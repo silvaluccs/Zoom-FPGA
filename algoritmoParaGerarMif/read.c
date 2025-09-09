@@ -115,20 +115,17 @@ void writeMIF(PGMImage *pgm) {
 
   filept = fopen("memory.mif", "w");
 
-  fprintf(filept, "WIDTH=16;\n");
-  fprintf(filept, "DEPTH=65536;\n\n");
+  fprintf(filept, "WIDTH=8;\n");
+  fprintf(filept, "DEPTH=76800;\n\n");
   fprintf(filept, "ADDRESS_RADIX=HEX;\n");
   fprintf(filept, "DATA_RADIX=HEX;\n\n");
   fprintf(filept, "CONTENT BEGIN\n");
 
-  int count = 0;
+  int andress = 0;
   for (int i = 0; i < pgm->height; i++) {
-    for (int j = 0; j < pgm->width - 1; j++) {
+    for (int j = 0; j < pgm->width; j++) {
 
-      int andress = count++ / 2;
-
-      fprintf(filept, " %X : %02X%02X;\n", andress, pgm->data[i][j],
-              pgm->data[i][j + 1]);
+      fprintf(filept, " %X : %02X;\n", andress++, pgm->data[i][j]);
     }
   }
 
