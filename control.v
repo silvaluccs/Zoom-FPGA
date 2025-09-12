@@ -1,5 +1,6 @@
 module control (
   input clock,
+  input input_chave,      // Nova entrada para a chave
   output wire hsync,    
   output wire vsync,    
   output [7:0] red,     
@@ -17,12 +18,39 @@ wire [9:0] proximo_y;
 reg clock_vga;              
 reg [7:0] color;             
 
+// Endereço para a imagem com zoom
+wire [16:0] zoom_ram_address;
+
+// Endereço para a imagem original (sem zoom)
+wire [16:0] original_ram_address;
+
+// O seu código original tem um deslocamento (offset) na tela
+// Para manter esse comportamento na imagem original, você deve subtrair os offsets.
+assign original_ram_address = (proximo_y - 120) * 320 + (proximo_x - 158);
 
 always @(posedge clock) begin
   clock_vga <= ~clock_vga;
 end
 
+// Instância do módulo que calcula o endereço para o zoom
+pixel_replication_core zoom_core (
+    .vga_x(proximo_x - 158), // Passa a coordenada com o offset já removido
+    .vga_y(proximo_y - 120), // Passa a coordenada com o offset já removido
+    .ram_address(zoom_ram_address)
+);
 
+// Multiplexador para selecionar o endereço de acordo com a chave
+// Se input_chave for '1', usa o endereço com zoom.
+// Se input_chave for '0', usa o endereço original.
+always @(*) begin
+    if (input_chave == 1'b1) begin
+        endereco_pixel = zoom_ram_address;
+    end else begin
+        endereco_pixel = original_ram_address;
+    end
+end
+
+// Sua instância da RAM (sem alterações)
 ram_nova ram_instancia (
     .address(endereco_pixel),  
     .clock(clock_vga),
@@ -32,7 +60,7 @@ ram_nova ram_instancia (
     .q(pixels)                 
 );
 
-
+// Sua instância do módulo VGA (sem alterações)
 vga_module vga_module_inst (
     .clock(~clock_vga),
     .reset(1'b0),
@@ -50,15 +78,12 @@ vga_module vga_module_inst (
 );
 
 always @(*) begin
+    // Esta lógica de controle da cor e da área de exibição é mantida
     if (proximo_x >= 159 && proximo_x < 479 && proximo_y >= 120 && proximo_y < 360) begin
-        
-        endereco_pixel <= (proximo_y - 120) * 320 + (proximo_x - 158);  
-        
-        color <= pixels[7:0];  
+        color = pixels[7:0];
     end else begin
-        color <= 8'h00;
+        color = 8'h00;
     end
-    
 end
 
 endmodule
