@@ -1,1 +1,0 @@
-#adicionar algoritmo aqui
