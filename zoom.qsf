@@ -91,4 +91,7 @@ set_location_assignment PIN_C10 -to sync
 set_location_assignment PIN_D11 -to vsync
 set_location_assignment PIN_AF14 -to clock
 set_global_assignment -name QIP_FILE ram_nova.qip
+set_global_assignment -name VERILOG_FILE pixel_replication_core.v
+set_global_assignment -name VERILOG_FILE matriz.v
+set_location_assignment PIN_AB12 -to input_chave
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

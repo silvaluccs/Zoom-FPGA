@@ -1,5 +1,5 @@
 Analysis & Synthesis report for zoom
-Tue Sep  9 11:22:21 2025
+Tue Sep 16 10:40:03 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -17,19 +17,18 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
   9. Analysis & Synthesis IP Cores Summary
  10. State Machine - |control|vga_module:vga_module_inst|v_state
  11. State Machine - |control|vga_module:vga_module_inst|h_state
- 12. User-Specified and Inferred Latches
- 13. Registers Removed During Synthesis
- 14. General Register Statistics
- 15. Multiplexer Restructuring Statistics (Restructuring Performed)
- 16. Source assignments for ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated
- 17. Parameter Settings for User Entity Instance: ram_nova:ram_instancia|altsyncram:altsyncram_component
- 18. Parameter Settings for User Entity Instance: vga_module:vga_module_inst
- 19. altsyncram Parameter Settings by Entity Instance
- 20. Port Connectivity Checks: "vga_module:vga_module_inst"
- 21. Port Connectivity Checks: "ram_nova:ram_instancia"
- 22. Post-Synthesis Netlist Statistics for Top Partition
- 23. Elapsed Time Per Partition
- 24. Analysis & Synthesis Messages
+ 12. Registers Removed During Synthesis
+ 13. General Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated
+ 16. Parameter Settings for User Entity Instance: matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component
+ 17. Parameter Settings for User Entity Instance: vga_module:vga_module_inst
+ 18. altsyncram Parameter Settings by Entity Instance
+ 19. Port Connectivity Checks: "vga_module:vga_module_inst"
+ 20. Port Connectivity Checks: "matriz:framebuffer"
+ 21. Post-Synthesis Netlist Statistics for Top Partition
+ 22. Elapsed Time Per Partition
+ 23. Analysis & Synthesis Messages
 
 
 
@@ -56,14 +55,14 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Tue Sep  9 11:22:21 2025          ;
+; Analysis & Synthesis Status     ; Successful - Tue Sep 16 10:40:03 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; zoom                                           ;
 ; Top-level Entity Name           ; control                                        ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
 ; Total registers                 ; 64                                             ;
-; Total pins                      ; 30                                             ;
+; Total pins                      ; 31                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 614,400                                        ;
 ; Total DSP Blocks                ; 0                                              ;
@@ -185,9 +184,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                   ; Library ;
 +----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------+---------+
-; vga_module.v                     ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/vga_module.v                   ;         ;
-; control.v                        ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v                      ;         ;
-; ram_nova.v                       ; yes             ; User Wizard-Generated File             ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/ram_nova.v                     ;         ;
+; vga_module.v                     ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/zoom/vga_module.v                                        ;         ;
+; control.v                        ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/zoom/control.v                                           ;         ;
+; ram_nova.v                       ; yes             ; User Wizard-Generated File             ; /home/aluno/Downloads/zoom/ram_nova.v                                          ;         ;
+; pixel_replication_core.v         ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/zoom/pixel_replication_core.v                            ;         ;
+; matriz.v                         ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/zoom/matriz.v                                            ;         ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
 ; lpm_mux.inc                      ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
@@ -197,10 +198,10 @@ https://fpgasoftware.intel.com/eula.
 ; altrom.inc                       ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altrom.inc            ;         ;
 ; altram.inc                       ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altram.inc            ;         ;
 ; altdpram.inc                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_u4r1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/altsyncram_u4r1.tdf         ;         ;
-; memoria_davi.mif                 ; yes             ; Auto-Found Memory Initialization File  ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/memoria_davi.mif               ;         ;
-; db/decode_nma.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/decode_nma.tdf              ;         ;
-; db/mux_7hb.tdf                   ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/mux_7hb.tdf                 ;         ;
+; db/altsyncram_u4r1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/zoom/db/altsyncram_u4r1.tdf                              ;         ;
+; memoria_davi.mif                 ; yes             ; Auto-Found Memory Initialization File  ; /home/aluno/Downloads/zoom/memoria_davi.mif                                    ;         ;
+; db/decode_nma.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/zoom/db/decode_nma.tdf                                   ;         ;
+; db/mux_7hb.tdf                   ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/zoom/db/mux_7hb.tdf                                      ;         ;
 +----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------+---------+
 
 
@@ -209,18 +210,18 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimate of Logic utilization (ALMs needed) ; 101       ;
+; Estimate of Logic utilization (ALMs needed) ; 105       ;
 ;                                             ;           ;
-; Combinational ALUT usage for logic          ; 165       ;
-;     -- 7 input functions                    ; 1         ;
-;     -- 6 input functions                    ; 33        ;
-;     -- 5 input functions                    ; 12        ;
-;     -- 4 input functions                    ; 23        ;
-;     -- <=3 input functions                  ; 96        ;
+; Combinational ALUT usage for logic          ; 161       ;
+;     -- 7 input functions                    ; 3         ;
+;     -- 6 input functions                    ; 42        ;
+;     -- 5 input functions                    ; 18        ;
+;     -- 4 input functions                    ; 20        ;
+;     -- <=3 input functions                  ; 78        ;
 ;                                             ;           ;
 ; Dedicated logic registers                   ; 64        ;
 ;                                             ;           ;
-; I/O pins                                    ; 30        ;
+; I/O pins                                    ; 31        ;
 ; Total MLAB memory bits                      ; 0         ;
 ; Total block memory bits                     ; 614400    ;
 ;                                             ;           ;
@@ -228,42 +229,44 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clock_vga ;
 ; Maximum fan-out                             ; 145       ;
-; Total fan-out                               ; 2096      ;
-; Average fan-out                             ; 5.68      ;
+; Total fan-out                               ; 2130      ;
+; Average fan-out                             ; 5.80      ;
 +---------------------------------------------+-----------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                         ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
-; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                   ; Entity Name     ; Library Name ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
-; |control                                  ; 165 (64)            ; 64 (1)                    ; 614400            ; 0          ; 30   ; 0            ; |control                                                                                                              ; control         ; work         ;
-;    |ram_nova:ram_instancia|               ; 10 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |control|ram_nova:ram_instancia                                                                                       ; ram_nova        ; work         ;
-;       |altsyncram:altsyncram_component|   ; 10 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |control|ram_nova:ram_instancia|altsyncram:altsyncram_component                                                       ; altsyncram      ; work         ;
-;          |altsyncram_u4r1:auto_generated| ; 10 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |control|ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated                        ; altsyncram_u4r1 ; work         ;
-;             |decode_nma:rden_decode|      ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |control|ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:rden_decode ; decode_nma      ; work         ;
-;    |vga_module:vga_module_inst|           ; 91 (91)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |control|vga_module:vga_module_inst                                                                                   ; vga_module      ; work         ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------+-----------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                             ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+------------------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                             ; Entity Name            ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+------------------------+--------------+
+; |control                                     ; 161 (35)            ; 64 (1)                    ; 614400            ; 0          ; 31   ; 0            ; |control                                                                                                                        ; control                ; work         ;
+;    |matriz:framebuffer|                      ; 28 (18)             ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |control|matriz:framebuffer                                                                                                     ; matriz                 ; work         ;
+;       |ram_nova:ram1|                        ; 10 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |control|matriz:framebuffer|ram_nova:ram1                                                                                       ; ram_nova               ; work         ;
+;          |altsyncram:altsyncram_component|   ; 10 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component                                                       ; altsyncram             ; work         ;
+;             |altsyncram_u4r1:auto_generated| ; 10 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated                        ; altsyncram_u4r1        ; work         ;
+;                |decode_nma:rden_decode|      ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:rden_decode ; decode_nma             ; work         ;
+;    |pixel_replication_core:zoom_core|        ; 12 (12)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |control|pixel_replication_core:zoom_core                                                                                       ; pixel_replication_core ; work         ;
+;    |vga_module:vga_module_inst|              ; 86 (86)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |control|vga_module:vga_module_inst                                                                                             ; vga_module             ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                       ;
-+--------------------------------------------------------------------------------------------------+------------+-------------+--------------+--------------+--------------+--------------+--------+---------------------+
-; Name                                                                                             ; Type       ; Mode        ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF                 ;
-+--------------------------------------------------------------------------------------------------+------------+-------------+--------------+--------------+--------------+--------------+--------+---------------------+
-; ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|ALTSYNCRAM ; M10K block ; Single Port ; 76800        ; 8            ; --           ; --           ; 614400 ; ../memoria_davi.mif ;
-+--------------------------------------------------------------------------------------------------+------------+-------------+--------------+--------------+--------------+--------------+--------+---------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                 ;
++------------------------------------------------------------------------------------------------------------+------------+-------------+--------------+--------------+--------------+--------------+--------+---------------------+
+; Name                                                                                                       ; Type       ; Mode        ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF                 ;
++------------------------------------------------------------------------------------------------------------+------------+-------------+--------------+--------------+--------------+--------------+--------+---------------------+
+; matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|ALTSYNCRAM ; M10K block ; Single Port ; 76800        ; 8            ; --           ; --           ; 614400 ; ../memoria_davi.mif ;
++------------------------------------------------------------------------------------------------------------+------------+-------------+--------------+--------------+--------------+--------------+--------+---------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis IP Cores Summary                                                                             ;
-+--------+--------------+---------+--------------+--------------+---------------------------------+-----------------+
-; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                 ; IP Include File ;
-+--------+--------------+---------+--------------+--------------+---------------------------------+-----------------+
-; Altera ; RAM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |control|ram_nova:ram_instancia ; ram_nova.v      ;
-+--------+--------------+---------+--------------+--------------+---------------------------------+-----------------+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                       ;
++--------+--------------+---------+--------------+--------------+-------------------------------------------+-----------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                           ; IP Include File ;
++--------+--------------+---------+--------------+--------------+-------------------------------------------+-----------------+
+; Altera ; RAM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |control|matriz:framebuffer|ram_nova:ram1 ; ram_nova.v      ;
++--------+--------------+---------+--------------+--------------+-------------------------------------------+-----------------+
 
 
 Encoding Type:  One-Hot
@@ -290,33 +293,6 @@ Encoding Type:  One-Hot
 ; h_state.H_PULSE_STATE  ; 0                    ; 1                     ; 0                     ; 1                      ;
 ; h_state.H_BACK_STATE   ; 1                    ; 0                     ; 0                     ; 1                      ;
 +------------------------+----------------------+-----------------------+-----------------------+------------------------+
-
-
-+----------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                ;
-+-----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
-+-----------------------------------------------------+---------------------+------------------------+
-; endereco_pixel[13]                                  ; always1             ; yes                    ;
-; endereco_pixel[14]                                  ; always1             ; yes                    ;
-; endereco_pixel[15]                                  ; always1             ; yes                    ;
-; endereco_pixel[16]                                  ; always1             ; yes                    ;
-; endereco_pixel[0]                                   ; always1             ; yes                    ;
-; endereco_pixel[1]                                   ; always1             ; yes                    ;
-; endereco_pixel[2]                                   ; always1             ; yes                    ;
-; endereco_pixel[3]                                   ; always1             ; yes                    ;
-; endereco_pixel[4]                                   ; always1             ; yes                    ;
-; endereco_pixel[5]                                   ; always1             ; yes                    ;
-; endereco_pixel[6]                                   ; always1             ; yes                    ;
-; endereco_pixel[7]                                   ; always1             ; yes                    ;
-; endereco_pixel[8]                                   ; always1             ; yes                    ;
-; endereco_pixel[9]                                   ; always1             ; yes                    ;
-; endereco_pixel[10]                                  ; always1             ; yes                    ;
-; endereco_pixel[11]                                  ; always1             ; yes                    ;
-; endereco_pixel[12]                                  ; always1             ; yes                    ;
-; Number of user-specified and inferred latches = 17  ;                     ;                        ;
-+-----------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
 +-------------------------------------------------------------+
@@ -364,79 +340,81 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |control|vga_module:vga_module_inst|v_counter[2] ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |control|vga_module:vga_module_inst|h_counter[6] ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |control|vga_module:vga_module_inst|v_counter[5] ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |control|vga_module:vga_module_inst|h_counter[8] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |control|linha_sel[0]                            ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |control|coluna_sel[2]                           ;
 ; 12:1               ; 8 bits    ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |control|vga_module:vga_module_inst|red_reg      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated ;
-+---------------------------------+--------------------+------+------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                             ;
-+---------------------------------+--------------------+------+------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                              ;
-+---------------------------------+--------------------+------+------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                       ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                        ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: ram_nova:ram_instancia|altsyncram:altsyncram_component ;
-+------------------------------------+----------------------+-----------------------------------------+
-; Parameter Name                     ; Value                ; Type                                    ;
-+------------------------------------+----------------------+-----------------------------------------+
-; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                 ;
-; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                              ;
-; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                            ;
-; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                            ;
-; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                          ;
-; WIDTH_BYTEENA                      ; 1                    ; Untyped                                 ;
-; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                                 ;
-; WIDTH_A                            ; 8                    ; Signed Integer                          ;
-; WIDTHAD_A                          ; 17                   ; Signed Integer                          ;
-; NUMWORDS_A                         ; 76800                ; Signed Integer                          ;
-; OUTDATA_REG_A                      ; CLOCK0               ; Untyped                                 ;
-; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                 ;
-; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                 ;
-; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                 ;
-; INDATA_ACLR_A                      ; NONE                 ; Untyped                                 ;
-; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                 ;
-; WIDTH_B                            ; 1                    ; Untyped                                 ;
-; WIDTHAD_B                          ; 1                    ; Untyped                                 ;
-; NUMWORDS_B                         ; 1                    ; Untyped                                 ;
-; INDATA_REG_B                       ; CLOCK1               ; Untyped                                 ;
-; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                 ;
-; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                 ;
-; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                 ;
-; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                 ;
-; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                 ;
-; INDATA_ACLR_B                      ; NONE                 ; Untyped                                 ;
-; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                 ;
-; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                 ;
-; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                 ;
-; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                 ;
-; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                 ;
-; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                          ;
-; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                 ;
-; RAM_BLOCK_TYPE                     ; M10K                 ; Untyped                                 ;
-; BYTE_SIZE                          ; 8                    ; Untyped                                 ;
-; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                 ;
-; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                 ;
-; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                 ;
-; INIT_FILE                          ; ../memoria_davi.mif  ; Untyped                                 ;
-; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                 ;
-; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                 ;
-; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                 ;
-; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                 ;
-; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                 ;
-; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                 ;
-; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                 ;
-; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                 ;
-; ENABLE_ECC                         ; FALSE                ; Untyped                                 ;
-; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                 ;
-; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                 ;
-; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                 ;
-; CBXI_PARAMETER                     ; altsyncram_u4r1      ; Untyped                                 ;
-+------------------------------------+----------------------+-----------------------------------------+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+---------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                              ;
++------------------------------------+----------------------+---------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                           ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                        ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                      ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                      ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                    ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                           ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                                           ;
+; WIDTH_A                            ; 8                    ; Signed Integer                                    ;
+; WIDTHAD_A                          ; 17                   ; Signed Integer                                    ;
+; NUMWORDS_A                         ; 76800                ; Signed Integer                                    ;
+; OUTDATA_REG_A                      ; CLOCK0               ; Untyped                                           ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                           ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                           ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; WIDTH_B                            ; 1                    ; Untyped                                           ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                           ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                           ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                           ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                           ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                           ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                           ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                           ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                           ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                           ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                           ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                           ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                           ;
+; RAM_BLOCK_TYPE                     ; M10K                 ; Untyped                                           ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                           ;
+; INIT_FILE                          ; ../memoria_davi.mif  ; Untyped                                           ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                           ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                           ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                           ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                           ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                           ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                           ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                           ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                           ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                           ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                           ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                           ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                           ;
+; CBXI_PARAMETER                     ; altsyncram_u4r1      ; Untyped                                           ;
++------------------------------------+----------------------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -467,24 +445,24 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------------------------------+
-; altsyncram Parameter Settings by Entity Instance                                                   ;
-+-------------------------------------------+--------------------------------------------------------+
-; Name                                      ; Value                                                  ;
-+-------------------------------------------+--------------------------------------------------------+
-; Number of entity instances                ; 1                                                      ;
-; Entity Instance                           ; ram_nova:ram_instancia|altsyncram:altsyncram_component ;
-;     -- OPERATION_MODE                     ; SINGLE_PORT                                            ;
-;     -- WIDTH_A                            ; 8                                                      ;
-;     -- NUMWORDS_A                         ; 76800                                                  ;
-;     -- OUTDATA_REG_A                      ; CLOCK0                                                 ;
-;     -- WIDTH_B                            ; 1                                                      ;
-;     -- NUMWORDS_B                         ; 1                                                      ;
-;     -- ADDRESS_REG_B                      ; CLOCK1                                                 ;
-;     -- OUTDATA_REG_B                      ; UNREGISTERED                                           ;
-;     -- RAM_BLOCK_TYPE                     ; M10K                                                   ;
-;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                              ;
-+-------------------------------------------+--------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                             ;
++-------------------------------------------+------------------------------------------------------------------+
+; Name                                      ; Value                                                            ;
++-------------------------------------------+------------------------------------------------------------------+
+; Number of entity instances                ; 1                                                                ;
+; Entity Instance                           ; matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                                      ;
+;     -- WIDTH_A                            ; 8                                                                ;
+;     -- NUMWORDS_A                         ; 76800                                                            ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                           ;
+;     -- WIDTH_B                            ; 1                                                                ;
+;     -- NUMWORDS_B                         ; 1                                                                ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                           ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                     ;
+;     -- RAM_BLOCK_TYPE                     ; M10K                                                             ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                        ;
++-------------------------------------------+------------------------------------------------------------------+
 
 
 +--------------------------------------------------------+
@@ -496,15 +474,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+-------+----------+-----------------------------+
 
 
-+----------------------------------------------------+
-; Port Connectivity Checks: "ram_nova:ram_instancia" ;
-+------+-------+----------+--------------------------+
-; Port ; Type  ; Severity ; Details                  ;
-+------+-------+----------+--------------------------+
-; data ; Input ; Info     ; Stuck at GND             ;
-; rden ; Input ; Info     ; Stuck at VCC             ;
-; wren ; Input ; Info     ; Stuck at GND             ;
-+------+-------+----------+--------------------------+
++------------------------------------------------------+
+; Port Connectivity Checks: "matriz:framebuffer"       ;
++--------------------+-------+----------+--------------+
+; Port               ; Type  ; Severity ; Details      ;
++--------------------+-------+----------+--------------+
+; escrever_na_matriz ; Input ; Info     ; Stuck at GND ;
+; byte_entrada       ; Input ; Info     ; Stuck at GND ;
++--------------------+-------+----------+--------------+
 
 
 +-----------------------------------------------------+
@@ -516,27 +493,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA SCLR          ; 10                          ;
 ;     SCLR              ; 10                          ;
 ;     plain             ; 44                          ;
-; arriav_lcell_comb     ; 166                         ;
-;     arith             ; 58                          ;
+; arriav_lcell_comb     ; 162                         ;
+;     arith             ; 67                          ;
 ;         0 data inputs ; 2                           ;
-;         1 data inputs ; 20                          ;
-;         2 data inputs ; 31                          ;
-;         3 data inputs ; 5                           ;
-;     extend            ; 1                           ;
-;         7 data inputs ; 1                           ;
-;     normal            ; 107                         ;
+;         1 data inputs ; 31                          ;
+;         2 data inputs ; 18                          ;
+;         3 data inputs ; 4                           ;
+;         4 data inputs ; 4                           ;
+;         5 data inputs ; 8                           ;
+;     extend            ; 3                           ;
+;         7 data inputs ; 3                           ;
+;     normal            ; 92                          ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 2                           ;
-;         2 data inputs ; 7                           ;
-;         3 data inputs ; 29                          ;
-;         4 data inputs ; 23                          ;
-;         5 data inputs ; 12                          ;
-;         6 data inputs ; 33                          ;
-; boundary_port         ; 30                          ;
+;         2 data inputs ; 4                           ;
+;         3 data inputs ; 17                          ;
+;         4 data inputs ; 16                          ;
+;         5 data inputs ; 10                          ;
+;         6 data inputs ; 42                          ;
+; boundary_port         ; 31                          ;
 ; stratixv_ram_block    ; 80                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 4.70                        ;
-; Average LUT depth     ; 2.48                        ;
+; Max LUT depth         ; 7.60                        ;
+; Average LUT depth     ; 3.72                        ;
 +-----------------------+-----------------------------+
 
 
@@ -555,40 +534,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Tue Sep  9 11:22:16 2025
+    Info: Processing started: Tue Sep 16 10:39:58 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off zoom -c zoom
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file vga_module.v
-    Info (12023): Found entity 1: vga_module File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/vga_module.v Line: 1
+    Info (12023): Found entity 1: vga_module File: /home/aluno/Downloads/zoom/vga_module.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file control.v
-    Info (12023): Found entity 1: control File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 1
+    Info (12023): Found entity 1: control File: /home/aluno/Downloads/zoom/control.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file ram_nova.v
-    Info (12023): Found entity 1: ram_nova File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/ram_nova.v Line: 40
+    Info (12023): Found entity 1: ram_nova File: /home/aluno/Downloads/zoom/ram_nova.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file pixel_replication_core.v
+    Info (12023): Found entity 1: pixel_replication_core File: /home/aluno/Downloads/zoom/pixel_replication_core.v Line: 3
+Warning (10463): Verilog HDL Declaration warning at matriz.v(10): "byte" is SystemVerilog-2005 keyword File: /home/aluno/Downloads/zoom/matriz.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file matriz.v
+    Info (12023): Found entity 1: matriz File: /home/aluno/Downloads/zoom/matriz.v Line: 3
 Info (12127): Elaborating entity "control" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at control.v(55): truncated value with size 32 to match size of target (17) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 55
-Warning (10240): Verilog HDL Always Construct warning at control.v(53): inferring latch(es) for variable "endereco_pixel", which holds its previous value in one or more paths through the always construct File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[0]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[1]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[2]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[3]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[4]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[5]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[6]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[7]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[8]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[9]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[10]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[11]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[12]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[13]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[14]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[15]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (10041): Inferred latch for "endereco_pixel[16]" at control.v(53) File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-Info (12128): Elaborating entity "ram_nova" for hierarchy "ram_nova:ram_instancia" File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 33
-Info (12128): Elaborating entity "altsyncram" for hierarchy "ram_nova:ram_instancia|altsyncram:altsyncram_component" File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/ram_nova.v Line: 89
-Info (12130): Elaborated megafunction instantiation "ram_nova:ram_instancia|altsyncram:altsyncram_component" File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/ram_nova.v Line: 89
-Info (12133): Instantiated megafunction "ram_nova:ram_instancia|altsyncram:altsyncram_component" with the following parameter: File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/ram_nova.v Line: 89
+Warning (10230): Verilog HDL assignment warning at control.v(22): truncated value with size 32 to match size of target (10) File: /home/aluno/Downloads/zoom/control.v Line: 22
+Warning (10230): Verilog HDL assignment warning at control.v(23): truncated value with size 32 to match size of target (9) File: /home/aluno/Downloads/zoom/control.v Line: 23
+Info (12128): Elaborating entity "pixel_replication_core" for hierarchy "pixel_replication_core:zoom_core" File: /home/aluno/Downloads/zoom/control.v Line: 34
+Warning (10230): Verilog HDL assignment warning at pixel_replication_core.v(19): truncated value with size 32 to match size of target (9) File: /home/aluno/Downloads/zoom/pixel_replication_core.v Line: 19
+Warning (10230): Verilog HDL assignment warning at pixel_replication_core.v(20): truncated value with size 32 to match size of target (8) File: /home/aluno/Downloads/zoom/pixel_replication_core.v Line: 20
+Info (12128): Elaborating entity "matriz" for hierarchy "matriz:framebuffer" File: /home/aluno/Downloads/zoom/control.v Line: 62
+Info (12128): Elaborating entity "ram_nova" for hierarchy "matriz:framebuffer|ram_nova:ram1" File: /home/aluno/Downloads/zoom/matriz.v Line: 25
+Info (12128): Elaborating entity "altsyncram" for hierarchy "matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component" File: /home/aluno/Downloads/zoom/ram_nova.v Line: 89
+Info (12130): Elaborated megafunction instantiation "matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component" File: /home/aluno/Downloads/zoom/ram_nova.v Line: 89
+Info (12133): Instantiated megafunction "matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component" with the following parameter: File: /home/aluno/Downloads/zoom/ram_nova.v Line: 89
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "init_file" = "../memoria_davi.mif"
@@ -606,33 +577,29 @@ Info (12133): Instantiated megafunction "ram_nova:ram_instancia|altsyncram:altsy
     Info (12134): Parameter "width_a" = "8"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_u4r1.tdf
-    Info (12023): Found entity 1: altsyncram_u4r1 File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/altsyncram_u4r1.tdf Line: 32
-Info (12128): Elaborating entity "altsyncram_u4r1" for hierarchy "ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated" File: /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+    Info (12023): Found entity 1: altsyncram_u4r1 File: /home/aluno/Downloads/zoom/db/altsyncram_u4r1.tdf Line: 32
+Info (12128): Elaborating entity "altsyncram_u4r1" for hierarchy "matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated" File: /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_nma.tdf
-    Info (12023): Found entity 1: decode_nma File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/decode_nma.tdf Line: 23
-Info (12128): Elaborating entity "decode_nma" for hierarchy "ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:decode3" File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/altsyncram_u4r1.tdf Line: 44
+    Info (12023): Found entity 1: decode_nma File: /home/aluno/Downloads/zoom/db/decode_nma.tdf Line: 23
+Info (12128): Elaborating entity "decode_nma" for hierarchy "matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:decode3" File: /home/aluno/Downloads/zoom/db/altsyncram_u4r1.tdf Line: 44
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_7hb.tdf
-    Info (12023): Found entity 1: mux_7hb File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/mux_7hb.tdf Line: 23
-Info (12128): Elaborating entity "mux_7hb" for hierarchy "ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|mux_7hb:mux2" File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/db/altsyncram_u4r1.tdf Line: 46
-Info (12128): Elaborating entity "vga_module" for hierarchy "vga_module:vga_module_inst" File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 50
-Warning (13012): Latch endereco_pixel[0] has unsafe behavior File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_module:vga_module_inst|h_counter[0] File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/vga_module.v Line: 60
-Warning (13012): Latch endereco_pixel[1] has unsafe behavior File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 53
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal vga_module:vga_module_inst|h_counter[1] File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/vga_module.v Line: 60
+    Info (12023): Found entity 1: mux_7hb File: /home/aluno/Downloads/zoom/db/mux_7hb.tdf Line: 23
+Info (12128): Elaborating entity "mux_7hb" for hierarchy "matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|mux_7hb:mux2" File: /home/aluno/Downloads/zoom/db/altsyncram_u4r1.tdf Line: 46
+Info (12128): Elaborating entity "vga_module" for hierarchy "vga_module:vga_module_inst" File: /home/aluno/Downloads/zoom/control.v Line: 78
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "sync" is stuck at GND File: /home/aluno/Downloads/Zoom-FPGA-imagemNaMemoria/control.v Line: 8
+    Warning (13410): Pin "sync" is stuck at GND File: /home/aluno/Downloads/zoom/control.v Line: 9
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 16 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 307 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 1 input pins
+Info (21057): Implemented 304 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
     Info (21059): Implemented 29 output pins
-    Info (21061): Implemented 197 logic cells
+    Info (21061): Implemented 193 logic cells
     Info (21064): Implemented 80 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 9 warnings
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
     Info: Peak virtual memory: 534 megabytes
-    Info: Processing ended: Tue Sep  9 11:22:21 2025
+    Info: Processing ended: Tue Sep 16 10:40:03 2025
     Info: Elapsed time: 00:00:05
     Info: Total CPU time (on all processors): 00:00:14
 

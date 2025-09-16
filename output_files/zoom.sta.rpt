@@ -1,5 +1,5 @@
 Timing Analyzer report for zoom
-Tue Sep  9 11:23:01 2025
+Tue Sep 16 10:40:37 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -50,9 +50,11 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  42. Report RSKM
  43. Unconstrained Paths Summary
  44. Clock Status Summary
- 45. Unconstrained Output Ports
+ 45. Unconstrained Input Ports
  46. Unconstrained Output Ports
- 47. Timing Analyzer Messages
+ 47. Unconstrained Input Ports
+ 48. Unconstrained Output Ports
+ 49. Timing Analyzer Messages
 
 
 
@@ -98,46 +100,44 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
-; Average used               ; 2.22        ;
+; Average used               ; 2.23        ;
 ; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   9.8%      ;
-;     Processor 3            ;   9.7%      ;
-;     Processor 4            ;   9.7%      ;
-;     Processor 5            ;   9.3%      ;
-;     Processor 6            ;   9.3%      ;
-;     Processor 7            ;   9.3%      ;
-;     Processor 8            ;   9.3%      ;
-;     Processor 9            ;   9.2%      ;
-;     Processor 10           ;   9.2%      ;
-;     Processor 11           ;   9.2%      ;
-;     Processor 12           ;   9.2%      ;
-;     Processor 13           ;   9.2%      ;
-;     Processor 14           ;   9.2%      ;
+;     Processor 2            ;  14.0%      ;
+;     Processor 3            ;  13.7%      ;
+;     Processor 4            ;  13.6%      ;
+;     Processor 5            ;   8.1%      ;
+;     Processor 6            ;   8.1%      ;
+;     Processor 7            ;   8.1%      ;
+;     Processor 8            ;   8.1%      ;
+;     Processor 9            ;   8.1%      ;
+;     Processor 10           ;   8.1%      ;
+;     Processor 11           ;   8.1%      ;
+;     Processor 12           ;   8.1%      ;
+;     Processor 13           ;   8.1%      ;
+;     Processor 14           ;   8.1%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Clocks                                                                                                                                                                                                                                           ;
-+-----------------------------------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------------------------------------+
-; Clock Name                              ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets                                     ;
-+-----------------------------------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------------------------------------+
-; clock                                   ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock }                                   ;
-; clock_vga                               ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock_vga }                               ;
-; vga_module:vga_module_inst|h_counter[0] ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { vga_module:vga_module_inst|h_counter[0] } ;
-+-----------------------------------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                                ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets       ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------+
+; clock      ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock }     ;
+; clock_vga  ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock_vga } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------+
 
 
-+-------------------------------------------------------------------------------+
-; Slow 1100mV 85C Model Fmax Summary                                            ;
-+------------+-----------------+-----------------------------------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name                              ; Note ;
-+------------+-----------------+-----------------------------------------+------+
-; 108.34 MHz ; 108.34 MHz      ; clock_vga                               ;      ;
-; 127.42 MHz ; 127.42 MHz      ; vga_module:vga_module_inst|h_counter[0] ;      ;
-+------------+-----------------+-----------------------------------------+------+
++-------------------------------------------------+
+; Slow 1100mV 85C Model Fmax Summary              ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 52.31 MHz ; 52.31 MHz       ; clock_vga  ;      ;
++-----------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -147,26 +147,24 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 HTML report is unavailable in plain text report export.
 
 
-+------------------------------------------------------------------+
-; Slow 1100mV 85C Model Setup Summary                              ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; vga_module:vga_module_inst|h_counter[0] ; -5.698 ; -74.816       ;
-; clock_vga                               ; -4.431 ; -3516.254     ;
-; clock                                   ; -3.590 ; -3.590        ;
-+-----------------------------------------+--------+---------------+
++-------------------------------------+
+; Slow 1100mV 85C Model Setup Summary ;
++-----------+--------+----------------+
+; Clock     ; Slack  ; End Point TNS  ;
++-----------+--------+----------------+
+; clock_vga ; -9.058 ; -7487.660      ;
+; clock     ; -3.529 ; -3.529         ;
++-----------+--------+----------------+
 
 
-+-----------------------------------------------------------------+
-; Slow 1100mV 85C Model Hold Summary                              ;
-+-----------------------------------------+-------+---------------+
-; Clock                                   ; Slack ; End Point TNS ;
-+-----------------------------------------+-------+---------------+
-; clock_vga                               ; 0.123 ; 0.000         ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.272 ; 0.000         ;
-; clock                                   ; 1.565 ; 0.000         ;
-+-----------------------------------------+-------+---------------+
++------------------------------------+
+; Slow 1100mV 85C Model Hold Summary ;
++-----------+-------+----------------+
+; Clock     ; Slack ; End Point TNS  ;
++-----------+-------+----------------+
+; clock_vga ; 0.325 ; 0.000          ;
+; clock     ; 1.635 ; 0.000          ;
++-----------+-------+----------------+
 
 
 ------------------------------------------
@@ -181,15 +179,14 @@ No paths to report.
 No paths to report.
 
 
-+------------------------------------------------------------------+
-; Slow 1100mV 85C Model Minimum Pulse Width Summary                ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; clock_vga                               ; -2.174 ; -7861.253     ;
-; clock                                   ; -0.759 ; -1.288        ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.239  ; 0.000         ;
-+-----------------------------------------+--------+---------------+
++---------------------------------------------------+
+; Slow 1100mV 85C Model Minimum Pulse Width Summary ;
++-----------+--------+------------------------------+
+; Clock     ; Slack  ; End Point TNS                ;
++-----------+--------+------------------------------+
+; clock_vga ; -2.174 ; -7927.512                    ;
+; clock     ; -0.817 ; -1.397                       ;
++-----------+--------+------------------------------+
 
 
 -----------------------------------------------
@@ -199,37 +196,34 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 
 
 
-+-------------------------------------------------------------------------------+
-; Slow 1100mV 0C Model Fmax Summary                                             ;
-+------------+-----------------+-----------------------------------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name                              ; Note ;
-+------------+-----------------+-----------------------------------------+------+
-; 110.2 MHz  ; 110.2 MHz       ; clock_vga                               ;      ;
-; 131.06 MHz ; 131.06 MHz      ; vga_module:vga_module_inst|h_counter[0] ;      ;
-+------------+-----------------+-----------------------------------------+------+
++-------------------------------------------------+
+; Slow 1100mV 0C Model Fmax Summary               ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 51.32 MHz ; 51.32 MHz       ; clock_vga  ;      ;
++-----------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
-+------------------------------------------------------------------+
-; Slow 1100mV 0C Model Setup Summary                               ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; vga_module:vga_module_inst|h_counter[0] ; -5.831 ; -75.256       ;
-; clock_vga                               ; -4.364 ; -3396.710     ;
-; clock                                   ; -3.498 ; -3.498        ;
-+-----------------------------------------+--------+---------------+
++------------------------------------+
+; Slow 1100mV 0C Model Setup Summary ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; clock_vga ; -9.243 ; -7583.741     ;
+; clock     ; -3.428 ; -3.428        ;
++-----------+--------+---------------+
 
 
-+-----------------------------------------------------------------+
-; Slow 1100mV 0C Model Hold Summary                               ;
-+-----------------------------------------+-------+---------------+
-; Clock                                   ; Slack ; End Point TNS ;
-+-----------------------------------------+-------+---------------+
-; vga_module:vga_module_inst|h_counter[0] ; 0.240 ; 0.000         ;
-; clock_vga                               ; 0.308 ; 0.000         ;
-; clock                                   ; 1.556 ; 0.000         ;
-+-----------------------------------------+-------+---------------+
++-----------------------------------+
+; Slow 1100mV 0C Model Hold Summary ;
++-----------+-------+---------------+
+; Clock     ; Slack ; End Point TNS ;
++-----------+-------+---------------+
+; clock_vga ; 0.338 ; 0.000         ;
+; clock     ; 1.551 ; 0.000         ;
++-----------+-------+---------------+
 
 
 -----------------------------------------
@@ -244,15 +238,14 @@ No paths to report.
 No paths to report.
 
 
-+------------------------------------------------------------------+
-; Slow 1100mV 0C Model Minimum Pulse Width Summary                 ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; clock_vga                               ; -2.174 ; -7846.180     ;
-; clock                                   ; -0.777 ; -1.349        ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.223  ; 0.000         ;
-+-----------------------------------------+--------+---------------+
++--------------------------------------------------+
+; Slow 1100mV 0C Model Minimum Pulse Width Summary ;
++-----------+--------+-----------------------------+
+; Clock     ; Slack  ; End Point TNS               ;
++-----------+--------+-----------------------------+
+; clock_vga ; -2.174 ; -7904.550                   ;
+; clock     ; -0.816 ; -1.422                      ;
++-----------+--------+-----------------------------+
 
 
 ----------------------------------------------
@@ -262,26 +255,24 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 
 
 
-+------------------------------------------------------------------+
-; Fast 1100mV 85C Model Setup Summary                              ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; vga_module:vga_module_inst|h_counter[0] ; -2.914 ; -37.880       ;
-; clock                                   ; -2.688 ; -2.688        ;
-; clock_vga                               ; -2.558 ; -1890.629     ;
-+-----------------------------------------+--------+---------------+
++-------------------------------------+
+; Fast 1100mV 85C Model Setup Summary ;
++-----------+--------+----------------+
+; Clock     ; Slack  ; End Point TNS  ;
++-----------+--------+----------------+
+; clock_vga ; -4.628 ; -3948.610      ;
+; clock     ; -2.663 ; -2.663         ;
++-----------+--------+----------------+
 
 
-+------------------------------------------------------------------+
-; Fast 1100mV 85C Model Hold Summary                               ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; clock_vga                               ; -0.072 ; -0.230        ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.162  ; 0.000         ;
-; clock                                   ; 1.418  ; 0.000         ;
-+-----------------------------------------+--------+---------------+
++------------------------------------+
+; Fast 1100mV 85C Model Hold Summary ;
++-----------+-------+----------------+
+; Clock     ; Slack ; End Point TNS  ;
++-----------+-------+----------------+
+; clock_vga ; 0.163 ; 0.000          ;
+; clock     ; 1.456 ; 0.000          ;
++-----------+-------+----------------+
 
 
 ------------------------------------------
@@ -296,15 +287,14 @@ No paths to report.
 No paths to report.
 
 
-+------------------------------------------------------------------+
-; Fast 1100mV 85C Model Minimum Pulse Width Summary                ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; clock_vga                               ; -2.174 ; -7807.171     ;
-; clock                                   ; -0.686 ; -1.024        ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.269  ; 0.000         ;
-+-----------------------------------------+--------+---------------+
++---------------------------------------------------+
+; Fast 1100mV 85C Model Minimum Pulse Width Summary ;
++-----------+--------+------------------------------+
+; Clock     ; Slack  ; End Point TNS                ;
++-----------+--------+------------------------------+
+; clock_vga ; -2.174 ; -7863.488                    ;
+; clock     ; -0.712 ; -1.075                       ;
++-----------+--------+------------------------------+
 
 
 -----------------------------------------------
@@ -314,26 +304,24 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 
 
 
-+------------------------------------------------------------------+
-; Fast 1100mV 0C Model Setup Summary                               ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; vga_module:vga_module_inst|h_counter[0] ; -2.704 ; -34.766       ;
-; clock_vga                               ; -2.341 ; -1594.264     ;
-; clock                                   ; -2.313 ; -2.313        ;
-+-----------------------------------------+--------+---------------+
++------------------------------------+
+; Fast 1100mV 0C Model Setup Summary ;
++-----------+--------+---------------+
+; Clock     ; Slack  ; End Point TNS ;
++-----------+--------+---------------+
+; clock_vga ; -4.337 ; -3652.841     ;
+; clock     ; -2.279 ; -2.279        ;
++-----------+--------+---------------+
 
 
-+------------------------------------------------------------------+
-; Fast 1100mV 0C Model Hold Summary                                ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; clock_vga                               ; -0.023 ; -0.038        ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.182  ; 0.000         ;
-; clock                                   ; 1.155  ; 0.000         ;
-+-----------------------------------------+--------+---------------+
++-----------------------------------+
+; Fast 1100mV 0C Model Hold Summary ;
++-----------+-------+---------------+
+; Clock     ; Slack ; End Point TNS ;
++-----------+-------+---------------+
+; clock_vga ; 0.143 ; 0.000         ;
+; clock     ; 1.134 ; 0.000         ;
++-----------+-------+---------------+
 
 
 -----------------------------------------
@@ -348,15 +336,14 @@ No paths to report.
 No paths to report.
 
 
-+------------------------------------------------------------------+
-; Fast 1100mV 0C Model Minimum Pulse Width Summary                 ;
-+-----------------------------------------+--------+---------------+
-; Clock                                   ; Slack  ; End Point TNS ;
-+-----------------------------------------+--------+---------------+
-; clock_vga                               ; -2.174 ; -7788.072     ;
-; clock                                   ; -0.679 ; -1.018        ;
-; vga_module:vga_module_inst|h_counter[0] ; 0.302  ; 0.000         ;
-+-----------------------------------------+--------+---------------+
++--------------------------------------------------+
+; Fast 1100mV 0C Model Minimum Pulse Width Summary ;
++-----------+--------+-----------------------------+
+; Clock     ; Slack  ; End Point TNS               ;
++-----------+--------+-----------------------------+
+; clock_vga ; -2.174 ; -7833.283                   ;
+; clock     ; -0.684 ; -1.028                      ;
++-----------+--------+-----------------------------+
 
 
 ----------------------------------------------
@@ -366,20 +353,18 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                                                      ;
-+------------------------------------------+-----------+--------+----------+---------+---------------------+
-; Clock                                    ; Setup     ; Hold   ; Recovery ; Removal ; Minimum Pulse Width ;
-+------------------------------------------+-----------+--------+----------+---------+---------------------+
-; Worst-case Slack                         ; -5.831    ; -0.072 ; N/A      ; N/A     ; -2.174              ;
-;  clock                                   ; -3.590    ; 1.155  ; N/A      ; N/A     ; -0.777              ;
-;  clock_vga                               ; -4.431    ; -0.072 ; N/A      ; N/A     ; -2.174              ;
-;  vga_module:vga_module_inst|h_counter[0] ; -5.831    ; 0.162  ; N/A      ; N/A     ; 0.223               ;
-; Design-wide TNS                          ; -3594.66  ; -0.23  ; 0.0      ; 0.0     ; -7862.541           ;
-;  clock                                   ; -3.590    ; 0.000  ; N/A      ; N/A     ; -1.349              ;
-;  clock_vga                               ; -3516.254 ; -0.230 ; N/A      ; N/A     ; -7861.253           ;
-;  vga_module:vga_module_inst|h_counter[0] ; -75.256   ; 0.000  ; N/A      ; N/A     ; 0.000               ;
-+------------------------------------------+-----------+--------+----------+---------+---------------------+
++---------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                             ;
++------------------+-----------+-------+----------+---------+---------------------+
+; Clock            ; Setup     ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+-----------+-------+----------+---------+---------------------+
+; Worst-case Slack ; -9.243    ; 0.143 ; N/A      ; N/A     ; -2.174              ;
+;  clock           ; -3.529    ; 1.134 ; N/A      ; N/A     ; -0.817              ;
+;  clock_vga       ; -9.243    ; 0.143 ; N/A      ; N/A     ; -2.174              ;
+; Design-wide TNS  ; -7587.169 ; 0.0   ; 0.0      ; 0.0     ; -7928.909           ;
+;  clock           ; -3.529    ; 0.000 ; N/A      ; N/A     ; -1.422              ;
+;  clock_vga       ; -7583.741 ; 0.000 ; N/A      ; N/A     ; -7927.512           ;
++------------------+-----------+-------+----------+---------+---------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -419,13 +404,14 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +----------+--------------+-------------------+-------------------------+-------------------------+---------------+---------------------+----------------+------------------+--------+------------------+------------------------+------------------------+--------------+---------------+-----------------+-------+---------------------+--------------------+---------------+-----------------+-------------+
 
 
-+----------------------------------------------------------+
-; Input Transition Times                                   ;
-+-------+--------------+-----------------+-----------------+
-; Pin   ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
-+-------+--------------+-----------------+-----------------+
-; clock ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-+-------+--------------+-----------------+-----------------+
++----------------------------------------------------------------+
+; Input Transition Times                                         ;
++-------------+--------------+-----------------+-----------------+
+; Pin         ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
++-------------+--------------+-----------------+-----------------+
+; input_chave ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; clock       ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
++-------------+--------------+-----------------+-----------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -576,31 +562,25 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +----------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------+
-; Setup Transfers                                                                                                               ;
-+-----------------------------------------+-----------------------------------------+----------+----------+----------+----------+
-; From Clock                              ; To Clock                                ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+-----------------------------------------+-----------------------------------------+----------+----------+----------+----------+
-; clock_vga                               ; clock                                   ; 1        ; 1        ; 0        ; 0        ;
-; clock_vga                               ; clock_vga                               ; 84       ; 0        ; 504      ; 2223     ;
-; vga_module:vga_module_inst|h_counter[0] ; clock_vga                               ; 1292     ; 0        ; 107      ; 107      ;
-; clock_vga                               ; vga_module:vga_module_inst|h_counter[0] ; 0        ; 2310     ; 0        ; 0        ;
-; vga_module:vga_module_inst|h_counter[0] ; vga_module:vga_module_inst|h_counter[0] ; 1        ; 1        ; 0        ; 0        ;
-+-----------------------------------------+-----------------------------------------+----------+----------+----------+----------+
++--------------------------------------------------------------------+
+; Setup Transfers                                                    ;
++------------+-----------+----------+----------+----------+----------+
+; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+-----------+----------+----------+----------+----------+
+; clock_vga  ; clock     ; 1        ; 1        ; 0        ; 0        ;
+; clock_vga  ; clock_vga ; 84       ; 3561728  ; 504      ; 20899    ;
++------------+-----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
-+-------------------------------------------------------------------------------------------------------------------------------+
-; Hold Transfers                                                                                                                ;
-+-----------------------------------------+-----------------------------------------+----------+----------+----------+----------+
-; From Clock                              ; To Clock                                ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
-+-----------------------------------------+-----------------------------------------+----------+----------+----------+----------+
-; clock_vga                               ; clock                                   ; 1        ; 1        ; 0        ; 0        ;
-; clock_vga                               ; clock_vga                               ; 84       ; 0        ; 504      ; 2223     ;
-; vga_module:vga_module_inst|h_counter[0] ; clock_vga                               ; 1292     ; 0        ; 107      ; 107      ;
-; clock_vga                               ; vga_module:vga_module_inst|h_counter[0] ; 0        ; 2310     ; 0        ; 0        ;
-; vga_module:vga_module_inst|h_counter[0] ; vga_module:vga_module_inst|h_counter[0] ; 1        ; 1        ; 0        ; 0        ;
-+-----------------------------------------+-----------------------------------------+----------+----------+----------+----------+
++--------------------------------------------------------------------+
+; Hold Transfers                                                     ;
++------------+-----------+----------+----------+----------+----------+
+; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+-----------+----------+----------+----------+----------+
+; clock_vga  ; clock     ; 1        ; 1        ; 0        ; 0        ;
+; clock_vga  ; clock_vga ; 84       ; 3561728  ; 504      ; 20899    ;
++------------+-----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
@@ -623,22 +603,30 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 0     ; 0    ;
-; Unconstrained Input Port Paths  ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 1     ; 1    ;
+; Unconstrained Input Port Paths  ; 1088  ; 1088 ;
 ; Unconstrained Output Ports      ; 28    ; 28   ;
 ; Unconstrained Output Port Paths ; 29    ; 29   ;
 +---------------------------------+-------+------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Clock Status Summary                                                                                   ;
-+-----------------------------------------+-----------------------------------------+------+-------------+
-; Target                                  ; Clock                                   ; Type ; Status      ;
-+-----------------------------------------+-----------------------------------------+------+-------------+
-; clock                                   ; clock                                   ; Base ; Constrained ;
-; clock_vga                               ; clock_vga                               ; Base ; Constrained ;
-; vga_module:vga_module_inst|h_counter[0] ; vga_module:vga_module_inst|h_counter[0] ; Base ; Constrained ;
-+-----------------------------------------+-----------------------------------------+------+-------------+
++--------------------------------------------+
+; Clock Status Summary                       ;
++-----------+-----------+------+-------------+
+; Target    ; Clock     ; Type ; Status      ;
++-----------+-----------+------+-------------+
+; clock     ; clock     ; Base ; Constrained ;
+; clock_vga ; clock_vga ; Base ; Constrained ;
++-----------+-----------+------+-------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                          ;
++-------------+--------------------------------------------------------------------------------------+
+; Input Port  ; Comment                                                                              ;
++-------------+--------------------------------------------------------------------------------------+
+; input_chave ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+--------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -675,6 +663,15 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; red[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; vsync       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-------------+---------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                          ;
++-------------+--------------------------------------------------------------------------------------+
+; Input Port  ; Comment                                                                              ;
++-------------+--------------------------------------------------------------------------------------+
+; input_chave ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+--------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -719,144 +716,122 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Tue Sep  9 11:22:58 2025
+    Info: Processing started: Tue Sep 16 10:40:33 2025
 Info: Command: quartus_sta zoom -c zoom
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
-Warning (335093): The Timing Analyzer is analyzing 17 combinational loops as latches. For more details, run the Check Timing command in the Timing Analyzer or view the "User-Specified and Inferred Latches" table in the Analysis & Synthesis report.
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'zoom.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
 Info (332105): Deriving Clocks
     Info (332105): create_clock -period 1.000 -name clock_vga clock_vga
     Info (332105): create_clock -period 1.000 -name clock clock
-    Info (332105): create_clock -period 1.000 -name vga_module:vga_module_inst|h_counter[0] vga_module:vga_module_inst|h_counter[0]
-Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
-    Info (332098): Cell: always1~2  from: datac  to: combout
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1100mV 85C Model
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -5.698
+Info (332146): Worst-case setup slack is -9.058
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -5.698             -74.816 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):    -4.431           -3516.254 clock_vga 
-    Info (332119):    -3.590              -3.590 clock 
-Info (332146): Worst-case hold slack is 0.123
+    Info (332119):    -9.058           -7487.660 clock_vga 
+    Info (332119):    -3.529              -3.529 clock 
+Info (332146): Worst-case hold slack is 0.325
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.123               0.000 clock_vga 
-    Info (332119):     0.272               0.000 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):     1.565               0.000 clock 
+    Info (332119):     0.325               0.000 clock_vga 
+    Info (332119):     1.635               0.000 clock 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -7861.253 clock_vga 
-    Info (332119):    -0.759              -1.288 clock 
-    Info (332119):     0.239               0.000 vga_module:vga_module_inst|h_counter[0] 
+    Info (332119):    -2.174           -7927.512 clock_vga 
+    Info (332119):    -0.817              -1.397 clock 
 Info (332114): Report Metastability: Found 4 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info: Analyzing Slow 1100mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
-    Info (332098): Cell: always1~2  from: datac  to: combout
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -5.831
+Info (332146): Worst-case setup slack is -9.243
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -5.831             -75.256 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):    -4.364           -3396.710 clock_vga 
-    Info (332119):    -3.498              -3.498 clock 
-Info (332146): Worst-case hold slack is 0.240
+    Info (332119):    -9.243           -7583.741 clock_vga 
+    Info (332119):    -3.428              -3.428 clock 
+Info (332146): Worst-case hold slack is 0.338
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.240               0.000 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):     0.308               0.000 clock_vga 
-    Info (332119):     1.556               0.000 clock 
+    Info (332119):     0.338               0.000 clock_vga 
+    Info (332119):     1.551               0.000 clock 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -7846.180 clock_vga 
-    Info (332119):    -0.777              -1.349 clock 
-    Info (332119):     0.223               0.000 vga_module:vga_module_inst|h_counter[0] 
+    Info (332119):    -2.174           -7904.550 clock_vga 
+    Info (332119):    -0.816              -1.422 clock 
 Info (332114): Report Metastability: Found 4 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info: Analyzing Fast 1100mV 85C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
-    Info (332098): Cell: always1~2  from: datac  to: combout
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -2.914
+Info (332146): Worst-case setup slack is -4.628
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.914             -37.880 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):    -2.688              -2.688 clock 
-    Info (332119):    -2.558           -1890.629 clock_vga 
-Info (332146): Worst-case hold slack is -0.072
+    Info (332119):    -4.628           -3948.610 clock_vga 
+    Info (332119):    -2.663              -2.663 clock 
+Info (332146): Worst-case hold slack is 0.163
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.072              -0.230 clock_vga 
-    Info (332119):     0.162               0.000 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):     1.418               0.000 clock 
+    Info (332119):     0.163               0.000 clock_vga 
+    Info (332119):     1.456               0.000 clock 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -7807.171 clock_vga 
-    Info (332119):    -0.686              -1.024 clock 
-    Info (332119):     0.269               0.000 vga_module:vga_module_inst|h_counter[0] 
+    Info (332119):    -2.174           -7863.488 clock_vga 
+    Info (332119):    -0.712              -1.075 clock 
 Info (332114): Report Metastability: Found 4 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info: Analyzing Fast 1100mV 0C Model
-Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
-    Info (332098): Cell: always1~2  from: datac  to: combout
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -2.704
+Info (332146): Worst-case setup slack is -4.337
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.704             -34.766 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):    -2.341           -1594.264 clock_vga 
-    Info (332119):    -2.313              -2.313 clock 
-Info (332146): Worst-case hold slack is -0.023
+    Info (332119):    -4.337           -3652.841 clock_vga 
+    Info (332119):    -2.279              -2.279 clock 
+Info (332146): Worst-case hold slack is 0.143
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.023              -0.038 clock_vga 
-    Info (332119):     0.182               0.000 vga_module:vga_module_inst|h_counter[0] 
-    Info (332119):     1.155               0.000 clock 
+    Info (332119):     0.143               0.000 clock_vga 
+    Info (332119):     1.134               0.000 clock 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -7788.072 clock_vga 
-    Info (332119):    -0.679              -1.018 clock 
-    Info (332119):     0.302               0.000 vga_module:vga_module_inst|h_counter[0] 
+    Info (332119):    -2.174           -7833.283 clock_vga 
+    Info (332119):    -0.684              -1.028 clock 
 Info (332114): Report Metastability: Found 4 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
-Info: Quartus Prime Timing Analyzer was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 983 megabytes
-    Info: Processing ended: Tue Sep  9 11:23:01 2025
-    Info: Elapsed time: 00:00:03
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 991 megabytes
+    Info: Processing ended: Tue Sep 16 10:40:37 2025
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:06
 
 

@@ -1,13 +1,13 @@
-Fitter Status : Successful - Tue Sep  9 11:22:52 2025
+Fitter Status : Successful - Tue Sep 16 10:40:27 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : zoom
 Top-level Entity Name : control
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 99 / 32,070 ( < 1 % )
+Logic utilization (in ALMs) : 101 / 32,070 ( < 1 % )
 Total registers : 67
-Total pins : 30 / 457 ( 7 % )
+Total pins : 31 / 457 ( 7 % )
 Total virtual pins : 0
 Total block memory bits : 614,400 / 4,065,280 ( 15 % )
 Total RAM Blocks : 76 / 397 ( 19 % )

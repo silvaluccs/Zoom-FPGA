@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Tue Sep  9 11:22:21 2025
+Analysis & Synthesis Status : Successful - Tue Sep 16 10:40:03 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : zoom
 Top-level Entity Name : control
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
 Total registers : 64
-Total pins : 30
+Total pins : 31
 Total virtual pins : 0
 Total block memory bits : 614,400
 Total DSP Blocks : 0

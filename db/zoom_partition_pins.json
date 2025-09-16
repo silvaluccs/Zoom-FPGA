@@ -116,6 +116,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "input_chave",
+					"strict" : false
+				},
+				{
 					"name" : "clock",
 					"strict" : false
 				}
