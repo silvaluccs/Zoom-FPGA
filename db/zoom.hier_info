@@ -1,5 +1,22 @@
 |control
 clock => clock_vga.CLK
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => linha_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
+input_chave => coluna_sel.OUTPUTSELECT
 hsync <= vga_module:vga_module_inst.hsync
 vsync <= vga_module:vga_module_inst.vsync
 red[0] <= vga_module:vga_module_inst.red
@@ -31,7 +48,98 @@ clk <= vga_module:vga_module_inst.clk
 blank <= vga_module:vga_module_inst.blank
 
 
-|control|ram_nova:ram_instancia
+|control|pixel_replication_core:zoom_core
+vga_x[0] => ~NO_FANOUT~
+vga_x[1] => LessThan0.IN18
+vga_x[1] => coluna.DATAA
+vga_x[2] => LessThan0.IN17
+vga_x[2] => coluna.DATAA
+vga_x[3] => LessThan0.IN16
+vga_x[3] => coluna.DATAA
+vga_x[4] => LessThan0.IN15
+vga_x[4] => coluna.DATAA
+vga_x[5] => Add0.IN10
+vga_x[6] => Add0.IN9
+vga_x[7] => Add0.IN8
+vga_x[8] => Add0.IN7
+vga_x[9] => Add0.IN6
+vga_y[0] => ~NO_FANOUT~
+vga_y[1] => LessThan1.IN16
+vga_y[1] => linha.DATAA
+vga_y[2] => LessThan1.IN15
+vga_y[2] => linha.DATAA
+vga_y[3] => Add1.IN12
+vga_y[4] => Add1.IN11
+vga_y[5] => Add1.IN10
+vga_y[6] => Add1.IN9
+vga_y[7] => Add1.IN8
+vga_y[8] => Add1.IN7
+linha[0] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[1] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[2] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[3] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[4] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[5] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[6] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+linha[7] <= linha.DB_MAX_OUTPUT_PORT_TYPE
+coluna[0] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[1] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[2] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[3] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[4] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[5] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[6] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[7] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+coluna[8] <= coluna.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|control|matriz:framebuffer
+clock => clock.IN1
+linha[0] => Add0.IN16
+linha[0] => Add1.IN19
+linha[1] => Add0.IN15
+linha[1] => Add1.IN18
+linha[2] => Add0.IN13
+linha[2] => Add0.IN14
+linha[3] => Add0.IN11
+linha[3] => Add0.IN12
+linha[4] => Add0.IN9
+linha[4] => Add0.IN10
+linha[5] => Add0.IN7
+linha[5] => Add0.IN8
+linha[6] => Add0.IN5
+linha[6] => Add0.IN6
+linha[7] => Add0.IN3
+linha[7] => Add0.IN4
+coluna[0] => endereco_pixel[0].IN1
+coluna[1] => endereco_pixel[1].IN1
+coluna[2] => endereco_pixel[2].IN1
+coluna[3] => endereco_pixel[3].IN1
+coluna[4] => endereco_pixel[4].IN1
+coluna[5] => endereco_pixel[5].IN1
+coluna[6] => Add1.IN22
+coluna[7] => Add1.IN21
+coluna[8] => Add1.IN20
+escrever_na_matriz => escrever_na_matriz.IN1
+byte_entrada[0] => byte_entrada[0].IN1
+byte_entrada[1] => byte_entrada[1].IN1
+byte_entrada[2] => byte_entrada[2].IN1
+byte_entrada[3] => byte_entrada[3].IN1
+byte_entrada[4] => byte_entrada[4].IN1
+byte_entrada[5] => byte_entrada[5].IN1
+byte_entrada[6] => byte_entrada[6].IN1
+byte_entrada[7] => byte_entrada[7].IN1
+byte[0] <= ram_nova:ram1.q
+byte[1] <= ram_nova:ram1.q
+byte[2] <= ram_nova:ram1.q
+byte[3] <= ram_nova:ram1.q
+byte[4] <= ram_nova:ram1.q
+byte[5] <= ram_nova:ram1.q
+byte[6] <= ram_nova:ram1.q
+byte[7] <= ram_nova:ram1.q
+
+
+|control|matriz:framebuffer|ram_nova:ram1
 address[0] => address[0].IN1
 address[1] => address[1].IN1
 address[2] => address[2].IN1
@@ -70,7 +178,7 @@ q[6] <= altsyncram:altsyncram_component.q_a
 q[7] <= altsyncram:altsyncram_component.q_a
 
 
-|control|ram_nova:ram_instancia|altsyncram:altsyncram_component
+|control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component
 wren_a => altsyncram_u4r1:auto_generated.wren_a
 rden_a => altsyncram_u4r1:auto_generated.rden_a
 wren_b => ~NO_FANOUT~
@@ -128,7 +236,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|control|ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated
+|control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -1438,7 +1546,7 @@ wren_a => decode_nma:decode3.enable
 wren_a => _.IN0
 
 
-|control|ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:decode3
+|control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:decode3
 data[0] => w_anode548w[1].IN0
 data[0] => w_anode565w[1].IN1
 data[0] => w_anode575w[1].IN0
@@ -1503,7 +1611,7 @@ eq[8] <= w_anode644w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[9] <= w_anode655w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|control|ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:rden_decode
+|control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|decode_nma:rden_decode
 data[0] => w_anode548w[1].IN0
 data[0] => w_anode565w[1].IN1
 data[0] => w_anode575w[1].IN0
@@ -1568,7 +1676,7 @@ eq[8] <= w_anode644w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[9] <= w_anode655w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|control|ram_nova:ram_instancia|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|mux_7hb:mux2
+|control|matriz:framebuffer|ram_nova:ram1|altsyncram:altsyncram_component|altsyncram_u4r1:auto_generated|mux_7hb:mux2
 data[0] => l1_w0_n0_mux_dataout.IN1
 data[1] => l1_w1_n0_mux_dataout.IN1
 data[2] => l1_w2_n0_mux_dataout.IN1

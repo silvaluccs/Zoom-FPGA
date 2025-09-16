@@ -2,148 +2,100 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1100mV 85C Model Setup 'vga_module:vga_module_inst|h_counter[0]'
-Slack : -5.698
-TNS   : -74.816
-
 Type  : Slow 1100mV 85C Model Setup 'clock_vga'
-Slack : -4.431
-TNS   : -3516.254
+Slack : -9.058
+TNS   : -7487.660
 
 Type  : Slow 1100mV 85C Model Setup 'clock'
-Slack : -3.590
-TNS   : -3.590
+Slack : -3.529
+TNS   : -3.529
 
 Type  : Slow 1100mV 85C Model Hold 'clock_vga'
-Slack : 0.123
-TNS   : 0.000
-
-Type  : Slow 1100mV 85C Model Hold 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.272
+Slack : 0.325
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Hold 'clock'
-Slack : 1.565
+Slack : 1.635
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clock_vga'
 Slack : -2.174
-TNS   : -7861.253
+TNS   : -7927.512
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clock'
-Slack : -0.759
-TNS   : -1.288
-
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.239
-TNS   : 0.000
-
-Type  : Slow 1100mV 0C Model Setup 'vga_module:vga_module_inst|h_counter[0]'
-Slack : -5.831
-TNS   : -75.256
+Slack : -0.817
+TNS   : -1.397
 
 Type  : Slow 1100mV 0C Model Setup 'clock_vga'
-Slack : -4.364
-TNS   : -3396.710
+Slack : -9.243
+TNS   : -7583.741
 
 Type  : Slow 1100mV 0C Model Setup 'clock'
-Slack : -3.498
-TNS   : -3.498
-
-Type  : Slow 1100mV 0C Model Hold 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.240
-TNS   : 0.000
+Slack : -3.428
+TNS   : -3.428
 
 Type  : Slow 1100mV 0C Model Hold 'clock_vga'
-Slack : 0.308
+Slack : 0.338
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Hold 'clock'
-Slack : 1.556
+Slack : 1.551
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clock_vga'
 Slack : -2.174
-TNS   : -7846.180
+TNS   : -7904.550
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clock'
-Slack : -0.777
-TNS   : -1.349
-
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.223
-TNS   : 0.000
-
-Type  : Fast 1100mV 85C Model Setup 'vga_module:vga_module_inst|h_counter[0]'
-Slack : -2.914
-TNS   : -37.880
-
-Type  : Fast 1100mV 85C Model Setup 'clock'
-Slack : -2.688
-TNS   : -2.688
+Slack : -0.816
+TNS   : -1.422
 
 Type  : Fast 1100mV 85C Model Setup 'clock_vga'
-Slack : -2.558
-TNS   : -1890.629
+Slack : -4.628
+TNS   : -3948.610
+
+Type  : Fast 1100mV 85C Model Setup 'clock'
+Slack : -2.663
+TNS   : -2.663
 
 Type  : Fast 1100mV 85C Model Hold 'clock_vga'
-Slack : -0.072
-TNS   : -0.230
-
-Type  : Fast 1100mV 85C Model Hold 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.162
+Slack : 0.163
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Hold 'clock'
-Slack : 1.418
+Slack : 1.456
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clock_vga'
 Slack : -2.174
-TNS   : -7807.171
+TNS   : -7863.488
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clock'
-Slack : -0.686
-TNS   : -1.024
-
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.269
-TNS   : 0.000
-
-Type  : Fast 1100mV 0C Model Setup 'vga_module:vga_module_inst|h_counter[0]'
-Slack : -2.704
-TNS   : -34.766
+Slack : -0.712
+TNS   : -1.075
 
 Type  : Fast 1100mV 0C Model Setup 'clock_vga'
-Slack : -2.341
-TNS   : -1594.264
+Slack : -4.337
+TNS   : -3652.841
 
 Type  : Fast 1100mV 0C Model Setup 'clock'
-Slack : -2.313
-TNS   : -2.313
+Slack : -2.279
+TNS   : -2.279
 
 Type  : Fast 1100mV 0C Model Hold 'clock_vga'
-Slack : -0.023
-TNS   : -0.038
-
-Type  : Fast 1100mV 0C Model Hold 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.182
+Slack : 0.143
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Hold 'clock'
-Slack : 1.155
+Slack : 1.134
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clock_vga'
 Slack : -2.174
-TNS   : -7788.072
+TNS   : -7833.283
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clock'
-Slack : -0.679
-TNS   : -1.018
-
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'vga_module:vga_module_inst|h_counter[0]'
-Slack : 0.302
-TNS   : 0.000
+Slack : -0.684
+TNS   : -1.028
 
 ------------------------------------------------------------
