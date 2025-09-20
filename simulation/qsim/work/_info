@@ -1,0 +1,78 @@
+m255
+K4
+z2
+!s11f MIXED_VERSIONS
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+R0
+R1
+R0
+R1
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z2 d/home/lucas/Uefs/pbls/tec499/testeFile/simulation/qsim
+T_opt
+!s110 1758159072
+VCbf<a3<l1aTIOEzdC:kI`2
+04 19 4 work control_vlg_vec_tst fast 0
+=1-000ae431a4f1-68cb60df-2ae98-42456
+R1
+!s12b OEM100
+!s124 OEM10U2 
+o-quiet -auto_acc_if_foreign -work work -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver
+Z3 tCvgOpt 0
+n@_opt
+OL;O;2023.3;77
+R2
+vcontrol
+Z4 !s110 1758385675
+!i10b 1
+!s100 CR4RZ7]YIJ>`;3Mi^fI3`0
+Z5 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I=5[HYee^;z:UA>O<f:Td50
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+R2
+w1758385671
+8testeFila.vo
+FtesteFila.vo
+!i122 64
+L0 32 14872
+Z7 OV;L;2020.1;71
+r1
+!s85 0
+31
+!s108 1758385674.000000
+!s107 testeFila.vo|
+!s90 -work|work|testeFila.vo|
+!i113 1
+Z8 o-work work
+R3
+vcontrol_vlg_vec_tst
+R4
+!i10b 1
+!s100 TmMJ<N?KYe;D;ozI2?>i71
+R5
+IgfV3@Y;5C@gMVk@@1^z7D2
+R6
+R2
+w1758385666
+8Waveform.vwf.vt
+FWaveform.vwf.vt
+!i122 65
+L0 30 36
+R7
+r1
+!s85 0
+31
+!s108 1758385675.000000
+!s107 Waveform.vwf.vt|
+!s90 -work|work|Waveform.vwf.vt|
+!i113 1
+R8
+R3

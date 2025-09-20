@@ -1,0 +1,14 @@
+vendor_name = ModelSim
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/ram.qip
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/ram.v
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/fifo.qip
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/fifo.v
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/control.v
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/Waveform.vwf
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/Waveform1.vwf
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/Waveform2.vwf
+source_file = 1, /home/lucas/Uefs/pbls/tec499/testeFile/db/testeFila.cbx.xml
+design_name = control
+instance = comp, \out~output , out~output, control, 1
+instance = comp, \clock~input , clock~input, control, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, control, 1
