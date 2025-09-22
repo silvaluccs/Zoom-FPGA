@@ -1,89 +1,34 @@
 |control
-clock_50Mhz => clock_div[0].CLK
-clock_50Mhz => clock_div[1].CLK
-dados_porta_a_saida[0] <= ram:ram_inst.q_a[0]
-dados_porta_a_saida[1] <= ram:ram_inst.q_a[1]
-dados_porta_a_saida[2] <= ram:ram_inst.q_a[2]
-dados_porta_a_saida[3] <= ram:ram_inst.q_a[3]
-dados_porta_a_saida[4] <= ram:ram_inst.q_a[4]
-dados_porta_a_saida[5] <= ram:ram_inst.q_a[5]
-dados_porta_a_saida[6] <= ram:ram_inst.q_a[6]
-dados_porta_a_saida[7] <= ram:ram_inst.q_a[7]
-dados_fila_saida[0] <= fifo:fifo_inst.q
-dados_fila_saida[1] <= fifo:fifo_inst.q
-dados_fila_saida[2] <= fifo:fifo_inst.q
-dados_fila_saida[3] <= fifo:fifo_inst.q
-dados_fila_saida[4] <= fifo:fifo_inst.q
-dados_fila_saida[5] <= fifo:fifo_inst.q
-dados_fila_saida[6] <= fifo:fifo_inst.q
-dados_fila_saida[7] <= fifo:fifo_inst.q
-contador_endereco_saida[0] <= contador_endereco[0].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[1] <= contador_endereco[1].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[2] <= contador_endereco[2].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[3] <= contador_endereco[3].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[4] <= contador_endereco[4].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[5] <= contador_endereco[5].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[6] <= contador_endereco[6].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[7] <= contador_endereco[7].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[8] <= contador_endereco[8].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[9] <= contador_endereco[9].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[10] <= contador_endereco[10].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[11] <= contador_endereco[11].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[12] <= contador_endereco[12].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[13] <= contador_endereco[13].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[14] <= contador_endereco[14].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[15] <= contador_endereco[15].DB_MAX_OUTPUT_PORT_TYPE
-contador_endereco_saida[16] <= contador_endereco[16].DB_MAX_OUTPUT_PORT_TYPE
-proximo_x_vga[0] <= vga_module:vga.next_x
-proximo_x_vga[1] <= vga_module:vga.next_x
-proximo_x_vga[2] <= vga_module:vga.next_x
-proximo_x_vga[3] <= vga_module:vga.next_x
-proximo_x_vga[4] <= vga_module:vga.next_x
-proximo_x_vga[5] <= vga_module:vga.next_x
-proximo_x_vga[6] <= vga_module:vga.next_x
-proximo_x_vga[7] <= vga_module:vga.next_x
-proximo_x_vga[8] <= vga_module:vga.next_x
-proximo_x_vga[9] <= vga_module:vga.next_x
-proximo_y_vga[0] <= vga_module:vga.next_y
-proximo_y_vga[1] <= vga_module:vga.next_y
-proximo_y_vga[2] <= vga_module:vga.next_y
-proximo_y_vga[3] <= vga_module:vga.next_y
-proximo_y_vga[4] <= vga_module:vga.next_y
-proximo_y_vga[5] <= vga_module:vga.next_y
-proximo_y_vga[6] <= vga_module:vga.next_y
-proximo_y_vga[7] <= vga_module:vga.next_y
-proximo_y_vga[8] <= vga_module:vga.next_y
-proximo_y_vga[9] <= vga_module:vga.next_y
+clock_50Mhz => clock.CLK
 hsync <= vga_module:vga.hsync
 vsync <= vga_module:vga.vsync
-red[0] <= vga_module:vga.red
-red[1] <= vga_module:vga.red
-red[2] <= vga_module:vga.red
-red[3] <= vga_module:vga.red
-red[4] <= vga_module:vga.red
-red[5] <= vga_module:vga.red
-red[6] <= vga_module:vga.red
-red[7] <= vga_module:vga.red
-green[0] <= vga_module:vga.green
-green[1] <= vga_module:vga.green
-green[2] <= vga_module:vga.green
-green[3] <= vga_module:vga.green
-green[4] <= vga_module:vga.green
-green[5] <= vga_module:vga.green
-green[6] <= vga_module:vga.green
-green[7] <= vga_module:vga.green
-blue[0] <= vga_module:vga.blue
-blue[1] <= vga_module:vga.blue
-blue[2] <= vga_module:vga.blue
-blue[3] <= vga_module:vga.blue
-blue[4] <= vga_module:vga.blue
-blue[5] <= vga_module:vga.blue
-blue[6] <= vga_module:vga.blue
-blue[7] <= vga_module:vga.blue
-sync <= <GND>
-clk <= <GND>
+red[0] <= vga_module:vga.red[0]
+red[1] <= vga_module:vga.red[1]
+red[2] <= vga_module:vga.red[2]
+red[3] <= vga_module:vga.red[3]
+red[4] <= vga_module:vga.red[4]
+red[5] <= vga_module:vga.red[5]
+red[6] <= vga_module:vga.red[6]
+red[7] <= vga_module:vga.red[7]
+green[0] <= vga_module:vga.green[0]
+green[1] <= vga_module:vga.green[1]
+green[2] <= vga_module:vga.green[2]
+green[3] <= vga_module:vga.green[3]
+green[4] <= vga_module:vga.green[4]
+green[5] <= vga_module:vga.green[5]
+green[6] <= vga_module:vga.green[6]
+green[7] <= vga_module:vga.green[7]
+blue[0] <= vga_module:vga.blue[0]
+blue[1] <= vga_module:vga.blue[1]
+blue[2] <= vga_module:vga.blue[2]
+blue[3] <= vga_module:vga.blue[3]
+blue[4] <= vga_module:vga.blue[4]
+blue[5] <= vga_module:vga.blue[5]
+blue[6] <= vga_module:vga.blue[6]
+blue[7] <= vga_module:vga.blue[7]
+sync <= vga_module:vga.sync
+clk <= vga_module:vga.clk
 blank <= vga_module:vga.blank
-leitura_fila_saida <= ativar_leitura_da_fila.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |control|ram:ram_inst
@@ -159,63 +104,63 @@ q_b[7] <= altsyncram:altsyncram_component.q_b
 
 
 |control|ram:ram_inst|altsyncram:altsyncram_component
-wren_a => altsyncram_t3r2:auto_generated.wren_a
+wren_a => altsyncram_ekq2:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
-wren_b => altsyncram_t3r2:auto_generated.wren_b
+wren_b => altsyncram_ekq2:auto_generated.wren_b
 rden_b => ~NO_FANOUT~
-data_a[0] => altsyncram_t3r2:auto_generated.data_a[0]
-data_a[1] => altsyncram_t3r2:auto_generated.data_a[1]
-data_a[2] => altsyncram_t3r2:auto_generated.data_a[2]
-data_a[3] => altsyncram_t3r2:auto_generated.data_a[3]
-data_a[4] => altsyncram_t3r2:auto_generated.data_a[4]
-data_a[5] => altsyncram_t3r2:auto_generated.data_a[5]
-data_a[6] => altsyncram_t3r2:auto_generated.data_a[6]
-data_a[7] => altsyncram_t3r2:auto_generated.data_a[7]
-data_b[0] => altsyncram_t3r2:auto_generated.data_b[0]
-data_b[1] => altsyncram_t3r2:auto_generated.data_b[1]
-data_b[2] => altsyncram_t3r2:auto_generated.data_b[2]
-data_b[3] => altsyncram_t3r2:auto_generated.data_b[3]
-data_b[4] => altsyncram_t3r2:auto_generated.data_b[4]
-data_b[5] => altsyncram_t3r2:auto_generated.data_b[5]
-data_b[6] => altsyncram_t3r2:auto_generated.data_b[6]
-data_b[7] => altsyncram_t3r2:auto_generated.data_b[7]
-address_a[0] => altsyncram_t3r2:auto_generated.address_a[0]
-address_a[1] => altsyncram_t3r2:auto_generated.address_a[1]
-address_a[2] => altsyncram_t3r2:auto_generated.address_a[2]
-address_a[3] => altsyncram_t3r2:auto_generated.address_a[3]
-address_a[4] => altsyncram_t3r2:auto_generated.address_a[4]
-address_a[5] => altsyncram_t3r2:auto_generated.address_a[5]
-address_a[6] => altsyncram_t3r2:auto_generated.address_a[6]
-address_a[7] => altsyncram_t3r2:auto_generated.address_a[7]
-address_a[8] => altsyncram_t3r2:auto_generated.address_a[8]
-address_a[9] => altsyncram_t3r2:auto_generated.address_a[9]
-address_a[10] => altsyncram_t3r2:auto_generated.address_a[10]
-address_a[11] => altsyncram_t3r2:auto_generated.address_a[11]
-address_a[12] => altsyncram_t3r2:auto_generated.address_a[12]
-address_a[13] => altsyncram_t3r2:auto_generated.address_a[13]
-address_a[14] => altsyncram_t3r2:auto_generated.address_a[14]
-address_a[15] => altsyncram_t3r2:auto_generated.address_a[15]
-address_a[16] => altsyncram_t3r2:auto_generated.address_a[16]
-address_b[0] => altsyncram_t3r2:auto_generated.address_b[0]
-address_b[1] => altsyncram_t3r2:auto_generated.address_b[1]
-address_b[2] => altsyncram_t3r2:auto_generated.address_b[2]
-address_b[3] => altsyncram_t3r2:auto_generated.address_b[3]
-address_b[4] => altsyncram_t3r2:auto_generated.address_b[4]
-address_b[5] => altsyncram_t3r2:auto_generated.address_b[5]
-address_b[6] => altsyncram_t3r2:auto_generated.address_b[6]
-address_b[7] => altsyncram_t3r2:auto_generated.address_b[7]
-address_b[8] => altsyncram_t3r2:auto_generated.address_b[8]
-address_b[9] => altsyncram_t3r2:auto_generated.address_b[9]
-address_b[10] => altsyncram_t3r2:auto_generated.address_b[10]
-address_b[11] => altsyncram_t3r2:auto_generated.address_b[11]
-address_b[12] => altsyncram_t3r2:auto_generated.address_b[12]
-address_b[13] => altsyncram_t3r2:auto_generated.address_b[13]
-address_b[14] => altsyncram_t3r2:auto_generated.address_b[14]
-address_b[15] => altsyncram_t3r2:auto_generated.address_b[15]
-address_b[16] => altsyncram_t3r2:auto_generated.address_b[16]
+data_a[0] => altsyncram_ekq2:auto_generated.data_a[0]
+data_a[1] => altsyncram_ekq2:auto_generated.data_a[1]
+data_a[2] => altsyncram_ekq2:auto_generated.data_a[2]
+data_a[3] => altsyncram_ekq2:auto_generated.data_a[3]
+data_a[4] => altsyncram_ekq2:auto_generated.data_a[4]
+data_a[5] => altsyncram_ekq2:auto_generated.data_a[5]
+data_a[6] => altsyncram_ekq2:auto_generated.data_a[6]
+data_a[7] => altsyncram_ekq2:auto_generated.data_a[7]
+data_b[0] => altsyncram_ekq2:auto_generated.data_b[0]
+data_b[1] => altsyncram_ekq2:auto_generated.data_b[1]
+data_b[2] => altsyncram_ekq2:auto_generated.data_b[2]
+data_b[3] => altsyncram_ekq2:auto_generated.data_b[3]
+data_b[4] => altsyncram_ekq2:auto_generated.data_b[4]
+data_b[5] => altsyncram_ekq2:auto_generated.data_b[5]
+data_b[6] => altsyncram_ekq2:auto_generated.data_b[6]
+data_b[7] => altsyncram_ekq2:auto_generated.data_b[7]
+address_a[0] => altsyncram_ekq2:auto_generated.address_a[0]
+address_a[1] => altsyncram_ekq2:auto_generated.address_a[1]
+address_a[2] => altsyncram_ekq2:auto_generated.address_a[2]
+address_a[3] => altsyncram_ekq2:auto_generated.address_a[3]
+address_a[4] => altsyncram_ekq2:auto_generated.address_a[4]
+address_a[5] => altsyncram_ekq2:auto_generated.address_a[5]
+address_a[6] => altsyncram_ekq2:auto_generated.address_a[6]
+address_a[7] => altsyncram_ekq2:auto_generated.address_a[7]
+address_a[8] => altsyncram_ekq2:auto_generated.address_a[8]
+address_a[9] => altsyncram_ekq2:auto_generated.address_a[9]
+address_a[10] => altsyncram_ekq2:auto_generated.address_a[10]
+address_a[11] => altsyncram_ekq2:auto_generated.address_a[11]
+address_a[12] => altsyncram_ekq2:auto_generated.address_a[12]
+address_a[13] => altsyncram_ekq2:auto_generated.address_a[13]
+address_a[14] => altsyncram_ekq2:auto_generated.address_a[14]
+address_a[15] => altsyncram_ekq2:auto_generated.address_a[15]
+address_a[16] => altsyncram_ekq2:auto_generated.address_a[16]
+address_b[0] => altsyncram_ekq2:auto_generated.address_b[0]
+address_b[1] => altsyncram_ekq2:auto_generated.address_b[1]
+address_b[2] => altsyncram_ekq2:auto_generated.address_b[2]
+address_b[3] => altsyncram_ekq2:auto_generated.address_b[3]
+address_b[4] => altsyncram_ekq2:auto_generated.address_b[4]
+address_b[5] => altsyncram_ekq2:auto_generated.address_b[5]
+address_b[6] => altsyncram_ekq2:auto_generated.address_b[6]
+address_b[7] => altsyncram_ekq2:auto_generated.address_b[7]
+address_b[8] => altsyncram_ekq2:auto_generated.address_b[8]
+address_b[9] => altsyncram_ekq2:auto_generated.address_b[9]
+address_b[10] => altsyncram_ekq2:auto_generated.address_b[10]
+address_b[11] => altsyncram_ekq2:auto_generated.address_b[11]
+address_b[12] => altsyncram_ekq2:auto_generated.address_b[12]
+address_b[13] => altsyncram_ekq2:auto_generated.address_b[13]
+address_b[14] => altsyncram_ekq2:auto_generated.address_b[14]
+address_b[15] => altsyncram_ekq2:auto_generated.address_b[15]
+address_b[16] => altsyncram_ekq2:auto_generated.address_b[16]
 addressstall_a => ~NO_FANOUT~
 addressstall_b => ~NO_FANOUT~
-clock0 => altsyncram_t3r2:auto_generated.clock0
+clock0 => altsyncram_ekq2:auto_generated.clock0
 clock1 => ~NO_FANOUT~
 clocken0 => ~NO_FANOUT~
 clocken1 => ~NO_FANOUT~
@@ -225,28 +170,28 @@ aclr0 => ~NO_FANOUT~
 aclr1 => ~NO_FANOUT~
 byteena_a[0] => ~NO_FANOUT~
 byteena_b[0] => ~NO_FANOUT~
-q_a[0] <= altsyncram_t3r2:auto_generated.q_a[0]
-q_a[1] <= altsyncram_t3r2:auto_generated.q_a[1]
-q_a[2] <= altsyncram_t3r2:auto_generated.q_a[2]
-q_a[3] <= altsyncram_t3r2:auto_generated.q_a[3]
-q_a[4] <= altsyncram_t3r2:auto_generated.q_a[4]
-q_a[5] <= altsyncram_t3r2:auto_generated.q_a[5]
-q_a[6] <= altsyncram_t3r2:auto_generated.q_a[6]
-q_a[7] <= altsyncram_t3r2:auto_generated.q_a[7]
-q_b[0] <= altsyncram_t3r2:auto_generated.q_b[0]
-q_b[1] <= altsyncram_t3r2:auto_generated.q_b[1]
-q_b[2] <= altsyncram_t3r2:auto_generated.q_b[2]
-q_b[3] <= altsyncram_t3r2:auto_generated.q_b[3]
-q_b[4] <= altsyncram_t3r2:auto_generated.q_b[4]
-q_b[5] <= altsyncram_t3r2:auto_generated.q_b[5]
-q_b[6] <= altsyncram_t3r2:auto_generated.q_b[6]
-q_b[7] <= altsyncram_t3r2:auto_generated.q_b[7]
+q_a[0] <= altsyncram_ekq2:auto_generated.q_a[0]
+q_a[1] <= altsyncram_ekq2:auto_generated.q_a[1]
+q_a[2] <= altsyncram_ekq2:auto_generated.q_a[2]
+q_a[3] <= altsyncram_ekq2:auto_generated.q_a[3]
+q_a[4] <= altsyncram_ekq2:auto_generated.q_a[4]
+q_a[5] <= altsyncram_ekq2:auto_generated.q_a[5]
+q_a[6] <= altsyncram_ekq2:auto_generated.q_a[6]
+q_a[7] <= altsyncram_ekq2:auto_generated.q_a[7]
+q_b[0] <= altsyncram_ekq2:auto_generated.q_b[0]
+q_b[1] <= altsyncram_ekq2:auto_generated.q_b[1]
+q_b[2] <= altsyncram_ekq2:auto_generated.q_b[2]
+q_b[3] <= altsyncram_ekq2:auto_generated.q_b[3]
+q_b[4] <= altsyncram_ekq2:auto_generated.q_b[4]
+q_b[5] <= altsyncram_ekq2:auto_generated.q_b[5]
+q_b[6] <= altsyncram_ekq2:auto_generated.q_b[6]
+q_b[7] <= altsyncram_ekq2:auto_generated.q_b[7]
 eccstatus[0] <= <GND>
 eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -2691,7 +2636,7 @@ wren_a => decode_nma:decode2.enable
 wren_b => decode_nma:decode3.enable
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated|decode_nma:decode2
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated|decode_nma:decode2
 data[0] => w_anode1082w[1].IN0
 data[0] => w_anode1099w[1].IN1
 data[0] => w_anode1109w[1].IN0
@@ -2756,7 +2701,7 @@ eq[8] <= w_anode1178w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[9] <= w_anode1189w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated|decode_nma:decode3
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated|decode_nma:decode3
 data[0] => w_anode1082w[1].IN0
 data[0] => w_anode1099w[1].IN1
 data[0] => w_anode1109w[1].IN0
@@ -2821,7 +2766,7 @@ eq[8] <= w_anode1178w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[9] <= w_anode1189w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated|decode_g2a:rden_decode_a
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated|decode_g2a:rden_decode_a
 data[0] => w_anode1264w[1].IN0
 data[0] => w_anode1281w[1].IN1
 data[0] => w_anode1291w[1].IN0
@@ -2891,7 +2836,7 @@ eq[8] <= w_anode1351w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[9] <= w_anode1362w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated|decode_g2a:rden_decode_b
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated|decode_g2a:rden_decode_b
 data[0] => w_anode1264w[1].IN0
 data[0] => w_anode1281w[1].IN1
 data[0] => w_anode1291w[1].IN0
@@ -2961,7 +2906,7 @@ eq[8] <= w_anode1351w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[9] <= w_anode1362w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated|mux_7hb:mux4
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated|mux_7hb:mux4
 data[0] => l1_w0_n0_mux_dataout.IN1
 data[1] => l1_w1_n0_mux_dataout.IN1
 data[2] => l1_w2_n0_mux_dataout.IN1
@@ -3292,7 +3237,7 @@ sel[3] => l4_w7_n0_mux_dataout.IN0
 sel[3] => _.IN0
 
 
-|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_t3r2:auto_generated|mux_7hb:mux5
+|control|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_ekq2:auto_generated|mux_7hb:mux5
 data[0] => l1_w0_n0_mux_dataout.IN1
 data[1] => l1_w1_n0_mux_dataout.IN1
 data[2] => l1_w2_n0_mux_dataout.IN1
