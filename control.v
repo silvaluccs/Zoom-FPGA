@@ -30,12 +30,6 @@ module control(
 		 clock_div <= clock_div + 1;
 	end
 
-	assign clock = clocreg [1:0] clock_div = 0;
-
-always @(posedge clock_50Mhz) begin
-    clock_div <= clock_div + 1;
-end
-
 assign clock = clock_div[1];  // 25MHz com 50% duty cyclek_div[1];  // 25MHz com 50% duty cycle
 	 
     // RAM
