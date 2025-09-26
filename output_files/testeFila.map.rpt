@@ -1,5 +1,5 @@
 Analysis & Synthesis report for testeFila
-Fri Sep 26 05:13:05 2025
+Fri Sep 26 07:20:58 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -15,11 +15,11 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. Analysis & Synthesis IP Cores Summary
- 10. State Machine - |unidade_de_controle|estado_atual
- 11. State Machine - |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_state
- 12. State Machine - |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_state
- 13. Registers Removed During Synthesis
- 14. Removed Registers Triggering Further Register Optimizations
+ 10. State Machine - |unidade_de_controle|salvar_pixels
+ 11. State Machine - |unidade_de_controle|estado_atual
+ 12. State Machine - |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_state
+ 13. State Machine - |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_state
+ 14. Registers Removed During Synthesis
  15. General Register Statistics
  16. Multiplexer Restructuring Statistics (Restructuring Performed)
  17. Source assignments for ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated
@@ -35,13 +35,11 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  27. scfifo Parameter Settings by Entity Instance
  28. Port Connectivity Checks: "controle_vga:controle_saida|vga_module:vga"
  29. Port Connectivity Checks: "controle_vga:controle_saida|ram:ram_inst"
- 30. Port Connectivity Checks: "controle_vga:controle_saida"
- 31. Port Connectivity Checks: "clock_75mhz:clock_75"
- 32. Port Connectivity Checks: "alu:alu"
- 33. Port Connectivity Checks: "ram_primaria:ram_leitura"
- 34. Post-Synthesis Netlist Statistics for Top Partition
- 35. Elapsed Time Per Partition
- 36. Analysis & Synthesis Messages
+ 30. Port Connectivity Checks: "clock_75mhz:clock_75"
+ 31. Port Connectivity Checks: "ram_primaria:ram_leitura"
+ 32. Post-Synthesis Netlist Statistics for Top Partition
+ 33. Elapsed Time Per Partition
+ 34. Analysis & Synthesis Messages
 
 
 
@@ -68,16 +66,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Sep 26 05:13:05 2025          ;
+; Analysis & Synthesis Status     ; Successful - Fri Sep 26 07:20:58 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; testeFila                                      ;
 ; Top-level Entity Name           ; unidade_de_controle                            ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 133                                            ;
+; Total registers                 ; 191                                            ;
 ; Total pins                      ; 41                                             ;
 ; Total virtual pins              ; 0                                              ;
-; Total block memory bits         ; 618,496                                        ;
+; Total block memory bits         ; 695,296                                        ;
 ; Total DSP Blocks                ; 0                                              ;
 ; Total HSSI RX PCSs              ; 0                                              ;
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
@@ -244,20 +242,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------------------------------------------+
 ; Resource                                    ; Usage                                         ;
 +---------------------------------------------+-----------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 122                                           ;
+; Estimate of Logic utilization (ALMs needed) ; 182                                           ;
 ;                                             ;                                               ;
-; Combinational ALUT usage for logic          ; 190                                           ;
-;     -- 7 input functions                    ; 2                                             ;
-;     -- 6 input functions                    ; 48                                            ;
-;     -- 5 input functions                    ; 18                                            ;
-;     -- 4 input functions                    ; 27                                            ;
-;     -- <=3 input functions                  ; 95                                            ;
+; Combinational ALUT usage for logic          ; 304                                           ;
+;     -- 7 input functions                    ; 4                                             ;
+;     -- 6 input functions                    ; 51                                            ;
+;     -- 5 input functions                    ; 35                                            ;
+;     -- 4 input functions                    ; 60                                            ;
+;     -- <=3 input functions                  ; 154                                           ;
 ;                                             ;                                               ;
-; Dedicated logic registers                   ; 133                                           ;
+; Dedicated logic registers                   ; 191                                           ;
 ;                                             ;                                               ;
 ; I/O pins                                    ; 41                                            ;
 ; Total MLAB memory bits                      ; 0                                             ;
-; Total block memory bits                     ; 618496                                        ;
+; Total block memory bits                     ; 695296                                        ;
 ;                                             ;                                               ;
 ; Total DSP Blocks                            ; 0                                             ;
 ;                                             ;                                               ;
@@ -265,9 +263,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 1                                             ;
 ;                                             ;                                               ;
 ; Maximum fan-out node                        ; divisor_clock_por_2:divisor_clock_50MHZ|clock ;
-; Maximum fan-out                             ; 222                                           ;
-; Total fan-out                               ; 2674                                          ;
-; Average fan-out                             ; 5.41                                          ;
+; Maximum fan-out                             ; 290                                           ;
+; Total fan-out                               ; 4622                                          ;
+; Average fan-out                             ; 6.84                                          ;
 +---------------------------------------------+-----------------------------------------------+
 
 
@@ -276,11 +274,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                             ; Entity Name         ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |unidade_de_controle                         ; 190 (1)             ; 133 (0)                   ; 618496            ; 0          ; 41   ; 0            ; |unidade_de_controle                                                                                                                                            ; unidade_de_controle ; work         ;
+; |unidade_de_controle                         ; 304 (85)            ; 191 (50)                  ; 695296            ; 0          ; 41   ; 0            ; |unidade_de_controle                                                                                                                                            ; unidade_de_controle ; work         ;
 ;    |clock_75mhz:clock_75|                    ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75                                                                                                                       ; clock_75mhz         ; clock_75mhz  ;
 ;       |clock_75mhz_0002:clock_75mhz_inst|    ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst                                                                                     ; clock_75mhz_0002    ; clock_75mhz  ;
 ;          |altera_pll:altera_pll_i|           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i                                                             ; altera_pll          ; work         ;
-;    |controle_vga:controle_saida|             ; 188 (37)            ; 132 (29)                  ; 618496            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida                                                                                                                ; controle_vga        ; work         ;
+;    |controle_vga:controle_saida|             ; 205 (35)            ; 132 (29)                  ; 618496            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida                                                                                                                ; controle_vga        ; work         ;
 ;       |fifo:fifo_inst|                       ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst                                                                                                 ; fifo                ; work         ;
 ;          |scfifo:scfifo_component|           ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component                                                                         ; scfifo              ; work         ;
 ;             |scfifo_7nd1:auto_generated|     ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated                                              ; scfifo_7nd1         ; work         ;
@@ -289,13 +287,20 @@ https://fpgasoftware.intel.com/eula.
 ;                   |cntr_037:usedw_counter|   ; 9 (9)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_037:usedw_counter  ; cntr_037            ; work         ;
 ;                   |cntr_j2b:rd_ptr_msb|      ; 8 (8)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_j2b:rd_ptr_msb     ; cntr_j2b            ; work         ;
 ;                   |cntr_k2b:wr_ptr|          ; 9 (9)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr         ; cntr_k2b            ; work         ;
-;       |ram:ram_inst|                         ; 42 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst                                                                                                   ; ram                 ; work         ;
-;          |altsyncram:altsyncram_component|   ; 42 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
-;             |altsyncram_f3n2:auto_generated| ; 42 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated                                    ; altsyncram_f3n2     ; work         ;
+;       |ram:ram_inst|                         ; 62 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst                                                                                                   ; ram                 ; work         ;
+;          |altsyncram:altsyncram_component|   ; 62 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
+;             |altsyncram_f3n2:auto_generated| ; 62 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated                                    ; altsyncram_f3n2     ; work         ;
 ;                |decode_g2a:rden_decode_a|    ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_a           ; decode_g2a          ; work         ;
+;                |decode_g2a:rden_decode_b|    ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_b           ; decode_g2a          ; work         ;
+;                |decode_nma:decode3|          ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_nma:decode3                 ; decode_nma          ; work         ;
 ;                |mux_7hb:mux4|                ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4                       ; mux_7hb             ; work         ;
-;       |vga_module:vga|                       ; 61 (61)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga                                                                                                 ; vga_module          ; work         ;
+;       |vga_module:vga|                       ; 60 (60)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga                                                                                                 ; vga_module          ; work         ;
 ;    |divisor_clock_por_2:divisor_clock_50MHZ| ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|divisor_clock_por_2:divisor_clock_50MHZ                                                                                                    ; divisor_clock_por_2 ; work         ;
+;    |ram_primaria:ram_leitura|                ; 13 (0)              ; 8 (0)                     ; 76800             ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura                                                                                                                   ; ram_primaria        ; work         ;
+;       |altsyncram:altsyncram_component|      ; 13 (0)              ; 8 (0)                     ; 76800             ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component                                                                                   ; altsyncram          ; work         ;
+;          |altsyncram_43r1:auto_generated|    ; 13 (0)              ; 8 (8)                     ; 76800             ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated                                                    ; altsyncram_43r1     ; work         ;
+;             |decode_nma:rden_decode|         ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|decode_nma:rden_decode                             ; decode_nma          ; work         ;
+;             |mux_7hb:mux2|                   ; 3 (3)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2                                       ; mux_7hb             ; work         ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -307,6 +312,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------------+--------------+--------------+--------------+--------------+--------+-------------------+
 ; controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|altsyncram_kep1:FIFOram|ALTSYNCRAM ; M10K block ; Simple Dual Port ; 512          ; 8            ; 512          ; 8            ; 4096   ; None              ;
 ; controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|ALTSYNCRAM                                    ; M10K block ; True Dual Port   ; 76800        ; 8            ; 76800        ; 8            ; 614400 ; memoria_bahia.mif ;
+; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ALTSYNCRAM                                                    ; M10K block ; Single Port      ; 76800        ; 8            ; --           ; --           ; 614400 ; memoria_bahia.mif ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------------+--------------+--------------+--------------+--------------+--------+-------------------+
 
 
@@ -320,6 +326,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Altera ; RAM: 2-PORT  ; 23.1    ; N/A          ; N/A          ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst   ; ram.v           ;
 ; Altera ; RAM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |unidade_de_controle|ram_primaria:ram_leitura                   ; ram_primaria.v  ;
 +--------+--------------+---------+--------------+--------------+-----------------------------------------------------------------+-----------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |unidade_de_controle|salvar_pixels                                                                                   ;
++--------------------------+--------------------------+--------------------------+--------------------------+--------------------------+
+; Name                     ; salvar_pixels.ENDERECO_4 ; salvar_pixels.ENDERECO_3 ; salvar_pixels.ENDERECO_2 ; salvar_pixels.ENDERECO_1 ;
++--------------------------+--------------------------+--------------------------+--------------------------+--------------------------+
+; salvar_pixels.ENDERECO_1 ; 0                        ; 0                        ; 0                        ; 0                        ;
+; salvar_pixels.ENDERECO_2 ; 0                        ; 0                        ; 1                        ; 1                        ;
+; salvar_pixels.ENDERECO_3 ; 0                        ; 1                        ; 0                        ; 1                        ;
+; salvar_pixels.ENDERECO_4 ; 1                        ; 0                        ; 0                        ; 1                        ;
++--------------------------+--------------------------+--------------------------+--------------------------+--------------------------+
 
 
 Encoding Type:  One-Hot
@@ -364,61 +383,35 @@ Encoding Type:  One-Hot
 +------------------------+----------------------+-----------------------+-----------------------+------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                ;
-+--------------------------------------------------------------------------------------------------------------+--------------------+
-; Register name                                                                                                ; Reason for Removal ;
-+--------------------------------------------------------------------------------------------------------------+--------------------+
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[2] ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[2]     ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[1] ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[1]     ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[0] ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[0]     ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[3] ; Lost fanout        ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[3]     ; Lost fanout        ;
-; estado_atual.WRITE                                                                                           ; Lost fanout        ;
-; estado_atual.NEXT_PIXEL                                                                                      ; Lost fanout        ;
-; estado_atual.END_INSTRUCTION                                                                                 ; Lost fanout        ;
-; estado_atual~2                                                                                               ; Lost fanout        ;
-; estado_atual~3                                                                                               ; Lost fanout        ;
-; estado_atual~4                                                                                               ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~5                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~6                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~7                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~8                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~9                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~10                                                        ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~11                                                        ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|v_state~12                                                        ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~5                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~6                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~7                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~8                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~9                                                         ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~10                                                        ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~11                                                        ; Lost fanout        ;
-; controle_vga:controle_saida|vga_module:vga|h_state~12                                                        ; Lost fanout        ;
-; estado_atual.IDLE                                                                                            ; Lost fanout        ;
-; estado_atual.LOAD_OP                                                                                         ; Lost fanout        ;
-; estado_atual.READ_PIXEL                                                                                      ; Lost fanout        ;
-; estado_atual.EXECUTE                                                                                         ; Lost fanout        ;
-; Total Number of Removed Registers = 34                                                                       ;                    ;
-+--------------------------------------------------------------------------------------------------------------+--------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                  ;
-+--------------------------------------------------------------------------------------------------------------+--------------------+----------------------------------------------------------------------------------------------------------+
-; Register name                                                                                                ; Reason for Removal ; Registers Removed due to This Register                                                                   ;
-+--------------------------------------------------------------------------------------------------------------+--------------------+----------------------------------------------------------------------------------------------------------+
-; estado_atual~3                                                                                               ; Lost Fanouts       ; estado_atual.LOAD_OP, estado_atual.READ_PIXEL                                                            ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[2] ; Lost Fanouts       ; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[2] ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[1] ; Lost Fanouts       ; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[1] ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[0] ; Lost Fanouts       ; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[0] ;
-; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|out_address_reg_a[3] ; Lost Fanouts       ; ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|address_reg_a[3] ;
-; estado_atual~2                                                                                               ; Lost Fanouts       ; estado_atual.EXECUTE                                                                                     ;
-+--------------------------------------------------------------------------------------------------------------+--------------------+----------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                             ;
++-------------------------------------------------------+----------------------------------------+
+; Register name                                         ; Reason for Removal                     ;
++-------------------------------------------------------+----------------------------------------+
+; pixel_para_salvar[1..7]                               ; Stuck at GND due to stuck port data_in ;
+; salvar_pixels~2                                       ; Lost fanout                            ;
+; salvar_pixels~3                                       ; Lost fanout                            ;
+; estado_atual~2                                        ; Lost fanout                            ;
+; estado_atual~3                                        ; Lost fanout                            ;
+; estado_atual~4                                        ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~5  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~6  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~7  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~8  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~9  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~10 ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~11 ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|v_state~12 ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~5  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~6  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~7  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~8  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~9  ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~10 ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~11 ; Lost fanout                            ;
+; controle_vga:controle_saida|vga_module:vga|h_state~12 ; Lost fanout                            ;
+; Total Number of Removed Registers = 28                ;                                        ;
++-------------------------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -426,12 +419,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 133   ;
+; Total registers                              ; 191   ;
 ; Number of registers using Synchronous Clear  ; 45    ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 34    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 54    ;
+; Number of registers using Clock Enable       ; 83    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -441,11 +434,14 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|contador_escrita[8]                                                                                           ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_counter[2]                                                                                   ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_counter[3]                                                                                   ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|contador_escrita[6]                                                                                           ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unidade_de_controle|endereco_escrita[4]                                                                                                                       ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |unidade_de_controle|endereco_memoria[10]                                                                                                                      ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_counter[3]                                                                                   ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_counter[0]                                                                                   ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|red_reg                                                                                        ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4|l4_w0_n0_mux_dataout ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|Add0                                                                                                                                      ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4|l4_w7_n0_mux_dataout ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -977,24 +973,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+-------+----------+---------------------------------------------+
 
 
-+----------------------------------------------------------------------+
-; Port Connectivity Checks: "controle_vga:controle_saida|ram:ram_inst" ;
-+--------+--------+----------+-----------------------------------------+
-; Port   ; Type   ; Severity ; Details                                 ;
-+--------+--------+----------+-----------------------------------------+
-; data_a ; Input  ; Info     ; Stuck at GND                            ;
-; wren_a ; Input  ; Info     ; Stuck at GND                            ;
-; q_b    ; Output ; Info     ; Explicitly unconnected                  ;
-+--------+--------+----------+-----------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "controle_vga:controle_saida"                                                                                                                                          ;
-+-------------------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port              ; Type  ; Severity ; Details                                                                                                                                                   ;
-+-------------------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; byte_para_escrita ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (8 bits) it drives.  Extra input bit(s) "byte_para_escrita[7..1]" will be connected to GND. ;
-+-------------------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "controle_vga:controle_saida|ram:ram_inst"                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; data_a ; Input  ; Info     ; Stuck at GND                                                                        ;
+; wren_a ; Input  ; Info     ; Stuck at GND                                                                        ;
+; q_b    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -1002,21 +989,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+--------+----------+------------------------+
 ; Port   ; Type   ; Severity ; Details                ;
 +--------+--------+----------+------------------------+
-; rst    ; Input  ; Info     ; Explicitly unconnected ;
+; rst    ; Input  ; Info     ; Stuck at GND           ;
 ; locked ; Output ; Info     ; Explicitly unconnected ;
 +--------+--------+----------+------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "alu:alu"                                                                                                ;
-+--------------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port                     ; Type   ; Severity ; Details                                                                             ;
-+--------------------------+--------+----------+-------------------------------------------------------------------------------------+
-; pixel_processado[31..25] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; pixel_processado[23..17] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; pixel_processado[15..9]  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; pixel_processado[7..1]   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -1035,31 +1010,35 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 133                         ;
-;     ENA               ; 27                          ;
+; arriav_ff             ; 191                         ;
+;     ENA               ; 33                          ;
 ;     ENA SCLR          ; 27                          ;
+;     ENA SLD           ; 23                          ;
 ;     SCLR              ; 18                          ;
-;     plain             ; 61                          ;
-; arriav_lcell_comb     ; 190                         ;
-;     arith             ; 63                          ;
-;         1 data inputs ; 55                          ;
+;     SLD               ; 11                          ;
+;     plain             ; 79                          ;
+; arriav_lcell_comb     ; 304                         ;
+;     arith             ; 109                         ;
+;         1 data inputs ; 89                          ;
 ;         2 data inputs ; 8                           ;
-;     extend            ; 2                           ;
-;         7 data inputs ; 2                           ;
-;     normal            ; 125                         ;
+;         4 data inputs ; 8                           ;
+;         5 data inputs ; 4                           ;
+;     extend            ; 4                           ;
+;         7 data inputs ; 4                           ;
+;     normal            ; 191                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 2                           ;
-;         2 data inputs ; 7                           ;
-;         3 data inputs ; 22                          ;
-;         4 data inputs ; 27                          ;
-;         5 data inputs ; 18                          ;
-;         6 data inputs ; 48                          ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 24                          ;
+;         3 data inputs ; 28                          ;
+;         4 data inputs ; 52                          ;
+;         5 data inputs ; 31                          ;
+;         6 data inputs ; 51                          ;
 ; boundary_port         ; 41                          ;
 ; generic_pll           ; 1                           ;
-; stratixv_ram_block    ; 88                          ;
+; stratixv_ram_block    ; 98                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.00                        ;
-; Average LUT depth     ; 1.88                        ;
+; Max LUT depth         ; 4.50                        ;
+; Average LUT depth     ; 2.04                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1078,7 +1057,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Fri Sep 26 05:12:49 2025
+    Info: Processing started: Fri Sep 26 07:20:38 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off testeFila -c testeFila
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -1103,108 +1082,10 @@ Info (12021): Found 1 design units, including 1 entities, in source file clock_7
 Info (12021): Found 1 design units, including 1 entities, in source file clock_75mhz/clock_75mhz_0002.v
     Info (12023): Found entity 1: clock_75mhz_0002 File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 2
 Info (12127): Elaborating entity "unidade_de_controle" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at unidade_de_controle.v(51): object "dados_prontos" assigned a value but never read File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 51
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(89): variable "botao_zoom_in_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 89
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(89): variable "botao_zoom_out_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 89
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(89): variable "seletor_algoritmo_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 89
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(94): variable "pixel_para_processar" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 94
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(103): variable "pixels_processados" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 103
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(106): variable "salvar_pixels" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 106
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(109): variable "endereco_memoria" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 109
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(110): variable "pixels_processados_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 110
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(110): truncated value with size 8 to match size of target (1) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 110
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(114): variable "endereco_memoria" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 114
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(115): variable "pixels_processados_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 115
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(115): truncated value with size 8 to match size of target (1) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 115
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(119): variable "endereco_memoria" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 119
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(120): variable "pixels_processados_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 120
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(120): truncated value with size 8 to match size of target (1) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 120
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(124): variable "endereco_memoria" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 124
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(125): variable "pixels_processados_reg" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 125
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(125): truncated value with size 8 to match size of target (1) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 125
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(134): variable "endereco_escrita" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 134
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(137): variable "proximo_estado" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 137
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(143): variable "endereco_memoria" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 143
-Warning (10235): Verilog HDL Always Construct warning at unidade_de_controle.v(145): variable "endereco_memoria" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 145
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "botao_zoom_in_reg", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "botao_zoom_out_reg", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "seletor_algoritmo_reg", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "proximo_estado", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "escrita_dados", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "endereco_memoria", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "opcode", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "pixel_para_processar_reg", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "salvar_pixels", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "pixels_processados_reg", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "endereco_escrita", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(66): inferring latch(es) for variable "pixel_para_salvar", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
+Warning (10036): Verilog HDL or VHDL warning at unidade_de_controle.v(34): object "pixels_processados_reg" assigned a value but never read File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 34
 Warning (10034): Output port "dados" at unidade_de_controle.v(6) has no driver File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-Info (10041): Inferred latch for "pixel_para_salvar" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[0]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[1]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[2]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[3]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[4]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[5]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[6]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[7]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[8]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[9]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[10]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[11]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[12]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[13]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[14]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[15]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_escrita[16]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixels_processados_reg[0]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixels_processados_reg[8]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixels_processados_reg[16]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixels_processados_reg[24]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "salvar_pixels.11" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "salvar_pixels.10" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "salvar_pixels.01" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "salvar_pixels.00" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[0]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[1]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[2]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[3]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[4]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[5]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[6]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "pixel_para_processar_reg[7]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "opcode[0]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "opcode[1]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "opcode[2]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[0]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[1]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[2]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[3]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[4]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[5]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[6]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[7]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[8]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[9]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[10]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[11]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[12]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[13]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[14]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[15]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "endereco_memoria[16]" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "escrita_dados" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "proximo_estado.END_INSTRUCTION" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "proximo_estado.NEXT_PIXEL" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "proximo_estado.EXECUTE" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "proximo_estado.READ_PIXEL" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "proximo_estado.LOAD_OP" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "proximo_estado.IDLE" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "seletor_algoritmo_reg" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "botao_zoom_out_reg" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Info (10041): Inferred latch for "botao_zoom_in_reg" at unidade_de_controle.v(66) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
 Info (12128): Elaborating entity "divisor_clock_por_2" for hierarchy "divisor_clock_por_2:divisor_clock_50MHZ" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 25
-Info (12128): Elaborating entity "ram_primaria" for hierarchy "ram_primaria:ram_leitura" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 175
+Info (12128): Elaborating entity "ram_primaria" for hierarchy "ram_primaria:ram_leitura" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 291
 Info (12128): Elaborating entity "altsyncram" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
 Info (12130): Elaborated megafunction instantiation "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
 Info (12133): Instantiated megafunction "ram_primaria:ram_leitura|altsyncram:altsyncram_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
@@ -1233,10 +1114,10 @@ Info (12128): Elaborating entity "decode_nma" for hierarchy "ram_primaria:ram_le
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_7hb.tdf
     Info (12023): Found entity 1: mux_7hb File: /home/lucas/uefs/pbl/Zoom-FPGA/db/mux_7hb.tdf Line: 23
 Info (12128): Elaborating entity "mux_7hb" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 46
-Info (12128): Elaborating entity "alu" for hierarchy "alu:alu" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 183
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 299
 Warning (10235): Verilog HDL Always Construct warning at alu.v(18): variable "pixel" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/alu.v Line: 18
 Warning (10230): Verilog HDL assignment warning at alu.v(18): truncated value with size 32 to match size of target (1) File: /home/lucas/uefs/pbl/Zoom-FPGA/alu.v Line: 18
-Info (12128): Elaborating entity "clock_75mhz" for hierarchy "clock_75mhz:clock_75" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 191
+Info (12128): Elaborating entity "clock_75mhz" for hierarchy "clock_75mhz:clock_75" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 307
 Info (12128): Elaborating entity "clock_75mhz_0002" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz.v Line: 20
 Info (12128): Elaborating entity "altera_pll" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
@@ -1302,11 +1183,11 @@ Info (12133): Instantiated megafunction "clock_75mhz:clock_75|clock_75mhz_0002:c
     Info (12134): Parameter "duty_cycle17" = "50"
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "controle_vga" for hierarchy "controle_vga:controle_saida" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 208
-Warning (10230): Verilog HDL assignment warning at controle_vga.v(86): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 86
-Warning (10230): Verilog HDL assignment warning at controle_vga.v(94): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 94
-Warning (10230): Verilog HDL assignment warning at controle_vga.v(108): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 108
-Info (12128): Elaborating entity "ram" for hierarchy "controle_vga:controle_saida|ram:ram_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 39
+Info (12128): Elaborating entity "controle_vga" for hierarchy "controle_vga:controle_saida" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 324
+Warning (10230): Verilog HDL assignment warning at controle_vga.v(88): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 88
+Warning (10230): Verilog HDL assignment warning at controle_vga.v(96): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 96
+Warning (10230): Verilog HDL assignment warning at controle_vga.v(110): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 110
+Info (12128): Elaborating entity "ram" for hierarchy "controle_vga:controle_saida|ram:ram_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 41
 Info (12128): Elaborating entity "altsyncram" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 100
 Info (12130): Elaborated megafunction instantiation "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 100
 Info (12133): Instantiated megafunction "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 100
@@ -1343,7 +1224,7 @@ Info (12128): Elaborating entity "altsyncram_f3n2" for hierarchy "controle_vga:c
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_g2a.tdf
     Info (12023): Found entity 1: decode_g2a File: /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_g2a.tdf Line: 23
 Info (12128): Elaborating entity "decode_g2a" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_a" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_f3n2.tdf Line: 54
-Info (12128): Elaborating entity "fifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 55
+Info (12128): Elaborating entity "fifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 57
 Info (12128): Elaborating entity "scfifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 77
 Info (12130): Elaborated megafunction instantiation "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 77
 Info (12133): Instantiated megafunction "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 77
@@ -1380,7 +1261,7 @@ Info (12128): Elaborating entity "cntr_037" for hierarchy "controle_vga:controle
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_k2b.tdf
     Info (12023): Found entity 1: cntr_k2b File: /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_k2b.tdf Line: 26
 Info (12128): Elaborating entity "cntr_k2b" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 57
-Info (12128): Elaborating entity "vga_module" for hierarchy "controle_vga:controle_saida|vga_module:vga" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 140
+Info (12128): Elaborating entity "vga_module" for hierarchy "controle_vga:controle_saida|vga_module:vga" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 142
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
         Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a1" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 72
@@ -1453,37 +1334,6 @@ Warning (14284): Synthesized away the following node(s):
         Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a77" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1972
         Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a78" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1997
         Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a79" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 2022
-Warning (14025): LATCH primitive "endereco_escrita[16]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[15]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[14]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[13]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[12]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[11]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[10]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[9]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[8]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[7]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[6]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[5]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[4]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[3]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[2]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[1]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "endereco_escrita[0]" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 66
-Warning (14025): LATCH primitive "pixel_para_salvar" is permanently disabled File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 46
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a0" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 47
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a8" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 247
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a16" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 447
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a24" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 647
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a32" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 847
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a40" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1047
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a48" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1247
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a56" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1447
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a64" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1647
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a72" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1847
-Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "dados[0]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
     Warning (13410): Pin "dados[1]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
@@ -1495,25 +1345,23 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "dados[7]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
     Warning (13410): Pin "sync" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 12
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 34 registers lost all their fanouts during netlist optimizations.
+Info (17049): 21 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 3 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning: RST port on the PLL is not properly connected on instance clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 749
     Info: Must be connected
-Warning (21074): Design contains 3 input pin(s) that do not drive logic
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "seletor_algoritmo" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 5
-    Warning (15610): No output dependent on input pin "botao_zoom_in" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 3
-    Warning (15610): No output dependent on input pin "botao_zoom_out" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 4
-Info (21057): Implemented 371 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 529 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 4 input pins
     Info (21059): Implemented 37 output pins
-    Info (21061): Implemented 241 logic cells
-    Info (21064): Implemented 88 RAM segments
+    Info (21061): Implemented 389 logic cells
+    Info (21064): Implemented 98 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 160 warnings
-    Info: Peak virtual memory: 461 megabytes
-    Info: Processing ended: Fri Sep 26 05:13:05 2025
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:24
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 93 warnings
+    Info: Peak virtual memory: 464 megabytes
+    Info: Processing ended: Fri Sep 26 07:20:58 2025
+    Info: Elapsed time: 00:00:20
+    Info: Total CPU time (on all processors): 00:00:26
 
 

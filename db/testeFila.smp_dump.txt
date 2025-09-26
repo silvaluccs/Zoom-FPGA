@@ -1,4 +1,11 @@
 
+State Machine - |unidade_de_controle|salvar_pixels
+Name salvar_pixels.ENDERECO_4 salvar_pixels.ENDERECO_3 salvar_pixels.ENDERECO_2 salvar_pixels.ENDERECO_1 
+salvar_pixels.ENDERECO_1 0 0 0 0 
+salvar_pixels.ENDERECO_2 0 0 1 1 
+salvar_pixels.ENDERECO_3 0 1 0 1 
+salvar_pixels.ENDERECO_4 1 0 0 1 
+
 State Machine - |unidade_de_controle|estado_atual
 Name estado_atual.END_INSTRUCTION estado_atual.NEXT_PIXEL estado_atual.WRITE estado_atual.EXECUTE estado_atual.READ_PIXEL estado_atual.LOAD_OP estado_atual.IDLE 
 estado_atual.IDLE 0 0 0 0 0 0 0 

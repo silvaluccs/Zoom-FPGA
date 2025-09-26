@@ -1,5 +1,5 @@
 Timing Analyzer report for testeFila
-Fri Sep 26 05:16:21 2025
+Fri Sep 26 07:30:54 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -50,9 +50,11 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  42. Report RSKM
  43. Unconstrained Paths Summary
  44. Clock Status Summary
- 45. Unconstrained Output Ports
+ 45. Unconstrained Input Ports
  46. Unconstrained Output Ports
- 47. Timing Analyzer Messages
+ 47. Unconstrained Input Ports
+ 48. Unconstrained Output Ports
+ 49. Timing Analyzer Messages
 
 
 
@@ -98,12 +100,12 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 2           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.29        ;
+; Average used               ; 1.38        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  29.1%      ;
+;     Processor 2            ;  37.6%      ;
 +----------------------------+-------------+
 
 
@@ -124,7 +126,7 @@ https://fpgasoftware.intel.com/eula.
 +------------+-----------------+----------------------------------------------------------------------------------+------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name                                                                       ; Note                                           ;
 +------------+-----------------+----------------------------------------------------------------------------------+------------------------------------------------+
-; 206.19 MHz ; 206.19 MHz      ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ;                                                ;
+; 188.71 MHz ; 188.71 MHz      ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ;                                                ;
 ; 487.09 MHz ; 315.06 MHz      ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; limit due to minimum period restriction (tmin) ;
 +------------+-----------------+----------------------------------------------------------------------------------+------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
@@ -141,9 +143,9 @@ HTML report is unavailable in plain text report export.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -3.850 ; -2960.009     ;
-; clock_50Mhz                                                                      ; -3.485 ; -3.485        ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 11.280 ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -7.644 ; -8806.819     ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -4.299 ; -3526.468     ;
+; clock_50Mhz                                                                      ; -4.047 ; -4.047        ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
@@ -152,9 +154,9 @@ HTML report is unavailable in plain text report export.
 +----------------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                            ; Slack ; End Point TNS ;
 +----------------------------------------------------------------------------------+-------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.464 ; 0.000         ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.760 ; 0.000         ;
-; clock_50Mhz                                                                      ; 1.564 ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.241 ; 0.000         ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.273 ; 0.000         ;
+; clock_50Mhz                                                                      ; 1.877 ; 0.000         ;
 +----------------------------------------------------------------------------------+-------+---------------+
 
 
@@ -175,17 +177,23 @@ No paths to report.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -8068.559     ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -9122.175     ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 5.424  ; 0.000         ;
-; clock_50Mhz                                                                      ; 8.718  ; 0.000         ;
+; clock_50Mhz                                                                      ; 8.638  ; 0.000         ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
 -----------------------------------------------
 ; Slow 1100mV 85C Model Metastability Summary ;
 -----------------------------------------------
-No synchronizer chains to report.
+The design MTBF is not calculated because there are no specified synchronizers in the design.
+Number of Synchronizer Chains Found: 76
+Shortest Synchronizer Chain: 2 Registers
+Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+Worst Case Available Settling Time: 11.280 ns
+
+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -193,7 +201,7 @@ No synchronizer chains to report.
 +------------+-----------------+----------------------------------------------------------------------------------+------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name                                                                       ; Note                                           ;
 +------------+-----------------+----------------------------------------------------------------------------------+------------------------------------------------+
-; 209.56 MHz ; 209.56 MHz      ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ;                                                ;
+; 189.93 MHz ; 189.93 MHz      ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ;                                                ;
 ; 480.08 MHz ; 315.06 MHz      ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; limit due to minimum period restriction (tmin) ;
 +------------+-----------------+----------------------------------------------------------------------------------+------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
@@ -204,21 +212,21 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -3.772 ; -2797.653     ;
-; clock_50Mhz                                                                      ; -3.388 ; -3.388        ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 11.250 ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -6.872 ; -7874.288     ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -4.265 ; -3317.009     ;
+; clock_50Mhz                                                                      ; -3.935 ; -3.935        ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Slow 1100mV 0C Model Hold Summary                                                                        ;
-+----------------------------------------------------------------------------------+-------+---------------+
-; Clock                                                                            ; Slack ; End Point TNS ;
-+----------------------------------------------------------------------------------+-------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.436 ; 0.000         ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.790 ; 0.000         ;
-; clock_50Mhz                                                                      ; 1.525 ; 0.000         ;
-+----------------------------------------------------------------------------------+-------+---------------+
++-----------------------------------------------------------------------------------------------------------+
+; Slow 1100mV 0C Model Hold Summary                                                                         ;
++----------------------------------------------------------------------------------+--------+---------------+
+; Clock                                                                            ; Slack  ; End Point TNS ;
++----------------------------------------------------------------------------------+--------+---------------+
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -0.283 ; -14.904       ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.276  ; 0.000         ;
+; clock_50Mhz                                                                      ; 1.849  ; 0.000         ;
++----------------------------------------------------------------------------------+--------+---------------+
 
 
 -----------------------------------------
@@ -238,17 +246,23 @@ No paths to report.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -8031.883     ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -9093.221     ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 5.405  ; 0.000         ;
-; clock_50Mhz                                                                      ; 8.719  ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 5.404  ; 0.000         ;
+; clock_50Mhz                                                                      ; 8.639  ; 0.000         ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
 ----------------------------------------------
 ; Slow 1100mV 0C Model Metastability Summary ;
 ----------------------------------------------
-No synchronizer chains to report.
+The design MTBF is not calculated because there are no specified synchronizers in the design.
+Number of Synchronizer Chains Found: 76
+Shortest Synchronizer Chain: 2 Registers
+Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+Worst Case Available Settling Time: 11.250 ns
+
+
 
 
 +-----------------------------------------------------------------------------------------------------------+
@@ -256,9 +270,9 @@ No synchronizer chains to report.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; clock_50Mhz                                                                      ; -2.717 ; -2.717        ;
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.033 ; -1620.499     ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 12.143 ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -6.157 ; -7037.959     ;
+; clock_50Mhz                                                                      ; -2.998 ; -2.998        ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.414 ; -1934.163     ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
@@ -267,9 +281,9 @@ No synchronizer chains to report.
 +----------------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                            ; Slack ; End Point TNS ;
 +----------------------------------------------------------------------------------+-------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.196 ; 0.000         ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.092 ; 0.000         ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.457 ; 0.000         ;
-; clock_50Mhz                                                                      ; 1.484 ; 0.000         ;
+; clock_50Mhz                                                                      ; 1.594 ; 0.000         ;
 +----------------------------------------------------------------------------------+-------+---------------+
 
 
@@ -290,17 +304,23 @@ No paths to report.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -7959.681     ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -8971.896     ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 5.545  ; 0.000         ;
-; clock_50Mhz                                                                      ; 8.811  ; 0.000         ;
+; clock_50Mhz                                                                      ; 8.752  ; 0.000         ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
 -----------------------------------------------
 ; Fast 1100mV 85C Model Metastability Summary ;
 -----------------------------------------------
-No synchronizer chains to report.
+The design MTBF is not calculated because there are no specified synchronizers in the design.
+Number of Synchronizer Chains Found: 76
+Shortest Synchronizer Chain: 2 Registers
+Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+Worst Case Available Settling Time: 12.143 ns
+
+
 
 
 +-----------------------------------------------------------------------------------------------------------+
@@ -308,9 +328,9 @@ No synchronizer chains to report.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; clock_50Mhz                                                                      ; -2.353 ; -2.353        ;
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -1.753 ; -1332.784     ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 12.161 ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -4.960 ; -5653.730     ;
+; clock_50Mhz                                                                      ; -2.593 ; -2.593        ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.140 ; -1596.097     ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
@@ -319,9 +339,9 @@ No synchronizer chains to report.
 +----------------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                            ; Slack ; End Point TNS ;
 +----------------------------------------------------------------------------------+-------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.163 ; 0.000         ;
-; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.449 ; 0.000         ;
-; clock_50Mhz                                                                      ; 1.194 ; 0.000         ;
+; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.032 ; 0.000         ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 0.080 ; 0.000         ;
+; clock_50Mhz                                                                      ; 1.317 ; 0.000         ;
 +----------------------------------------------------------------------------------+-------+---------------+
 
 
@@ -342,35 +362,41 @@ No paths to report.
 +----------------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                            ; Slack  ; End Point TNS ;
 +----------------------------------------------------------------------------------+--------+---------------+
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -7923.335     ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2.174 ; -8936.336     ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 5.548  ; 0.000         ;
-; clock_50Mhz                                                                      ; 8.832  ; 0.000         ;
+; clock_50Mhz                                                                      ; 8.782  ; 0.000         ;
 +----------------------------------------------------------------------------------+--------+---------------+
 
 
 ----------------------------------------------
 ; Fast 1100mV 0C Model Metastability Summary ;
 ----------------------------------------------
-No synchronizer chains to report.
+The design MTBF is not calculated because there are no specified synchronizers in the design.
+Number of Synchronizer Chains Found: 76
+Shortest Synchronizer Chain: 2 Registers
+Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+Worst Case Available Settling Time: 12.161 ns
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                                                                                              ;
-+-----------------------------------------------------------------------------------+-----------+-------+----------+---------+---------------------+
-; Clock                                                                             ; Setup     ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
-+-----------------------------------------------------------------------------------+-----------+-------+----------+---------+---------------------+
-; Worst-case Slack                                                                  ; -3.850    ; 0.163 ; N/A      ; N/A     ; -2.174              ;
-;  clock_50Mhz                                                                      ; -3.485    ; 1.194 ; N/A      ; N/A     ; 8.718               ;
-;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A       ; N/A   ; N/A      ; N/A     ; 1.666               ;
-;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 11.250    ; 0.449 ; N/A      ; N/A     ; 5.405               ;
-;  divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -3.850    ; 0.163 ; N/A      ; N/A     ; -2.174              ;
-; Design-wide TNS                                                                   ; -2963.494 ; 0.0   ; 0.0      ; 0.0     ; -8068.559           ;
-;  clock_50Mhz                                                                      ; -3.485    ; 0.000 ; N/A      ; N/A     ; 0.000               ;
-;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A       ; N/A   ; N/A      ; N/A     ; 0.000               ;
-;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.000     ; 0.000 ; N/A      ; N/A     ; 0.000               ;
-;  divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -2960.009 ; 0.000 ; N/A      ; N/A     ; -8068.559           ;
-+-----------------------------------------------------------------------------------+-----------+-------+----------+---------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                                                                                                 ;
++-----------------------------------------------------------------------------------+------------+---------+----------+---------+---------------------+
+; Clock                                                                             ; Setup      ; Hold    ; Recovery ; Removal ; Minimum Pulse Width ;
++-----------------------------------------------------------------------------------+------------+---------+----------+---------+---------------------+
+; Worst-case Slack                                                                  ; -7.644     ; -0.283  ; N/A      ; N/A     ; -2.174              ;
+;  clock_50Mhz                                                                      ; -4.047     ; 1.317   ; N/A      ; N/A     ; 8.638               ;
+;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A        ; N/A     ; N/A      ; N/A     ; 1.666               ;
+;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -7.644     ; -0.283  ; N/A      ; N/A     ; 5.404               ;
+;  divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -4.299     ; 0.080   ; N/A      ; N/A     ; -2.174              ;
+; Design-wide TNS                                                                   ; -12337.334 ; -14.904 ; 0.0      ; 0.0     ; -9122.175           ;
+;  clock_50Mhz                                                                      ; -4.047     ; 0.000   ; N/A      ; N/A     ; 0.000               ;
+;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A        ; N/A     ; N/A      ; N/A     ; 0.000               ;
+;  clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -8806.819  ; -14.904 ; N/A      ; N/A     ; 0.000               ;
+;  divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; -3526.468  ; 0.000   ; N/A      ; N/A     ; -9122.175           ;
++-----------------------------------------------------------------------------------+------------+---------+----------+---------+---------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -424,9 +450,9 @@ No synchronizer chains to report.
 ; Pin               ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
 +-------------------+--------------+-----------------+-----------------+
 ; seletor_algoritmo ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; clock_50Mhz       ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; botao_zoom_in     ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; botao_zoom_out    ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; clock_50Mhz       ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 +-------------------+--------------+-----------------+-----------------+
 
 
@@ -436,12 +462,12 @@ No synchronizer chains to report.
 ; Pin      ; I/O Standard ; Board Delay on Rise ; Board Delay on Fall ; Steady State Voh at FPGA Pin ; Steady State Vol at FPGA Pin ; Voh Max at FPGA Pin ; Vol Min at FPGA Pin ; Ringback Voltage on Rise at FPGA Pin ; Ringback Voltage on Fall at FPGA Pin ; 10-90 Rise Time at FPGA Pin ; 90-10 Fall Time at FPGA Pin ; Monotonic Rise at FPGA Pin ; Monotonic Fall at FPGA Pin ; Steady State Voh at Far-end ; Steady State Vol at Far-end ; Voh Max at Far-end ; Vol Min at Far-end ; Ringback Voltage on Rise at Far-end ; Ringback Voltage on Fall at Far-end ; 10-90 Rise Time at Far-end ; 90-10 Fall Time at Far-end ; Monotonic Rise at Far-end ; Monotonic Fall at Far-end ;
 +----------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 ; dados[0] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0568 V           ; 0.173 V                              ; 0.113 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0568 V          ; 0.173 V                             ; 0.113 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
-; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0557 V           ; 0.175 V                              ; 0.114 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0557 V          ; 0.175 V                             ; 0.114 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
+; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.07e-07 V                   ; 2.36 V              ; -0.0231 V           ; 0.14 V                               ; 0.089 V                              ; 4.52e-10 s                  ; 4.35e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.07e-07 V                  ; 2.36 V             ; -0.0231 V          ; 0.14 V                              ; 0.089 V                             ; 4.52e-10 s                 ; 4.35e-10 s                 ; No                        ; Yes                       ;
 ; dados[2] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0557 V           ; 0.175 V                              ; 0.114 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0557 V          ; 0.175 V                             ; 0.114 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
 ; dados[3] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0557 V           ; 0.175 V                              ; 0.114 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0557 V          ; 0.175 V                             ; 0.114 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
-; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.07e-07 V                   ; 2.36 V              ; -0.0231 V           ; 0.14 V                               ; 0.089 V                              ; 4.52e-10 s                  ; 4.35e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.07e-07 V                  ; 2.36 V             ; -0.0231 V          ; 0.14 V                              ; 0.089 V                             ; 4.52e-10 s                 ; 4.35e-10 s                 ; No                        ; Yes                       ;
-; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.6e-07 V                    ; 2.41 V              ; -0.0463 V           ; 0.201 V                              ; 0.131 V                              ; 4.61e-10 s                  ; 4.53e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.6e-07 V                   ; 2.41 V             ; -0.0463 V          ; 0.201 V                             ; 0.131 V                             ; 4.61e-10 s                 ; 4.53e-10 s                 ; No                        ; Yes                       ;
-; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.07e-07 V                   ; 2.36 V              ; -0.0231 V           ; 0.14 V                               ; 0.089 V                              ; 4.52e-10 s                  ; 4.35e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.07e-07 V                  ; 2.36 V             ; -0.0231 V          ; 0.14 V                              ; 0.089 V                             ; 4.52e-10 s                 ; 4.35e-10 s                 ; No                        ; Yes                       ;
+; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.6e-07 V                    ; 2.41 V              ; -0.0463 V           ; 0.201 V                              ; 0.131 V                              ; 4.61e-10 s                  ; 4.53e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.6e-07 V                   ; 2.41 V             ; -0.0463 V          ; 0.201 V                             ; 0.131 V                             ; 4.61e-10 s                 ; 4.53e-10 s                 ; No                        ; Yes                       ;
+; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0557 V           ; 0.175 V                              ; 0.114 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0557 V          ; 0.175 V                             ; 0.114 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
+; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.6e-07 V                    ; 2.41 V              ; -0.0463 V           ; 0.201 V                              ; 0.131 V                              ; 4.61e-10 s                  ; 4.53e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.6e-07 V                   ; 2.41 V             ; -0.0463 V          ; 0.201 V                             ; 0.131 V                             ; 4.61e-10 s                 ; 4.53e-10 s                 ; No                        ; Yes                       ;
 ; dados[7] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0557 V           ; 0.175 V                              ; 0.114 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0557 V          ; 0.175 V                             ; 0.114 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
 ; hsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.52e-07 V                   ; 2.42 V              ; -0.0557 V           ; 0.175 V                              ; 0.114 V                              ; 4.5e-10 s                   ; 4.35e-10 s                  ; No                         ; No                         ; 2.32 V                      ; 3.52e-07 V                  ; 2.42 V             ; -0.0557 V          ; 0.175 V                             ; 0.114 V                             ; 4.5e-10 s                  ; 4.35e-10 s                 ; No                        ; No                        ;
 ; vsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.6e-07 V                    ; 2.41 V              ; -0.0463 V           ; 0.201 V                              ; 0.131 V                              ; 4.61e-10 s                  ; 4.53e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.6e-07 V                   ; 2.41 V             ; -0.0463 V          ; 0.201 V                             ; 0.131 V                             ; 4.61e-10 s                 ; 4.53e-10 s                 ; No                        ; Yes                       ;
@@ -481,12 +507,12 @@ No synchronizer chains to report.
 ; Pin      ; I/O Standard ; Board Delay on Rise ; Board Delay on Fall ; Steady State Voh at FPGA Pin ; Steady State Vol at FPGA Pin ; Voh Max at FPGA Pin ; Vol Min at FPGA Pin ; Ringback Voltage on Rise at FPGA Pin ; Ringback Voltage on Fall at FPGA Pin ; 10-90 Rise Time at FPGA Pin ; 90-10 Fall Time at FPGA Pin ; Monotonic Rise at FPGA Pin ; Monotonic Fall at FPGA Pin ; Steady State Voh at Far-end ; Steady State Vol at Far-end ; Voh Max at Far-end ; Vol Min at Far-end ; Ringback Voltage on Rise at Far-end ; Ringback Voltage on Fall at Far-end ; 10-90 Rise Time at Far-end ; 90-10 Fall Time at Far-end ; Monotonic Rise at Far-end ; Monotonic Fall at Far-end ;
 +----------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 ; dados[0] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.0374 V           ; 0.189 V                              ; 0.158 V                              ; 4.66e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.0374 V          ; 0.189 V                             ; 0.158 V                             ; 4.66e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
-; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
+; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
 ; dados[2] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
 ; dados[3] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
-; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
-; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
-; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.49e-05 V                   ; 2.34 V              ; -0.0118 V           ; 0.182 V                              ; 0.051 V                              ; 4.81e-10 s                  ; 4.83e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 3.49e-05 V                  ; 2.34 V             ; -0.0118 V          ; 0.182 V                             ; 0.051 V                             ; 4.81e-10 s                 ; 4.83e-10 s                 ; Yes                       ; Yes                       ;
+; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
+; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
+; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
 ; dados[7] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
 ; hsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.88e-05 V                   ; 2.39 V              ; -0.037 V            ; 0.188 V                              ; 0.158 V                              ; 4.67e-10 s                  ; 4.67e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.88e-05 V                  ; 2.39 V             ; -0.037 V           ; 0.188 V                             ; 0.158 V                             ; 4.67e-10 s                 ; 4.67e-10 s                 ; No                        ; Yes                       ;
 ; vsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.96e-05 V                   ; 2.38 V              ; -0.0306 V           ; 0.23 V                               ; 0.206 V                              ; 4.83e-10 s                  ; 5.01e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.96e-05 V                  ; 2.38 V             ; -0.0306 V          ; 0.23 V                              ; 0.206 V                             ; 4.83e-10 s                 ; 5.01e-10 s                 ; No                        ; Yes                       ;
@@ -526,12 +552,12 @@ No synchronizer chains to report.
 ; Pin      ; I/O Standard ; Board Delay on Rise ; Board Delay on Fall ; Steady State Voh at FPGA Pin ; Steady State Vol at FPGA Pin ; Voh Max at FPGA Pin ; Vol Min at FPGA Pin ; Ringback Voltage on Rise at FPGA Pin ; Ringback Voltage on Fall at FPGA Pin ; 10-90 Rise Time at FPGA Pin ; 90-10 Fall Time at FPGA Pin ; Monotonic Rise at FPGA Pin ; Monotonic Fall at FPGA Pin ; Steady State Voh at Far-end ; Steady State Vol at Far-end ; Voh Max at Far-end ; Vol Min at Far-end ; Ringback Voltage on Rise at Far-end ; Ringback Voltage on Fall at Far-end ; 10-90 Rise Time at Far-end ; 90-10 Fall Time at Far-end ; Monotonic Rise at Far-end ; Monotonic Fall at Far-end ;
 +----------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 ; dados[0] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.119 V            ; 0.326 V                              ; 0.298 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.119 V           ; 0.326 V                             ; 0.298 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
-; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.121 V            ; 0.326 V                              ; 0.297 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.121 V           ; 0.326 V                             ; 0.297 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
+; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 3.54e-06 V                   ; 2.81 V              ; -0.0578 V           ; 0.303 V                              ; 0.28 V                               ; 2.93e-10 s                  ; 3.01e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 3.54e-06 V                  ; 2.81 V             ; -0.0578 V          ; 0.303 V                             ; 0.28 V                              ; 2.93e-10 s                 ; 3.01e-10 s                 ; No                        ; No                        ;
 ; dados[2] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.121 V            ; 0.326 V                              ; 0.297 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.121 V           ; 0.326 V                             ; 0.297 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
 ; dados[3] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.121 V            ; 0.326 V                              ; 0.297 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.121 V           ; 0.326 V                             ; 0.297 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
-; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 3.54e-06 V                   ; 2.81 V              ; -0.0578 V           ; 0.303 V                              ; 0.28 V                               ; 2.93e-10 s                  ; 3.01e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 3.54e-06 V                  ; 2.81 V             ; -0.0578 V          ; 0.303 V                             ; 0.28 V                              ; 2.93e-10 s                 ; 3.01e-10 s                 ; No                        ; No                        ;
-; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.25e-06 V                   ; 2.9 V               ; -0.107 V            ; 0.378 V                              ; 0.16 V                               ; 2.87e-10 s                  ; 4.28e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 4.25e-06 V                  ; 2.9 V              ; -0.107 V           ; 0.378 V                             ; 0.16 V                              ; 2.87e-10 s                 ; 4.28e-10 s                 ; No                        ; No                        ;
-; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 3.54e-06 V                   ; 2.81 V              ; -0.0578 V           ; 0.303 V                              ; 0.28 V                               ; 2.93e-10 s                  ; 3.01e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 3.54e-06 V                  ; 2.81 V             ; -0.0578 V          ; 0.303 V                             ; 0.28 V                              ; 2.93e-10 s                 ; 3.01e-10 s                 ; No                        ; No                        ;
+; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.25e-06 V                   ; 2.9 V               ; -0.107 V            ; 0.378 V                              ; 0.16 V                               ; 2.87e-10 s                  ; 4.28e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 4.25e-06 V                  ; 2.9 V              ; -0.107 V           ; 0.378 V                             ; 0.16 V                              ; 2.87e-10 s                 ; 4.28e-10 s                 ; No                        ; No                        ;
+; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.121 V            ; 0.326 V                              ; 0.297 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.121 V           ; 0.326 V                             ; 0.297 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
+; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.25e-06 V                   ; 2.9 V               ; -0.107 V            ; 0.378 V                              ; 0.16 V                               ; 2.87e-10 s                  ; 4.28e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 4.25e-06 V                  ; 2.9 V              ; -0.107 V           ; 0.378 V                             ; 0.16 V                              ; 2.87e-10 s                 ; 4.28e-10 s                 ; No                        ; No                        ;
 ; dados[7] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.121 V            ; 0.326 V                              ; 0.297 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.121 V           ; 0.326 V                             ; 0.297 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
 ; hsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.14e-06 V                   ; 2.91 V              ; -0.121 V            ; 0.326 V                              ; 0.297 V                              ; 2.74e-10 s                  ; 2.8e-10 s                   ; No                         ; No                         ; 2.75 V                      ; 4.14e-06 V                  ; 2.91 V             ; -0.121 V           ; 0.326 V                             ; 0.297 V                             ; 2.74e-10 s                 ; 2.8e-10 s                  ; No                        ; No                        ;
 ; vsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 4.25e-06 V                   ; 2.9 V               ; -0.107 V            ; 0.378 V                              ; 0.16 V                               ; 2.87e-10 s                  ; 4.28e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 4.25e-06 V                  ; 2.9 V              ; -0.107 V           ; 0.378 V                             ; 0.16 V                              ; 2.87e-10 s                 ; 4.28e-10 s                 ; No                        ; No                        ;
@@ -571,12 +597,12 @@ No synchronizer chains to report.
 ; Pin      ; I/O Standard ; Board Delay on Rise ; Board Delay on Fall ; Steady State Voh at FPGA Pin ; Steady State Vol at FPGA Pin ; Voh Max at FPGA Pin ; Vol Min at FPGA Pin ; Ringback Voltage on Rise at FPGA Pin ; Ringback Voltage on Fall at FPGA Pin ; 10-90 Rise Time at FPGA Pin ; 90-10 Fall Time at FPGA Pin ; Monotonic Rise at FPGA Pin ; Monotonic Fall at FPGA Pin ; Steady State Voh at Far-end ; Steady State Vol at Far-end ; Voh Max at Far-end ; Vol Min at Far-end ; Ringback Voltage on Rise at Far-end ; Ringback Voltage on Fall at Far-end ; 10-90 Rise Time at Far-end ; 90-10 Fall Time at Far-end ; Monotonic Rise at Far-end ; Monotonic Fall at Far-end ;
 +----------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 ; dados[0] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0805 V           ; 0.358 V                              ; 0.156 V                              ; 3.01e-10 s                  ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0805 V          ; 0.358 V                             ; 0.156 V                             ; 3.01e-10 s                 ; 4.34e-10 s                 ; No                        ; No                        ;
-; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0814 V           ; 0.36 V                               ; 0.156 V                              ; 3e-10 s                     ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0814 V          ; 0.36 V                              ; 0.156 V                             ; 3e-10 s                    ; 4.34e-10 s                 ; No                        ; No                        ;
+; dados[1] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000213 V                   ; 2.79 V              ; -0.0324 V           ; 0.139 V                              ; 0.119 V                              ; 4.42e-10 s                  ; 4.33e-10 s                  ; No                         ; Yes                        ; 2.75 V                      ; 0.000213 V                  ; 2.79 V             ; -0.0324 V          ; 0.139 V                             ; 0.119 V                             ; 4.42e-10 s                 ; 4.33e-10 s                 ; No                        ; Yes                       ;
 ; dados[2] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0814 V           ; 0.36 V                               ; 0.156 V                              ; 3e-10 s                     ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0814 V          ; 0.36 V                              ; 0.156 V                             ; 3e-10 s                    ; 4.34e-10 s                 ; No                        ; No                        ;
 ; dados[3] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0814 V           ; 0.36 V                               ; 0.156 V                              ; 3e-10 s                     ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0814 V          ; 0.36 V                              ; 0.156 V                             ; 3e-10 s                    ; 4.34e-10 s                 ; No                        ; No                        ;
-; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000213 V                   ; 2.79 V              ; -0.0324 V           ; 0.139 V                              ; 0.119 V                              ; 4.42e-10 s                  ; 4.33e-10 s                  ; No                         ; Yes                        ; 2.75 V                      ; 0.000213 V                  ; 2.79 V             ; -0.0324 V          ; 0.139 V                             ; 0.119 V                             ; 4.42e-10 s                 ; 4.33e-10 s                 ; No                        ; Yes                       ;
-; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000247 V                   ; 2.85 V              ; -0.0711 V           ; 0.204 V                              ; 0.181 V                              ; 4.55e-10 s                  ; 4.49e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000247 V                  ; 2.85 V             ; -0.0711 V          ; 0.204 V                             ; 0.181 V                             ; 4.55e-10 s                 ; 4.49e-10 s                 ; No                        ; No                        ;
-; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000213 V                   ; 2.79 V              ; -0.0324 V           ; 0.139 V                              ; 0.119 V                              ; 4.42e-10 s                  ; 4.33e-10 s                  ; No                         ; Yes                        ; 2.75 V                      ; 0.000213 V                  ; 2.79 V             ; -0.0324 V          ; 0.139 V                             ; 0.119 V                             ; 4.42e-10 s                 ; 4.33e-10 s                 ; No                        ; Yes                       ;
+; dados[4] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000247 V                   ; 2.85 V              ; -0.0711 V           ; 0.204 V                              ; 0.181 V                              ; 4.55e-10 s                  ; 4.49e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000247 V                  ; 2.85 V             ; -0.0711 V          ; 0.204 V                             ; 0.181 V                             ; 4.55e-10 s                 ; 4.49e-10 s                 ; No                        ; No                        ;
+; dados[5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0814 V           ; 0.36 V                               ; 0.156 V                              ; 3e-10 s                     ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0814 V          ; 0.36 V                              ; 0.156 V                             ; 3e-10 s                    ; 4.34e-10 s                 ; No                        ; No                        ;
+; dados[6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000247 V                   ; 2.85 V              ; -0.0711 V           ; 0.204 V                              ; 0.181 V                              ; 4.55e-10 s                  ; 4.49e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000247 V                  ; 2.85 V             ; -0.0711 V          ; 0.204 V                             ; 0.181 V                             ; 4.55e-10 s                 ; 4.49e-10 s                 ; No                        ; No                        ;
 ; dados[7] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0814 V           ; 0.36 V                               ; 0.156 V                              ; 3e-10 s                     ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0814 V          ; 0.36 V                              ; 0.156 V                             ; 3e-10 s                    ; 4.34e-10 s                 ; No                        ; No                        ;
 ; hsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000242 V                   ; 2.86 V              ; -0.0814 V           ; 0.36 V                               ; 0.156 V                              ; 3e-10 s                     ; 4.34e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000242 V                  ; 2.86 V             ; -0.0814 V          ; 0.36 V                              ; 0.156 V                             ; 3e-10 s                    ; 4.34e-10 s                 ; No                        ; No                        ;
 ; vsync    ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.75 V                       ; 0.000247 V                   ; 2.85 V              ; -0.0711 V           ; 0.204 V                              ; 0.181 V                              ; 4.55e-10 s                  ; 4.49e-10 s                  ; No                         ; No                         ; 2.75 V                      ; 0.000247 V                  ; 2.85 V             ; -0.0711 V          ; 0.204 V                             ; 0.181 V                             ; 4.55e-10 s                 ; 4.49e-10 s                 ; No                        ; No                        ;
@@ -617,7 +643,8 @@ No synchronizer chains to report.
 +----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+----------+----------+----------+----------+
 ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; clock_50Mhz                                                                      ; 1        ; 1        ; 0        ; 0        ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 76       ; 0        ; 0        ; 0        ;
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 5652     ; 0        ; 0        ; 0        ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 1820     ; 0        ; 0        ; 0        ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 7380     ; 0        ; 0        ; 0        ;
 +----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -629,7 +656,8 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+----------+----------+----------+----------+
 ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; clock_50Mhz                                                                      ; 1        ; 1        ; 0        ; 0        ;
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 76       ; 0        ; 0        ; 0        ;
-; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 5652     ; 0        ; 0        ; 0        ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 1820     ; 0        ; 0        ; 0        ;
+; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; 7380     ; 0        ; 0        ; 0        ;
 +----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -653,8 +681,8 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 0     ; 0    ;
-; Unconstrained Input Port Paths  ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 2     ; 2    ;
+; Unconstrained Input Port Paths  ; 2     ; 2    ;
 ; Unconstrained Output Ports      ; 28    ; 28   ;
 ; Unconstrained Output Port Paths ; 29    ; 29   ;
 +---------------------------------+-------+------+
@@ -670,6 +698,16 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; Generated ; Constrained ;
 ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; divisor_clock_por_2:divisor_clock_50MHZ|clock                                    ; Base      ; Constrained ;
 +----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+-----------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                             ;
++----------------+--------------------------------------------------------------------------------------+
+; Input Port     ; Comment                                                                              ;
++----------------+--------------------------------------------------------------------------------------+
+; botao_zoom_in  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; botao_zoom_out ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++----------------+--------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -706,6 +744,16 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; red[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; vsync       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-------------+---------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                             ;
++----------------+--------------------------------------------------------------------------------------+
+; Input Port     ; Comment                                                                              ;
++----------------+--------------------------------------------------------------------------------------+
+; botao_zoom_in  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; botao_zoom_out ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++----------------+--------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -750,7 +798,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Fri Sep 26 05:16:05 2025
+    Info: Processing started: Fri Sep 26 07:30:35 2025
 Info: Command: quartus_sta testeFila -c testeFila
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -776,27 +824,34 @@ Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1100mV 85C Model
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -3.850
+Info (332146): Worst-case setup slack is -7.644
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -3.850           -2960.009 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):    -3.485              -3.485 clock_50Mhz 
-    Info (332119):    11.280               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.464
+    Info (332119):    -7.644           -8806.819 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    -4.299           -3526.468 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):    -4.047              -4.047 clock_50Mhz 
+Info (332146): Worst-case hold slack is 0.241
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.464               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):     0.760               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     1.564               0.000 clock_50Mhz 
+    Info (332119):     0.241               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.273               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):     1.877               0.000 clock_50Mhz 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -8068.559 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):    -2.174           -9122.175 divisor_clock_por_2:divisor_clock_50MHZ|clock 
     Info (332119):     1.666               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     5.424               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     8.718               0.000 clock_50Mhz 
+    Info (332119):     8.638               0.000 clock_50Mhz 
+Info (332114): Report Metastability: Found 76 synchronizer chains.
+    Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
+    Info (332114): Number of Synchronizer Chains Found: 76
+    Info (332114): Shortest Synchronizer Chain: 2 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+    Info (332114): Worst Case Available Settling Time: 11.280 ns
+    Info (332114): 
 Info: Analyzing Slow 1100mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
@@ -807,27 +862,34 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -3.772
+Info (332146): Worst-case setup slack is -6.872
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -3.772           -2797.653 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):    -3.388              -3.388 clock_50Mhz 
-    Info (332119):    11.250               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.436
+    Info (332119):    -6.872           -7874.288 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    -4.265           -3317.009 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):    -3.935              -3.935 clock_50Mhz 
+Info (332146): Worst-case hold slack is -0.283
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.436               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):     0.790               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     1.525               0.000 clock_50Mhz 
+    Info (332119):    -0.283             -14.904 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.276               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):     1.849               0.000 clock_50Mhz 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -8031.883 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):    -2.174           -9093.221 divisor_clock_por_2:divisor_clock_50MHZ|clock 
     Info (332119):     1.666               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
-    Info (332119):     5.405               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     8.719               0.000 clock_50Mhz 
+    Info (332119):     5.404               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     8.639               0.000 clock_50Mhz 
+Info (332114): Report Metastability: Found 76 synchronizer chains.
+    Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
+    Info (332114): Number of Synchronizer Chains Found: 76
+    Info (332114): Shortest Synchronizer Chain: 2 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+    Info (332114): Worst Case Available Settling Time: 11.250 ns
+    Info (332114): 
 Info: Analyzing Fast 1100mV 85C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
@@ -838,27 +900,34 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -2.717
+Info (332146): Worst-case setup slack is -6.157
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.717              -2.717 clock_50Mhz 
-    Info (332119):    -2.033           -1620.499 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):    12.143               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.196
+    Info (332119):    -6.157           -7037.959 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    -2.998              -2.998 clock_50Mhz 
+    Info (332119):    -2.414           -1934.163 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+Info (332146): Worst-case hold slack is 0.092
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.196               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):     0.092               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
     Info (332119):     0.457               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     1.484               0.000 clock_50Mhz 
+    Info (332119):     1.594               0.000 clock_50Mhz 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -7959.681 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):    -2.174           -8971.896 divisor_clock_por_2:divisor_clock_50MHZ|clock 
     Info (332119):     1.666               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     5.545               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     8.811               0.000 clock_50Mhz 
+    Info (332119):     8.752               0.000 clock_50Mhz 
+Info (332114): Report Metastability: Found 76 synchronizer chains.
+    Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
+    Info (332114): Number of Synchronizer Chains Found: 76
+    Info (332114): Shortest Synchronizer Chain: 2 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+    Info (332114): Worst Case Available Settling Time: 12.143 ns
+    Info (332114): 
 Info: Analyzing Fast 1100mV 0C Model
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL  from: refclkin  to: fbclk
@@ -867,33 +936,40 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -2.353
+Info (332146): Worst-case setup slack is -4.960
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.353              -2.353 clock_50Mhz 
-    Info (332119):    -1.753           -1332.784 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):    12.161               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-Info (332146): Worst-case hold slack is 0.163
+    Info (332119):    -4.960           -5653.730 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    -2.593              -2.593 clock_50Mhz 
+    Info (332119):    -2.140           -1596.097 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+Info (332146): Worst-case hold slack is 0.032
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.163               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
-    Info (332119):     0.449               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     1.194               0.000 clock_50Mhz 
+    Info (332119):     0.032               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.080               0.000 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):     1.317               0.000 clock_50Mhz 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174           -7923.335 divisor_clock_por_2:divisor_clock_50MHZ|clock 
+    Info (332119):    -2.174           -8936.336 divisor_clock_por_2:divisor_clock_50MHZ|clock 
     Info (332119):     1.666               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     5.548               0.000 clock_75|clock_75mhz_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     8.832               0.000 clock_50Mhz 
+    Info (332119):     8.782               0.000 clock_50Mhz 
+Info (332114): Report Metastability: Found 76 synchronizer chains.
+    Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
+    Info (332114): Number of Synchronizer Chains Found: 76
+    Info (332114): Shortest Synchronizer Chain: 2 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
+    Info (332114): Worst Case Available Settling Time: 12.161 ns
+    Info (332114): 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 841 megabytes
-    Info: Processing ended: Fri Sep 26 05:16:21 2025
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:17
+    Info: Peak virtual memory: 845 megabytes
+    Info: Processing ended: Fri Sep 26 07:30:54 2025
+    Info: Elapsed time: 00:00:19
+    Info: Total CPU time (on all processors): 00:00:23
 
 

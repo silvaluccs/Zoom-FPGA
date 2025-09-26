@@ -39,19 +39,19 @@ I=5[HYee^;z:UA>O<f:Td50
 Z6 VDg1SIo80bB@j0V0VzS_@n1
 R2
 w1758385671
-8testeFila.vo
-FtesteFila.vo
+Z7 8testeFila.vo
+Z8 FtesteFila.vo
 !i122 64
 L0 32 14872
-Z7 OV;L;2020.1;71
+Z9 OV;L;2020.1;71
 r1
 !s85 0
 31
 !s108 1758385674.000000
-!s107 testeFila.vo|
-!s90 -work|work|testeFila.vo|
+Z10 !s107 testeFila.vo|
+Z11 !s90 -work|work|testeFila.vo|
 !i113 1
-Z8 o-work work
+Z12 o-work work
 R3
 vcontrol_vlg_vec_tst
 R4
@@ -66,7 +66,7 @@ w1758385666
 FWaveform.vwf.vt
 !i122 65
 L0 30 36
-R7
+R9
 r1
 !s85 0
 31
@@ -74,5 +74,51 @@ r1
 !s107 Waveform.vwf.vt|
 !s90 -work|work|Waveform.vwf.vt|
 !i113 1
+R12
+R3
+vunidade_de_controle
+Z13 !s110 1758882883
+!i10b 1
+!s100 L8EQKg3PDSV_X_kmYUb@X1
+R5
+I]hSFo`XC?2VTU6><ch_0_0
+R6
+Z14 d/home/lucas/uefs/pbl/Zoom-FPGA/simulation/qsim
+w1758882881
+R7
 R8
+!i122 66
+L0 32 20807
+R9
+r1
+!s85 0
+31
+Z15 !s108 1758882883.000000
+R10
+R11
+!i113 1
+R12
+R3
+vunidade_de_controle_vlg_vec_tst
+R13
+!i10b 1
+!s100 YjTNP;oD=FRCY9G58O7R;1
+R5
+I:fB4BUFk]57ZBcN4b;62H3
+R6
+R14
+w1758882877
+8Waveform3.vwf.vt
+FWaveform3.vwf.vt
+!i122 67
+L0 30 66
+R9
+r1
+!s85 0
+31
+R15
+!s107 Waveform3.vwf.vt|
+!s90 -work|work|Waveform3.vwf.vt|
+!i113 1
+R12
 R3

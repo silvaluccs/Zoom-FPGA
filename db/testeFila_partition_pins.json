@@ -118,6 +118,14 @@
 				{
 					"name" : "clock_50Mhz",
 					"strict" : false
+				},
+				{
+					"name" : "botao_zoom_in",
+					"strict" : false
+				},
+				{
+					"name" : "botao_zoom_out",
+					"strict" : false
 				}
 			]
 		}

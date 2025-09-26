@@ -1,16 +1,16 @@
-Fitter Status : Successful - Fri Sep 26 05:15:46 2025
+Fitter Status : Successful - Fri Sep 26 07:30:17 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : testeFila
 Top-level Entity Name : unidade_de_controle
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 116 / 32,070 ( < 1 % )
-Total registers : 156
+Logic utilization (in ALMs) : 179 / 32,070 ( < 1 % )
+Total registers : 210
 Total pins : 41 / 457 ( 9 % )
 Total virtual pins : 0
-Total block memory bits : 618,496 / 4,065,280 ( 15 % )
-Total RAM Blocks : 77 / 397 ( 19 % )
+Total block memory bits : 695,296 / 4,065,280 ( 17 % )
+Total RAM Blocks : 87 / 397 ( 22 % )
 Total DSP Blocks : 0 / 87 ( 0 % )
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
