@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="clock_75mhz_sim/clock_75mhz.vo" type="VERILOG" />
+ <topLevel name="clock_75mhz" />
+ <deviceFamily name="cyclonev" />
+</simPackage>

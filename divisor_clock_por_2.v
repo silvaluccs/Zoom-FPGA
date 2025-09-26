@@ -1,0 +1,17 @@
+module divisor_clock_por_2(
+	input clock_entrada,
+	output clock_saida
+);
+	
+	reg clock = 1'b0;
+	
+	always @(posedge clock_entrada)
+	begin
+		clock <= ~clock;
+	end
+	
+	assign clock_saida = clock;
+
+
+
+endmodule

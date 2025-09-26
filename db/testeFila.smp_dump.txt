@@ -1,12 +1,22 @@
 
-State Machine - |control|vga_module:vga|v_state
+State Machine - |unidade_de_controle|estado_atual
+Name estado_atual.END_INSTRUCTION estado_atual.NEXT_PIXEL estado_atual.WRITE estado_atual.EXECUTE estado_atual.READ_PIXEL estado_atual.LOAD_OP estado_atual.IDLE 
+estado_atual.IDLE 0 0 0 0 0 0 0 
+estado_atual.LOAD_OP 0 0 0 0 0 1 1 
+estado_atual.READ_PIXEL 0 0 0 0 1 0 1 
+estado_atual.EXECUTE 0 0 0 1 0 0 1 
+estado_atual.WRITE 0 0 1 0 0 0 1 
+estado_atual.NEXT_PIXEL 0 1 0 0 0 0 1 
+estado_atual.END_INSTRUCTION 1 0 0 0 0 0 1 
+
+State Machine - |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_state
 Name v_state.V_BACK_STATE v_state.V_PULSE_STATE v_state.V_FRONT_STATE v_state.V_ACTIVE_STATE 
 v_state.V_ACTIVE_STATE 0 0 0 0 
 v_state.V_FRONT_STATE 0 0 1 1 
 v_state.V_PULSE_STATE 0 1 0 1 
 v_state.V_BACK_STATE 1 0 0 1 
 
-State Machine - |control|vga_module:vga|h_state
+State Machine - |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_state
 Name h_state.H_BACK_STATE h_state.H_PULSE_STATE h_state.H_FRONT_STATE h_state.H_ACTIVE_STATE 
 h_state.H_ACTIVE_STATE 0 0 0 0 
 h_state.H_FRONT_STATE 0 0 1 1 

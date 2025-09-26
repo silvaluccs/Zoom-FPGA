@@ -1,0 +1,4 @@
+module unidade_de_controle(
+	input reset,
+	input clock
+);
