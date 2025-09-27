@@ -1,5 +1,5 @@
 Analysis & Synthesis report for testeFila
-Fri Sep 26 07:20:58 2025
+Fri Sep 26 17:16:23 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -35,11 +35,13 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  27. scfifo Parameter Settings by Entity Instance
  28. Port Connectivity Checks: "controle_vga:controle_saida|vga_module:vga"
  29. Port Connectivity Checks: "controle_vga:controle_saida|ram:ram_inst"
- 30. Port Connectivity Checks: "clock_75mhz:clock_75"
- 31. Port Connectivity Checks: "ram_primaria:ram_leitura"
- 32. Post-Synthesis Netlist Statistics for Top Partition
- 33. Elapsed Time Per Partition
- 34. Analysis & Synthesis Messages
+ 30. Port Connectivity Checks: "controle_vga:controle_saida"
+ 31. Port Connectivity Checks: "clock_75mhz:clock_75"
+ 32. Port Connectivity Checks: "alu:alu"
+ 33. Port Connectivity Checks: "ram_primaria:ram_leitura"
+ 34. Post-Synthesis Netlist Statistics for Top Partition
+ 35. Elapsed Time Per Partition
+ 36. Analysis & Synthesis Messages
 
 
 
@@ -66,16 +68,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Sep 26 07:20:58 2025          ;
+; Analysis & Synthesis Status     ; Successful - Fri Sep 26 17:16:23 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; testeFila                                      ;
 ; Top-level Entity Name           ; unidade_de_controle                            ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 191                                            ;
-; Total pins                      ; 41                                             ;
+; Total registers                 ; 196                                            ;
+; Total pins                      ; 33                                             ;
 ; Total virtual pins              ; 0                                              ;
-; Total block memory bits         ; 695,296                                        ;
+; Total block memory bits         ; 1,232,896                                      ;
 ; Total DSP Blocks                ; 0                                              ;
 ; Total HSSI RX PCSs              ; 0                                              ;
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
@@ -178,63 +180,67 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 14          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 2           ;
+; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processors 6-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                               ;
-+----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+-------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                             ; Library     ;
-+----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+-------------+
-; ram.v                            ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/ram.v                                                     ;             ;
-; fifo.v                           ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v                                                    ;             ;
-; vga_module.v                     ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/vga_module.v                                              ;             ;
-; unidade_de_controle.v            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v                                     ;             ;
-; ram_primaria.v                   ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v                                            ;             ;
-; alu.v                            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/alu.v                                                     ;             ;
-; divisor_clock_por_2.v            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/divisor_clock_por_2.v                                     ;             ;
-; controle_vga.v                   ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v                                            ;             ;
-; clock_75mhz.v                    ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz.v                                             ; clock_75mhz ;
-; clock_75mhz/clock_75mhz_0002.v   ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v                            ; clock_75mhz ;
-; altsyncram.tdf                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;             ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;             ;
-; lpm_mux.inc                      ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mux.inc           ;             ;
-; lpm_decode.inc                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_decode.inc        ;             ;
-; aglobal231.inc                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/aglobal231.inc        ;             ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc         ;             ;
-; altrom.inc                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altrom.inc            ;             ;
-; altram.inc                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altram.inc            ;             ;
-; altdpram.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc          ;             ;
-; db/altsyncram_43r1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf                                    ;             ;
-; memoria_bahia.mif                ; yes             ; Auto-Found Memory Initialization File  ; /home/lucas/uefs/pbl/Zoom-FPGA/memoria_bahia.mif                                         ;             ;
-; db/decode_nma.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_nma.tdf                                         ;             ;
-; db/mux_7hb.tdf                   ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/mux_7hb.tdf                                            ;             ;
-; altera_pll.v                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v          ;             ;
-; db/altsyncram_f3n2.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_f3n2.tdf                                    ;             ;
-; db/decode_g2a.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_g2a.tdf                                         ;             ;
-; scfifo.tdf                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/scfifo.tdf            ;             ;
-; a_regfifo.inc                    ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_regfifo.inc         ;             ;
-; a_dpfifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_dpfifo.inc          ;             ;
-; a_i2fifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_i2fifo.inc          ;             ;
-; a_fffifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_fffifo.inc          ;             ;
-; a_f2fifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_f2fifo.inc          ;             ;
-; db/scfifo_7nd1.tdf               ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/scfifo_7nd1.tdf                                        ;             ;
-; db/a_dpfifo_90c1.tdf             ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf                                      ;             ;
-; db/altsyncram_kep1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_kep1.tdf                                    ;             ;
-; db/cmpr_8l8.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cmpr_8l8.tdf                                           ;             ;
-; db/cntr_j2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_j2b.tdf                                           ;             ;
-; db/cntr_037.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_037.tdf                                           ;             ;
-; db/cntr_k2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_k2b.tdf                                           ;             ;
-+----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+-------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                     ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------+-------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                   ; Library     ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------+-------------+
+; ram.v                            ; yes             ; User Wizard-Generated File             ; /home/aluno/Downloads/Zoom-FPGA-fifo/ram.v                                     ;             ;
+; fifo.v                           ; yes             ; User Wizard-Generated File             ; /home/aluno/Downloads/Zoom-FPGA-fifo/fifo.v                                    ;             ;
+; vga_module.v                     ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-fifo/vga_module.v                              ;             ;
+; unidade_de_controle.v            ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v                     ;             ;
+; ram_primaria.v                   ; yes             ; User Wizard-Generated File             ; /home/aluno/Downloads/Zoom-FPGA-fifo/ram_primaria.v                            ;             ;
+; alu.v                            ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-fifo/alu.v                                     ;             ;
+; divisor_clock_por_2.v            ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-fifo/divisor_clock_por_2.v                     ;             ;
+; controle_vga.v                   ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v                            ;             ;
+; clock_75mhz.v                    ; yes             ; User Wizard-Generated File             ; /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz.v                             ; clock_75mhz ;
+; clock_75mhz/clock_75mhz_0002.v   ; yes             ; User Verilog HDL File                  ; /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz/clock_75mhz_0002.v            ; clock_75mhz ;
+; altsyncram.tdf                   ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altsyncram.tdf        ;             ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/stratix_ram_block.inc ;             ;
+; lpm_mux.inc                      ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/lpm_mux.inc           ;             ;
+; lpm_decode.inc                   ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/lpm_decode.inc        ;             ;
+; aglobal231.inc                   ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/aglobal231.inc        ;             ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/a_rdenreg.inc         ;             ;
+; altrom.inc                       ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altrom.inc            ;             ;
+; altram.inc                       ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altram.inc            ;             ;
+; altdpram.inc                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altdpram.inc          ;             ;
+; db/altsyncram_43r1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_43r1.tdf                    ;             ;
+; memoria_bahia.mif                ; yes             ; Auto-Found Memory Initialization File  ; /home/aluno/Downloads/Zoom-FPGA-fifo/memoria_bahia.mif                         ;             ;
+; db/decode_nma.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/decode_nma.tdf                         ;             ;
+; db/mux_7hb.tdf                   ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/mux_7hb.tdf                            ;             ;
+; altera_pll.v                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altera_pll.v          ;             ;
+; db/altsyncram_f3n2.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_f3n2.tdf                    ;             ;
+; db/decode_g2a.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/decode_g2a.tdf                         ;             ;
+; scfifo.tdf                       ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/scfifo.tdf            ;             ;
+; a_regfifo.inc                    ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/a_regfifo.inc         ;             ;
+; a_dpfifo.inc                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/a_dpfifo.inc          ;             ;
+; a_i2fifo.inc                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/a_i2fifo.inc          ;             ;
+; a_fffifo.inc                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/a_fffifo.inc          ;             ;
+; a_f2fifo.inc                     ; yes             ; Megafunction                           ; /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/a_f2fifo.inc          ;             ;
+; db/scfifo_7nd1.tdf               ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/scfifo_7nd1.tdf                        ;             ;
+; db/a_dpfifo_90c1.tdf             ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf                      ;             ;
+; db/altsyncram_kep1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_kep1.tdf                    ;             ;
+; db/cmpr_8l8.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/cmpr_8l8.tdf                           ;             ;
+; db/cntr_j2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/cntr_j2b.tdf                           ;             ;
+; db/cntr_037.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/cntr_037.tdf                           ;             ;
+; db/cntr_k2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/aluno/Downloads/Zoom-FPGA-fifo/db/cntr_k2b.tdf                           ;             ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------+-------------+
 
 
 +---------------------------------------------------------------------------------------------+
@@ -242,20 +248,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------------------------------------------+
 ; Resource                                    ; Usage                                         ;
 +---------------------------------------------+-----------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 182                                           ;
+; Estimate of Logic utilization (ALMs needed) ; 217                                           ;
 ;                                             ;                                               ;
-; Combinational ALUT usage for logic          ; 304                                           ;
-;     -- 7 input functions                    ; 4                                             ;
-;     -- 6 input functions                    ; 51                                            ;
-;     -- 5 input functions                    ; 35                                            ;
-;     -- 4 input functions                    ; 60                                            ;
-;     -- <=3 input functions                  ; 154                                           ;
+; Combinational ALUT usage for logic          ; 340                                           ;
+;     -- 7 input functions                    ; 3                                             ;
+;     -- 6 input functions                    ; 85                                            ;
+;     -- 5 input functions                    ; 18                                            ;
+;     -- 4 input functions                    ; 46                                            ;
+;     -- <=3 input functions                  ; 188                                           ;
 ;                                             ;                                               ;
-; Dedicated logic registers                   ; 191                                           ;
+; Dedicated logic registers                   ; 196                                           ;
 ;                                             ;                                               ;
-; I/O pins                                    ; 41                                            ;
+; I/O pins                                    ; 33                                            ;
 ; Total MLAB memory bits                      ; 0                                             ;
-; Total block memory bits                     ; 695296                                        ;
+; Total block memory bits                     ; 1232896                                       ;
 ;                                             ;                                               ;
 ; Total DSP Blocks                            ; 0                                             ;
 ;                                             ;                                               ;
@@ -263,9 +269,9 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 1                                             ;
 ;                                             ;                                               ;
 ; Maximum fan-out node                        ; divisor_clock_por_2:divisor_clock_50MHZ|clock ;
-; Maximum fan-out                             ; 290                                           ;
-; Total fan-out                               ; 4622                                          ;
-; Average fan-out                             ; 6.84                                          ;
+; Maximum fan-out                             ; 365                                           ;
+; Total fan-out                               ; 5830                                          ;
+; Average fan-out                             ; 7.56                                          ;
 +---------------------------------------------+-----------------------------------------------+
 
 
@@ -274,11 +280,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                             ; Entity Name         ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |unidade_de_controle                         ; 304 (85)            ; 191 (50)                  ; 695296            ; 0          ; 41   ; 0            ; |unidade_de_controle                                                                                                                                            ; unidade_de_controle ; work         ;
+; |unidade_de_controle                         ; 340 (101)           ; 196 (55)                  ; 1232896           ; 0          ; 33   ; 0            ; |unidade_de_controle                                                                                                                                            ; unidade_de_controle ; work         ;
 ;    |clock_75mhz:clock_75|                    ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75                                                                                                                       ; clock_75mhz         ; clock_75mhz  ;
 ;       |clock_75mhz_0002:clock_75mhz_inst|    ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst                                                                                     ; clock_75mhz_0002    ; clock_75mhz  ;
 ;          |altera_pll:altera_pll_i|           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i                                                             ; altera_pll          ; work         ;
-;    |controle_vga:controle_saida|             ; 205 (35)            ; 132 (29)                  ; 618496            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida                                                                                                                ; controle_vga        ; work         ;
+;    |controle_vga:controle_saida|             ; 196 (37)            ; 132 (29)                  ; 618496            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida                                                                                                                ; controle_vga        ; work         ;
 ;       |fifo:fifo_inst|                       ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst                                                                                                 ; fifo                ; work         ;
 ;          |scfifo:scfifo_component|           ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component                                                                         ; scfifo              ; work         ;
 ;             |scfifo_7nd1:auto_generated|     ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated                                              ; scfifo_7nd1         ; work         ;
@@ -287,20 +293,19 @@ https://fpgasoftware.intel.com/eula.
 ;                   |cntr_037:usedw_counter|   ; 9 (9)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_037:usedw_counter  ; cntr_037            ; work         ;
 ;                   |cntr_j2b:rd_ptr_msb|      ; 8 (8)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_j2b:rd_ptr_msb     ; cntr_j2b            ; work         ;
 ;                   |cntr_k2b:wr_ptr|          ; 9 (9)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr         ; cntr_k2b            ; work         ;
-;       |ram:ram_inst|                         ; 62 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst                                                                                                   ; ram                 ; work         ;
-;          |altsyncram:altsyncram_component|   ; 62 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
-;             |altsyncram_f3n2:auto_generated| ; 62 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated                                    ; altsyncram_f3n2     ; work         ;
+;       |ram:ram_inst|                         ; 52 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst                                                                                                   ; ram                 ; work         ;
+;          |altsyncram:altsyncram_component|   ; 52 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
+;             |altsyncram_f3n2:auto_generated| ; 52 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated                                    ; altsyncram_f3n2     ; work         ;
 ;                |decode_g2a:rden_decode_a|    ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_a           ; decode_g2a          ; work         ;
-;                |decode_g2a:rden_decode_b|    ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_b           ; decode_g2a          ; work         ;
 ;                |decode_nma:decode3|          ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_nma:decode3                 ; decode_nma          ; work         ;
 ;                |mux_7hb:mux4|                ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4                       ; mux_7hb             ; work         ;
-;       |vga_module:vga|                       ; 60 (60)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga                                                                                                 ; vga_module          ; work         ;
+;       |vga_module:vga|                       ; 59 (59)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga                                                                                                 ; vga_module          ; work         ;
 ;    |divisor_clock_por_2:divisor_clock_50MHZ| ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|divisor_clock_por_2:divisor_clock_50MHZ                                                                                                    ; divisor_clock_por_2 ; work         ;
-;    |ram_primaria:ram_leitura|                ; 13 (0)              ; 8 (0)                     ; 76800             ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura                                                                                                                   ; ram_primaria        ; work         ;
-;       |altsyncram:altsyncram_component|      ; 13 (0)              ; 8 (0)                     ; 76800             ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component                                                                                   ; altsyncram          ; work         ;
-;          |altsyncram_43r1:auto_generated|    ; 13 (0)              ; 8 (8)                     ; 76800             ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated                                                    ; altsyncram_43r1     ; work         ;
+;    |ram_primaria:ram_leitura|                ; 42 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura                                                                                                                   ; ram_primaria        ; work         ;
+;       |altsyncram:altsyncram_component|      ; 42 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component                                                                                   ; altsyncram          ; work         ;
+;          |altsyncram_43r1:auto_generated|    ; 42 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated                                                    ; altsyncram_43r1     ; work         ;
 ;             |decode_nma:rden_decode|         ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|decode_nma:rden_decode                             ; decode_nma          ; work         ;
-;             |mux_7hb:mux2|                   ; 3 (3)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2                                       ; mux_7hb             ; work         ;
+;             |mux_7hb:mux2|                   ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2                                       ; mux_7hb             ; work         ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -383,35 +388,34 @@ Encoding Type:  One-Hot
 +------------------------+----------------------+-----------------------+-----------------------+------------------------+
 
 
-+------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                             ;
-+-------------------------------------------------------+----------------------------------------+
-; Register name                                         ; Reason for Removal                     ;
-+-------------------------------------------------------+----------------------------------------+
-; pixel_para_salvar[1..7]                               ; Stuck at GND due to stuck port data_in ;
-; salvar_pixels~2                                       ; Lost fanout                            ;
-; salvar_pixels~3                                       ; Lost fanout                            ;
-; estado_atual~2                                        ; Lost fanout                            ;
-; estado_atual~3                                        ; Lost fanout                            ;
-; estado_atual~4                                        ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~5  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~6  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~7  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~8  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~9  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~10 ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~11 ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|v_state~12 ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~5  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~6  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~7  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~8  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~9  ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~10 ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~11 ; Lost fanout                            ;
-; controle_vga:controle_saida|vga_module:vga|h_state~12 ; Lost fanout                            ;
-; Total Number of Removed Registers = 28                ;                                        ;
-+-------------------------------------------------------+----------------------------------------+
++----------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                         ;
++-------------------------------------------------------+--------------------+
+; Register name                                         ; Reason for Removal ;
++-------------------------------------------------------+--------------------+
+; salvar_pixels~2                                       ; Lost fanout        ;
+; salvar_pixels~3                                       ; Lost fanout        ;
+; estado_atual~2                                        ; Lost fanout        ;
+; estado_atual~3                                        ; Lost fanout        ;
+; estado_atual~4                                        ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~5  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~6  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~7  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~8  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~9  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~10 ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~11 ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|v_state~12 ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~5  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~6  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~7  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~8  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~9  ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~10 ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~11 ; Lost fanout        ;
+; controle_vga:controle_saida|vga_module:vga|h_state~12 ; Lost fanout        ;
+; Total Number of Removed Registers = 21                ;                    ;
++-------------------------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -419,12 +423,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 191   ;
-; Number of registers using Synchronous Clear  ; 45    ;
-; Number of registers using Synchronous Load   ; 34    ;
+; Total registers                              ; 196   ;
+; Number of registers using Synchronous Clear  ; 61    ;
+; Number of registers using Synchronous Load   ; 6     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 83    ;
+; Number of registers using Clock Enable       ; 93    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -434,14 +438,14 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|contador_escrita[6]                                                                                           ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |unidade_de_controle|endereco_escrita[4]                                                                                                                       ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |unidade_de_controle|endereco_memoria[10]                                                                                                                      ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_counter[3]                                                                                   ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_counter[0]                                                                                   ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|contador_escrita[16]                                                                                          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |unidade_de_controle|endereco_escrita[3]                                                                                                                       ;
+; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |unidade_de_controle|endereco_escrita[12]                                                                                                                      ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |unidade_de_controle|pixel_para_processar_reg[2]                                                                                                               ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_counter[8]                                                                                   ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_counter[7]                                                                                   ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|red_reg                                                                                        ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|Add0                                                                                                                                      ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4|l4_w7_n0_mux_dataout ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4|l4_w0_n0_mux_dataout ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -477,7 +481,7 @@ Encoding Type:  One-Hot
 +-----------------+-------------------+-----------------------------------------------+
 ; Parameter Name  ; Value             ; Type                                          ;
 +-----------------+-------------------+-----------------------------------------------+
-; ENDERECO_BASE   ; 01001011010100000 ; Unsigned Binary                               ;
+; ENDERECO_BASE   ; 00000000000000000 ; Unsigned Binary                               ;
 ; IDLE            ; 0                 ; Signed Integer                                ;
 ; LOAD_OP         ; 1                 ; Signed Integer                                ;
 ; READ_PIXEL      ; 2                 ; Signed Integer                                ;
@@ -984,6 +988,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 
 
++---------------------------------------------------------+
+; Port Connectivity Checks: "controle_vga:controle_saida" ;
++------------------+-------+----------+-------------------+
+; Port             ; Type  ; Severity ; Details           ;
++------------------+-------+----------+-------------------+
+; permicao_escrita ; Input ; Info     ; Stuck at VCC      ;
++------------------+-------+----------+-------------------+
+
+
 +-----------------------------------------------------+
 ; Port Connectivity Checks: "clock_75mhz:clock_75"    ;
 +--------+--------+----------+------------------------+
@@ -992,6 +1005,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; rst    ; Input  ; Info     ; Stuck at GND           ;
 ; locked ; Output ; Info     ; Explicitly unconnected ;
 +--------+--------+----------+------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu"                                                                                        ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; pixel_processado ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -1010,35 +1032,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 191                         ;
-;     ENA               ; 33                          ;
-;     ENA SCLR          ; 27                          ;
-;     ENA SLD           ; 23                          ;
+; arriav_ff             ; 196                         ;
+;     ENA               ; 44                          ;
+;     ENA SCLR          ; 43                          ;
+;     ENA SLD           ; 6                           ;
 ;     SCLR              ; 18                          ;
-;     SLD               ; 11                          ;
-;     plain             ; 79                          ;
-; arriav_lcell_comb     ; 304                         ;
-;     arith             ; 109                         ;
-;         1 data inputs ; 89                          ;
+;     plain             ; 85                          ;
+; arriav_lcell_comb     ; 340                         ;
+;     arith             ; 108                         ;
+;         1 data inputs ; 100                         ;
 ;         2 data inputs ; 8                           ;
-;         4 data inputs ; 8                           ;
-;         5 data inputs ; 4                           ;
-;     extend            ; 4                           ;
-;         7 data inputs ; 4                           ;
-;     normal            ; 191                         ;
+;     extend            ; 3                           ;
+;         7 data inputs ; 3                           ;
+;     normal            ; 229                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 4                           ;
-;         2 data inputs ; 24                          ;
-;         3 data inputs ; 28                          ;
-;         4 data inputs ; 52                          ;
-;         5 data inputs ; 31                          ;
-;         6 data inputs ; 51                          ;
-; boundary_port         ; 41                          ;
+;         1 data inputs ; 5                           ;
+;         2 data inputs ; 30                          ;
+;         3 data inputs ; 44                          ;
+;         4 data inputs ; 46                          ;
+;         5 data inputs ; 18                          ;
+;         6 data inputs ; 85                          ;
+; boundary_port         ; 33                          ;
 ; generic_pll           ; 1                           ;
-; stratixv_ram_block    ; 98                          ;
+; stratixv_ram_block    ; 168                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 4.50                        ;
-; Average LUT depth     ; 2.04                        ;
+; Max LUT depth         ; 4.30                        ;
+; Average LUT depth     ; 2.02                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1047,7 +1066,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -1057,38 +1076,37 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Fri Sep 26 07:20:38 2025
+    Info: Processing started: Fri Sep 26 17:16:18 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off testeFila -c testeFila
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file ram.v
-    Info (12023): Found entity 1: ram File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 40
+    Info (12023): Found entity 1: ram File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file fifo.v
-    Info (12023): Found entity 1: fifo File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 40
+    Info (12023): Found entity 1: fifo File: /home/aluno/Downloads/Zoom-FPGA-fifo/fifo.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file vga_module.v
-    Info (12023): Found entity 1: vga_module File: /home/lucas/uefs/pbl/Zoom-FPGA/vga_module.v Line: 1
+    Info (12023): Found entity 1: vga_module File: /home/aluno/Downloads/Zoom-FPGA-fifo/vga_module.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file unidade_de_controle.v
-    Info (12023): Found entity 1: unidade_de_controle File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 1
+    Info (12023): Found entity 1: unidade_de_controle File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file ram_primaria.v
-    Info (12023): Found entity 1: ram_primaria File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 40
+    Info (12023): Found entity 1: ram_primaria File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram_primaria.v Line: 40
 Info (12021): Found 1 design units, including 1 entities, in source file alu.v
-    Info (12023): Found entity 1: alu File: /home/lucas/uefs/pbl/Zoom-FPGA/alu.v Line: 1
+    Info (12023): Found entity 1: alu File: /home/aluno/Downloads/Zoom-FPGA-fifo/alu.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file divisor_clock_por_2.v
-    Info (12023): Found entity 1: divisor_clock_por_2 File: /home/lucas/uefs/pbl/Zoom-FPGA/divisor_clock_por_2.v Line: 1
+    Info (12023): Found entity 1: divisor_clock_por_2 File: /home/aluno/Downloads/Zoom-FPGA-fifo/divisor_clock_por_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file controle_vga.v
-    Info (12023): Found entity 1: controle_vga File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 1
+    Info (12023): Found entity 1: controle_vga File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file clock_75mhz.v
-    Info (12023): Found entity 1: clock_75mhz File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz.v Line: 8
+    Info (12023): Found entity 1: clock_75mhz File: /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file clock_75mhz/clock_75mhz_0002.v
-    Info (12023): Found entity 1: clock_75mhz_0002 File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 2
+    Info (12023): Found entity 1: clock_75mhz_0002 File: /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz/clock_75mhz_0002.v Line: 2
 Info (12127): Elaborating entity "unidade_de_controle" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at unidade_de_controle.v(34): object "pixels_processados_reg" assigned a value but never read File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 34
-Warning (10034): Output port "dados" at unidade_de_controle.v(6) has no driver File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-Info (12128): Elaborating entity "divisor_clock_por_2" for hierarchy "divisor_clock_por_2:divisor_clock_50MHZ" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 25
-Info (12128): Elaborating entity "ram_primaria" for hierarchy "ram_primaria:ram_leitura" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 291
-Info (12128): Elaborating entity "altsyncram" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
-Info (12130): Elaborated megafunction instantiation "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
-Info (12133): Instantiated megafunction "ram_primaria:ram_leitura|altsyncram:altsyncram_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
+Warning (10036): Verilog HDL or VHDL warning at unidade_de_controle.v(33): object "pixels_processados_reg" assigned a value but never read File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 33
+Info (12128): Elaborating entity "divisor_clock_por_2" for hierarchy "divisor_clock_por_2:divisor_clock_50MHZ" File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 24
+Info (12128): Elaborating entity "ram_primaria" for hierarchy "ram_primaria:ram_leitura" File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 292
+Info (12128): Elaborating entity "altsyncram" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram_primaria.v Line: 89
+Info (12130): Elaborated megafunction instantiation "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram_primaria.v Line: 89
+Info (12133): Instantiated megafunction "ram_primaria:ram_leitura|altsyncram:altsyncram_component" with the following parameter: File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram_primaria.v Line: 89
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "init_file" = "memoria_bahia.mif"
@@ -1106,23 +1124,23 @@ Info (12133): Instantiated megafunction "ram_primaria:ram_leitura|altsyncram:alt
     Info (12134): Parameter "width_a" = "8"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_43r1.tdf
-    Info (12023): Found entity 1: altsyncram_43r1 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 32
-Info (12128): Elaborating entity "altsyncram_43r1" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated" File: /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+    Info (12023): Found entity 1: altsyncram_43r1 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_43r1.tdf Line: 32
+Info (12128): Elaborating entity "altsyncram_43r1" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated" File: /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_nma.tdf
-    Info (12023): Found entity 1: decode_nma File: /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_nma.tdf Line: 23
-Info (12128): Elaborating entity "decode_nma" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|decode_nma:decode3" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 44
+    Info (12023): Found entity 1: decode_nma File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/decode_nma.tdf Line: 23
+Info (12128): Elaborating entity "decode_nma" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|decode_nma:decode3" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_43r1.tdf Line: 44
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_7hb.tdf
-    Info (12023): Found entity 1: mux_7hb File: /home/lucas/uefs/pbl/Zoom-FPGA/db/mux_7hb.tdf Line: 23
-Info (12128): Elaborating entity "mux_7hb" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 46
-Info (12128): Elaborating entity "alu" for hierarchy "alu:alu" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 299
-Warning (10235): Verilog HDL Always Construct warning at alu.v(18): variable "pixel" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/lucas/uefs/pbl/Zoom-FPGA/alu.v Line: 18
-Warning (10230): Verilog HDL assignment warning at alu.v(18): truncated value with size 32 to match size of target (1) File: /home/lucas/uefs/pbl/Zoom-FPGA/alu.v Line: 18
-Info (12128): Elaborating entity "clock_75mhz" for hierarchy "clock_75mhz:clock_75" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 307
-Info (12128): Elaborating entity "clock_75mhz_0002" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz.v Line: 20
-Info (12128): Elaborating entity "altera_pll" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
+    Info (12023): Found entity 1: mux_7hb File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/mux_7hb.tdf Line: 23
+Info (12128): Elaborating entity "mux_7hb" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_43r1.tdf Line: 46
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu" File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 300
+Warning (10235): Verilog HDL Always Construct warning at alu.v(18): variable "pixel" is read inside the Always Construct but isn't in the Always Construct's Event Control File: /home/aluno/Downloads/Zoom-FPGA-fifo/alu.v Line: 18
+Warning (10230): Verilog HDL assignment warning at alu.v(18): truncated value with size 32 to match size of target (1) File: /home/aluno/Downloads/Zoom-FPGA-fifo/alu.v Line: 18
+Info (12128): Elaborating entity "clock_75mhz" for hierarchy "clock_75mhz:clock_75" File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 308
+Info (12128): Elaborating entity "clock_75mhz_0002" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst" File: /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz.v Line: 20
+Info (12128): Elaborating entity "altera_pll" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz/clock_75mhz_0002.v Line: 85
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
-Info (12130): Elaborated megafunction instantiation "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
-Info (12133): Instantiated megafunction "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
+Info (12130): Elaborated megafunction instantiation "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz/clock_75mhz_0002.v Line: 85
+Info (12133): Instantiated megafunction "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" with the following parameter: File: /home/aluno/Downloads/Zoom-FPGA-fifo/clock_75mhz/clock_75mhz_0002.v Line: 85
     Info (12134): Parameter "fractional_vco_multiplier" = "false"
     Info (12134): Parameter "reference_clock_frequency" = "50.0 MHz"
     Info (12134): Parameter "operation_mode" = "direct"
@@ -1183,14 +1201,14 @@ Info (12133): Instantiated megafunction "clock_75mhz:clock_75|clock_75mhz_0002:c
     Info (12134): Parameter "duty_cycle17" = "50"
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "controle_vga" for hierarchy "controle_vga:controle_saida" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 324
-Warning (10230): Verilog HDL assignment warning at controle_vga.v(88): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 88
-Warning (10230): Verilog HDL assignment warning at controle_vga.v(96): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 96
-Warning (10230): Verilog HDL assignment warning at controle_vga.v(110): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 110
-Info (12128): Elaborating entity "ram" for hierarchy "controle_vga:controle_saida|ram:ram_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 41
-Info (12128): Elaborating entity "altsyncram" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 100
-Info (12130): Elaborated megafunction instantiation "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 100
-Info (12133): Instantiated megafunction "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/ram.v Line: 100
+Info (12128): Elaborating entity "controle_vga" for hierarchy "controle_vga:controle_saida" File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 325
+Warning (10230): Verilog HDL assignment warning at controle_vga.v(88): truncated value with size 32 to match size of target (17) File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 88
+Warning (10230): Verilog HDL assignment warning at controle_vga.v(96): truncated value with size 32 to match size of target (17) File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 96
+Warning (10230): Verilog HDL assignment warning at controle_vga.v(110): truncated value with size 32 to match size of target (17) File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 110
+Info (12128): Elaborating entity "ram" for hierarchy "controle_vga:controle_saida|ram:ram_inst" File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 41
+Info (12128): Elaborating entity "altsyncram" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram.v Line: 100
+Info (12130): Elaborated megafunction instantiation "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram.v Line: 100
+Info (12133): Instantiated megafunction "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component" with the following parameter: File: /home/aluno/Downloads/Zoom-FPGA-fifo/ram.v Line: 100
     Info (12134): Parameter "address_reg_b" = "CLOCK1"
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_input_b" = "BYPASS"
@@ -1219,15 +1237,15 @@ Info (12133): Instantiated megafunction "controle_vga:controle_saida|ram:ram_ins
     Info (12134): Parameter "width_byteena_b" = "1"
     Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_f3n2.tdf
-    Info (12023): Found entity 1: altsyncram_f3n2 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_f3n2.tdf Line: 34
-Info (12128): Elaborating entity "altsyncram_f3n2" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated" File: /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+    Info (12023): Found entity 1: altsyncram_f3n2 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_f3n2.tdf Line: 34
+Info (12128): Elaborating entity "altsyncram_f3n2" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated" File: /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_g2a.tdf
-    Info (12023): Found entity 1: decode_g2a File: /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_g2a.tdf Line: 23
-Info (12128): Elaborating entity "decode_g2a" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_a" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_f3n2.tdf Line: 54
-Info (12128): Elaborating entity "fifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 57
-Info (12128): Elaborating entity "scfifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 77
-Info (12130): Elaborated megafunction instantiation "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 77
-Info (12133): Instantiated megafunction "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v Line: 77
+    Info (12023): Found entity 1: decode_g2a File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/decode_g2a.tdf Line: 23
+Info (12128): Elaborating entity "decode_g2a" for hierarchy "controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_a" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_f3n2.tdf Line: 54
+Info (12128): Elaborating entity "fifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst" File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 57
+Info (12128): Elaborating entity "scfifo" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" File: /home/aluno/Downloads/Zoom-FPGA-fifo/fifo.v Line: 77
+Info (12130): Elaborated megafunction instantiation "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" File: /home/aluno/Downloads/Zoom-FPGA-fifo/fifo.v Line: 77
+Info (12133): Instantiated megafunction "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component" with the following parameter: File: /home/aluno/Downloads/Zoom-FPGA-fifo/fifo.v Line: 77
     Info (12134): Parameter "add_ram_output_register" = "ON"
     Info (12134): Parameter "intended_device_family" = "Cyclone V"
     Info (12134): Parameter "lpm_hint" = "RAM_BLOCK_TYPE=M10K"
@@ -1240,128 +1258,48 @@ Info (12133): Instantiated megafunction "controle_vga:controle_saida|fifo:fifo_i
     Info (12134): Parameter "underflow_checking" = "ON"
     Info (12134): Parameter "use_eab" = "ON"
 Info (12021): Found 1 design units, including 1 entities, in source file db/scfifo_7nd1.tdf
-    Info (12023): Found entity 1: scfifo_7nd1 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/scfifo_7nd1.tdf Line: 25
-Info (12128): Elaborating entity "scfifo_7nd1" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated" File: /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/scfifo.tdf Line: 300
+    Info (12023): Found entity 1: scfifo_7nd1 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/scfifo_7nd1.tdf Line: 25
+Info (12128): Elaborating entity "scfifo_7nd1" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated" File: /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/scfifo.tdf Line: 300
 Info (12021): Found 1 design units, including 1 entities, in source file db/a_dpfifo_90c1.tdf
-    Info (12023): Found entity 1: a_dpfifo_90c1 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 33
-Info (12128): Elaborating entity "a_dpfifo_90c1" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/scfifo_7nd1.tdf Line: 36
+    Info (12023): Found entity 1: a_dpfifo_90c1 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 33
+Info (12128): Elaborating entity "a_dpfifo_90c1" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/scfifo_7nd1.tdf Line: 36
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_kep1.tdf
-    Info (12023): Found entity 1: altsyncram_kep1 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_kep1.tdf Line: 28
-Info (12128): Elaborating entity "altsyncram_kep1" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|altsyncram_kep1:FIFOram" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 45
+    Info (12023): Found entity 1: altsyncram_kep1 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/altsyncram_kep1.tdf Line: 28
+Info (12128): Elaborating entity "altsyncram_kep1" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|altsyncram_kep1:FIFOram" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 45
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_8l8.tdf
-    Info (12023): Found entity 1: cmpr_8l8 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/cmpr_8l8.tdf Line: 23
-Info (12128): Elaborating entity "cmpr_8l8" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cmpr_8l8:almost_full_comparer" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 53
-Info (12128): Elaborating entity "cmpr_8l8" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cmpr_8l8:two_comparison" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 54
+    Info (12023): Found entity 1: cmpr_8l8 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/cmpr_8l8.tdf Line: 23
+Info (12128): Elaborating entity "cmpr_8l8" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cmpr_8l8:almost_full_comparer" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 53
+Info (12128): Elaborating entity "cmpr_8l8" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cmpr_8l8:two_comparison" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 54
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_j2b.tdf
-    Info (12023): Found entity 1: cntr_j2b File: /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_j2b.tdf Line: 26
-Info (12128): Elaborating entity "cntr_j2b" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_j2b:rd_ptr_msb" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 55
+    Info (12023): Found entity 1: cntr_j2b File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/cntr_j2b.tdf Line: 26
+Info (12128): Elaborating entity "cntr_j2b" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_j2b:rd_ptr_msb" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 55
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_037.tdf
-    Info (12023): Found entity 1: cntr_037 File: /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_037.tdf Line: 26
-Info (12128): Elaborating entity "cntr_037" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_037:usedw_counter" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 56
+    Info (12023): Found entity 1: cntr_037 File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/cntr_037.tdf Line: 26
+Info (12128): Elaborating entity "cntr_037" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_037:usedw_counter" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 56
 Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_k2b.tdf
-    Info (12023): Found entity 1: cntr_k2b File: /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_k2b.tdf Line: 26
-Info (12128): Elaborating entity "cntr_k2b" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 57
-Info (12128): Elaborating entity "vga_module" for hierarchy "controle_vga:controle_saida|vga_module:vga" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 142
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a1" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 72
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a2" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 97
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a3" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 122
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a4" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 147
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a5" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 172
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a6" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 197
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a7" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 222
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a9" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 272
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a10" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 297
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a11" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 322
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a12" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 347
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a13" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 372
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a14" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 397
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a15" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 422
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a17" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 472
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a18" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 497
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a19" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 522
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a20" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 547
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a21" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 572
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a22" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 597
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a23" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 622
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a25" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 672
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a26" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 697
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a27" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 722
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a28" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 747
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a29" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 772
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a30" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 797
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a31" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 822
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a33" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 872
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a34" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 897
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a35" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 922
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a36" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 947
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a37" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 972
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a38" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 997
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a39" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1022
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a41" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1072
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a42" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1097
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a43" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1122
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a44" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1147
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a45" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1172
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a46" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1197
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a47" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1222
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a49" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1272
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a50" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1297
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a51" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1322
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a52" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1347
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a53" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1372
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a54" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1397
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a55" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1422
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a57" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1472
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a58" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1497
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a59" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1522
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a60" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1547
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a61" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1572
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a62" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1597
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a63" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1622
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a65" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1672
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a66" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1697
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a67" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1722
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a68" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1747
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a69" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1772
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a70" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1797
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a71" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1822
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a73" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1872
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a74" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1897
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a75" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1922
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a76" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1947
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a77" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1972
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a78" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 1997
-        Warning (14320): Synthesized away node "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|ram_block1a79" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 2022
+    Info (12023): Found entity 1: cntr_k2b File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/cntr_k2b.tdf Line: 26
+Info (12128): Elaborating entity "cntr_k2b" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr" File: /home/aluno/Downloads/Zoom-FPGA-fifo/db/a_dpfifo_90c1.tdf Line: 57
+Info (12128): Elaborating entity "vga_module" for hierarchy "controle_vga:controle_saida|vga_module:vga" File: /home/aluno/Downloads/Zoom-FPGA-fifo/controle_vga.v Line: 142
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "dados[0]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[1]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[2]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[3]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[4]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[5]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[6]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "dados[7]" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-    Warning (13410): Pin "sync" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 12
+    Warning (13410): Pin "sync" is stuck at GND File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 11
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 21 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 3 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Warning: RST port on the PLL is not properly connected on instance clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 749
+Warning: RST port on the PLL is not properly connected on instance clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: /opt/intelFPGA_lite/23.1/quartus/libraries/megafunctions/altera_pll.v Line: 749
     Info: Must be connected
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "seletor_algoritmo" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 5
-Info (21057): Implemented 529 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "seletor_algoritmo" File: /home/aluno/Downloads/Zoom-FPGA-fifo/unidade_de_controle.v Line: 5
+Info (21057): Implemented 602 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 4 input pins
-    Info (21059): Implemented 37 output pins
-    Info (21061): Implemented 389 logic cells
-    Info (21064): Implemented 98 RAM segments
+    Info (21059): Implemented 29 output pins
+    Info (21061): Implemented 400 logic cells
+    Info (21064): Implemented 168 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 93 warnings
-    Info: Peak virtual memory: 464 megabytes
-    Info: Processing ended: Fri Sep 26 07:20:58 2025
-    Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:26
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 559 megabytes
+    Info: Processing ended: Fri Sep 26 17:16:23 2025
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:14
 
 

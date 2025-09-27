@@ -1,5 +1,5 @@
 Assembler report for testeFila
-Fri Sep 26 07:30:33 2025
+Fri Sep 26 17:20:41 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Sep 26 07:30:33 2025 ;
+; Assembler Status      ; Successful - Fri Sep 26 17:20:41 2025 ;
 ; Revision Name         ; testeFila                             ;
 ; Top-level Entity Name ; unidade_de_controle                   ;
 ; Family                ; Cyclone V                             ;
@@ -53,13 +53,13 @@ https://fpgasoftware.intel.com/eula.
 +--------+---------+---------------+
 
 
-+-----------------------------------------------------------+
-; Assembler Generated Files                                 ;
-+-----------------------------------------------------------+
-; File Name                                                 ;
-+-----------------------------------------------------------+
-; /home/lucas/uefs/pbl/Zoom-FPGA/output_files/testeFila.sof ;
-+-----------------------------------------------------------+
++-----------------------------------------------------------------+
+; Assembler Generated Files                                       ;
++-----------------------------------------------------------------+
+; File Name                                                       ;
++-----------------------------------------------------------------+
+; /home/aluno/Downloads/Zoom-FPGA-fifo/output_files/testeFila.sof ;
++-----------------------------------------------------------------+
 
 
 +-----------------------------------------+
@@ -67,8 +67,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------+------------------------+
 ; Option         ; Setting                ;
 +----------------+------------------------+
-; JTAG usercode  ; 0x016A7DA5             ;
-; Checksum       ; 0x016A7DA5             ;
+; JTAG usercode  ; 0x01E114B4             ;
+; Checksum       ; 0x01E114B4             ;
 +----------------+------------------------+
 
 
@@ -78,14 +78,14 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Fri Sep 26 07:30:22 2025
+    Info: Processing started: Fri Sep 26 17:20:37 2025
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off testeFila -c testeFila
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 523 megabytes
-    Info: Processing ended: Fri Sep 26 07:30:33 2025
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:12
+    Info: Peak virtual memory: 539 megabytes
+    Info: Processing ended: Fri Sep 26 17:20:41 2025
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:04
 
 

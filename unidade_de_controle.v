@@ -38,11 +38,12 @@
 		 wire [7:0] pixel_para_processar;
 		 wire [31:0] pixels_processados;
 		
-		parameter ENDERECO_BASE = 17'd38560;
+		parameter ENDERECO_BASE = 17'd0;
 		
 		parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6;
 		
 		parameter ENDERECO_1=0,ENDERECO_2=1, ENDERECO_3=2,ENDERECO_4=3;
+		
 		
 		always @(posedge clock) begin
         estado_atual <= proximo_estado;
@@ -115,29 +116,30 @@
                 
                 case (salvar_pixels)
                     ENDERECO_1: begin
-                        endereco_escrita_next = endereco_memoria - ENDERECO_BASE;
+                        endereco_escrita_next = endereco_memoria;
                         pixel_para_salvar_next = pixels_processados[7:0]; // Usar saída direta da ALU
                         salvar_pixels_next = ENDERECO_2;
                         proximo_estado = WRITE;
                     end
                     ENDERECO_2: begin
-                        endereco_escrita_next = (endereco_memoria + 1'b1) - ENDERECO_BASE;
+                        endereco_escrita_next = endereco_memoria + 1'b1;
                         pixel_para_salvar_next = pixels_processados[15:8];
                         salvar_pixels_next = ENDERECO_3;
                         proximo_estado = WRITE;
                     end
                     ENDERECO_3: begin
-                        endereco_escrita_next = (endereco_memoria + 9'd320) - ENDERECO_BASE;
+                        endereco_escrita_next = endereco_memoria + 9'd320;
                         pixel_para_salvar_next = pixels_processados[23:16];
                         salvar_pixels_next = ENDERECO_4;
                         proximo_estado = WRITE;
                     end
                     ENDERECO_4: begin
-                        endereco_escrita_next = (endereco_memoria + 9'd321) - ENDERECO_BASE;
+                        endereco_escrita_next = endereco_memoria + 9'd321;
                         pixel_para_salvar_next = pixels_processados[31:24];
                         escrita_dados_next = 1'b0;
                         salvar_pixels_next = ENDERECO_1;
-                        
+                        endereco_memoria_next = endereco_memoria + 1'b1;
+								
                         if (endereco_escrita_next >= 17'd76800) begin
                             proximo_estado = END_INSTRUCTION;
                         end else begin
@@ -151,12 +153,12 @@
             end
             
             NEXT_PIXEL: begin
-                endereco_memoria_next = endereco_memoria + 1'b1;
+                
                 
                 if (endereco_memoria_next >= 17'd76800) begin
                     proximo_estado = END_INSTRUCTION;
                 end else begin
-                    proximo_estado = LOAD_OP;
+                    proximo_estado = READ_PIXEL;
                 end
             end
             
@@ -170,7 +172,7 @@
             end
         endcase
     end
-		
+	
 		
 		/*
 		always @(posedge clock)
@@ -309,9 +311,9 @@
 	controle_vga controle_saida(
 		 .clock(clock),
 		 .endereco_escrita(endereco_escrita),
-		 .byte_para_escrita(pixel_para_salvar),
+		 .byte_para_escrita(pixel_para_processar_reg),
 		 .clock_b(clock_75_mhz),
-		 .permicao_escrita(escrita_dados),
+		 .permicao_escrita(1'b1),
 		 .hsync(hsync),
 		 .vsync(vsync),    
 		 .red(red),     
