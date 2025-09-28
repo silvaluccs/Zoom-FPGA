@@ -77,23 +77,23 @@ r1
 R12
 R3
 vunidade_de_controle
-Z13 !s110 1758882883
+Z13 !s110 1759074701
 !i10b 1
-!s100 L8EQKg3PDSV_X_kmYUb@X1
+!s100 lEb77@W@K3RcSaQlB`e=L1
 R5
-I]hSFo`XC?2VTU6><ch_0_0
+Io36zdAd@82K>7Un0k2OTR2
 R6
 Z14 d/home/lucas/uefs/pbl/Zoom-FPGA/simulation/qsim
-w1758882881
+w1759074698
 R7
 R8
-!i122 66
-L0 32 20807
+!i122 92
+L0 32 41189
 R9
 r1
 !s85 0
 31
-Z15 !s108 1758882883.000000
+!s108 1759074700.000000
 R10
 R11
 !i113 1
@@ -102,23 +102,23 @@ R3
 vunidade_de_controle_vlg_vec_tst
 R13
 !i10b 1
-!s100 YjTNP;oD=FRCY9G58O7R;1
+!s100 9j<BaobIngFjI<W0<G0cC1
 R5
-I:fB4BUFk]57ZBcN4b;62H3
+IaD@Y<i@PahUI@zL6?O6g71
 R6
 R14
-w1758882877
-8Waveform3.vwf.vt
-FWaveform3.vwf.vt
-!i122 67
-L0 30 66
+w1759074695
+8Waveform4.vwf.vt
+FWaveform4.vwf.vt
+!i122 93
+L0 30 91
 R9
 r1
 !s85 0
 31
-R15
-!s107 Waveform3.vwf.vt|
-!s90 -work|work|Waveform3.vwf.vt|
+!s108 1759074701.000000
+!s107 Waveform4.vwf.vt|
+!s90 -work|work|Waveform4.vwf.vt|
 !i113 1
 R12
 R3

@@ -1,5 +1,5 @@
 EDA Netlist Writer report for testeFila
-Fri Sep 26 07:34:41 2025
+Sun Sep 28 12:51:38 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Fri Sep 26 07:34:41 2025 ;
+; EDA Netlist Writer Status ; Successful - Sun Sep 28 12:51:38 2025 ;
 ; Revision Name             ; testeFila                             ;
 ; Top-level Entity Name     ; unidade_de_controle                   ;
 ; Family                    ; Cyclone V                             ;
@@ -95,13 +95,18 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Fri Sep 26 07:34:38 2025
+    Info: Processing started: Sun Sep 28 12:51:36 2025
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=/home/lucas/uefs/pbl/Zoom-FPGA/simulation/qsim/ testeFila -c testeFila
+Warning (20013): Ignored 16 assignments for entity "clock_75mhz" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_pll -entity clock_75mhz -sip clock_75mhz.sip -library lib_clock_75mhz was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 23.1 -entity clock_75mhz -sip clock_75mhz.sip -library lib_clock_75mhz was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV mwpim -entity clock_75mhz -sip clock_75mhz.sip -library lib_clock_75mhz was ignored
+Warning (20013): Ignored 317 assignments for entity "clock_75mhz_0002" -- entity does not exist in design
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file testeFila.vo in folder "/home/lucas/uefs/pbl/Zoom-FPGA/simulation/qsim//" for EDA simulation tool
-Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 785 megabytes
-    Info: Processing ended: Fri Sep 26 07:34:41 2025
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 693 megabytes
+    Info: Processing ended: Sun Sep 28 12:51:39 2025
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 

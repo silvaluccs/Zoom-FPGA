@@ -1,8 +1,14 @@
 	module unidade_de_controle(
 		input clock_50Mhz,
+		input clock_75_mhz, // remover
 		input botao_zoom_in,
 		input botao_zoom_out,
 		input seletor_algoritmo,
+		output [16:0] endereco_atual,
+		output [16:0] endereco_atual_reg,
+		output [7:0] dados_porta_b,
+		output [7:0] pixel_alu,
+		output escrita,
 		output wire hsync,
 		output wire vsync,    
 		output [7:0] red,     
@@ -15,7 +21,7 @@
 
 		wire clock;
 		 
-		wire clock_75_mhz;
+	//	wire clock_75_mhz;
 
 		 
 		 divisor_clock_por_2 divisor_clock_50MHZ(
@@ -30,15 +36,18 @@
 		 reg escrita_dados, escrita_dados_next;
 		 reg botao_zoom_in_reg, botao_zoom_out_reg, seletor_algoritmo_reg;
 		 reg [7:0] pixel_para_processar_reg;
-		 reg [31:0] pixels_processados_reg;
 		 reg [7:0] pixel_para_salvar, pixel_para_salvar_next;
 		 reg [1:0] salvar_pixels, salvar_pixels_next;
 		 reg dados_prontos, dados_prontos_next;
 		 reg [2:0] opcode, opcode_next;
 		 wire [7:0] pixel_para_processar;
 		 wire [31:0] pixels_processados;
+
+		 reg [8:0] linha;
+		 reg [8:0] coluna;
+		 reg [16:0] endereco_base_para_escrita;
 		
-		parameter ENDERECO_BASE = 17'd0;
+		parameter ENDERECO_BASE = 17'd38560; // i=120 j=160
 		
 		parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6;
 		
@@ -67,7 +76,6 @@
         salvar_pixels <= salvar_pixels_next;
         dados_prontos <= dados_prontos_next;
         opcode <= opcode_next;
-        pixels_processados_reg <= pixels_processados; // Registrar saída da ALU
         pixel_para_processar_reg <= pixel_para_processar; // Registrar leitura RAM
     end
 
@@ -109,51 +117,65 @@
             EXECUTE: begin
                 salvar_pixels_next = ENDERECO_1;
                 proximo_estado = WRITE;
+					 
             end
             
             WRITE: begin
                 escrita_dados_next = 1'b1;
+					 
+					 coluna = (endereco_memoria % 9'd320) - 8'd160;
+					 linha = (endereco_memoria / 9'd320) - 7'd120;					
+					 
                 
                 case (salvar_pixels)
                     ENDERECO_1: begin
-                        endereco_escrita_next = endereco_memoria;
+                        endereco_escrita_next = (linha * 2) * 9'd320 + (coluna * 2);
                         pixel_para_salvar_next = pixels_processados[7:0]; // Usar saída direta da ALU
                         salvar_pixels_next = ENDERECO_2;
                         proximo_estado = WRITE;
                     end
                     ENDERECO_2: begin
-                        endereco_escrita_next = endereco_memoria + 1'b1;
+                        endereco_escrita_next = (linha * 2) * 9'd320 + (coluna * 2 + 1);
                         pixel_para_salvar_next = pixels_processados[15:8];
                         salvar_pixels_next = ENDERECO_3;
                         proximo_estado = WRITE;
                     end
                     ENDERECO_3: begin
-                        endereco_escrita_next = endereco_memoria + 9'd320;
+                        endereco_escrita_next = (linha * 2 + 1) * 9'd320 + (coluna * 2);
                         pixel_para_salvar_next = pixels_processados[23:16];
                         salvar_pixels_next = ENDERECO_4;
                         proximo_estado = WRITE;
                     end
                     ENDERECO_4: begin
-                        endereco_escrita_next = endereco_memoria + 9'd321;
+                        endereco_escrita_next =	(linha * 2 + 1) * 9'd320 + (coluna * 2 + 1);
                         pixel_para_salvar_next = pixels_processados[31:24];
-                        escrita_dados_next = 1'b0;
+                        escrita_dados_next = 1'b1;
                         salvar_pixels_next = ENDERECO_1;
                         endereco_memoria_next = endereco_memoria + 1'b1;
 								
-                        if (endereco_escrita_next >= 17'd76800) begin
-                            proximo_estado = END_INSTRUCTION;
-                        end else begin
-                            proximo_estado = NEXT_PIXEL;
-                        end
                     end
                     default: begin
                         proximo_estado = IDLE;
                     end
                 endcase
+					 
+					 if (endereco_escrita_next >= 17'd76800) begin
+						  	escrita_dados_next = 1'b0;
+
+                    proximo_estado = END_INSTRUCTION;
+                end else begin
+						  
+						  if (salvar_pixels == ENDERECO_4) begin
+								proximo_estado = NEXT_PIXEL;
+						  end else begin 
+								proximo_estado = WRITE;
+						  end
+                end
             end
             
             NEXT_PIXEL: begin
-                
+                escrita_dados_next = 1'b0;
+
                 
                 if (endereco_memoria_next >= 17'd76800) begin
                     proximo_estado = END_INSTRUCTION;
@@ -163,11 +185,15 @@
             end
             
             END_INSTRUCTION: begin
+					 escrita_dados_next = 1'b0;
+
                 dados_prontos_next = 1'b1;
                 proximo_estado = IDLE;
             end
             
             default: begin
+					 escrita_dados_next = 1'b0;
+
                 proximo_estado = IDLE;
             end
         endcase
@@ -299,21 +325,21 @@
 		.pixel_processado(pixels_processados)
 	);
 
-
+/*
 	clock_75mhz clock_75(
 			.refclk(clock_50Mhz),   
 			.rst(1'b0),      //   reset.reset
 			.outclk_0(clock_75_mhz), // outclk0.clk
 			.locked()    //  locked.export
 		);
-		
+	*/	
 		
 	controle_vga controle_saida(
 		 .clock(clock),
-		 .endereco_escrita(endereco_escrita),
-		 .byte_para_escrita(pixel_para_processar_reg),
+		 .endereco_escrita(endereco_escrita_next),
+		 .byte_para_escrita(pixel_para_salvar_next),
 		 .clock_b(clock_75_mhz),
-		 .permicao_escrita(1'b1),
+		 .permicao_escrita(escrita_dados_next),
 		 .hsync(hsync),
 		 .vsync(vsync),    
 		 .red(red),     
@@ -321,8 +347,14 @@
 		 .blue(blue),    
 		 .sync(sync),          
 		 .clk(clk),           
-		 .blank(blank)
+		 .blank(blank),
+		 .dados_porta_b(dados_porta_b)
 	);
 
+	// necessario remover essas saidas, usei para debugar e resolver o problema
+	assign pixel_alu = pixel_para_salvar_next;
+	assign escrita = escrita_dados_next;
+	assign endereco_atual = endereco_escrita;
+	assign endereco_atual_reg = endereco_escrita_next;
 
 	endmodule

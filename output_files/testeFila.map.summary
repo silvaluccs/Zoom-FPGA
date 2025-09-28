@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Fri Sep 26 17:16:23 2025
+Analysis & Synthesis Status : Successful - Sun Sep 28 12:32:32 2025
 Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : testeFila
 Top-level Entity Name : unidade_de_controle
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 196
-Total pins : 33
+Total registers : 213
+Total pins : 85
 Total virtual pins : 0
 Total block memory bits : 1,232,896
 Total DSP Blocks : 0
@@ -13,5 +13,5 @@ Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0
 Total HSSI TX PCSs : 0
 Total HSSI PMA TX Serializers : 0
-Total PLLs : 1
+Total PLLs : 0
 Total DLLs : 0

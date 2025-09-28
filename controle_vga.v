@@ -11,7 +11,8 @@ module controle_vga(
     output [7:0] blue,    
     output sync,          
     output clk,           
-    output blank
+    output blank,
+	 output wire [7:0] dados_porta_b
 );
 
     // Contador de endereço da RAM
@@ -23,7 +24,7 @@ module controle_vga(
     // Dados vindos da RAM
     wire [7:0] dados_porta_a;
 	 
-	 wire [7:0] dados_porta_b;
+	 
 
 	 
     // RAM

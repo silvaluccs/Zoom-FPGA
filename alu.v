@@ -12,12 +12,12 @@ module alu(
 	localparam MEDIA_DE_BLOCOS=3'b010;
 	localparam VIZINHO_MAIS_PROXIMO_OUT=3'b011;
 
+	/*
 	always @(clock)
 	begin
 	
 		pixel_processado_reg <= {pixel, pixel, pixel, pixel};
 	
-	/*
 		quando criar todos os algoritmos vai fazer a selecao aqui
 		case (opcode)
 		
@@ -44,10 +44,12 @@ module alu(
 		
 		endcase
 	
-	*/
+	
 	
 	end
 	
-	assign pixel_processado = pixel_processado_reg;
+	*/
+	
+	assign pixel_processado = {pixel, pixel, pixel, pixel};
 	
 endmodule
