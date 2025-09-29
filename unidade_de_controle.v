@@ -1,14 +1,8 @@
 	module unidade_de_controle(
 		input clock_50Mhz,
-		input clock_75_mhz, // remover
 		input botao_zoom_in,
 		input botao_zoom_out,
 		input seletor_algoritmo,
-		output [16:0] endereco_atual,
-		output [16:0] endereco_atual_reg,
-		output [7:0] dados_porta_b,
-		output [7:0] pixel_alu,
-		output escrita,
 		output wire hsync,
 		output wire vsync,    
 		output [7:0] red,     
@@ -21,7 +15,9 @@
 
 		wire clock;
 		 
-	//	wire clock_75_mhz;
+		wire clock_75_mhz;
+		
+		wire [7:0] dados_porta_b;
 
 		 
 		 divisor_clock_por_2 divisor_clock_50MHZ(
@@ -130,7 +126,7 @@
                 case (salvar_pixels)
                     ENDERECO_1: begin
                         endereco_escrita_next = (linha * 2) * 9'd320 + (coluna * 2);
-                        pixel_para_salvar_next = pixels_processados[7:0]; // Usar saída direta da ALU
+								pixel_para_salvar_next = pixels_processados[7:0]; // Usar saída direta da ALU
                         salvar_pixels_next = ENDERECO_2;
                         proximo_estado = WRITE;
                     end
@@ -325,14 +321,14 @@
 		.pixel_processado(pixels_processados)
 	);
 
-/*
+
 	clock_75mhz clock_75(
 			.refclk(clock_50Mhz),   
 			.rst(1'b0),      //   reset.reset
 			.outclk_0(clock_75_mhz), // outclk0.clk
 			.locked()    //  locked.export
 		);
-	*/	
+	
 		
 	controle_vga controle_saida(
 		 .clock(clock),
@@ -351,10 +347,5 @@
 		 .dados_porta_b(dados_porta_b)
 	);
 
-	// necessario remover essas saidas, usei para debugar e resolver o problema
-	assign pixel_alu = pixel_para_salvar_next;
-	assign escrita = escrita_dados_next;
-	assign endereco_atual = endereco_escrita;
-	assign endereco_atual_reg = endereco_escrita_next;
 
 	endmodule

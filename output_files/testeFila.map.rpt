@@ -1,5 +1,5 @@
 Analysis & Synthesis report for testeFila
-Sun Sep 28 12:32:32 2025
+Mon Sep 29 09:21:24 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -27,19 +27,22 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  19. Source assignments for controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|altsyncram_kep1:FIFOram
  20. Parameter Settings for User Entity Instance: Top-level Entity: |unidade_de_controle
  21. Parameter Settings for User Entity Instance: ram_primaria:ram_leitura|altsyncram:altsyncram_component
- 22. Parameter Settings for User Entity Instance: controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component
- 23. Parameter Settings for User Entity Instance: controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component
- 24. Parameter Settings for User Entity Instance: controle_vga:controle_saida|vga_module:vga
- 25. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
- 26. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
- 27. altsyncram Parameter Settings by Entity Instance
- 28. scfifo Parameter Settings by Entity Instance
- 29. Port Connectivity Checks: "controle_vga:controle_saida|vga_module:vga"
- 30. Port Connectivity Checks: "controle_vga:controle_saida|ram:ram_inst"
- 31. Port Connectivity Checks: "ram_primaria:ram_leitura"
- 32. Post-Synthesis Netlist Statistics for Top Partition
- 33. Elapsed Time Per Partition
- 34. Analysis & Synthesis Messages
+ 22. Parameter Settings for User Entity Instance: clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i
+ 23. Parameter Settings for User Entity Instance: controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component
+ 24. Parameter Settings for User Entity Instance: controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component
+ 25. Parameter Settings for User Entity Instance: controle_vga:controle_saida|vga_module:vga
+ 26. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
+ 27. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
+ 28. altsyncram Parameter Settings by Entity Instance
+ 29. scfifo Parameter Settings by Entity Instance
+ 30. Port Connectivity Checks: "controle_vga:controle_saida|vga_module:vga"
+ 31. Port Connectivity Checks: "controle_vga:controle_saida|ram:ram_inst"
+ 32. Port Connectivity Checks: "controle_vga:controle_saida"
+ 33. Port Connectivity Checks: "clock_75mhz:clock_75"
+ 34. Port Connectivity Checks: "ram_primaria:ram_leitura"
+ 35. Post-Synthesis Netlist Statistics for Top Partition
+ 36. Elapsed Time Per Partition
+ 37. Analysis & Synthesis Messages
 
 
 
@@ -66,14 +69,14 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Sep 28 12:32:32 2025          ;
+; Analysis & Synthesis Status     ; Successful - Mon Sep 29 09:21:24 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; testeFila                                      ;
 ; Top-level Entity Name           ; unidade_de_controle                            ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 213                                            ;
-; Total pins                      ; 85                                             ;
+; Total registers                 ; 205                                            ;
+; Total pins                      ; 33                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 1,232,896                                      ;
 ; Total DSP Blocks                ; 0                                              ;
@@ -81,7 +84,7 @@ https://fpgasoftware.intel.com/eula.
 ; Total HSSI PMA RX Deserializers ; 0                                              ;
 ; Total HSSI TX PCSs              ; 0                                              ;
 ; Total HSSI PMA TX Serializers   ; 0                                              ;
-; Total PLLs                      ; 0                                              ;
+; Total PLLs                      ; 1                                              ;
 ; Total DLLs                      ; 0                                              ;
 +---------------------------------+------------------------------------------------+
 
@@ -190,55 +193,58 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                           ;
-+----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                             ; Library ;
-+----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+---------+
-; ram.v                            ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/ram.v                                                     ;         ;
-; fifo.v                           ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v                                                    ;         ;
-; vga_module.v                     ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/vga_module.v                                              ;         ;
-; unidade_de_controle.v            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v                                     ;         ;
-; ram_primaria.v                   ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v                                            ;         ;
-; alu.v                            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/alu.v                                                     ;         ;
-; divisor_clock_por_2.v            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/divisor_clock_por_2.v                                     ;         ;
-; controle_vga.v                   ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v                                            ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
-; aglobal231.inc                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/aglobal231.inc        ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
-; altrom.inc                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altrom.inc            ;         ;
-; altram.inc                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altram.inc            ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_43r1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf                                    ;         ;
-; memoria_bahia.mif                ; yes             ; Auto-Found Memory Initialization File  ; /home/lucas/uefs/pbl/Zoom-FPGA/memoria_bahia.mif                                         ;         ;
-; db/decode_nma.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_nma.tdf                                         ;         ;
-; db/mux_7hb.tdf                   ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/mux_7hb.tdf                                            ;         ;
-; db/altsyncram_f3n2.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_f3n2.tdf                                    ;         ;
-; db/decode_g2a.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_g2a.tdf                                         ;         ;
-; scfifo.tdf                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/scfifo.tdf            ;         ;
-; a_regfifo.inc                    ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_regfifo.inc         ;         ;
-; a_dpfifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_dpfifo.inc          ;         ;
-; a_i2fifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_i2fifo.inc          ;         ;
-; a_fffifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_fffifo.inc          ;         ;
-; a_f2fifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_f2fifo.inc          ;         ;
-; db/scfifo_7nd1.tdf               ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/scfifo_7nd1.tdf                                        ;         ;
-; db/a_dpfifo_90c1.tdf             ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf                                      ;         ;
-; db/altsyncram_kep1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_kep1.tdf                                    ;         ;
-; db/cmpr_8l8.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cmpr_8l8.tdf                                           ;         ;
-; db/cntr_j2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_j2b.tdf                                           ;         ;
-; db/cntr_037.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_037.tdf                                           ;         ;
-; db/cntr_k2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_k2b.tdf                                           ;         ;
-; lpm_divide.tdf                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_divide.tdf        ;         ;
-; abs_divider.inc                  ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/abs_divider.inc       ;         ;
-; sign_div_unsign.inc              ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/sign_div_unsign.inc   ;         ;
-; db/lpm_divide_t3m.tdf            ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/lpm_divide_t3m.tdf                                     ;         ;
-; db/sign_div_unsign_0mh.tdf       ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/sign_div_unsign_0mh.tdf                                ;         ;
-; db/alt_u_div_60f.tdf             ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/alt_u_div_60f.tdf                                      ;         ;
-; db/lpm_divide_qbm.tdf            ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/lpm_divide_qbm.tdf                                     ;         ;
-+----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                               ;
++----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+-------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                             ; Library     ;
++----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+-------------+
+; ram.v                            ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/ram.v                                                     ;             ;
+; fifo.v                           ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/fifo.v                                                    ;             ;
+; vga_module.v                     ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/vga_module.v                                              ;             ;
+; unidade_de_controle.v            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v                                     ;             ;
+; ram_primaria.v                   ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v                                            ;             ;
+; alu.v                            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/alu.v                                                     ;             ;
+; divisor_clock_por_2.v            ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/divisor_clock_por_2.v                                     ;             ;
+; controle_vga.v                   ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v                                            ;             ;
+; clock_75mhz.v                    ; yes             ; User Wizard-Generated File             ; /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz.v                                             ; clock_75mhz ;
+; clock_75mhz/clock_75mhz_0002.v   ; yes             ; User Verilog HDL File                  ; /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v                            ; clock_75mhz ;
+; altsyncram.tdf                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;             ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;             ;
+; lpm_mux.inc                      ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mux.inc           ;             ;
+; lpm_decode.inc                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_decode.inc        ;             ;
+; aglobal231.inc                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/aglobal231.inc        ;             ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc         ;             ;
+; altrom.inc                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altrom.inc            ;             ;
+; altram.inc                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altram.inc            ;             ;
+; altdpram.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc          ;             ;
+; db/altsyncram_43r1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf                                    ;             ;
+; memoria_bahia.mif                ; yes             ; Auto-Found Memory Initialization File  ; /home/lucas/uefs/pbl/Zoom-FPGA/memoria_bahia.mif                                         ;             ;
+; db/decode_nma.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_nma.tdf                                         ;             ;
+; db/mux_7hb.tdf                   ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/mux_7hb.tdf                                            ;             ;
+; altera_pll.v                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v          ;             ;
+; db/altsyncram_f3n2.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_f3n2.tdf                                    ;             ;
+; db/decode_g2a.tdf                ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/decode_g2a.tdf                                         ;             ;
+; scfifo.tdf                       ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/scfifo.tdf            ;             ;
+; a_regfifo.inc                    ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_regfifo.inc         ;             ;
+; a_dpfifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_dpfifo.inc          ;             ;
+; a_i2fifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_i2fifo.inc          ;             ;
+; a_fffifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_fffifo.inc          ;             ;
+; a_f2fifo.inc                     ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/a_f2fifo.inc          ;             ;
+; db/scfifo_7nd1.tdf               ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/scfifo_7nd1.tdf                                        ;             ;
+; db/a_dpfifo_90c1.tdf             ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf                                      ;             ;
+; db/altsyncram_kep1.tdf           ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_kep1.tdf                                    ;             ;
+; db/cmpr_8l8.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cmpr_8l8.tdf                                           ;             ;
+; db/cntr_j2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_j2b.tdf                                           ;             ;
+; db/cntr_037.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_037.tdf                                           ;             ;
+; db/cntr_k2b.tdf                  ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/cntr_k2b.tdf                                           ;             ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_divide.tdf        ;             ;
+; abs_divider.inc                  ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/abs_divider.inc       ;             ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                           ; /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/sign_div_unsign.inc   ;             ;
+; db/lpm_divide_t3m.tdf            ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/lpm_divide_t3m.tdf                                     ;             ;
+; db/sign_div_unsign_0mh.tdf       ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/sign_div_unsign_0mh.tdf                                ;             ;
+; db/alt_u_div_60f.tdf             ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/alt_u_div_60f.tdf                                      ;             ;
+; db/lpm_divide_qbm.tdf            ; yes             ; Auto-Generated Megafunction            ; /home/lucas/uefs/pbl/Zoom-FPGA/db/lpm_divide_qbm.tdf                                     ;             ;
++----------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------+-------------+
 
 
 +---------------------------------------------------------------------------------------------+
@@ -246,27 +252,30 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------------------------------------------+
 ; Resource                                    ; Usage                                         ;
 +---------------------------------------------+-----------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 480                                           ;
+; Estimate of Logic utilization (ALMs needed) ; 419                                           ;
 ;                                             ;                                               ;
-; Combinational ALUT usage for logic          ; 821                                           ;
-;     -- 7 input functions                    ; 0                                             ;
-;     -- 6 input functions                    ; 118                                           ;
-;     -- 5 input functions                    ; 37                                            ;
-;     -- 4 input functions                    ; 169                                           ;
-;     -- <=3 input functions                  ; 497                                           ;
+; Combinational ALUT usage for logic          ; 770                                           ;
+;     -- 7 input functions                    ; 6                                             ;
+;     -- 6 input functions                    ; 57                                            ;
+;     -- 5 input functions                    ; 55                                            ;
+;     -- 4 input functions                    ; 160                                           ;
+;     -- <=3 input functions                  ; 492                                           ;
 ;                                             ;                                               ;
-; Dedicated logic registers                   ; 213                                           ;
+; Dedicated logic registers                   ; 205                                           ;
 ;                                             ;                                               ;
-; I/O pins                                    ; 85                                            ;
+; I/O pins                                    ; 33                                            ;
 ; Total MLAB memory bits                      ; 0                                             ;
 ; Total block memory bits                     ; 1232896                                       ;
 ;                                             ;                                               ;
 ; Total DSP Blocks                            ; 0                                             ;
 ;                                             ;                                               ;
+; Total PLLs                                  ; 1                                             ;
+;     -- PLLs                                 ; 1                                             ;
+;                                             ;                                               ;
 ; Maximum fan-out node                        ; divisor_clock_por_2:divisor_clock_50MHZ|clock ;
 ; Maximum fan-out                             ; 374                                           ;
-; Total fan-out                               ; 7716                                          ;
-; Average fan-out                             ; 5.62                                          ;
+; Total fan-out                               ; 7246                                          ;
+; Average fan-out                             ; 5.99                                          ;
 +---------------------------------------------+-----------------------------------------------+
 
 
@@ -275,8 +284,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                             ; Entity Name         ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |unidade_de_controle                         ; 821 (109)           ; 213 (64)                  ; 1232896           ; 0          ; 85   ; 0            ; |unidade_de_controle                                                                                                                                            ; unidade_de_controle ; work         ;
-;    |controle_vga:controle_saida|             ; 248 (35)            ; 140 (29)                  ; 618496            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida                                                                                                                ; controle_vga        ; work         ;
+; |unidade_de_controle                         ; 770 (121)           ; 205 (64)                  ; 1232896           ; 0          ; 33   ; 0            ; |unidade_de_controle                                                                                                                                            ; unidade_de_controle ; work         ;
+;    |clock_75mhz:clock_75|                    ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75                                                                                                                       ; clock_75mhz         ; clock_75mhz  ;
+;       |clock_75mhz_0002:clock_75mhz_inst|    ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst                                                                                     ; clock_75mhz_0002    ; clock_75mhz  ;
+;          |altera_pll:altera_pll_i|           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i                                                             ; altera_pll          ; work         ;
+;    |controle_vga:controle_saida|             ; 207 (34)            ; 132 (29)                  ; 618496            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida                                                                                                                ; controle_vga        ; work         ;
 ;       |fifo:fifo_inst|                       ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst                                                                                                 ; fifo                ; work         ;
 ;          |scfifo:scfifo_component|           ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component                                                                         ; scfifo              ; work         ;
 ;             |scfifo_7nd1:auto_generated|     ; 48 (0)              ; 40 (0)                    ; 4096              ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated                                              ; scfifo_7nd1         ; work         ;
@@ -285,29 +297,28 @@ https://fpgasoftware.intel.com/eula.
 ;                   |cntr_037:usedw_counter|   ; 9 (9)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_037:usedw_counter  ; cntr_037            ; work         ;
 ;                   |cntr_j2b:rd_ptr_msb|      ; 8 (8)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_j2b:rd_ptr_msb     ; cntr_j2b            ; work         ;
 ;                   |cntr_k2b:wr_ptr|          ; 9 (9)               ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr         ; cntr_k2b            ; work         ;
-;       |ram:ram_inst|                         ; 96 (0)              ; 16 (0)                    ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst                                                                                                   ; ram                 ; work         ;
-;          |altsyncram:altsyncram_component|   ; 96 (0)              ; 16 (0)                    ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
-;             |altsyncram_f3n2:auto_generated| ; 96 (0)              ; 16 (16)                   ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated                                    ; altsyncram_f3n2     ; work         ;
+;       |ram:ram_inst|                         ; 65 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst                                                                                                   ; ram                 ; work         ;
+;          |altsyncram:altsyncram_component|   ; 65 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
+;             |altsyncram_f3n2:auto_generated| ; 65 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated                                    ; altsyncram_f3n2     ; work         ;
 ;                |decode_g2a:rden_decode_a|    ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_a           ; decode_g2a          ; work         ;
 ;                |decode_g2a:rden_decode_b|    ; 11 (11)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_g2a:rden_decode_b           ; decode_g2a          ; work         ;
 ;                |decode_nma:decode3|          ; 11 (11)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|decode_nma:decode3                 ; decode_nma          ; work         ;
-;                |mux_7hb:mux4|                ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4                       ; mux_7hb             ; work         ;
-;                |mux_7hb:mux5|                ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux5                       ; mux_7hb             ; work         ;
-;       |vga_module:vga|                       ; 69 (69)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga                                                                                                 ; vga_module          ; work         ;
+;                |mux_7hb:mux4|                ; 33 (33)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4                       ; mux_7hb             ; work         ;
+;       |vga_module:vga|                       ; 60 (60)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga                                                                                                 ; vga_module          ; work         ;
 ;    |divisor_clock_por_2:divisor_clock_50MHZ| ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|divisor_clock_por_2:divisor_clock_50MHZ                                                                                                    ; divisor_clock_por_2 ; work         ;
-;    |lpm_divide:Div0|                         ; 203 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0                                                                                                                            ; lpm_divide          ; work         ;
-;       |lpm_divide_qbm:auto_generated|        ; 203 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0|lpm_divide_qbm:auto_generated                                                                                              ; lpm_divide_qbm      ; work         ;
-;          |sign_div_unsign_0mh:divider|       ; 203 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0|lpm_divide_qbm:auto_generated|sign_div_unsign_0mh:divider                                                                  ; sign_div_unsign_0mh ; work         ;
-;             |alt_u_div_60f:divider|          ; 203 (203)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0|lpm_divide_qbm:auto_generated|sign_div_unsign_0mh:divider|alt_u_div_60f:divider                                            ; alt_u_div_60f       ; work         ;
-;    |lpm_divide:Mod0|                         ; 218 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0                                                                                                                            ; lpm_divide          ; work         ;
-;       |lpm_divide_t3m:auto_generated|        ; 218 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0|lpm_divide_t3m:auto_generated                                                                                              ; lpm_divide_t3m      ; work         ;
-;          |sign_div_unsign_0mh:divider|       ; 218 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0|lpm_divide_t3m:auto_generated|sign_div_unsign_0mh:divider                                                                  ; sign_div_unsign_0mh ; work         ;
-;             |alt_u_div_60f:divider|          ; 218 (218)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0|lpm_divide_t3m:auto_generated|sign_div_unsign_0mh:divider|alt_u_div_60f:divider                                            ; alt_u_div_60f       ; work         ;
-;    |ram_primaria:ram_leitura|                ; 42 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura                                                                                                                   ; ram_primaria        ; work         ;
-;       |altsyncram:altsyncram_component|      ; 42 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component                                                                                   ; altsyncram          ; work         ;
-;          |altsyncram_43r1:auto_generated|    ; 42 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated                                                    ; altsyncram_43r1     ; work         ;
+;    |lpm_divide:Div0|                         ; 196 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0                                                                                                                            ; lpm_divide          ; work         ;
+;       |lpm_divide_qbm:auto_generated|        ; 196 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0|lpm_divide_qbm:auto_generated                                                                                              ; lpm_divide_qbm      ; work         ;
+;          |sign_div_unsign_0mh:divider|       ; 196 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0|lpm_divide_qbm:auto_generated|sign_div_unsign_0mh:divider                                                                  ; sign_div_unsign_0mh ; work         ;
+;             |alt_u_div_60f:divider|          ; 196 (196)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Div0|lpm_divide_qbm:auto_generated|sign_div_unsign_0mh:divider|alt_u_div_60f:divider                                            ; alt_u_div_60f       ; work         ;
+;    |lpm_divide:Mod0|                         ; 202 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0                                                                                                                            ; lpm_divide          ; work         ;
+;       |lpm_divide_t3m:auto_generated|        ; 202 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0|lpm_divide_t3m:auto_generated                                                                                              ; lpm_divide_t3m      ; work         ;
+;          |sign_div_unsign_0mh:divider|       ; 202 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0|lpm_divide_t3m:auto_generated|sign_div_unsign_0mh:divider                                                                  ; sign_div_unsign_0mh ; work         ;
+;             |alt_u_div_60f:divider|          ; 202 (202)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|lpm_divide:Mod0|lpm_divide_t3m:auto_generated|sign_div_unsign_0mh:divider|alt_u_div_60f:divider                                            ; alt_u_div_60f       ; work         ;
+;    |ram_primaria:ram_leitura|                ; 43 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura                                                                                                                   ; ram_primaria        ; work         ;
+;       |altsyncram:altsyncram_component|      ; 43 (0)              ; 8 (0)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component                                                                                   ; altsyncram          ; work         ;
+;          |altsyncram_43r1:auto_generated|    ; 43 (0)              ; 8 (8)                     ; 614400            ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated                                                    ; altsyncram_43r1     ; work         ;
 ;             |decode_nma:rden_decode|         ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|decode_nma:rden_decode                             ; decode_nma          ; work         ;
-;             |mux_7hb:mux2|                   ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2                                       ; mux_7hb             ; work         ;
+;             |mux_7hb:mux2|                   ; 33 (33)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |unidade_de_controle|ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2                                       ; mux_7hb             ; work         ;
 +----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -328,6 +339,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+-----------------------------------------------------------------+-----------------+
 ; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                                                 ; IP Include File ;
 +--------+--------------+---------+--------------+--------------+-----------------------------------------------------------------+-----------------+
+; Altera ; altera_pll   ; 23.1    ; N/A          ; N/A          ; |unidade_de_controle|clock_75mhz:clock_75                       ; clock_75mhz.v   ;
 ; Altera ; FIFO         ; 23.1    ; N/A          ; N/A          ; |unidade_de_controle|controle_vga:controle_saida|fifo:fifo_inst ; fifo.v          ;
 ; Altera ; RAM: 2-PORT  ; 23.1    ; N/A          ; N/A          ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst   ; ram.v           ;
 ; Altera ; RAM: 1-PORT  ; 23.1    ; N/A          ; N/A          ; |unidade_de_controle|ram_primaria:ram_leitura                   ; ram_primaria.v  ;
@@ -424,9 +436,9 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 213   ;
-; Number of registers using Synchronous Clear  ; 45    ;
-; Number of registers using Synchronous Load   ; 49    ;
+; Total registers                              ; 205   ;
+; Number of registers using Synchronous Clear  ; 56    ;
+; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 76    ;
@@ -439,16 +451,15 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|contador_escrita[10]                                                                                          ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |unidade_de_controle|endereco_memoria[12]                                                                                                                      ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|contador_escrita[16]                                                                                          ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |unidade_de_controle|endereco_memoria[15]                                                                                                                      ;
 ; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |unidade_de_controle|pixel_para_processar_reg[7]                                                                                                               ;
-; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_counter[0]                                                                                   ;
+; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|v_counter[8]                                                                                   ;
 ; 9:1                ; 10 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|h_counter[8]                                                                                   ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|vga_module:vga|red_reg                                                                                        ;
-; 4:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; No         ; |unidade_de_controle|Selector6                                                                                                                                 ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; No         ; |unidade_de_controle|Selector0                                                                                                                                 ;
 ; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |unidade_de_controle|endereco_escrita_next[7]                                                                                                                  ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux5|l4_w0_n0_mux_dataout ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4|l4_w1_n0_mux_dataout ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |unidade_de_controle|controle_vga:controle_saida|ram:ram_inst|altsyncram:altsyncram_component|altsyncram_f3n2:auto_generated|mux_7hb:mux4|l4_w6_n0_mux_dataout ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -558,6 +569,253 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                   ;
 ; CBXI_PARAMETER                     ; altsyncram_43r1      ; Untyped                                   ;
 +------------------------------------+----------------------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i ;
++--------------------------------------+------------------------+-------------------------------------------------------------+
+; Parameter Name                       ; Value                  ; Type                                                        ;
++--------------------------------------+------------------------+-------------------------------------------------------------+
+; reference_clock_frequency            ; 50.0 MHz               ; String                                                      ;
+; fractional_vco_multiplier            ; false                  ; String                                                      ;
+; pll_type                             ; General                ; String                                                      ;
+; pll_subtype                          ; General                ; String                                                      ;
+; number_of_clocks                     ; 1                      ; Signed Integer                                              ;
+; operation_mode                       ; direct                 ; String                                                      ;
+; deserialization_factor               ; 4                      ; Signed Integer                                              ;
+; data_rate                            ; 0                      ; Signed Integer                                              ;
+; sim_additional_refclk_cycles_to_lock ; 0                      ; Signed Integer                                              ;
+; output_clock_frequency0              ; 75.000000 MHz          ; String                                                      ;
+; phase_shift0                         ; 0 ps                   ; String                                                      ;
+; duty_cycle0                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency1              ; 0 MHz                  ; String                                                      ;
+; phase_shift1                         ; 0 ps                   ; String                                                      ;
+; duty_cycle1                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency2              ; 0 MHz                  ; String                                                      ;
+; phase_shift2                         ; 0 ps                   ; String                                                      ;
+; duty_cycle2                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency3              ; 0 MHz                  ; String                                                      ;
+; phase_shift3                         ; 0 ps                   ; String                                                      ;
+; duty_cycle3                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency4              ; 0 MHz                  ; String                                                      ;
+; phase_shift4                         ; 0 ps                   ; String                                                      ;
+; duty_cycle4                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency5              ; 0 MHz                  ; String                                                      ;
+; phase_shift5                         ; 0 ps                   ; String                                                      ;
+; duty_cycle5                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency6              ; 0 MHz                  ; String                                                      ;
+; phase_shift6                         ; 0 ps                   ; String                                                      ;
+; duty_cycle6                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency7              ; 0 MHz                  ; String                                                      ;
+; phase_shift7                         ; 0 ps                   ; String                                                      ;
+; duty_cycle7                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency8              ; 0 MHz                  ; String                                                      ;
+; phase_shift8                         ; 0 ps                   ; String                                                      ;
+; duty_cycle8                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency9              ; 0 MHz                  ; String                                                      ;
+; phase_shift9                         ; 0 ps                   ; String                                                      ;
+; duty_cycle9                          ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency10             ; 0 MHz                  ; String                                                      ;
+; phase_shift10                        ; 0 ps                   ; String                                                      ;
+; duty_cycle10                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency11             ; 0 MHz                  ; String                                                      ;
+; phase_shift11                        ; 0 ps                   ; String                                                      ;
+; duty_cycle11                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency12             ; 0 MHz                  ; String                                                      ;
+; phase_shift12                        ; 0 ps                   ; String                                                      ;
+; duty_cycle12                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency13             ; 0 MHz                  ; String                                                      ;
+; phase_shift13                        ; 0 ps                   ; String                                                      ;
+; duty_cycle13                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency14             ; 0 MHz                  ; String                                                      ;
+; phase_shift14                        ; 0 ps                   ; String                                                      ;
+; duty_cycle14                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency15             ; 0 MHz                  ; String                                                      ;
+; phase_shift15                        ; 0 ps                   ; String                                                      ;
+; duty_cycle15                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency16             ; 0 MHz                  ; String                                                      ;
+; phase_shift16                        ; 0 ps                   ; String                                                      ;
+; duty_cycle16                         ; 50                     ; Signed Integer                                              ;
+; output_clock_frequency17             ; 0 MHz                  ; String                                                      ;
+; phase_shift17                        ; 0 ps                   ; String                                                      ;
+; duty_cycle17                         ; 50                     ; Signed Integer                                              ;
+; clock_name_0                         ;                        ; String                                                      ;
+; clock_name_1                         ;                        ; String                                                      ;
+; clock_name_2                         ;                        ; String                                                      ;
+; clock_name_3                         ;                        ; String                                                      ;
+; clock_name_4                         ;                        ; String                                                      ;
+; clock_name_5                         ;                        ; String                                                      ;
+; clock_name_6                         ;                        ; String                                                      ;
+; clock_name_7                         ;                        ; String                                                      ;
+; clock_name_8                         ;                        ; String                                                      ;
+; clock_name_global_0                  ; false                  ; String                                                      ;
+; clock_name_global_1                  ; false                  ; String                                                      ;
+; clock_name_global_2                  ; false                  ; String                                                      ;
+; clock_name_global_3                  ; false                  ; String                                                      ;
+; clock_name_global_4                  ; false                  ; String                                                      ;
+; clock_name_global_5                  ; false                  ; String                                                      ;
+; clock_name_global_6                  ; false                  ; String                                                      ;
+; clock_name_global_7                  ; false                  ; String                                                      ;
+; clock_name_global_8                  ; false                  ; String                                                      ;
+; m_cnt_hi_div                         ; 1                      ; Signed Integer                                              ;
+; m_cnt_lo_div                         ; 1                      ; Signed Integer                                              ;
+; m_cnt_bypass_en                      ; false                  ; String                                                      ;
+; m_cnt_odd_div_duty_en                ; false                  ; String                                                      ;
+; n_cnt_hi_div                         ; 1                      ; Signed Integer                                              ;
+; n_cnt_lo_div                         ; 1                      ; Signed Integer                                              ;
+; n_cnt_bypass_en                      ; false                  ; String                                                      ;
+; n_cnt_odd_div_duty_en                ; false                  ; String                                                      ;
+; c_cnt_hi_div0                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div0                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en0                     ; false                  ; String                                                      ;
+; c_cnt_in_src0                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en0               ; false                  ; String                                                      ;
+; c_cnt_prst0                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst0                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div1                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div1                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en1                     ; false                  ; String                                                      ;
+; c_cnt_in_src1                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en1               ; false                  ; String                                                      ;
+; c_cnt_prst1                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst1                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div2                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div2                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en2                     ; false                  ; String                                                      ;
+; c_cnt_in_src2                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en2               ; false                  ; String                                                      ;
+; c_cnt_prst2                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst2                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div3                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div3                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en3                     ; false                  ; String                                                      ;
+; c_cnt_in_src3                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en3               ; false                  ; String                                                      ;
+; c_cnt_prst3                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst3                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div4                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div4                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en4                     ; false                  ; String                                                      ;
+; c_cnt_in_src4                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en4               ; false                  ; String                                                      ;
+; c_cnt_prst4                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst4                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div5                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div5                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en5                     ; false                  ; String                                                      ;
+; c_cnt_in_src5                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en5               ; false                  ; String                                                      ;
+; c_cnt_prst5                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst5                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div6                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div6                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en6                     ; false                  ; String                                                      ;
+; c_cnt_in_src6                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en6               ; false                  ; String                                                      ;
+; c_cnt_prst6                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst6                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div7                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div7                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en7                     ; false                  ; String                                                      ;
+; c_cnt_in_src7                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en7               ; false                  ; String                                                      ;
+; c_cnt_prst7                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst7                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div8                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div8                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en8                     ; false                  ; String                                                      ;
+; c_cnt_in_src8                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en8               ; false                  ; String                                                      ;
+; c_cnt_prst8                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst8                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div9                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div9                        ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en9                     ; false                  ; String                                                      ;
+; c_cnt_in_src9                        ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en9               ; false                  ; String                                                      ;
+; c_cnt_prst9                          ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst9                   ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div10                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div10                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en10                    ; false                  ; String                                                      ;
+; c_cnt_in_src10                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en10              ; false                  ; String                                                      ;
+; c_cnt_prst10                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst10                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div11                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div11                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en11                    ; false                  ; String                                                      ;
+; c_cnt_in_src11                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en11              ; false                  ; String                                                      ;
+; c_cnt_prst11                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst11                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div12                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div12                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en12                    ; false                  ; String                                                      ;
+; c_cnt_in_src12                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en12              ; false                  ; String                                                      ;
+; c_cnt_prst12                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst12                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div13                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div13                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en13                    ; false                  ; String                                                      ;
+; c_cnt_in_src13                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en13              ; false                  ; String                                                      ;
+; c_cnt_prst13                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst13                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div14                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div14                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en14                    ; false                  ; String                                                      ;
+; c_cnt_in_src14                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en14              ; false                  ; String                                                      ;
+; c_cnt_prst14                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst14                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div15                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div15                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en15                    ; false                  ; String                                                      ;
+; c_cnt_in_src15                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en15              ; false                  ; String                                                      ;
+; c_cnt_prst15                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst15                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div16                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div16                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en16                    ; false                  ; String                                                      ;
+; c_cnt_in_src16                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en16              ; false                  ; String                                                      ;
+; c_cnt_prst16                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst16                  ; 0                      ; Signed Integer                                              ;
+; c_cnt_hi_div17                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_lo_div17                       ; 1                      ; Signed Integer                                              ;
+; c_cnt_bypass_en17                    ; false                  ; String                                                      ;
+; c_cnt_in_src17                       ; ph_mux_clk             ; String                                                      ;
+; c_cnt_odd_div_duty_en17              ; false                  ; String                                                      ;
+; c_cnt_prst17                         ; 1                      ; Signed Integer                                              ;
+; c_cnt_ph_mux_prst17                  ; 0                      ; Signed Integer                                              ;
+; pll_vco_div                          ; 1                      ; Signed Integer                                              ;
+; pll_slf_rst                          ; false                  ; String                                                      ;
+; pll_bw_sel                           ; low                    ; String                                                      ;
+; pll_output_clk_frequency             ; 0 MHz                  ; String                                                      ;
+; pll_cp_current                       ; 0                      ; Signed Integer                                              ;
+; pll_bwctrl                           ; 0                      ; Signed Integer                                              ;
+; pll_fractional_division              ; 1                      ; Signed Integer                                              ;
+; pll_fractional_cout                  ; 24                     ; Signed Integer                                              ;
+; pll_dsm_out_sel                      ; 1st_order              ; String                                                      ;
+; mimic_fbclk_type                     ; gclk                   ; String                                                      ;
+; pll_fbclk_mux_1                      ; glb                    ; String                                                      ;
+; pll_fbclk_mux_2                      ; fb_1                   ; String                                                      ;
+; pll_m_cnt_in_src                     ; ph_mux_clk             ; String                                                      ;
+; pll_vcoph_div                        ; 1                      ; Signed Integer                                              ;
+; refclk1_frequency                    ; 0 MHz                  ; String                                                      ;
+; pll_clkin_0_src                      ; clk_0                  ; String                                                      ;
+; pll_clkin_1_src                      ; clk_0                  ; String                                                      ;
+; pll_clk_loss_sw_en                   ; false                  ; String                                                      ;
+; pll_auto_clk_sw_en                   ; false                  ; String                                                      ;
+; pll_manu_clk_sw_en                   ; false                  ; String                                                      ;
+; pll_clk_sw_dly                       ; 0                      ; Signed Integer                                              ;
+; pll_extclk_0_cnt_src                 ; pll_extclk_cnt_src_vss ; String                                                      ;
+; pll_extclk_1_cnt_src                 ; pll_extclk_cnt_src_vss ; String                                                      ;
++--------------------------------------+------------------------+-------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -789,6 +1047,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+-------+----------+------------------------------------------+
 
 
++-------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "controle_vga:controle_saida"                                                                 ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port          ; Type   ; Severity ; Details                                                                             ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+; dados_porta_b ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Port Connectivity Checks: "clock_75mhz:clock_75"    ;
++--------+--------+----------+------------------------+
+; Port   ; Type   ; Severity ; Details                ;
++--------+--------+----------+------------------------+
+; rst    ; Input  ; Info     ; Stuck at GND           ;
+; locked ; Output ; Info     ; Explicitly unconnected ;
++--------+--------+----------+------------------------+
+
+
 +------------------------------------------------------+
 ; Port Connectivity Checks: "ram_primaria:ram_leitura" ;
 +------+-------+----------+----------------------------+
@@ -805,39 +1082,40 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 213                         ;
-;     ENA               ; 29                          ;
-;     ENA SCLR          ; 27                          ;
-;     ENA SLD           ; 20                          ;
+; arriav_ff             ; 205                         ;
+;     ENA               ; 38                          ;
+;     ENA SCLR          ; 38                          ;
 ;     SCLR              ; 18                          ;
-;     SLD               ; 29                          ;
-;     plain             ; 90                          ;
-; arriav_lcell_comb     ; 821                         ;
+;     plain             ; 111                         ;
+; arriav_lcell_comb     ; 770                         ;
 ;     arith             ; 272                         ;
 ;         0 data inputs ; 32                          ;
 ;         1 data inputs ; 88                          ;
 ;         2 data inputs ; 16                          ;
-;         3 data inputs ; 66                          ;
-;         4 data inputs ; 70                          ;
-;     normal            ; 508                         ;
+;         3 data inputs ; 80                          ;
+;         4 data inputs ; 56                          ;
+;     extend            ; 6                           ;
+;         7 data inputs ; 6                           ;
+;     normal            ; 451                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 5                           ;
-;         2 data inputs ; 160                         ;
-;         3 data inputs ; 96                          ;
-;         4 data inputs ; 91                          ;
-;         5 data inputs ; 37                          ;
-;         6 data inputs ; 118                         ;
+;         2 data inputs ; 147                         ;
+;         3 data inputs ; 90                          ;
+;         4 data inputs ; 96                          ;
+;         5 data inputs ; 55                          ;
+;         6 data inputs ; 57                          ;
 ;     shared            ; 41                          ;
 ;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 18                          ;
 ;         2 data inputs ; 2                           ;
 ;         3 data inputs ; 11                          ;
 ;         4 data inputs ; 8                           ;
-; boundary_port         ; 85                          ;
+; boundary_port         ; 33                          ;
+; generic_pll           ; 1                           ;
 ; stratixv_ram_block    ; 168                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 24.70                       ;
-; Average LUT depth     ; 11.49                       ;
+; Average LUT depth     ; 12.06                       ;
 +-----------------------+-----------------------------+
 
 
@@ -856,7 +1134,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Sun Sep 28 12:32:12 2025
+    Info: Processing started: Mon Sep 29 09:21:04 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off testeFila -c testeFila
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -881,16 +1159,16 @@ Info (12021): Found 1 design units, including 1 entities, in source file clock_7
 Info (12021): Found 1 design units, including 1 entities, in source file clock_75mhz/clock_75mhz_0002.v
     Info (12023): Found entity 1: clock_75mhz_0002 File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 2
 Info (12127): Elaborating entity "unidade_de_controle" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(126): truncated value with size 17 to match size of target (9) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 126
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(127): truncated value with size 17 to match size of target (9) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 127
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(132): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 132
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(138): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 138
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(144): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 144
-Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(150): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 150
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(85): inferring latch(es) for variable "coluna", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 85
-Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(85): inferring latch(es) for variable "linha", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 85
-Info (12128): Elaborating entity "divisor_clock_por_2" for hierarchy "divisor_clock_por_2:divisor_clock_50MHZ" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 30
-Info (12128): Elaborating entity "ram_primaria" for hierarchy "ram_primaria:ram_leitura" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 318
+Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(122): truncated value with size 17 to match size of target (9) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 122
+Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(123): truncated value with size 17 to match size of target (9) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 123
+Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(128): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 128
+Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(134): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 134
+Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(140): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 140
+Warning (10230): Verilog HDL assignment warning at unidade_de_controle.v(146): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 146
+Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(81): inferring latch(es) for variable "coluna", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 81
+Warning (10240): Verilog HDL Always Construct warning at unidade_de_controle.v(81): inferring latch(es) for variable "linha", which holds its previous value in one or more paths through the always construct File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 81
+Info (12128): Elaborating entity "divisor_clock_por_2" for hierarchy "divisor_clock_por_2:divisor_clock_50MHZ" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 26
+Info (12128): Elaborating entity "ram_primaria" for hierarchy "ram_primaria:ram_leitura" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 314
 Info (12128): Elaborating entity "altsyncram" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
 Info (12130): Elaborated megafunction instantiation "ram_primaria:ram_leitura|altsyncram:altsyncram_component" File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
 Info (12133): Instantiated megafunction "ram_primaria:ram_leitura|altsyncram:altsyncram_component" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/ram_primaria.v Line: 89
@@ -919,8 +1197,74 @@ Info (12128): Elaborating entity "decode_nma" for hierarchy "ram_primaria:ram_le
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_7hb.tdf
     Info (12023): Found entity 1: mux_7hb File: /home/lucas/uefs/pbl/Zoom-FPGA/db/mux_7hb.tdf Line: 23
 Info (12128): Elaborating entity "mux_7hb" for hierarchy "ram_primaria:ram_leitura|altsyncram:altsyncram_component|altsyncram_43r1:auto_generated|mux_7hb:mux2" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/altsyncram_43r1.tdf Line: 46
-Info (12128): Elaborating entity "alu" for hierarchy "alu:alu" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 326
-Info (12128): Elaborating entity "controle_vga" for hierarchy "controle_vga:controle_saida" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 352
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 322
+Info (12128): Elaborating entity "clock_75mhz" for hierarchy "clock_75mhz:clock_75" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 330
+Info (12128): Elaborating entity "clock_75mhz_0002" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz.v Line: 20
+Info (12128): Elaborating entity "altera_pll" for hierarchy "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
+Info (12130): Elaborated megafunction instantiation "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
+Info (12133): Instantiated megafunction "clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/clock_75mhz/clock_75mhz_0002.v Line: 85
+    Info (12134): Parameter "fractional_vco_multiplier" = "false"
+    Info (12134): Parameter "reference_clock_frequency" = "50.0 MHz"
+    Info (12134): Parameter "operation_mode" = "direct"
+    Info (12134): Parameter "number_of_clocks" = "1"
+    Info (12134): Parameter "output_clock_frequency0" = "75.000000 MHz"
+    Info (12134): Parameter "phase_shift0" = "0 ps"
+    Info (12134): Parameter "duty_cycle0" = "50"
+    Info (12134): Parameter "output_clock_frequency1" = "0 MHz"
+    Info (12134): Parameter "phase_shift1" = "0 ps"
+    Info (12134): Parameter "duty_cycle1" = "50"
+    Info (12134): Parameter "output_clock_frequency2" = "0 MHz"
+    Info (12134): Parameter "phase_shift2" = "0 ps"
+    Info (12134): Parameter "duty_cycle2" = "50"
+    Info (12134): Parameter "output_clock_frequency3" = "0 MHz"
+    Info (12134): Parameter "phase_shift3" = "0 ps"
+    Info (12134): Parameter "duty_cycle3" = "50"
+    Info (12134): Parameter "output_clock_frequency4" = "0 MHz"
+    Info (12134): Parameter "phase_shift4" = "0 ps"
+    Info (12134): Parameter "duty_cycle4" = "50"
+    Info (12134): Parameter "output_clock_frequency5" = "0 MHz"
+    Info (12134): Parameter "phase_shift5" = "0 ps"
+    Info (12134): Parameter "duty_cycle5" = "50"
+    Info (12134): Parameter "output_clock_frequency6" = "0 MHz"
+    Info (12134): Parameter "phase_shift6" = "0 ps"
+    Info (12134): Parameter "duty_cycle6" = "50"
+    Info (12134): Parameter "output_clock_frequency7" = "0 MHz"
+    Info (12134): Parameter "phase_shift7" = "0 ps"
+    Info (12134): Parameter "duty_cycle7" = "50"
+    Info (12134): Parameter "output_clock_frequency8" = "0 MHz"
+    Info (12134): Parameter "phase_shift8" = "0 ps"
+    Info (12134): Parameter "duty_cycle8" = "50"
+    Info (12134): Parameter "output_clock_frequency9" = "0 MHz"
+    Info (12134): Parameter "phase_shift9" = "0 ps"
+    Info (12134): Parameter "duty_cycle9" = "50"
+    Info (12134): Parameter "output_clock_frequency10" = "0 MHz"
+    Info (12134): Parameter "phase_shift10" = "0 ps"
+    Info (12134): Parameter "duty_cycle10" = "50"
+    Info (12134): Parameter "output_clock_frequency11" = "0 MHz"
+    Info (12134): Parameter "phase_shift11" = "0 ps"
+    Info (12134): Parameter "duty_cycle11" = "50"
+    Info (12134): Parameter "output_clock_frequency12" = "0 MHz"
+    Info (12134): Parameter "phase_shift12" = "0 ps"
+    Info (12134): Parameter "duty_cycle12" = "50"
+    Info (12134): Parameter "output_clock_frequency13" = "0 MHz"
+    Info (12134): Parameter "phase_shift13" = "0 ps"
+    Info (12134): Parameter "duty_cycle13" = "50"
+    Info (12134): Parameter "output_clock_frequency14" = "0 MHz"
+    Info (12134): Parameter "phase_shift14" = "0 ps"
+    Info (12134): Parameter "duty_cycle14" = "50"
+    Info (12134): Parameter "output_clock_frequency15" = "0 MHz"
+    Info (12134): Parameter "phase_shift15" = "0 ps"
+    Info (12134): Parameter "duty_cycle15" = "50"
+    Info (12134): Parameter "output_clock_frequency16" = "0 MHz"
+    Info (12134): Parameter "phase_shift16" = "0 ps"
+    Info (12134): Parameter "duty_cycle16" = "50"
+    Info (12134): Parameter "output_clock_frequency17" = "0 MHz"
+    Info (12134): Parameter "phase_shift17" = "0 ps"
+    Info (12134): Parameter "duty_cycle17" = "50"
+    Info (12134): Parameter "pll_type" = "General"
+    Info (12134): Parameter "pll_subtype" = "General"
+Info (12128): Elaborating entity "controle_vga" for hierarchy "controle_vga:controle_saida" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 348
 Warning (10230): Verilog HDL assignment warning at controle_vga.v(89): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 89
 Warning (10230): Verilog HDL assignment warning at controle_vga.v(97): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 97
 Warning (10230): Verilog HDL assignment warning at controle_vga.v(111): truncated value with size 32 to match size of target (17) File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 111
@@ -1000,10 +1344,10 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
 Info (12128): Elaborating entity "cntr_k2b" for hierarchy "controle_vga:controle_saida|fifo:fifo_inst|scfifo:scfifo_component|scfifo_7nd1:auto_generated|a_dpfifo_90c1:dpfifo|cntr_k2b:wr_ptr" File: /home/lucas/uefs/pbl/Zoom-FPGA/db/a_dpfifo_90c1.tdf Line: 57
 Info (12128): Elaborating entity "vga_module" for hierarchy "controle_vga:controle_saida|vga_module:vga" File: /home/lucas/uefs/pbl/Zoom-FPGA/controle_vga.v Line: 143
 Info (278001): Inferred 2 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 126
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 127
-Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 126
-Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 126
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 122
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 123
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 122
+Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 122
     Info (12134): Parameter "LPM_WIDTHN" = "17"
     Info (12134): Parameter "LPM_WIDTHD" = "9"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -1014,8 +1358,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/sign
     Info (12023): Found entity 1: sign_div_unsign_0mh File: /home/lucas/uefs/pbl/Zoom-FPGA/db/sign_div_unsign_0mh.tdf Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_60f.tdf
     Info (12023): Found entity 1: alt_u_div_60f File: /home/lucas/uefs/pbl/Zoom-FPGA/db/alt_u_div_60f.tdf Line: 23
-Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 127
-Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 127
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 123
+Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter: File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 123
     Info (12134): Parameter "LPM_WIDTHN" = "17"
     Info (12134): Parameter "LPM_WIDTHD" = "9"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -1023,27 +1367,25 @@ Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following par
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_qbm.tdf
     Info (12023): Found entity 1: lpm_divide_qbm File: /home/lucas/uefs/pbl/Zoom-FPGA/db/lpm_divide_qbm.tdf Line: 25
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "sync" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 17
+    Warning (13410): Pin "sync" is stuck at GND File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 11
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 21 registers lost all their fanouts during netlist optimizations.
-Warning (20013): Ignored 16 assignments for entity "clock_75mhz" -- entity does not exist in design
-    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_pll -entity clock_75mhz -sip clock_75mhz.sip -library lib_clock_75mhz was ignored
-    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 23.1 -entity clock_75mhz -sip clock_75mhz.sip -library lib_clock_75mhz was ignored
-    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV mwpim -entity clock_75mhz -sip clock_75mhz.sip -library lib_clock_75mhz was ignored
-Warning (20013): Ignored 317 assignments for entity "clock_75mhz_0002" -- entity does not exist in design
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+    Info (16011): Adding 3 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Warning: RST port on the PLL is not properly connected on instance clock_75mhz:clock_75|clock_75mhz_0002:clock_75mhz_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: /home/lucas/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 749
+    Info: Must be connected
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "seletor_algoritmo" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 6
-Info (21057): Implemented 1159 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 5 input pins
-    Info (21059): Implemented 80 output pins
-    Info (21061): Implemented 906 logic cells
+    Warning (15610): No output dependent on input pin "seletor_algoritmo" File: /home/lucas/uefs/pbl/Zoom-FPGA/unidade_de_controle.v Line: 5
+Info (21057): Implemented 1059 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 29 output pins
+    Info (21061): Implemented 857 logic cells
     Info (21064): Implemented 168 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 21 warnings
-    Info: Peak virtual memory: 468 megabytes
-    Info: Processing ended: Sun Sep 28 12:32:32 2025
+    Info (21065): Implemented 1 PLLs
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 17 warnings
+    Info: Peak virtual memory: 471 megabytes
+    Info: Processing ended: Mon Sep 29 09:21:24 2025
     Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:28
+    Info: Total CPU time (on all processors): 00:00:27
 
 
