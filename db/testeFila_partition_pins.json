@@ -120,11 +120,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "botao_zoom_in",
+					"name" : "seletor_algoritmo",
 					"strict" : false
 				},
 				{
-					"name" : "botao_zoom_out",
+					"name" : "reset_input",
+					"strict" : false
+				},
+				{
+					"name" : "botao_zoom_out_input",
+					"strict" : false
+				},
+				{
+					"name" : "botao_zoom_in_input",
 					"strict" : false
 				}
 			]

@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "09/28/2025 12:51:34"
+// Generated on "09/28/2025 15:07:22"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          unidade_de_controle
 // 
@@ -42,6 +42,7 @@ wire clk;
 wire [7:0] dados_porta_b;
 wire [16:0] endereco_atual;
 wire [16:0] endereco_atual_reg;
+wire [16:0] endereco_leitura;
 wire escrita;
 wire [7:0] green;
 wire hsync;
@@ -63,6 +64,7 @@ unidade_de_controle i1 (
 	.dados_porta_b(dados_porta_b),
 	.endereco_atual(endereco_atual),
 	.endereco_atual_reg(endereco_atual_reg),
+	.endereco_leitura(endereco_leitura),
 	.escrita(escrita),
 	.green(green),
 	.hsync(hsync),
@@ -74,14 +76,14 @@ unidade_de_controle i1 (
 );
 initial 
 begin 
-#100000000 $finish;
+#1000000 $finish;
 end 
 
 // botao_zoom_in
 initial
 begin
 	botao_zoom_in = 1'b1;
-	botao_zoom_in = #20000 1'b0;
+	botao_zoom_in = #30000 1'b0;
 end 
 
 // botao_zoom_out
@@ -98,24 +100,23 @@ begin
 	#10000;
 end 
 
-// seletor_algoritmo
-initial
-begin
-	seletor_algoritmo = 1'b1;
-	seletor_algoritmo = #20000 1'b0;
-end 
-
 // clock_75_mhz
 initial
 begin
-	repeat(7320)
+	repeat(73)
 	begin
 		clock_75_mhz = 1'b0;
 		clock_75_mhz = #6830 1'b1;
 		# 6830;
 	end
 	clock_75_mhz = 1'b0;
-	clock_75_mhz = #6830 1'b1;
+end 
+
+// seletor_algoritmo
+initial
+begin
+	seletor_algoritmo = 1'b1;
+	seletor_algoritmo = #30000 1'b0;
 end 
 endmodule
 

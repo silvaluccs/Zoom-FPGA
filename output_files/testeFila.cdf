@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("/home/aluno/Downloads/Zoom-FPGA-fifo/output_files/") File("testeFila.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("/home/aluno/Downloads/Zoom-FPGA-algoritmos2-21-5/Zoom-FPGA-algoritmos2-21/Zoom-FPGA-algoritmos2-2/Zoom-FPGA-algoritmos2/Zoom-FPGA-algoritmos/output_files/") File("testeFila.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

@@ -61,6 +61,9 @@ module controle_vga(
     wire regiao_ativa = (pixel_x >= 160) && (pixel_x < 480) && 
                        (pixel_y >= 120) && (pixel_y < 360);
     
+//	 wire regiao_ativa = (pixel_x >= 240) && (pixel_x < 400) &&
+//                    (pixel_y >= 180) && (pixel_y < 300);
+	 
     // Leitura sincronizada - só lê quando está na região ativa
     wire leitura_na_fila = regiao_ativa;
     
