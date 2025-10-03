@@ -4,12 +4,6 @@
 					input botao_zoom_out_input,
 					input seletor_algoritmo,
 					input reset_input,
-				//	input clock_75_mhz,
-				//	output wire [7:0] dados_porta_b,
-				//	output [7:0] pixel_alu,
-				//	output escrita,
-				//	output [16:0] endereco_atual,
-				//	output [2:0] op,
 					output wire hsync,
 					output wire vsync,    
 					output [7:0] red,     
@@ -20,23 +14,29 @@
 					output blank
 				);
 				
+          // fio para os botões com debounce
 					wire botao_zoom_in, botao_zoom_out, reset;
 					
+
+          // Instanciação do módulo de debounce para os botões
 					debounce debouce_zoom_in(botao_zoom_in_input,clock, botao_zoom_in);
 					debounce debouce_zoom_out(botao_zoom_out_input,clock, botao_zoom_out);
 					debounce debouce_reset(reset_input,clock, reset);
 
+          // fios para os clocks
 					wire clock;
 					 
 					wire clock_75_mhz;
 					
 					 
+          // divisor de clock por 2
 					 divisor_clock_por_2 divisor_clock_50MHZ(
 						.clock_entrada(clock_50Mhz),
 						.clock_saida(clock)
 					 );
 
 
+           // registradores e fios internos
 					 reg [2:0] estado_atual, proximo_estado;
 					 reg [16:0] endereco_memoria, endereco_memoria_next;
 					 reg [16:0] endereco_escrita, endereco_escrita_next;
@@ -57,57 +57,33 @@
 					 reg [16:0] endereco_base_para_escrita_next;
 					 
 					 
+           // registradores para armazenar os 4 pixels para a média
 					 reg [7:0] pixel_m_1;
 					 reg [7:0] pixel_m_2;
 					 reg [7:0] pixel_m_3;
 					 reg [7:0] pixel_m_4;
 					 wire [7:0] pixel_media_p;
-					 
-
 					 reg [7:0] pixel_m_1_next;
 					 reg [7:0] pixel_m_2_next;
 					 reg [7:0] pixel_m_3_next;
 					 reg [7:0] pixel_m_4_next;
 					
+
+           // endereco base para os algoritmos de zoom in
 					parameter ENDERECO_BASE = 17'd38560; // i=120 j=160
 					
+          // definição dos estados
 					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6, WAIT_READ=7;
 					
+          // definição dos endereços para salvar os pixels
 					parameter ENDERECO_1=0,ENDERECO_2=1, ENDERECO_3=2,ENDERECO_4=3, ENDERECO_5=4;
 					
-							
+          // definição dos opcodes
 					localparam REPLICACAO_PIXEL=3'b100;
 					localparam VIZINHO_MAIS_PROXIMO=3'b101;
 					localparam MEDIA_DE_BLOCOS=3'b010;
 					localparam VIZINHO_MAIS_PROXIMO_OUT=3'b011;
 					localparam RESET_IMAGEM=3'b111;
-
-					/*
-					always @(posedge clock) begin
-					  estado_atual <= proximo_estado;
-					  
-					  
-					  if (estado_atual == IDLE) begin
-						  botao_zoom_in_reg <= ~botao_zoom_in;
-						  botao_zoom_out_reg <= ~botao_zoom_out;
-						  seletor_algoritmo_reg <= seletor_algoritmo;
-					  end else begin
-						  botao_zoom_in_reg <= botao_zoom_in_reg;
-						  botao_zoom_out_reg <= botao_zoom_out_reg;
-						  seletor_algoritmo_reg <= seletor_algoritmo_reg;
-					  end
-					  
-					  // Registrar próximos valores
-					  endereco_memoria <= endereco_memoria_next;
-					  endereco_escrita <= endereco_escrita_next;
-					  escrita_dados <= escrita_dados_next;
-					  pixel_para_salvar <= pixel_para_salvar_next;
-					  salvar_pixels <= salvar_pixels_next;
-					  dados_prontos <= dados_prontos_next;
-					  opcode <= opcode_next;
-					  pixel_para_processar_reg <= pixel_para_processar; // Registrar leitura RAM
-				 end
-*/
 
 				// No início do módulo, ajuste as declarações:
 				reg [8:0] linha_aux;
@@ -174,62 +150,57 @@
 				 // BLOCO COMBINACIONAL - apenas atribuições com =
 				 always @(*) begin
      // Valores padrão (evitar latches)
-     proximo_estado = estado_atual;
-     endereco_memoria_next = endereco_memoria;
-     endereco_escrita_next = endereco_escrita;
-     escrita_dados_next = escrita_dados;
-     pixel_para_salvar_next = pixel_para_salvar;
-     salvar_pixels_next = salvar_pixels;
-     dados_prontos_next = dados_prontos;
-     opcode_next = opcode;
-	  endereco_base_para_escrita_next = endereco_base_para_escrita;
-	  
-	  pixel_m_1_next = pixel_m_1;
-	  pixel_m_2_next = pixel_m_2;
-	  pixel_m_3_next = pixel_m_3;
-	  pixel_m_4_next = pixel_m_4;
-     case (estado_atual)
+           proximo_estado = estado_atual;
+           endereco_memoria_next = endereco_memoria;
+           endereco_escrita_next = endereco_escrita;
+           escrita_dados_next = escrita_dados;
+           pixel_para_salvar_next = pixel_para_salvar;
+           salvar_pixels_next = salvar_pixels;
+           dados_prontos_next = dados_prontos;
+           opcode_next = opcode;
+           endereco_base_para_escrita_next = endereco_base_para_escrita;
+           
+           pixel_m_1_next = pixel_m_1;
+           pixel_m_2_next = pixel_m_2;
+           pixel_m_3_next = pixel_m_3;
+           pixel_m_4_next = pixel_m_4;
+           case (estado_atual)
          IDLE: begin
-             escrita_dados_next = 1'b0;
-             endereco_memoria_next = ENDERECO_BASE;
-             dados_prontos_next = 1'b0;
+              escrita_dados_next = 1'b0;
+              endereco_memoria_next = ENDERECO_BASE;
+              dados_prontos_next = 1'b0;
              
-             if (botao_zoom_in_reg || botao_zoom_out_reg || reset_reg) begin
-                  proximo_estado = LOAD_OP;
-             end else begin
-                  proximo_estado = IDLE;
-             end
+              if (botao_zoom_in_reg || botao_zoom_out_reg || reset_reg) begin
+                   proximo_estado = LOAD_OP;
+              end else begin
+                   proximo_estado = IDLE;
+              end
          end
-         
          LOAD_OP: begin
-             // --- INÍCIO DA CORREÇÃO ---
-             // Lógica de seleção explícita do opcode
              if (reset_reg) begin
                  opcode_next = RESET_IMAGEM;
              end else if (botao_zoom_in_reg) begin
                  // Se o seletor for 1, VIZINHO_MAIS_PROXIMO, senão REPLICACAO_PIXEL
 					  
+                 // caso o algoritmo atual seja de zoom out, ao pressionar zoom in, reseta a imagem
 						if (opcode_next == VIZINHO_MAIS_PROXIMO_OUT || opcode_next == MEDIA_DE_BLOCOS) begin
 							opcode_next = RESET_IMAGEM;
 						end else begin
 							opcode_next = seletor_algoritmo_reg ? VIZINHO_MAIS_PROXIMO : REPLICACAO_PIXEL;
 						end
                   
-					  //opcode_next = REPLICACAO_PIXEL;
 					  endereco_memoria_next = ENDERECO_BASE;
 
              end else if (botao_zoom_out_reg) begin
 				 
+                 // caso o algoritmo atual seja de zoom in, ao pressionar zoom out, reseta a imagem
 					if (opcode_next == VIZINHO_MAIS_PROXIMO || opcode_next == REPLICACAO_PIXEL) begin
 							opcode_next = RESET_IMAGEM;
 						end else begin
-							//opcode_next = seletor_algoritmo_reg ? VIZINHO_MAIS_PROXIMO : REPLICACAO_PIXEL;
 							opcode_next = seletor_algoritmo_reg ? VIZINHO_MAIS_PROXIMO_OUT : MEDIA_DE_BLOCOS;
 						end
-                 // Se o seletor for 1, VIZINHO_MAIS_PROXIMO_OUT, senão MEDIA_DE_BLOCOS
                  
              end
-             // --- FIM DA CORREÇÃO ---
 
              proximo_estado = READ_PIXEL;
              
@@ -237,27 +208,12 @@
              if (opcode_next == VIZINHO_MAIS_PROXIMO_OUT || opcode_next == MEDIA_DE_BLOCOS || opcode_next == RESET_IMAGEM) begin
                     endereco_memoria_next = 17'd0;
              end else begin
-                    endereco_memoria_next = ENDERECO_BASE;
+                    endereco_memoria_next = opcode_next == REPLICACAO_PIXEL ? ENDERECO_BASE : (((endereco_memoria / 17'd320) - 17'd120) / 17'd2) * 17'd320 + (((endereco_memoria % 17'd320) - 17'd160) / 17'd2);;
              end
          end
 							
 							READ_PIXEL: begin
-							/*
-								case (opcode_next)
-								 
-									 VIZINHO_MAIS_PROXIMO: begin
-										endereco_memoria_next = (((endereco_memoria / 17'd320) - 17'd120) / 17'd2) * 17'd320 + (((endereco_memoria % 17'd320) - 17'd160) / 17'd2);
-										proximo_estado = WAIT_READ;
-									 end
-									 
-									 default: begin
-										endereco_memoria_next = endereco_memoria_next;
-										proximo_estado = EXECUTE;
-									 end
-									 
-								  endcase               
-							*/
-							
+						
 							if (opcode_next == MEDIA_DE_BLOCOS) begin
 							
 								proximo_estado = WAIT_READ;
@@ -473,9 +429,6 @@
 											 
 										end
 										
-							
-								 
-
 									 default: begin
 										 
 										 coluna = (endereco_memoria % 17'd320) - 17'd160;
@@ -559,116 +512,6 @@
 					  endcase
 				 end
 				
-					
-					/*
-					always @(posedge clock)
-					 begin
-								estado_atual <= proximo_estado;
-					 end
-					 
-					 always @(estado_atual or botao_zoom_in or botao_zoom_out or seletor_algoritmo)
-					  begin
-							case (estado_atual)
-								
-								IDLE: begin
-								
-									if (~botao_zoom_in | ~botao_zoom_out) begin // caso um botao seja precionado
-										
-										botao_zoom_in_reg <= ~botao_zoom_in;
-										botao_zoom_out_reg <= ~botao_zoom_out;
-										seletor_algoritmo_reg <= seletor_algoritmo;
-										
-										proximo_estado <= LOAD_OP;
-									end else begin
-										proximo_estado <= IDLE;
-									end
-									
-										escrita_dados <= 1'b0;
-										endereco_memoria <= ENDERECO_BASE;
-									
-								end
-								
-								LOAD_OP: begin
-									opcode <= {botao_zoom_in_reg, botao_zoom_out_reg, seletor_algoritmo_reg};
-									proximo_estado <= READ_PIXEL;
-								end
-								
-								READ_PIXEL: begin
-									pixel_para_processar_reg <= pixel_para_processar;
-									proximo_estado <= EXECUTE;
-								end
-								
-								EXECUTE: begin
-									salvar_pixels <= 2'd0;
-								end
-								
-								WRITE: begin
-									pixels_processados_reg <= pixels_processados;
-									escrita_dados <= 1'b1;
-									
-									case (salvar_pixels)
-									
-										ENDERECO_1: begin
-											endereco_escrita <= endereco_memoria - ENDERECO_BASE;
-											pixel_para_salvar <= pixels_processados_reg[7:0];
-											salvar_pixels <= 2'b01;
-										end
-										ENDERECO_2: begin
-											endereco_escrita <= (endereco_memoria + 1'b1) - ENDERECO_BASE;
-											pixel_para_salvar <= pixels_processados_reg[15:8];
-											salvar_pixels <= 2'b10;
-										end 
-										ENDERECO_3: begin
-											endereco_escrita <= (endereco_memoria + 9'd320) - ENDERECO_BASE;
-											pixel_para_salvar <= pixels_processados_reg[23:16];
-											salvar_pixels <= 2'b11;
-										end 
-										ENDERECO_4: begin
-											endereco_escrita <= (endereco_memoria + 9'd321) - ENDERECO_BASE;
-											pixel_para_salvar <= pixels_processados_reg[31:24];
-											proximo_estado <= NEXT_PIXEL;
-										end
-										default: begin
-										
-											proximo_estado <= IDLE;
-										end
-									endcase
-									
-									if (endereco_escrita >= 17'd76800)
-										proximo_estado <= END_INSTRUCTION;
-									else
-										proximo_estado <= proximo_estado;
-									
-								end
-								NEXT_PIXEL: begin
-									
-									escrita_dados <= 1'b0;
-									endereco_memoria <= endereco_memoria + 1'b1;
-									
-									if (endereco_memoria == 17'd76800) begin
-										proximo_estado <= END_INSTRUCTION;
-									end else begin
-										proximo_estado <= LOAD_OP;
-									end	
-								end
-								
-								END_INSTRUCTION: begin
-									
-									dados_prontos <= 1'b1;
-									proximo_estado <= IDLE;
-								
-								end
-								
-								default: begin
-									
-									proximo_estado <= IDLE;
-								
-								end
-							
-							endcase	  
-					  end
-			*/
-
 				ram_primaria ram_leitura(
 					.address(endereco_memoria),
 					.clock(clock),
@@ -686,16 +529,16 @@
 					.media_pixel(pixel_media_p),
 					.opcode(opcode),
 					.clock(clock),
-					.pixel(pixel_para_processar_reg), // poderia aumentar
+					.pixel(pixel_para_processar_reg), 
 					.pixel_processado(pixels_processados)
 				);
 
 			
 				clock_75mhz clock_75(
 						.refclk(clock_50Mhz),   
-						.rst(1'b0),      //   reset.reset
-						.outclk_0(clock_75_mhz), // outclk0.clk
-						.locked()    //  locked.export
+						.rst(1'b0),      
+						.outclk_0(clock_75_mhz), 
+						.locked()    
 					);
 					
 					
@@ -717,9 +560,5 @@
 					 .dados_porta_b(dados_porta_b)
 				);
 				
-				//assign pixel_alu = pixel_para_salvar_next;
-				//assign escrita = escrita_dados_next;
-				//assign endereco_atual = endereco_escrita_next;
-				//assign op = opcode_next;
 
 				endmodule

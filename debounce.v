@@ -1,8 +1,6 @@
 
-
-//fpga4student.com
-// FPGA projects, Verilog projects, VHDL projects
-// Verilog code for button debouncing on FPGA
+// modulo de debounce
+// by: www.fpga4student.com
 // debouncing module 
 module debounce(input pb_1,clk,output pb_out);
 wire slow_clk;

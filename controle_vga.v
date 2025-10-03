@@ -1,4 +1,4 @@
-module controle_vga(
+/module controle_vga(
     input clock,
 	 input [16:0] endereco_escrita,
 	 input [7:0] byte_para_escrita,
@@ -24,15 +24,15 @@ module controle_vga(
     // Dados vindos da RAM
     wire [7:0] dados_porta_a;
 	 
-	 
-
-	 
+    // Instanciação da memória RAM dual-port
+    // Porta A: leitura (para FIFO)
+    // Porta B: escrita (dos dados processados pela unidade de controle)
     // RAM
     ram ram_inst (
         .address_a(contador_escrita),
         .address_b(endereco_escrita),
         .clock_a(clock),
-		  .clock_b(clock_b),
+		    .clock_b(clock_b),
         .data_a(8'd0),
         .data_b(byte_para_escrita),
         .wren_a(1'b0),
@@ -42,6 +42,9 @@ module controle_vga(
     );
 
     // FIFO sinais
+    // FIFO para buffer de pixels
+    // Profundidade de 512 enderecos para garantir espaço suficiente
+    // Largura de 8 bits (um pixel)
     reg escrita_na_fila = 1'b0;
     wire [7:0] dados_da_fila;
     wire fila_vazia;
@@ -60,10 +63,8 @@ module controle_vga(
     // Controle de região ativa (320x240 centralizado em 640x480)
     wire regiao_ativa = (pixel_x >= 160) && (pixel_x < 480) && 
                        (pixel_y >= 120) && (pixel_y < 360);
-    
-//	 wire regiao_ativa = (pixel_x >= 240) && (pixel_x < 400) &&
-//                    (pixel_y >= 180) && (pixel_y < 300);
-	 
+ 
+
     // Leitura sincronizada - só lê quando está na região ativa
     wire leitura_na_fila = regiao_ativa;
     
@@ -71,15 +72,19 @@ module controle_vga(
     wire inicio_frame;
     reg vsync_anterior = 1'b0;
     
+    // Detecção de borda de descida do VSYNC
     always @(posedge clock) begin
         vsync_anterior <= vsync;
     end
+    
     
     assign inicio_frame = vsync_anterior && !vsync; // Detecção de borda de descida do VSYNC
 
     // Lógica de escrita na FIFO (preenche a FIFO antes do frame)
     reg preenchimento_completo = 1'b0;
     
+    // Preenche a FIFO com pelo menos 480 pixels antes de começar a ler
+    // Durante a região ativa, mantém a FIFO alimentada
     always @(posedge clock) begin
         if (inicio_frame) begin
             // Reset no início de cada frame
@@ -105,6 +110,7 @@ module controle_vga(
         end
     end
 
+
     // Contador de leitura baseado nas coordenadas VGA
     always @(posedge clock) begin
         if (inicio_frame) begin
@@ -119,6 +125,9 @@ module controle_vga(
     reg [7:0] pixel_sincronizado;
     reg leitura_valida = 1'b0;
     
+    // Lógica de leitura da FIFO
+    // Só lê quando na região ativa e a FIFO não está vazia
+    // Fora da região ativa, envia preto (0)
     always @(posedge clock) begin
         leitura_valida <= leitura_na_fila && !fila_vazia;
         
@@ -129,6 +138,8 @@ module controle_vga(
         end
     end
 
+    // Instanciação do módulo VGA
+    // Gera os sinais VGA e as coordenadas dos pixels
     vga_module vga(
         .clock(clock),
         .reset(1'b0),
