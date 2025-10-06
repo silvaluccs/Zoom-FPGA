@@ -21,7 +21,7 @@ As imagens são tratadas em **escala de cinza**, onde cada pixel é representado
 
 ## Recursos Utilizados
 
-![Imagem da Placa]([https://exemplo.com/logo.png](https://www.terasic.com.tw/attachment/archive/836/image/top45_01.jpg)
+![Image](https://github.com/user-attachments/assets/cd06616a-a5f0-446b-a090-6bb92ac9e4be)
 
 ### Hardware
 
@@ -29,10 +29,10 @@ As imagens são tratadas em **escala de cinza**, onde cada pixel é representado
 | :--- | :--- | :--- |
 | **Placa de Desenvolvimento** | **DE1-SoC** | Plataforma principal de implementação. |
 | **FPGA** | **Altera Cyclone V SE 5CSEMA5F31C6N** | Fabric Lógica para o co-processador gráfico. |
-| **Memória** | **SDRAM 64MB (FPGA)** | Armazenamento do *framebuffer* para a imagem original e a imagem processada (escala de cinza 8-bit). |
+| **Memória** | **m10k** | Armazenamento do *framebuffer* para a imagem original e a imagem processada (escala de cinza 8-bit). |
 | **Saída de Vídeo** | **VGA DAC (ADV7123)** | Conversor Digital-Analógico de 8 bits para a saída VGA (15-pin D-SUB). Permite exibição em modos de alta resolução como SXGA ($1280 \times 1024$) a 100MHz. |
-| **Controles de Usuário** | **Chaves Deslizantes (SW[9:0])** | Seleção do algoritmo de redimensionamento e/ou fator de zoom. **SW[9:0]** estão conectados ao FPGA e fornecem nível lógico alto (UP) ou baixo (DOWN). |
-| **Controles de Usuário** | **Botões de Pressão (KEY[3:0])** | Ações de controle (ex: Reset, Captura, Troca de Imagem). **KEY[3:0]** estão conectados ao FPGA e são **debounced** por *Schmitt Triggers*, sendo ideais para uso como clock ou reset. |
+| **Controles de Usuário** | **Chaves Deslizantes (SW[9:0])** | Seleção do algoritmo de redimensionamento. **SW[9:0]** estão conectados ao FPGA e fornecem nível lógico alto (UP) ou baixo (DOWN). |
+| **Controles de Usuário** | **Botões de Pressão (KEY[3:0])** | Ações de controle (ex: Reset e Redimensionamento de Imagem (Zoom-in e Zoom-out)). **KEY[3:0]** estão conectados ao FPGA e são **debounced** por *Schmitt Triggers*, sendo ideais para uso como clock ou reset. |
 
 ### Software
 
@@ -45,7 +45,28 @@ As imagens são tratadas em **escala de cinza**, onde cada pixel é representado
 
 ## Metodologia
 
-O design do sistema segue uma arquitetura baseada em **Pipeline e Memória de Buffer** para garantir o processamento em tempo real dos pixels.
+O design do sistema segue uma arquitetura baseada em **Sicronismo de Clock e Memória de Buffer** para garantir o processamento em tempo real dos pixels.
+
+### Máquina de Estados (Finite State Machine - FSM)
+
+A lógica de controle do co-processador gráfico é implementada através de uma **Máquina de Estados Finita (FSM)**. Essa FSM gerencia o ciclo de vida completo de cada operação de redimensionamento, desde a inicialização e leitura dos controles até o processamento de pixel e o *commit* dos dados na memória.
+
+![Image](https://github.com/user-attachments/assets/6e591a19-5860-4a38-a9b6-2a919eb1d5d9)
+
+O ciclo de operação é dividido nos seguintes estados:
+
+| Estado | Função |
+| :--- | :--- |
+| **IDLE** | Estado inicial e de espera. O processador aguarda o sinal de início de operação, geralmente disparado pela **ativação de um botão ou chave**. |
+| **LOAD_OP** | Estado de carregamento da operação. O processador lê os valores atuais dos botões e chaves para determinar **qual algoritmo de zoom (operação)** deve ser executado e qual o **pixel inicial** a ser lido. |
+| **READ_PIXEL** | O processador envia o endereço à **Memória** (SDRAM) para ler o valor do pixel (ou bloco de pixels) que será processado. |
+| **WAIT_READ** | Estado de espera. É crucial para aguardar o tempo de latência da memória e garantir que o pixel (ou os pixels) solicitados estejam disponíveis antes de iniciar o processamento. |
+| **EXECUTE** | O valor do pixel carregado é enviado para a **Unidade Lógica e Aritmética (ULA)**, onde o processamento do zoom (interpolação, replicação, decimação ou média de bloco) é realizado com base na operação definida em `LOAD_OP`. |
+| **WRITE** | Estado de escrita. O pixel que acabou de ser processado é escrito de volta na **memória secundária (Frame Buffer)** para a geração da imagem de saída. |
+| **NEXT_PIXEL** | O endereço de memória é avançado para que o próximo pixel no ciclo de processamento seja buscado. O sistema verifica se atingiu o fim da imagem. |
+| **END_INSTRUCTION** | Estado final da operação de redimensionamento. As *flags* de controle são atualizadas e resetadas, e o sistema retorna ao estado **IDLE** para aguardar a próxima instrução. |
+
+Essa arquitetura sequencial garante que a leitura da memória, o cálculo na ULA e a escrita do resultado sejam realizados de forma coordenada para cada pixel, controlando o fluxo de dados em tempo real.
 
 ### Arquitetura do Sistema
 
@@ -64,7 +85,7 @@ O fator de escala de **2X** simplifica a lógica de interpolação:
 
 * **Decimação (Zoom Out):** Apenas um pixel a cada bloco de $2 \times 2$ pixels da imagem original é amostrado e mantido na imagem reduzida. A lógica utiliza o módulo ($\text{mod}$) das coordenadas de leitura para selecionar apenas os pixels com $x \text{ mod } 2 = 0$ e $y \text{ mod } 2 = 0$.
 
-* **Block Averaging (Zoom Out):** Para cada pixel de saída $(x', y')$, o módulo calcula a **média aritmética** dos $2 \times 2$ pixels da área correspondente da imagem original. Para garantir um resultado em **8 bits** (sem ponto flutuante), a soma dos 4 pixels é feita e o resultado é deslocado em 2 bits para a direita ($\text{soma} / 4$) (i.e., $\lfloor (\sum \text{pixels}) / 4 \rfloor$).
+* **Block Averaging (Zoom Out):** Para cada pixel de saída $(x', y')$, o módulo calcula a **média aritmética** dos $2 \times 2$ pixels da área correspondente da imagem original. Para garantir um resultado em **8 bits** (sem ponto flutuante), a soma dos 4 pixels é feita e o resultado é deslocado em 2 bits para a direita ($\text{soma} / 4$).
 
 ## Explicação dos Clocks (Sinais de Relógio)
 
