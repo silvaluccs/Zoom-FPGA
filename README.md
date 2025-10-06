@@ -96,8 +96,8 @@ O projeto requer o uso de múltiplos sinais de relógio, derivados do **Clock Ge
 | Sinal de Clock | Frequência | Origem/Propósito | Módulo/Uso | Pin Assignment FPGA |
 | :--- | :--- | :--- | :--- | :--- |
 | **`CLOCK_50`** | **50 MHz** | Clock primário do sistema. Usado para gerar clocks derivados via **PLL**. | Módulo Top-Level, PLL. | **PIN\_AF14** |
-| **`CLK_PIXEL`** | **25.175 MHz** | Frequência padrão para resolução VGA $640 \times 480$ a 60Hz. Gerado internamente por uma **PLL** a partir de `CLOCK_50`. | Módulo Controlador VGA, Módulos de Processamento. | N/A (PLL Output) |
-| **`SDRAM_CLK`** | **100 MHz** | Clock de alta velocidade para a interface com a memória **SDRAM de 64MB**. Gerado internamente por uma **PLL** a partir de `CLOCK_50`. | Controlador SDRAM. | **PIN\_AH12** |
+| **`CLK_PIXEL`** | **25.175 MHz** | Frequência padrão para resolução VGA $640 \times 480$ a 60Hz. Gerado a partir de `CLOCK_50` pelo módulo divisor de clock por 2. | Módulo Controlador VGA, Módulos de Processamento. | N/A (reg Output) |
+| **`CLOCK_WRITE`** | **75 MHz** | Clock de alta velocidade para a interface com a memória. Gerado internamente por uma **PLL** a partir de `CLOCK_50`. | Controlador SDRAM. |  N/A (PLL Output)|
 
 **Metodologia do Clock:**
 1.  O **`CLOCK_50`** é o sinal de referência.
