@@ -101,8 +101,9 @@ O projeto requer o uso de múltiplos sinais de relógio, derivados do **Clock Ge
 
 **Metodologia do Clock:**
 1.  O **`CLOCK_50`** é o sinal de referência.
-2.  Uma **PLL (Phase-Locked Loop)** é instanciada no Quartus para gerar as frequências de **`CLK_PIXEL`** (para a sincronização VGA) e **`SDRAM_CLK`** (para comunicação com a memória) a partir do `CLOCK_50`.
-3.  O sistema é dividido em domínios de clock: o domínio de **50MHz/100MHz** para acesso à memória e lógica interna de alta velocidade, e o domínio de **25.175MHz** para a geração e transmissão dos dados de vídeo.
+2.  O **`CLOCK_25MHz`** é gerado pelo módulo de divisor de clock. Ele está diretamente ligado ao VGA e ao sincronismo do sistema.
+3.  Um **`CLOCK_75MHz`** é gerado pelo PLL para escrita de dados de forma mais rápida, ele garante que os dados sejam escritos antes de
+avançar para o próximo pixel.
 
 ---
 
@@ -125,16 +126,9 @@ O controle do sistema é feito usando as chaves deslizantes (**SW**) para seleç
 
 ---
 
-## Compatibilidade HPS (Hard Processor System)
-
-O projeto da lógica do co-processador reside unicamente no **FPGA Fabric**, mas foi desenhado para ser compatível com o **HPS** (ARM Cortex-A9).
-
-A compatibilidade é garantida ao se utilizar o **Lightweight HPS-to-FPGA Bridge** (LW-AXI) para registrar os periféricos e o *Frame Buffer*. O HPS poderá atuar nas próximas etapas lendo os dados de controle (**SW**, **KEY**) e manipulando o *Frame Buffer* na SDRAM, tratando o módulo de Zoom como um periférico de alto desempenho acessível pelo barramento AXI.
-
 ## Próximos Passos (Desenvolvimento Futuro)
 
 Este repositório serve como a **Etapa 1** do projeto. As próximas etapas podem incluir:
 
-1.  **Integração com HPS:** Permitir que o HPS carregue imagens de um Micro SD Card para a SDRAM e inicie o processamento gráfico via co-processador FPGA.
-2.  **Interface Gráfica (GUI):** Desenvolvimento de uma aplicação Linux/QT no HPS para controlar o zoom e exibir o status do sistema via terminal ou *frame buffer*.
-3.  **Algoritmos Avançados:** Implementação de interpolação bilinear ou bicúbica para melhor qualidade de imagem.
+1.  **Integração com HPS:** Permitir que o HPS carregue imagens para o processamento gráfico via co-processador FPGA.
+2.  **Interface Gráfica (GUI):** Desenvolvimento de uma aplicação Linux/QT no HPS para controlar o zoom e exibir o status do sistema via terminal.
