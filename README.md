@@ -21,7 +21,7 @@ As imagens são tratadas em **escala de cinza**, onde cada pixel é representado
 
 ## Recursos Utilizados
 
-![Imagem da Placa]([https://exemplo.com/logo.png](https://www.terasic.com.tw/attachment/archive/836/image/top45_01.jpg))
+![Imagem da Placa]([https://exemplo.com/logo.png](https://www.terasic.com.tw/attachment/archive/836/image/top45_01.jpg)
 
 ### Hardware
 
