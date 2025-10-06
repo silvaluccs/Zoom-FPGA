@@ -29,7 +29,7 @@ As imagens são tratadas em **escala de cinza**, onde cada pixel é representado
 | :--- | :--- | :--- |
 | **Placa de Desenvolvimento** | **DE1-SoC** | Plataforma principal de implementação. |
 | **FPGA** | **Altera Cyclone V SE 5CSEMA5F31C6N** | Fabric Lógica para o co-processador gráfico. |
-| **Memória** | **m10k** | Armazenamento do *framebuffer* para a imagem original e a imagem processada (escala de cinza 8-bit). |
+| **Memória** | **M10k block** | Armazenamento do *framebuffer* para a imagem original e a imagem processada (escala de cinza 8-bit). |
 | **Saída de Vídeo** | **VGA DAC (ADV7123)** | Conversor Digital-Analógico de 8 bits para a saída VGA (15-pin D-SUB). Permite exibição em modos de alta resolução como SXGA ($1280 \times 1024$) a 100MHz. |
 | **Controles de Usuário** | **Chaves Deslizantes (SW[9:0])** | Seleção do algoritmo de redimensionamento. **SW[9:0]** estão conectados ao FPGA e fornecem nível lógico alto (UP) ou baixo (DOWN). |
 | **Controles de Usuário** | **Botões de Pressão (KEY[3:0])** | Ações de controle (ex: Reset e Redimensionamento de Imagem (Zoom-in e Zoom-out)). **KEY[3:0]** estão conectados ao FPGA e são **debounced** por *Schmitt Triggers*, sendo ideais para uso como clock ou reset. |
