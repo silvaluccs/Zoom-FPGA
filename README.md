@@ -2,9 +2,7 @@
 
 ## Descrição do Projeto
 
-Este repositório contém o projeto de um coprocessador gráfico dedicado ao **Redimensionamento de Imagens** (Zoom Digital e Downscale) implementado em **Verilog** para a **FPGA Cyclone V SE** da placa de desenvolvimento **DE1-SoC**. O sistema opera como um processador gráfico autossuficiente (co-processador), realizando todo o processamento de imagens diretamente na **Fabric Lógica (FPGA)**. O controle do zoom é feito através de chaves e botões a bordo, e a imagem final é exibida em tempo real via saída **VGA**.
-
-O objetivo é simular um comportamento básico de interpolação visual, com foco na eficiência de hardware para processamento em tempo real.
+Este repositório contém o projeto de um coprocessador gráfico dedicado ao **Redimensionamento de Imagens** (Zoom Digital e Downscale) implementado em **Verilog** para a **FPGA Cyclone V SE** da placa de desenvolvimento **DE1-SoC**. O sistema opera como um processador gráfico autossuficiente (co-processador), realizando todo o processamento de imagens diretamente na FPGA. O controle do zoom é feito através de chaves e botões a bordo, e a imagem final é exibida em tempo real via saída **VGA**.
 
 ### Requisitos Funcionais Implementados
 
@@ -66,6 +64,16 @@ O ciclo de operação é dividido nos seguintes estados:
 | **NEXT_PIXEL** | O endereço de memória é avançado para que o próximo pixel no ciclo de processamento seja buscado. O sistema verifica se atingiu o fim da imagem. |
 | **END_INSTRUCTION** | Estado final da operação de redimensionamento. As *flags* de controle são atualizadas e resetadas, e o sistema retorna ao estado **IDLE** para aguardar a próxima instrução. |
 
+##### Tabela para o opcode de cada algoritmo
+| Algoritmo | Opcode (binário) |
+| :--- | :--- |
+|REPLICACAO_PIXEL|100|
+|VIZINHO_MAIS_PROXIMO|101|
+|MÉDIA_DE_BLOCOS|010|
+|DECIMAÇÂO|011|
+|RESET_IMAGEM|111|
+
+
 Essa arquitetura sequencial garante que a leitura da memória, o cálculo na ULA e a escrita do resultado sejam realizados de forma coordenada para cada pixel, controlando o fluxo de dados em tempo real.
 
 ### Arquitetura do Sistema
@@ -88,6 +96,7 @@ O fator de escala de **2X** simplifica a lógica de interpolação:
 * **Decimação (Zoom Out):** Apenas um pixel a cada bloco de  $2 \times 2$ pixels da imagem original é amostrado e mantido na imagem reduzida. A lógica utiliza o módulo ($\text{mod}$) das coordenadas de leitura para selecionar apenas os pixels com  $x \text{ mod } 2 = 0$ e  $y \text{ mod } 2 = 0$.
 
 * **Block Averaging (Zoom Out):** Para cada pixel de saída $(x', y')$, o módulo calcula a **média aritmética** dos $2 \times 2$  pixels da área correspondente da imagem original. Para garantir um resultado em **8 bits** (sem ponto flutuante), a soma dos 4 pixels é feita e o resultado é deslocado em 2 bits para a direita ($\text{soma} / 4$).
+
 
 ## Explicação dos Clocks (Sinais de Relógio)
 
