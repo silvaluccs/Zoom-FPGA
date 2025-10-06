@@ -83,9 +83,9 @@ O fator de escala de **2X** simplifica a lógica de interpolação:
 
 * **Pixel Replication (Zoom In):** Idêntico ao Nearest Neighbor para o fator 2X, onde o valor de cada pixel original é simplesmente replicado em um bloco de $2 \times 2$ pixels na imagem ampliada.
 
-* **Decimação (Zoom Out):** Apenas um pixel a cada bloco de $2 \times 2$ pixels da imagem original é amostrado e mantido na imagem reduzida. A lógica utiliza o módulo ($\text{mod}$) das coordenadas de leitura para selecionar apenas os pixels com $x \text{ mod } 2 = 0$ e $y \text{ mod } 2 = 0$.
+* **Decimação (Zoom Out):** Apenas um pixel a cada bloco de  $2 \times 2$ pixels da imagem original é amostrado e mantido na imagem reduzida. A lógica utiliza o módulo ($\text{mod}$) das coordenadas de leitura para selecionar apenas os pixels com  $x \text{ mod } 2 = 0$ e  $y \text{ mod } 2 = 0$.
 
-* **Block Averaging (Zoom Out):** Para cada pixel de saída $(x', y')$, o módulo calcula a **média aritmética** dos $2 \times 2$ pixels da área correspondente da imagem original. Para garantir um resultado em **8 bits** (sem ponto flutuante), a soma dos 4 pixels é feita e o resultado é deslocado em 2 bits para a direita ($\text{soma} / 4$).
+* **Block Averaging (Zoom Out):** Para cada pixel de saída $(x', y')$, o módulo calcula a **média aritmética** dos $2 \times 2$  pixels da área correspondente da imagem original. Para garantir um resultado em **8 bits** (sem ponto flutuante), a soma dos 4 pixels é feita e o resultado é deslocado em 2 bits para a direita ($\text{soma} / 4$).
 
 ## Explicação dos Clocks (Sinais de Relógio)
 
