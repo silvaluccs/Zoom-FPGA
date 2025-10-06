@@ -70,10 +70,12 @@ Essa arquitetura sequencial garante que a leitura da memória, o cálculo na ULA
 
 ### Arquitetura do Sistema
 
-1.  **Módulo de Controle VGA (VGA Controller):** Gera os sinais de sincronismo padrão VGA (**VGA\_HS**, **VGA\_VS**, **VGA\_CLK**) para a taxa de atualização e resolução desejada (ex: $640 \times 480$ a 25MHz). Este módulo é o mestre do tempo.
-2.  **Módulo de Leitura da Memória (SDRAM Read):** Endereça e lê os dados de pixel (8-bit) da **SDRAM de 64MB** (usada como *Frame Buffer*). O endereço de leitura é calculado com base nos sinais de sincronismo VGA e no estado atual do Zoom.
-3.  **Módulo Co-Processador Gráfico (Zoom Processor):** O coração do sistema. Ele recebe o pixel lido da memória e as coordenadas de tela, aplicando a lógica do algoritmo selecionado (Nearest Neighbor, Pixel Replication, Decimação, ou Block Averaging) para calcular o valor do pixel de saída no novo tamanho. Este módulo implementa a lógica combinacional e sequencial específica para cada método.
-4.  **Módulo de Saída de Vídeo (VGA Output):** Envia os dados de pixel processados (8-bit de escala de cinza, R=G=B) para o **ADV7123 DAC**.
+<img width="2021" height="1451" alt="Diagrama sem nome drawio(5)" src="https://github.com/user-attachments/assets/500c3d32-2465-4b7f-9732-a1f3de0d7411" />
+
+1.  **Módulo de Controle VGA (VGA Controller):** Gera os sinais de sincronismo padrão VGA (**VGA\_HS**, **VGA\_VS**, **VGA\_CLK**) para a taxa de atualização e resolução desejada (ex: $320 \times 240$ a 25MHz). Este módulo é o mestre do tempo e responsável pela exibição da imagem.
+2.  **Módulo de Leitura da Memória:** Endereça e lê os dados de pixel (8-bit) dos blocos de memória da FPGA. O endereço é calculado com um contador de 76800 endereços. As memórias possuem 76800 endereços de 1 Byte, ou seja, 8 bits. Também é usado uma fila para evitar que o vga acesse diretamente a memória. Ela possui 512 espaços de 8 bits.
+3.  **Módulo Co-Processador Gráfico (Zoom Processor):** O coração do sistema. Ele recebe o pixel lido da memória e a operação com base no botão e a chave seletora, aplicando a lógica do algoritmo selecionado (Nearest Neighbor, Pixel Replication, Decimação, ou Block Averaging) para calcular o valor do pixel de saída no novo tamanho. Este módulo implementa a lógica combinacional e sequencial específica para cada método.
+4.  **Módulo de Saída de Vídeo (VGA Output):** Envia os dados de pixel processados para uma memoria de processamento, para que futuramente eles entrem na fila de exibição.
 
 ### Implementação dos Algoritmos de Redimensionamento (Fator 2X)
 
