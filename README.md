@@ -59,10 +59,10 @@ O ciclo de operação é dividido nos seguintes estados:
 | :--- | :--- |
 | **IDLE** | Estado inicial e de espera. O processador aguarda o sinal de início de operação, geralmente disparado pela **ativação de um botão ou chave**. |
 | **LOAD_OP** | Estado de carregamento da operação. O processador lê os valores atuais dos botões e chaves para determinar **qual algoritmo de zoom (operação)** deve ser executado e qual o **pixel inicial** a ser lido. |
-| **READ_PIXEL** | O processador envia o endereço à **Memória** (SDRAM) para ler o valor do pixel (ou bloco de pixels) que será processado. |
-| **WAIT_READ** | Estado de espera. É crucial para aguardar o tempo de latência da memória e garantir que o pixel (ou os pixels) solicitados estejam disponíveis antes de iniciar o processamento. |
-| **EXECUTE** | O valor do pixel carregado é enviado para a **Unidade Lógica e Aritmética (ULA)**, onde o processamento do zoom (interpolação, replicação, decimação ou média de bloco) é realizado com base na operação definida em `LOAD_OP`. |
-| **WRITE** | Estado de escrita. O pixel que acabou de ser processado é escrito de volta na **memória secundária (Frame Buffer)** para a geração da imagem de saída. |
+| **READ_PIXEL** | O processador envia o endereço à **Memória** para ler o valor do pixel (ou bloco de pixels) que será processado. |
+| **WAIT_READ** | Estado de espera. É crucial para aguardar o tempo de latência da memória e garantir que o pixel (ou os pixels) solicitados estejam disponíveis antes de iniciar o processamento. Esse estado só é ativado caso seja necessário ler pixels além do disponível pelo endereço do contador. |
+| **EXECUTE** | O valor do pixel carregado é enviado para a **Unidade Lógica e Aritmética (ULA)**, onde o processamento do zoom (vizinho mais próximo, replicação, decimação ou média de bloco) é realizado com base na operação definida em `LOAD_OP`. |
+| **WRITE** | Estado de escrita. O pixel que acabou de ser processado é escrito na **memória secundária** para a geração da imagem de saída. |
 | **NEXT_PIXEL** | O endereço de memória é avançado para que o próximo pixel no ciclo de processamento seja buscado. O sistema verifica se atingiu o fim da imagem. |
 | **END_INSTRUCTION** | Estado final da operação de redimensionamento. As *flags* de controle são atualizadas e resetadas, e o sistema retorna ao estado **IDLE** para aguardar a próxima instrução. |
 
