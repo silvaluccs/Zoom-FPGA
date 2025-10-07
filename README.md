@@ -141,16 +141,13 @@ O controle do sistema é feito usando as chaves deslizantes (**SW**) para seleç
 
 ## Funcionamento do Sistema
 
-<div align="center">
-    <div style="display: inline-block; margin: 10px;">
-        <h3>Zoom In</h3>
-        <img src="Assets/AlgoritmosZoom-In.gif" alt="Algoritmos de Zoom In" width="400"/>
-    </div><div style="display: inline-block; margin: 10px;">
-        <h3>Zoom Out</h3>
-        <img src="Assets/zoom-out.mp4.gif" alt="Algoritmos de Zoom Out" width="400"/>
-    </div>
-</div>
+### Algoritmos de Zoom_In
 
+![Zoom_In](Assets/AlgoritmosZoom-In.gif)
+
+### Algoritmos de Zoom_Out
+
+![Zoom_Out](Assets/zoom-out.mp4.gif)
 
 ## Próximos Passos (Desenvolvimento Futuro)
 
