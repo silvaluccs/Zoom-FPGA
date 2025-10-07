@@ -1,5 +1,9 @@
 # Zoom Digital: Redimensionamento de Imagens com FPGA em Verilog
 
+<div align="center">
+  <img src="Assets/ApresentaçãoDoProjeto(1).gif" alt="Gif de Apresetação" width="600"/>
+</div>
+
 ## Descrição do Projeto
 
 Este repositório contém o projeto de um coprocessador gráfico dedicado ao **Redimensionamento de Imagens** (Zoom Digital e Downscale) implementado em **Verilog** para a **FPGA Cyclone V SE** da placa de desenvolvimento **DE1-SoC**. O sistema opera como um processador gráfico autossuficiente (co-processador), realizando todo o processamento de imagens diretamente na FPGA. O controle do zoom é feito através de chaves e botões a bordo, e a imagem final é exibida em tempo real via saída **VGA**.
@@ -76,9 +80,10 @@ O ciclo de operação é dividido nos seguintes estados:
 
 Essa arquitetura sequencial garante que a leitura da memória, o cálculo na ULA e a escrita do resultado sejam realizados de forma coordenada para cada pixel, controlando o fluxo de dados em tempo real.
 
-### Arquitetura do Sistema
-
+### Caminho de Dados 
 <img width="2021" height="1451" alt="Diagrama sem nome drawio(5)" src="https://github.com/user-attachments/assets/500c3d32-2465-4b7f-9732-a1f3de0d7411" />
+
+### Arquitetura do Sistema
 
 1.  **Módulo de Controle VGA (VGA Controller):** Gera os sinais de sincronismo padrão VGA (**VGA\_HS**, **VGA\_VS**, **VGA\_CLK**) para a taxa de atualização e resolução desejada (ex: $320 \times 240$ a 25MHz). Este módulo é o mestre do tempo e responsável pela exibição da imagem.
 2.  **Módulo de Leitura da Memória:** Endereça e lê os dados de pixel (8-bit) dos blocos de memória da FPGA. O endereço é calculado com um contador de 76800 endereços. As memórias possuem 76800 endereços de 1 Byte, ou seja, 8 bits. Também é usado uma fila para evitar que o vga acesse diretamente a memória. Ela possui 512 espaços de 8 bits.
@@ -131,9 +136,21 @@ O controle do sistema é feito usando as chaves deslizantes (**SW**) para seleç
 | **`SW[9:0]`** | Entrada | Chaves Deslizantes | PIN\_AE12 - PIN\_AB12 (Tabela 3-7) |
 | **`KEY[3:0]`** | Entrada | Botões de Pressão | PIN\_Y16 - PIN\_AA14 (Tabela 3-8) |
 | **`CLOCK_50`** | Entrada | Clock 50 MHz | PIN\_AF14 (Tabela 3-6) |
-| **`LEDR[9:0]`** | Saída | LEDs Vermelhos | PIN\_Y21 - PIN\_V16 (Tabela 3-9/3-10) |
 
 ---
+
+## Funcionamento do Sistema
+
+<div align="center">
+    <div style="display: inline-block; margin: 10px;">
+        <h3>Zoom In</h3>
+        <img src="Assets/AlgoritmosZoom-In.gif" alt="Algoritmos de Zoom In" width="400"/>
+    </div><div style="display: inline-block; margin: 10px;">
+        <h3>Zoom Out</h3>
+        <img src="Assets/zoom-out.mp4.gif" alt="Algoritmos de Zoom Out" width="400"/>
+    </div>
+</div>
+
 
 ## Próximos Passos (Desenvolvimento Futuro)
 
