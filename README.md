@@ -155,3 +155,13 @@ Este repositório serve como a **Etapa 1** do projeto. As próximas etapas podem
 
 1.  **Integração com HPS:** Permitir que o HPS carregue imagens para o processamento gráfico via co-processador FPGA.
 2.  **Interface Gráfica (GUI):** Desenvolvimento de uma aplicação Linux/QT no HPS para controlar o zoom e exibir o status do sistema via terminal.
+
+## Referências
+
+PATTERSON, D. A.; HENNESSY, J. L. Computer organization and design : the hardware/software interface, ARM edition / Computer organization and design : the hardware/software interface, ARM edition.
+
+‌Cyclone V Device Overview. Disponível em: https://www.intel.com/content/www/us/en/docs/programmable/683694/current/cyclone-v-device-overview.html.
+
+FPGAcademy. Disponível em: https://fpgacademy.org.
+
+TECHNOLOGIES, T. Terasic - SoC Platform - Cyclone - DE1-SoC Board. Disponível em: https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=836.
