@@ -988,7 +988,6 @@ set_instance_assignment -name GLOBAL_SIGNAL OFF -to u0|hps_0|hps_io|border|hps_s
 set_instance_assignment -name GLOBAL_SIGNAL OFF -to u0|hps_0|hps_io|border|hps_sdram_inst|p0|umemphy|uread_datapath|reset_n_fifo_wraddress[3] -tag __hps_sdram_p0
 set_instance_assignment -name ENABLE_BENEFICIAL_SKEW_OPTIMIZATION_FOR_NON_GLOBAL_CLOCKS ON -to u0|hps_0|hps_io|border|hps_sdram_inst -tag __hps_sdram_p0
 set_instance_assignment -name PLL_COMPENSATION_MODE DIRECT -to u0|hps_0|hps_io|border|hps_sdram_inst|pll0|fbout -tag __hps_sdram_p0
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name QIP_FILE ip/altsource_probe/hps_reset.qip
 set_global_assignment -name VERILOG_FILE ip/debounce/debounce.v
 set_global_assignment -name VERILOG_FILE ip/edge_detect/altera_edge_detector.v
@@ -1006,3 +1005,10 @@ set_global_assignment -name VERILOG_FILE controle_vga.v
 set_global_assignment -name QIP_FILE ram_primaria.qip
 set_global_assignment -name QIP_FILE fifo_a.qip
 set_global_assignment -name QIP_FILE ram_secundaria.qip
+set_global_assignment -name VERILOG_FILE decodificar_num.v
+set_global_assignment -name VERILOG_FILE decodificar_segmentos.v
+set_global_assignment -name VERILOG_FILE delayed_clock_generator.v
+set_global_assignment -name QIP_FILE ram_leitura_2.qip
+set_global_assignment -name VERILOG_FILE gerenciar_memoria_ram.v
+set_global_assignment -name VERILOG_FILE decodificador.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

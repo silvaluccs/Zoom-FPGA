@@ -1,4 +1,6 @@
 module unidade_de_controle(
+					input [31:0] instrucao,
+					input sinal_wb,
 					input clock_50Mhz,
 					input botao_zoom_in_input,
 					input botao_zoom_out_input,
@@ -11,8 +13,12 @@ module unidade_de_controle(
 					output [7:0] blue,    
 					output sync,          
 					output clk,           
-					output blank
+					output blank,
+					output proxima_instrucao
 );
+
+					
+
 				
           // fio para os botões com debounce
 					wire botao_zoom_in, botao_zoom_out, reset;
@@ -511,6 +517,7 @@ module unidade_de_controle(
 					  endcase
 				 end
 				
+				/*
 				ram_primaria ram_leitura(
 					.address(endereco_memoria),
 					.clock(clock),
@@ -518,6 +525,17 @@ module unidade_de_controle(
 					.rden(1'b1),
 					.wren(1'b0),
 					.q(pixel_para_processar));
+					*/
+				gerenciar_memoria_ram gmr(
+					.clock_25_mhz(clock),
+					.clock_50_mhz(clock_75_mhz),
+					.endereco_escrita(endereco_escrita_s),
+					.endereco_leitura(endereco_memoria),
+					.pixels_para_escrita(pixel_escrita_dados_s),
+					.escrita_dados(opcode_s == 3'b000),
+					.pixel_leitura(pixel_para_processar),
+					.proximo_pixels_instrucao(proxima_instrucao),
+			);
 					  
 
 				alu alu (
@@ -538,6 +556,22 @@ module unidade_de_controle(
 						.rst(1'b0),      
 						.outclk_0(clock_75_mhz), 
 						.locked()    
+					);
+					
+				wire [2:0] opcode_s;
+				wire zoom_in_s, zoom_out_s;
+				wire [7:0] pixel_escrita_dados_s;
+				wire [16:0] endereco_escrita_s;
+				
+				decodificador decoder_instrucao(
+						.clock(clock_50Mhz),
+						.sinal_escrita(sinal_wb),
+						.instrucao(instrucao),
+						.opcode_out(opcode_s),
+						.zoom_in(zoom_in_s),
+						.zoom_out(zoom_out_s),
+						.pixel_dados(pixel_escrita_dados_s),
+						.endereco_escrita(endereco_escrita_s)
 					);
 					
 					
