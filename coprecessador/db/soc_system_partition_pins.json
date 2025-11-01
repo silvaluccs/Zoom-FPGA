@@ -4,251 +4,243 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "HEX0[0]",
+					"name" : "hsync",
 					"strict" : false
 				},
 				{
-					"name" : "HEX0[1]",
+					"name" : "vsync",
 					"strict" : false
 				},
 				{
-					"name" : "HEX0[2]",
+					"name" : "red[0]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX0[3]",
+					"name" : "red[1]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX0[4]",
+					"name" : "red[2]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX0[5]",
+					"name" : "red[3]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX0[6]",
+					"name" : "red[4]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[0]",
+					"name" : "red[5]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[1]",
+					"name" : "red[6]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[2]",
+					"name" : "red[7]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[3]",
+					"name" : "green[0]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[4]",
+					"name" : "green[1]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[5]",
+					"name" : "green[2]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX1[6]",
+					"name" : "green[3]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[0]",
+					"name" : "green[4]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[1]",
+					"name" : "green[5]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[2]",
+					"name" : "green[6]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[3]",
+					"name" : "green[7]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[4]",
+					"name" : "blue[0]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[5]",
+					"name" : "blue[1]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX2[6]",
+					"name" : "blue[2]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[0]",
+					"name" : "blue[3]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[1]",
+					"name" : "blue[4]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[2]",
+					"name" : "blue[5]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[3]",
+					"name" : "blue[6]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[4]",
+					"name" : "blue[7]",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[5]",
+					"name" : "clk",
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[6]",
+					"name" : "blank",
 					"strict" : false
 				},
 				{
-					"name" : "LEDR[0]",
+					"name" : "proxima_instrucao",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[0]",
+					"name" : "clock_50Mhz",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[1]",
+					"name" : "instrucao[30]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[2]",
+					"name" : "instrucao[29]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[3]",
+					"name" : "instrucao[31]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[4]",
+					"name" : "sinal_wb",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[5]",
+					"name" : "instrucao[23]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[6]",
+					"name" : "instrucao[24]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_B[7]",
+					"name" : "instrucao[25]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_BLANK_N",
+					"name" : "instrucao[26]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_CLK",
+					"name" : "instrucao[21]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[0]",
+					"name" : "instrucao[22]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[1]",
+					"name" : "instrucao[27]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[2]",
+					"name" : "instrucao[28]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[3]",
+					"name" : "instrucao[20]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[4]",
+					"name" : "instrucao[17]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[5]",
+					"name" : "instrucao[19]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[6]",
+					"name" : "instrucao[18]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_G[7]",
+					"name" : "instrucao[4]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_HS",
+					"name" : "instrucao[5]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[0]",
+					"name" : "instrucao[6]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[1]",
+					"name" : "instrucao[7]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[2]",
+					"name" : "instrucao[8]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[3]",
+					"name" : "instrucao[9]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[4]",
+					"name" : "instrucao[10]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[5]",
+					"name" : "instrucao[11]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[6]",
+					"name" : "instrucao[12]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_R[7]",
+					"name" : "instrucao[13]",
 					"strict" : false
 				},
 				{
-					"name" : "VGA_VS",
+					"name" : "instrucao[14]",
 					"strict" : false
 				},
 				{
-					"name" : "SW[9]",
+					"name" : "instrucao[15]",
 					"strict" : false
 				},
 				{
-					"name" : "CLOCK_50",
+					"name" : "instrucao[16]",
 					"strict" : false
 				},
 				{
-					"name" : "KEY[1]",
-					"strict" : false
-				},
-				{
-					"name" : "KEY[0]",
-					"strict" : false
-				},
-				{
-					"name" : "KEY[3]",
+					"name" : "reset_input",
 					"strict" : false
 				}
 			]

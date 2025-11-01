@@ -4,7 +4,6 @@ module unidade_de_controle(
 					input clock_50Mhz,
 					input botao_zoom_in_input,
 					input botao_zoom_out_input,
-					input seletor_algoritmo,
 					input reset_input,
 					output wire hsync,
 					output wire vsync,    
@@ -17,15 +16,16 @@ module unidade_de_controle(
 					output proxima_instrucao
 );
 
+					wire seletor_algoritmo;
 					
 
 				
           // fio para os botões com debounce
-					wire botao_zoom_in, botao_zoom_out, reset;
+			 //	wire botao_zoom_in, botao_zoom_out, reset;
+					wire reset;
 					
-          // Instanciação do módulo de debounce para os botões
-					debounce_bt debouce_zoom_in(botao_zoom_in_input,clock, botao_zoom_in);
-					debounce_bt debouce_zoom_out(botao_zoom_out_input,clock, botao_zoom_out);
+					//debounce_bt debouce_zoom_in(botao_zoom_in_input,clock, botao_zoom_in);
+					//debounce_bt debouce_zoom_out(botao_zoom_out_input,clock, botao_zoom_out);
 					debounce_bt debouce_reset(reset_input,clock, reset);
 
           // fios para os clocks
@@ -100,8 +100,8 @@ module unidade_de_controle(
 					 
 					 if (estado_atual == IDLE) begin
 						  reset_reg <= reset;
-						  botao_zoom_in_reg <= botao_zoom_in;
-						  botao_zoom_out_reg <= botao_zoom_out;
+						  botao_zoom_in_reg <= zoom_in_s;
+						  botao_zoom_out_reg <= zoom_out_s;
 						  seletor_algoritmo_reg <= seletor_algoritmo;
 						  linha_aux <= 9'd60;  // Reset para início da região central
 						  coluna_aux <= 9'd80; // Reset para início da região central
@@ -573,10 +573,13 @@ module unidade_de_controle(
 						.pixel_dados(pixel_escrita_dados_s),
 						.endereco_escrita(endereco_escrita_s)
 					);
+					
+					// ja eh a parte do verilog para receber as instrucoes de zoom
+					assign seletor_algoritmo = opcode_s == 3'b011 || opcode_s == 3'b101;
+					
 					wire proxima_instrucao_1;
 					wire [7:0] dados_porta_b;
 					
-					assign proxima_instrucao = proxima_instrucao_1 && pixel_escrita_dados_s == dados_porta_b;
 					
 				controle_vga controle_saida(
 					 .clock(clock),
@@ -595,5 +598,8 @@ module unidade_de_controle(
 					 .dados_porta_b(dados_porta_b)
 				);
 				
+				
+				assign proxima_instrucao = (opcode_s == 3'b000 && proxima_instrucao_1 && pixel_escrita_dados_s == dados_porta_b) || (opcode_s != 3'b000 && estado_atual == END_INSTRUCTION);
+
 
 				endmodule
