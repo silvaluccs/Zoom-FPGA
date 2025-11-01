@@ -534,7 +534,7 @@ module unidade_de_controle(
 					.pixels_para_escrita(pixel_escrita_dados_s),
 					.escrita_dados(opcode_s == 3'b000),
 					.pixel_leitura(pixel_para_processar),
-					.proximo_pixels_instrucao(proxima_instrucao),
+					.proximo_pixels_instrucao(proxima_instrucao_1),
 			);
 					  
 
@@ -573,14 +573,17 @@ module unidade_de_controle(
 						.pixel_dados(pixel_escrita_dados_s),
 						.endereco_escrita(endereco_escrita_s)
 					);
+					wire proxima_instrucao_1;
+					wire [7:0] dados_porta_b;
 					
+					assign proxima_instrucao = proxima_instrucao_1 && pixel_escrita_dados_s == dados_porta_b;
 					
 				controle_vga controle_saida(
 					 .clock(clock),
-					 .endereco_escrita(endereco_escrita_next),
-					 .byte_para_escrita(pixel_para_salvar_next),
+					 .endereco_escrita(opcode_s == 3'b000 ? endereco_escrita_s  : endereco_escrita_next),
+					 .byte_para_escrita(opcode_s == 3'b000 ? pixel_escrita_dados_s : pixel_para_salvar_next),
 					 .clock_b(clock_75_mhz),
-					 .permicao_escrita(escrita_dados_next),
+					 .permicao_escrita(opcode_s == 3'b000 ? 1'b1 : escrita_dados_next),
 					 .hsync(hsync),
 					 .vsync(vsync),    
 					 .red(red),     

@@ -302,7 +302,7 @@ KEY[0] => KEY[0].IN1
 KEY[1] => KEY[1].IN1
 KEY[2] => ~NO_FANOUT~
 KEY[3] => KEY[3].IN1
-LEDR[0] <= <GND>
+LEDR[0] <= proxima_instrucao.DB_MAX_OUTPUT_PORT_TYPE
 LEDR[1] <= <GND>
 LEDR[2] <= <GND>
 LEDR[3] <= <GND>
@@ -87785,7 +87785,7 @@ blue[7] <= controle_vga:controle_saida.blue
 sync <= controle_vga:controle_saida.sync
 clk <= controle_vga:controle_saida.clk
 blank <= controle_vga:controle_saida.blank
-proxima_instrucao <= gerenciar_memoria_ram:gmr.proximo_pixels_instrucao
+proxima_instrucao <= proxima_instrucao.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |ghrd_top|unidade_de_controle:unidade_de_controle|debounce_bt:debouce_zoom_in

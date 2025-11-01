@@ -365,6 +365,7 @@ unidade_de_controle unidade_de_controle(
 					proxima_instrucao
 );
 
+assign LEDR[0] = proxima_instrucao;
 
   
 // Source/Probe megawizard instance
