@@ -352,7 +352,6 @@ unidade_de_controle unidade_de_controle(
 					CLOCK_50,
 					KEY[0],
 					KEY[1],
-					SW[9],
 					KEY[3],
 					VGA_HS,
 					VGA_VS,    

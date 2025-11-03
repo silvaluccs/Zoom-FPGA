@@ -1,0 +1,26 @@
+module pulse_generator_ff(
+    input wire enable,
+    output wire pulse
+);
+    reg pulse_generated;  // Flag para indicar que pulso já foi gerado
+    reg pulse_reg;
+    
+    // Na borda de subida do enable: gera pulso se ainda não gerou
+    always @(posedge enable) begin
+        if (!pulse_generated) begin
+            pulse_reg <= 1'b1;
+            pulse_generated <= 1'b1;
+        end else begin
+            pulse_reg <= 1'b0;  // Garante que não gera mais pulsos
+        end
+    end
+    
+    // Na borda de descida do enable: reseta a flag e o pulso
+    always @(negedge enable) begin
+        pulse_reg <= 1'b0;
+        pulse_generated <= 1'b0;  // Permite novo pulso no próximo posedge
+    end
+    
+    assign pulse = pulse_reg;
+    
+endmodule

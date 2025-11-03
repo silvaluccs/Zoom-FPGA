@@ -17,5 +17,7 @@ module delayed_clock_generator(
             delayed_clk <= 0;  // Mantém o sinal de clock baixo caso contrário
         end
     end
+	 
+	 
 
 endmodule

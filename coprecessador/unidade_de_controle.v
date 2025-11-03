@@ -16,17 +16,45 @@ module unidade_de_controle(
 					output proxima_instrucao
 );
 
-					wire seletor_algoritmo;
+				//	wire seletor_algoritmo;
 					
 
+					reg botao_last;
+					reg botao_zoom_in_last;
+					
+					/*
+					always @(posedge clock_75_mhz) begin
+					   botao_zoom_in_last <= zoom_in_s;
+						botao_last <= zoom_out_s;
+					end
+					
+					wire borda_zoom_out;
+					wire borda_zoom_in;
+					
+					assign borda_zoom_in = !zoom_in_s && botao_zoom_in_last;
+					assign borda_zoom_out = !zoom_out_s && botao_last;
+					*/
 				
           // fio para os botões com debounce
 			 //	wire botao_zoom_in, botao_zoom_out, reset;
 					wire reset;
+					assign reset = opcode_s == 3'b000;
 					
-					//debounce_bt debouce_zoom_in(botao_zoom_in_input,clock, botao_zoom_in);
-					//debounce_bt debouce_zoom_out(botao_zoom_out_input,clock, botao_zoom_out);
-					debounce_bt debouce_reset(reset_input,clock, reset);
+
+					
+					
+					
+					reg seletor_algoritmo;
+					always @(posedge clock_50Mhz) begin
+						case (opcode_s)
+						
+						3'b010: begin seletor_algoritmo <= seletor_algoritmo; end
+						3'b110: begin seletor_algoritmo <= 1'b0; end
+						default: begin seletor_algoritmo <= 1'b1; end
+					
+						endcase
+					end
+					
 
           // fios para os clocks
 					wire clock;
@@ -78,7 +106,7 @@ module unidade_de_controle(
 					parameter ENDERECO_BASE = 17'd38560; // i=120 j=160
 					
           // definição dos estados
-					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6, WAIT_READ=7;
+					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=!(opcode_s == 3'b010) && last_zoom_out6, WAIT_READ=7;
 					
           // definição dos endereços para salvar os pixels
 					parameter ENDERECO_1=0,ENDERECO_2=1, ENDERECO_3=2,ENDERECO_4=3, ENDERECO_5=4;
@@ -329,7 +357,7 @@ module unidade_de_controle(
 													 escrita_dados_next = 1'b0;
 													 pixel_para_salvar_next = 8'd0;
 												end
-												
+																	
 												proximo_estado = NEXT_PIXEL;
 												endereco_memoria_next = endereco_memoria + 1'b1;
 										  end
@@ -563,6 +591,7 @@ module unidade_de_controle(
 				wire [7:0] pixel_escrita_dados_s;
 				wire [16:0] endereco_escrita_s;
 				
+				wire escrita_nov;
 				decodificador decoder_instrucao(
 						.clock(clock_50Mhz),
 						.sinal_escrita(sinal_wb),
@@ -570,12 +599,16 @@ module unidade_de_controle(
 						.opcode_out(opcode_s),
 						.zoom_in(zoom_in_s),
 						.zoom_out(zoom_out_s),
+						.escrita(escrita_nov),
 						.pixel_dados(pixel_escrita_dados_s),
 						.endereco_escrita(endereco_escrita_s)
 					);
 					
+				
+					
+					
 					// ja eh a parte do verilog para receber as instrucoes de zoom
-					assign seletor_algoritmo = opcode_s == 3'b011 || opcode_s == 3'b101;
+				//	assign seletor_algoritmo = opcode_s == 3'b011 || opcode_s == 3'b101 || opcode_s == 3'b100;
 					
 					wire proxima_instrucao_1;
 					wire [7:0] dados_porta_b;
@@ -583,10 +616,10 @@ module unidade_de_controle(
 					
 				controle_vga controle_saida(
 					 .clock(clock),
-					 .endereco_escrita(opcode_s == 3'b000 ? endereco_escrita_s  : endereco_escrita_next),
-					 .byte_para_escrita(opcode_s == 3'b000 ? pixel_escrita_dados_s : pixel_para_salvar_next),
+					 .endereco_escrita(seletor_algoritmo ? endereco_escrita_s  : endereco_escrita_next),
+					 .byte_para_escrita(seletor_algoritmo ? pixel_escrita_dados_s : pixel_para_salvar_next),
 					 .clock_b(clock_75_mhz),
-					 .permicao_escrita(opcode_s == 3'b000 ? 1'b1 : escrita_dados_next),
+					 .permicao_escrita(seletor_algoritmo ? 1'b1 : escrita_dados_next),
 					 .hsync(hsync),
 					 .vsync(vsync),    
 					 .red(red),     
@@ -599,7 +632,7 @@ module unidade_de_controle(
 				);
 				
 				
-				assign proxima_instrucao = (opcode_s == 3'b000 && proxima_instrucao_1 && pixel_escrita_dados_s == dados_porta_b) || (opcode_s != 3'b000 && estado_atual == END_INSTRUCTION);
+				assign proxima_instrucao = seletor_algoritmo;
 
 
 				endmodule
