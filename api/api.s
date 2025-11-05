@@ -5,6 +5,21 @@
     .global mapear_enderecos
     .global abrir_imagem
     .global enviar_imagem_fpga
+    .global replicacao_pixel
+    .global vizinho_mais_proximo
+    .global decimacao
+    .global media_de_blocos
+    .global nop
+    .global zoom_in
+    .global zoom_out
+
+    .type replicacao_pixel, %function
+    .type vizinho_mais_proximo, %function
+    .type decimacao, %function
+    .type media_de_blocos, %function
+    .type nop, %function
+    .type zoom_in, %function
+    .type zoom_out, %function
     .type enviar_imagem_fpga, %function
     .type abrir_imagem, %function
     .type mapear_enderecos, %function
@@ -168,6 +183,116 @@ erro_abrir_dev_mem:
   pop {r0, r1}
   bx lr
 
+
+replicacao_pixel:
+  @ Funcao para selecionar o algoritmo de replicacao_pixel
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 100
+
+  push {r0, r1}
+
+
+  ldr r1, =0x80000000 @ Carrega o opcode 100 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
+
+
+vizinho_mais_proximo:
+  @ Funcao para selecionar o algoritmo de vizinho_mais_proximo
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 011
+
+  push {r0, r1}
+
+  ldr r1, =0x60000000 @ Carrega o opcode 011 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
+
+decimacao:
+  @ Funcao para selecionar o algoritmo de vizinho_mais_proximo
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 101
+
+  push {r0, r1}
+
+  ldr r1, =0xA0000000 @ Carrega o opcode 101 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
+
+media_de_blocos:
+  @ Funcao para selecionar o algoritmo de media_de_blocos
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 110
+
+  push {r0, r1}
+
+  ldr r1, =0xC0000000 @ Carrega o opcode 110 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
+
+
+nop:
+  @ Funcao para enviar uma instrucao NOP
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 111
+
+  push {r0, r1}
+
+  ldr r1, =0xE0000000 @ Carrega o opcode 111 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
+
+
+zoom_in:
+  @ Funcao para enviar o comando de zoom in
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 001
+
+  push {r0, r1}
+
+  ldr r1, =0x20000000 @ Carrega o opcode 001 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
+
+
+zoom_out:
+  @ Funcao para enviar o comando de zoom out
+  @ Ponteiro para o envio das instrucoes em r0
+  @ Opcode 010
+
+  push {r0, r1} 
+
+  ldr r1, =0x40000000 @ Carrega o opcode 010 na posicao correta
+
+  str r1, [r0]        @ Envia a instrucao para o endereco de envio
+
+  pop {r0, r1}
+
+  bx lr
 
 
 .section .data
