@@ -24,12 +24,11 @@
     .type abrir_imagem, %function
     .type mapear_enderecos, %function
     
-
 abrir_imagem:
-    push {r4, r5, r6, lr}   @ Salva os registradores de uso geral e o endereço de retorno
+    push {r0, r1, r2, r3, r4, r5, r6, lr}   @ Salva todos os registradores de uso geral e o endereço de retorno
 
     @ 1. ABRIR ARQUIVO
-    ldr r0, =nome_arquivo
+    ldr r0, =nome_arquivo // TODO: substituir pelo nome do arquivo desejado
     mov r1, #0              @ O_RDONLY
     mov r2, #0              @ Permissões (não usadas para leitura)
     mov r7, #5              @ syscall 'open'
@@ -69,30 +68,31 @@ find_header_end_loop:
     @ 5. PREPARAR RETORNO
     @ R0 deve ser o valor de retorno (ponteiro para o início dos dados de pixel)
     @ R0 = Endereço base do buffer (R1) + Offset do cabeçalho (R2)
-    add r0, r1, r2          @ R0 = Endereço do início dos dados de pixel
+    add r0, r1, r2          @ R0 = Endereço do início dos dados de pix
 
-    pop {r4, r5, r6, lr}    @ Restaura os registradores salvos
+    pop {r0, r1, r2, r3, r4, r5, r6, lr}    @ Restaura todos os registradores salvos
     bx lr                   @ Retorna
 
 file_error_abrir:
     @ A função falhou. R0 já está com o valor de erro (-1 ou similar)
     @ O chamador deve checar R0 < 0 para tratar o erro.
-    pop {r4, r5, r6, lr}    @ Restaura registradores
+    pop {r0, r1, r2, r3, r4, r5, r6, lr}    @ Restaura todos os registradores
+    mov r0, #0              @ Retorna NULL (0) em caso de erro
     bx lr                   @ Retorna
 
 
 enviar_imagem_fpga:
   @ Função para enviar a imagem processada para a fpga
   @ argumentos:
-  @  1: ponteiro para o endereco de envio das instrucoes
-  @  2: ponteiro para o endereco de recepcao da resposta
-  @  3: ponteiro para o endereco da imagem
+
+  bl abrir_imagem
+
+  mov r2, r0 @ r2 = ponteiro para o endereco da imagem
+  ldr r0, =ponteiro_instrucoes
   
- @ push {r0, r1, r3} @ salvando os registradores com os ponteiros para envio e recepcao
 
   push {r0, r1, r2, r4, r5, r6, lr} @ Salva todos os regs que serão usados (Incluindo LR para o BX no final)
   mov r4, r0 @ r5 = ponteiro para o endereco de envio das instrucoes
-  mov r5, r1 @ r6 = ponteiro para o endereco de recepcao da resposta
   mov r6, r2
   mov r3, #0 @ contador de enderecos enviados
 
@@ -133,14 +133,11 @@ fim_envio_imagem:
 
 
 
-
 mapear_enderecos:
   @ Função para mapear endereços de memória virutal da fpga
   @ argumentos:
-  @  1: ponteiro para o endereco de envio das instrucoes
-  @  2: ponteiro para o endereco de recepcao da resposta
 
-  push {r0, r1}
+  push {r0, r1, r2, r3, r4, r5, r6} @ Salva todos os registradores necessários
 
   @ abrindo o /dev/mem
   ldr r0, =DEV_MEM
@@ -167,27 +164,31 @@ mapear_enderecos:
 
   mov r2, r0
 
-  pop {r0, r1}
 
   ldr r0, =0x00000000 
   add r0, r0, r2
 
-  ldr r1, =0x00000010  
-  add r1, r1, r2
+  ldr r1, =ponteiro_instrucoes
+  str r0, [r1]
 
+  mov r0, #1
+
+  pop {r0, r1, r2, r3, r4, r5, r6} @ Restaura os registradores
   bx lr
 
 
 erro_abrir_dev_mem:
   @ caso haja erro ao abrir o /dev/mem
-  pop {r0, r1}
+  mov r0, #0
+  pop {r0, r1, r2, r3, r4, r5, r6} @ Restaura os registradores
   bx lr
 
 
 replicacao_pixel:
   @ Funcao para selecionar o algoritmo de replicacao_pixel
-  @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 100
+
+  ldr r0, =ponteiro_instrucoes
 
   push {r0, r1}
 
@@ -203,8 +204,9 @@ replicacao_pixel:
 
 vizinho_mais_proximo:
   @ Funcao para selecionar o algoritmo de vizinho_mais_proximo
-  @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 011
+
+  ldr r0, =ponteiro_instrucoes
 
   push {r0, r1}
 
@@ -221,6 +223,8 @@ decimacao:
   @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 101
 
+  ldr r0, =ponteiro_instrucoes
+
   push {r0, r1}
 
   ldr r1, =0xA0000000 @ Carrega o opcode 101 na posicao correta
@@ -233,8 +237,9 @@ decimacao:
 
 media_de_blocos:
   @ Funcao para selecionar o algoritmo de media_de_blocos
-  @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 110
+
+  ldr r0, =ponteiro_instrucoes
 
   push {r0, r1}
 
@@ -249,8 +254,9 @@ media_de_blocos:
 
 nop:
   @ Funcao para enviar uma instrucao NOP
-  @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 111
+
+  ldr r0, =ponteiro_instrucoes
 
   push {r0, r1}
 
@@ -268,6 +274,8 @@ zoom_in:
   @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 001
 
+  ldr r0, =ponteiro_instrucoes
+
   push {r0, r1}
 
   ldr r1, =0x20000000 @ Carrega o opcode 001 na posicao correta
@@ -283,6 +291,8 @@ zoom_out:
   @ Funcao para enviar o comando de zoom out
   @ Ponteiro para o envio das instrucoes em r0
   @ Opcode 010
+
+  ldr r0, =ponteiro_instrucoes
 
   push {r0, r1} 
 
@@ -305,5 +315,8 @@ nome_arquivo: .asciz "imagem.pgm"  @ String com o nome do arquivo
     input_buffer: .space BUFFER_SIZE
 
     temp_instruction: .space 4
+    ponteiro_instrucoes: .space 4
+
+
 
 

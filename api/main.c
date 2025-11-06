@@ -2,25 +2,11 @@
 #include <stdio.h>
 
 int main() {
-  volatile int *instrucoes = NULL;
-  volatile int *resposta = NULL;
 
-  volatile int *arquivo = NULL;
+  if (!mapear_enderecos()) {
 
-  arquivo = abrir_imagem();
-
-  if (arquivo == NULL) {
-
-    printf("Ocorreu um erro ao abrir um arquivo.\n");
-    return 0;
-  }
-
-  // Corrigir o nome da função para mapear_enderecos
-  mapear_enderecos(instrucoes, resposta);
-
-  if (instrucoes == NULL || resposta == NULL) {
     printf("Ocorreu um erro ao mapear os enderecos.\n");
-    return 1;
+    return 0;
   }
 
   char comando;
@@ -53,7 +39,7 @@ int main() {
                "Selecione um algoritmo de Zoom In primeiro.\n");
         continue;
       } else {
-        zoom_in(instrucoes);
+        zoom_in();
         printf("Zoom In aplicado com sucesso.\n");
       }
 
@@ -71,28 +57,28 @@ int main() {
       } else {
         printf("Zoom Out aplicado com sucesso.\n");
 
-        zoom_out(instrucoes);
+        zoom_out();
         break;
       }
 
       break;
     case '3':
-      vizinho_mais_proximo(instrucoes);
+      vizinho_mais_proximo();
       algoritmo_zoom_in = 1;
       printf("Algoritmo de Vizinho mais próximo selecionado para Zoom In.\n");
       break;
     case '4':
-      replicacao_pixel(instrucoes);
+      replicacao_pixel();
       printf("Algoritmo de Replicação de pixels selecionado para Zoom In.\n");
       algoritmo_zoom_in = 1;
       break;
     case '5':
-      decimacao(instrucoes);
+      decimacao();
       printf("Algoritmo de Decimação selecionado para Zoom Out.\n");
       algoritmo_zoom_in = 0;
       break;
     case '6':
-      media_de_blocos(instrucoes);
+      media_de_blocos();
       printf("Algoritmo de Média de blocos selecionado para Zoom Out.\n");
       algoritmo_zoom_in = 0;
       break;

@@ -2,25 +2,21 @@
 #define API_H
 
 // Alterando para aceitar ponteiros volatile
-extern int *abrir_imagem();
+extern int mapear_enderecos();
 
-extern void mapear_enderecos(volatile int *instrucoes, volatile int *resposta);
+extern void enviar_imagem_fpga();
+extern void replicacao_pixel();
 
-extern void enviar_imagem_fpga(volatile int *instrucoes, volatile int *resposta,
-                               volatile int *arquivo);
+extern void vizinho_mais_proximo();
 
-extern void replicacao_pixel(volatile int *instrucoes);
+extern void decimacao();
 
-extern void vizinho_mais_proximo(volatile int *instrucoes);
+extern void media_de_blocos();
 
-extern void decimacao(volatile int *instrucoes);
+extern void nop();
 
-extern void media_de_blocos(volatile int *instrucoes);
+extern void zoom_in();
 
-extern void nop(volatile int *instrucoes);
-
-extern void zoom_in(volatile int *instrucoes);
-
-extern void zoom_out(volatile int *instrucoes);
+extern void zoom_out();
 
 #endif // API_H
