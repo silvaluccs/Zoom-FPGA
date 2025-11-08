@@ -1,4 +1,4 @@
-module decodificar_num(
+module visualizar_instrucoes(
 	input [31:0] inst,
 	input clock,
 	input clock_in,

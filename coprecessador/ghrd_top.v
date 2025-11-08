@@ -227,14 +227,52 @@ wire [27:0] stm_hw_events;
 // connection of internal logics
 assign stm_hw_events    = {{3{1'b0}},SW, fpga_led_internal, fpga_debounced_buttons};
 
+unidade_de_controle unidade_de_controle(
+					CLOCK_50,
+					KEY[0],
+					KEY[1],
+					SW[9],
+					KEY[3],
+					VGA_HS,
+					VGA_VS,    
+					VGA_R,     
+					VGA_G,   
+					VGA_B,    
+					VGA_SYNC_N,          
+					VGA_CLK,           
+					VGA_BLANK_N,
+					instrucoes,
+					enabl
+);
 
-wire pio_o_write;
-wire proxima_instrucao;
+wire [31:0] instrucoes;
+wire enable_instrucoes;
+
+delayed_clock_generator gerador(
+	 CLOCK_50,
+	 enable_instrucoes,
+	 enable_ins
+);
+
+wire enable_ins;
+
+wire enabl;
+
+visualizar_instrucoes k(
+	.inst(instrucoes),
+	.clock(enable_ins),
+	.clock_in(CLOCK_50),
+	.seletor(SW[9]),
+	.HEX0(HEX0),
+	.HEX1(HEX1),
+	.HEX2(HEX2),
+	.HEX3(HEX3)
+);
 
 soc_system u0 (
-	  .pio_1_external_connection_export 	(proxima_instrucao),       // pio_1_external_connection.export
-     .pio_0_external_connection_export      (instrucao),       // pio_0_external_connection.export  (instrucao),
-	 .pio_o_write(pio_o_write),
+      .enable_external_connection_export     (enabl),      //     enable_external_connection.export
+     .sinal_escrita_instrucoes(enable_instrucoes),
+    .instrucoes_external_connection_export (instrucoes),  // instrucoes_external_connection.export
     .clk_clk                               ( CLOCK_50           ),      //                            clk.clk
     .reset_reset_n                         ( hps_fpga_reset_n   ),      //                          reset.reset_n
     .memory_mem_a                          ( HPS_DDR3_ADDR  ),          //                         memory.mem_a
@@ -324,48 +362,6 @@ soc_system u0 (
     .hps_0_f2h_debug_reset_req_reset_n     (~hps_debug_reset),          //      hps_0_f2h_debug_reset_req.reset_n
     .hps_0_f2h_cold_reset_req_reset_n      (~hps_cold_reset)            //       hps_0_f2h_cold_reset_req.reset_n
 );
-
-wire [31:0] instrucao;
-wire clock_gerador;
-
-delayed_clock_generator gerador(
-	 CLOCK_50,
-	 pio_o_write,
-	 clock_gerador
-);
-
-decodificar_num x(
-	.inst(instrucao),
-	.clock(clock_gerador),
-	.clock_in(CLOCK_50),
-	.seletor(SW[9]),
-	.HEX0(HEX0),
-	.HEX1(HEX1),
-	.HEX2(HEX2),
-	.HEX3(HEX3)
-);
-
-
-unidade_de_controle unidade_de_controle(
-					instrucao,
-					clock_gerador,
-					CLOCK_50,
-					KEY[0],
-					KEY[1],
-					KEY[3],
-					VGA_HS,
-					VGA_VS,    
-					VGA_R,     
-					VGA_G,   
-					VGA_B,    
-					VGA_SYNC_N,          
-					VGA_CLK,           
-					VGA_BLANK_N,
-					proxima_instrucao
-);
-
-assign LEDR[0] = proxima_instrucao;
-
   
 // Source/Probe megawizard instance
 hps_reset hps_reset_inst (

@@ -47,7 +47,7 @@ module soc_system_mm_interconnect_0_router_002_default_decode
      parameter DEFAULT_CHANNEL = 0,
                DEFAULT_WR_CHANNEL = -1,
                DEFAULT_RD_CHANNEL = -1,
-               DEFAULT_DESTID = 2 
+               DEFAULT_DESTID = 4 
    )
   (output [104 - 102 : 0] default_destination_id,
    output [6-1 : 0] default_wr_channel,
@@ -199,7 +199,7 @@ module soc_system_mm_interconnect_0_router_002
     // ( 0x0 .. 0x10000 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 18'h0   ) begin
             src_channel = 6'b0001;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
     end
 
     // ( 0x10000 .. 0x10008 )
@@ -211,13 +211,13 @@ module soc_system_mm_interconnect_0_router_002
     // ( 0x20000 .. 0x20008 )
     if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h20000   ) begin
             src_channel = 6'b0010;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
     end
 
     // ( 0x30000 .. 0x30008 )
     if ( {address[RG:PAD3],{PAD3{1'b0}}} == 18'h30000  && read_transaction  ) begin
             src_channel = 6'b0100;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
     end
 
 end

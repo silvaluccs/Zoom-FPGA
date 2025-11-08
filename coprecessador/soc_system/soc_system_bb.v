@@ -61,6 +61,7 @@ module soc_system (
 	hps_0_hps_io_hps_io_gpio_inst_GPIO53,
 	hps_0_hps_io_hps_io_gpio_inst_GPIO54,
 	hps_0_hps_io_hps_io_gpio_inst_GPIO61,
+	instrucoes_external_connection_export,
 	memory_mem_a,
 	memory_mem_ba,
 	memory_mem_ck,
@@ -77,9 +78,8 @@ module soc_system (
 	memory_mem_odt,
 	memory_mem_dm,
 	memory_oct_rzqin,
-	pio_0_external_connection_export,
 	reset_reset_n,
-	pio_1_external_connection_export);	
+	enable_external_connection_export);	
 
 	input		clk_clk;
 	input		hps_0_f2h_cold_reset_req_reset_n;
@@ -142,6 +142,7 @@ module soc_system (
 	inout		hps_0_hps_io_hps_io_gpio_inst_GPIO53;
 	inout		hps_0_hps_io_hps_io_gpio_inst_GPIO54;
 	inout		hps_0_hps_io_hps_io_gpio_inst_GPIO61;
+	output	[31:0]	instrucoes_external_connection_export;
 	output	[14:0]	memory_mem_a;
 	output	[2:0]	memory_mem_ba;
 	output		memory_mem_ck;
@@ -158,7 +159,6 @@ module soc_system (
 	output		memory_mem_odt;
 	output	[3:0]	memory_mem_dm;
 	input		memory_oct_rzqin;
-	output	[31:0]	pio_0_external_connection_export;
 	input		reset_reset_n;
-	input		pio_1_external_connection_export;
+	output		enable_external_connection_export;
 endmodule

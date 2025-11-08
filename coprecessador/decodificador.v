@@ -1,5 +1,4 @@
 	module decodificador(
-		input clock,
 		input sinal_escrita,
 		input [31:0] instrucao,
 		output [2:0] opcode_out,
@@ -26,18 +25,10 @@
 		assign zoom_in = opcode == ZOOM_IN;
 		assign zoom_out = opcode == ZOOM_OUT;
 		
-		localparam COPIAR_IMAGEM=3'b000, ZOOM_IN=3'b001, ZOOM_OUT=3'b010, VIZINHO_MAIS_PROXIMO=3'b011, REPLICACAO_PIXEL=3'b100, DECIMACAO=3'b101, MEDIA_DE_BLOCOS=3'b110;
-		
-		
-		
-		delayed_clock_generator gerador_de_sinal (
-		 clock,
-		 sinal_escrita,
-		 sinal_nova_instrucao
-	);
+		localparam COPIAR_IMAGEM=3'b111, ZOOM_IN=3'b001, ZOOM_OUT=3'b010, VIZINHO_MAIS_PROXIMO=3'b011, REPLICACAO_PIXEL=3'b100, DECIMACAO=3'b101, MEDIA_DE_BLOCOS=3'b110;
 
 
-		always @(posedge sinal_nova_instrucao) begin
+		always @(posedge sinal_escrita) begin
 			instrucao_atual <= instrucao;
 		end
 		

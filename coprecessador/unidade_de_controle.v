@@ -1,9 +1,8 @@
 module unidade_de_controle(
-					input [31:0] instrucao,
-					input sinal_wb,
 					input clock_50Mhz,
 					input botao_zoom_in_input,
 					input botao_zoom_out_input,
+					input seletor_algoritmo,
 					input reset_input,
 					output wire hsync,
 					output wire vsync,    
@@ -13,48 +12,35 @@ module unidade_de_controle(
 					output sync,          
 					output clk,           
 					output blank,
-					output proxima_instrucao
+					input [31:0] instrucoes,
+					input enable_read
 );
-
-				//	wire seletor_algoritmo;
-					
-
-					reg botao_last;
-					reg botao_zoom_in_last;
-					
-					/*
-					always @(posedge clock_75_mhz) begin
-					   botao_zoom_in_last <= zoom_in_s;
-						botao_last <= zoom_out_s;
-					end
-					
-					wire borda_zoom_out;
-					wire borda_zoom_in;
-					
-					assign borda_zoom_in = !zoom_in_s && botao_zoom_in_last;
-					assign borda_zoom_out = !zoom_out_s && botao_last;
-					*/
+	wire [2:0] opcode_instrucao;
+	wire zoom_in_s, zoom_out_s;
+	wire escrita_sinal;
+	wire [7:0] pixel_escrever;
+	wire [16:0] endereco_escrv;
+	
+decodificador  deco(
+		enable_read,
+		instrucoes,
+		opcode_instrucao,
+		zoom_in_s,
+		zoom_out_s,
+		escrita_sinal,
+		pixel_escrever,
+		endereco_escrv
+		);
+		
+				
 				
           // fio para os botões com debounce
-			 //	wire botao_zoom_in, botao_zoom_out, reset;
-					wire reset;
-					assign reset = opcode_s == 3'b000;
+					wire botao_zoom_in, botao_zoom_out, reset;
 					
-
-					
-					
-					
-					reg seletor_algoritmo;
-					always @(posedge clock_50Mhz) begin
-						case (opcode_s)
-						
-						3'b010: begin seletor_algoritmo <= seletor_algoritmo; end
-						3'b110: begin seletor_algoritmo <= 1'b0; end
-						default: begin seletor_algoritmo <= 1'b1; end
-					
-						endcase
-					end
-					
+          // Instanciação do módulo de debounce para os botões
+				//	debounce_bt debouce_zoom_in(botao_zoom_in_input,clock, botao_zoom_in);
+				//	debounce_bt debouce_zoom_out(botao_zoom_out_input,clock, botao_zoom_out);
+					debounce_bt debouce_reset(reset_input,clock, reset);
 
           // fios para os clocks
 					wire clock;
@@ -106,7 +92,7 @@ module unidade_de_controle(
 					parameter ENDERECO_BASE = 17'd38560; // i=120 j=160
 					
           // definição dos estados
-					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=!(opcode_s == 3'b010) && last_zoom_out6, WAIT_READ=7;
+					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6, WAIT_READ=7;
 					
           // definição dos endereços para salvar os pixels
 					parameter ENDERECO_1=0,ENDERECO_2=1, ENDERECO_3=2,ENDERECO_4=3, ENDERECO_5=4;
@@ -128,9 +114,9 @@ module unidade_de_controle(
 					 
 					 if (estado_atual == IDLE) begin
 						  reset_reg <= reset;
-						  botao_zoom_in_reg <= zoom_in_s;
-						  botao_zoom_out_reg <= zoom_out_s;
-						  seletor_algoritmo_reg <= seletor_algoritmo;
+						//  botao_zoom_in_reg <= botao_zoom_in;
+						//  botao_zoom_out_reg <= botao_zoom_out;
+						//  seletor_algoritmo_reg <= seletor_algoritmo;
 						  linha_aux <= 9'd60;  // Reset para início da região central
 						  coluna_aux <= 9'd80; // Reset para início da região central
 					 end else begin
@@ -203,48 +189,54 @@ module unidade_de_controle(
               endereco_memoria_next = ENDERECO_BASE;
               dados_prontos_next = 1'b0;
              
+				 // TODO: colocar o valor gerado pelo clock do decodificador
+				 /*
               if (botao_zoom_in_reg || botao_zoom_out_reg || reset_reg) begin
                    proximo_estado = LOAD_OP;
               end else begin
                    proximo_estado = IDLE;
               end
+				  */
+				  
+				  
+				  if (enable_read) begin
+						proximo_estado = LOAD_OP;
+				  end else begin
+						proximo_estado = IDLE;
+				  end
          end
-         LOAD_OP: begin
-             if (reset_reg) begin
-                 opcode_next = RESET_IMAGEM;
-             end else if (botao_zoom_in_reg) begin
-                 // Se o seletor for 1, VIZINHO_MAIS_PROXIMO, senão REPLICACAO_PIXEL
-					  
-                 // caso o algoritmo atual seja de zoom out, ao pressionar zoom in, reseta a imagem
-						if (opcode_next == VIZINHO_MAIS_PROXIMO_OUT || opcode_next == MEDIA_DE_BLOCOS) begin
-							opcode_next = RESET_IMAGEM;
-						end else begin
-							opcode_next = seletor_algoritmo_reg ? VIZINHO_MAIS_PROXIMO : REPLICACAO_PIXEL;
-						end
-                  
-					  endereco_memoria_next = ENDERECO_BASE;
-
-             end else if (botao_zoom_out_reg) begin
-				 
-                 // caso o algoritmo atual seja de zoom in, ao pressionar zoom out, reseta a imagem
-					if (opcode_next == VIZINHO_MAIS_PROXIMO || opcode_next == REPLICACAO_PIXEL) begin
-							opcode_next = RESET_IMAGEM;
-						end else begin
-							opcode_next = seletor_algoritmo_reg ? VIZINHO_MAIS_PROXIMO_OUT : MEDIA_DE_BLOCOS;
-						end
-                 
-             end
-
-             proximo_estado = READ_PIXEL;
-             
-             // Lógica para definir o endereço inicial de leitura
-             if (opcode_next == VIZINHO_MAIS_PROXIMO_OUT || opcode_next == MEDIA_DE_BLOCOS || opcode_next == RESET_IMAGEM) begin
-                    endereco_memoria_next = 17'd0;
-             end else begin
-                    endereco_memoria_next = opcode_next == REPLICACAO_PIXEL ? ENDERECO_BASE : (((endereco_memoria / 17'd320) - 17'd120) / 17'd2) * 17'd320 + (((endereco_memoria % 17'd320) - 17'd160) / 17'd2);;
-             end
-         end
-							
+LOAD_OP: begin
+    // Determinar o tipo de operação baseado no opcode_instrucao
+    case (opcode_instrucao) 
+        3'b011, 3'b100: begin // 
+            //
+            if (opcode == VIZINHO_MAIS_PROXIMO_OUT || opcode == MEDIA_DE_BLOCOS) begin
+                opcode_next = RESET_IMAGEM;
+                endereco_memoria_next = 17'd0; // 
+            end else begin
+                opcode_next = (opcode_instrucao == 3'b011) ? VIZINHO_MAIS_PROXIMO : REPLICACAO_PIXEL;
+                endereco_memoria_next = ENDERECO_BASE; // 
+            end
+            proximo_estado = READ_PIXEL;
+        end
+        
+        3'b101, 3'b110: begin // Zoom out
+            // Verificar se precisa resetar (vindo de zoom in)
+            if (opcode == VIZINHO_MAIS_PROXIMO || opcode == REPLICACAO_PIXEL) begin
+                opcode_next = RESET_IMAGEM;
+                endereco_memoria_next = 17'd0; // 
+            end else begin
+                opcode_next = (opcode_instrucao == 3'b101) ? VIZINHO_MAIS_PROXIMO_OUT : MEDIA_DE_BLOCOS;
+                endereco_memoria_next = 17'd0; // 
+            end
+            proximo_estado = READ_PIXEL;
+        end
+        
+        default: begin
+            proximo_estado = IDLE;
+        end
+    endcase
+end
 							READ_PIXEL: begin
 						
 							if (opcode_next == MEDIA_DE_BLOCOS) begin
@@ -357,7 +349,7 @@ module unidade_de_controle(
 													 escrita_dados_next = 1'b0;
 													 pixel_para_salvar_next = 8'd0;
 												end
-																	
+												
 												proximo_estado = NEXT_PIXEL;
 												endereco_memoria_next = endereco_memoria + 1'b1;
 										  end
@@ -545,7 +537,6 @@ module unidade_de_controle(
 					  endcase
 				 end
 				
-				/*
 				ram_primaria ram_leitura(
 					.address(endereco_memoria),
 					.clock(clock),
@@ -553,17 +544,6 @@ module unidade_de_controle(
 					.rden(1'b1),
 					.wren(1'b0),
 					.q(pixel_para_processar));
-					*/
-				gerenciar_memoria_ram gmr(
-					.clock_25_mhz(clock),
-					.clock_50_mhz(clock_75_mhz),
-					.endereco_escrita(endereco_escrita_s),
-					.endereco_leitura(endereco_memoria),
-					.pixels_para_escrita(pixel_escrita_dados_s),
-					.escrita_dados(opcode_s == 3'b000),
-					.pixel_leitura(pixel_para_processar),
-					.proximo_pixels_instrucao(proxima_instrucao_1),
-			);
 					  
 
 				alu alu (
@@ -586,40 +566,13 @@ module unidade_de_controle(
 						.locked()    
 					);
 					
-				wire [2:0] opcode_s;
-				wire zoom_in_s, zoom_out_s;
-				wire [7:0] pixel_escrita_dados_s;
-				wire [16:0] endereco_escrita_s;
-				
-				wire escrita_nov;
-				decodificador decoder_instrucao(
-						.clock(clock_50Mhz),
-						.sinal_escrita(sinal_wb),
-						.instrucao(instrucao),
-						.opcode_out(opcode_s),
-						.zoom_in(zoom_in_s),
-						.zoom_out(zoom_out_s),
-						.escrita(escrita_nov),
-						.pixel_dados(pixel_escrita_dados_s),
-						.endereco_escrita(endereco_escrita_s)
-					);
-					
-				
-					
-					
-					// ja eh a parte do verilog para receber as instrucoes de zoom
-				//	assign seletor_algoritmo = opcode_s == 3'b011 || opcode_s == 3'b101 || opcode_s == 3'b100;
-					
-					wire proxima_instrucao_1;
-					wire [7:0] dados_porta_b;
-					
 					
 				controle_vga controle_saida(
 					 .clock(clock),
-					 .endereco_escrita(seletor_algoritmo ? endereco_escrita_s  : endereco_escrita_next),
-					 .byte_para_escrita(seletor_algoritmo ? pixel_escrita_dados_s : pixel_para_salvar_next),
+					 .endereco_escrita(endereco_escrita_next),
+					 .byte_para_escrita(pixel_para_salvar_next),
 					 .clock_b(clock_75_mhz),
-					 .permicao_escrita(seletor_algoritmo ? 1'b1 : escrita_dados_next),
+					 .permicao_escrita(escrita_dados_next),
 					 .hsync(hsync),
 					 .vsync(vsync),    
 					 .red(red),     
@@ -631,8 +584,5 @@ module unidade_de_controle(
 					 .dados_porta_b(dados_porta_b)
 				);
 				
-				
-				assign proxima_instrucao = seletor_algoritmo;
-
 
 				endmodule
