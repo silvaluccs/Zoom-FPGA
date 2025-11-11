@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("/home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/output_files/") File("soc_system.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("/home/aluno/Downloads/Zoom-FPGA-fase-2-enviar-imagem (3)/coprecessador/output_files/") File("soc_system.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

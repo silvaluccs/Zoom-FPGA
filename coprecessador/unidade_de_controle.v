@@ -56,7 +56,7 @@ decodificador  deco(
 
 
            // registradores e fios internos
-					 reg [2:0] estado_atual, proximo_estado;
+					 reg [3:0] estado_atual, proximo_estado;
 					 reg [16:0] endereco_memoria, endereco_memoria_next;
 					 reg [16:0] endereco_escrita, endereco_escrita_next;
 					 reg escrita_dados, escrita_dados_next;
@@ -92,7 +92,7 @@ decodificador  deco(
 					parameter ENDERECO_BASE = 17'd38560; // i=120 j=160
 					
           // definição dos estados
-					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6, WAIT_READ=7;
+					parameter IDLE=0,LOAD_OP=1,READ_PIXEL=2, EXECUTE=3, WRITE=4, NEXT_PIXEL=5, END_INSTRUCTION=6, WAIT_READ=7, WRITE_IMAGEM=8;
 					
           // definição dos endereços para salvar os pixels
 					parameter ENDERECO_1=0,ENDERECO_2=1, ENDERECO_3=2,ENDERECO_4=3, ENDERECO_5=4;
@@ -112,7 +112,7 @@ decodificador  deco(
 				always @(posedge clock) begin
 					 estado_atual <= proximo_estado;
 					 
-					 if (estado_atual == IDLE) begin
+					 if (estado_atual == IDLE || estado_atual == WRITE_IMAGEM) begin
 						  reset_reg <= reset;
 						//  botao_zoom_in_reg <= botao_zoom_in;
 						//  botao_zoom_out_reg <= botao_zoom_out;
@@ -231,14 +231,28 @@ LOAD_OP: begin
             end
             proximo_estado = READ_PIXEL;
         end
+		  3'b111 : begin
+				endereco_escrita_next = endereco_escrv;
+				pixel_para_salvar_next = pixel_escrever;
+				escrita_dados_next = 1'b1;
+				proximo_estado = WRITE_IMAGEM;
+				
+
+		  end
         
         default: begin
             proximo_estado = IDLE;
         end
     endcase
 end
+							WRITE_IMAGEM: begin
+									escrita_dados_next = 1'b0;
+									opcode_next = 3'b000;  // ADICIONE esta linha para limpar o opcode
+									proximo_estado = IDLE;
+							end
+
 							READ_PIXEL: begin
-						
+							escrita_dados_next = 1'b0;
 							if (opcode_next == MEDIA_DE_BLOCOS) begin
 							
 								proximo_estado = WAIT_READ;
@@ -537,6 +551,7 @@ end
 					  endcase
 				 end
 				
+				/*
 				ram_primaria ram_leitura(
 					.address(endereco_memoria),
 					.clock(clock),
@@ -544,7 +559,7 @@ end
 					.rden(1'b1),
 					.wren(1'b0),
 					.q(pixel_para_processar));
-					  
+					*/  
 
 				alu alu (
 					.pixel_1(pixel_m_1),
@@ -566,12 +581,21 @@ end
 						.locked()    
 					);
 					
+					wire escrever_memoria_principal = (opcode_instrucao == 3'b111) && escrita_dados_next;
+				gerenciar_memoria_ram gm_ram(clock,
+					clock,
+					endereco_escrita_next,
+					endereco_memoria,
+					pixel_para_salvar_next,
+					escrever_memoria_principal,
+					pixel_para_processar
+				);	
 					
 				controle_vga controle_saida(
 					 .clock(clock),
 					 .endereco_escrita(endereco_escrita_next),
 					 .byte_para_escrita(pixel_para_salvar_next),
-					 .clock_b(clock_75_mhz),
+					 .clock_b(clock_50Mhz),
 					 .permicao_escrita(escrita_dados_next),
 					 .hsync(hsync),
 					 .vsync(vsync),    

@@ -52,16 +52,17 @@ _start:
  lsl r0, r0, #29
  str r0, [r6]
 
-  mov r0, #1
-  lsl r0, r0, #29
-  
-  str r0, [r6]
 
-@  mov r0, #7
-@  lsl r0, r0, #29
+  bl function_sleeping
+
+  mov r0, #1  
+  str r0, [r7]
+
+ bl function_sleeping
 
 
-@  str r0, [r6]
+  mov r0, #0
+  str r0, [r7]
  
 
  mov r0, r6
@@ -74,7 +75,7 @@ b close
 
 @ A função abrir_imagem não precisa de argumentos (registrador R0 será o retorno)
 abrir_imagem:
-    push {r4, r5, r6, lr}   @ Salva os registradores de uso geral e o endereço de retorno
+    push {r4, r5, r6}   @ Salva os registradores de uso geral e o endereço de retorno
 
     @ 1. ABRIR ARQUIVO
     ldr r0, =nome_arquivo
@@ -84,8 +85,6 @@ abrir_imagem:
     swi #0
     mov r4, r0              @ R4 = File Descriptor (FD)
 
-    cmp r4, #0
-    blt file_error_abrir    @ Se FD <= 0, erro ao abrir
 
     @ 2. LER ARQUIVO PARA O BUFFER
     mov r0, r4              @ r0 = File Descriptor
@@ -119,13 +118,7 @@ find_header_end_loop:
     @ R0 = Endereço base do buffer (R1) + Offset do cabeçalho (R2)
     add r0, r1, r2          @ R0 = Endereço do início dos dados de pixel
 
-    pop {r4, r5, r6, lr}    @ Restaura os registradores salvos
-    bx lr                   @ Retorna
-
-file_error_abrir:
-    @ A função falhou. R0 já está com o valor de erro (-1 ou similar)
-    @ O chamador deve checar R0 < 0 para tratar o erro.
-    pop {r4, r5, r6, lr}    @ Restaura registradores
+    pop {r4, r5, r6}    @ Restaura os registradores salvos
     bx lr                   @ Retorna
 
 enviar_imagem_fpga:
@@ -150,7 +143,7 @@ enviar_proximo_pixel:
 
   ldrb r2, [r6], #1
 
-  mov r0, #0b000 @ opcode
+  mov r0, #0b111 @ opcode
   lsl r0, r0, #29 @ deslocando para a posicao correta
 
   mov r1, r3 @ r1 = contador de enderecos enviados
@@ -164,6 +157,12 @@ enviar_proximo_pixel:
 
   str r0, [r4]
 
+  mov r0, #1
+  str r0, [r5]
+
+  mov r0, #0
+  str r0, [r5]
+
   add r3, r3, #1 @ incrementando o contador de enderecos enviados
 
 @  bl function_sleeping
@@ -172,15 +171,22 @@ enviar_proximo_pixel:
 fim_envio_imagem:
   @ caso tenha enviado todos os pixels
   @pop {r0, r1} @ restaurando os registradores
-  mov r0, #7
+  mov r0, #0
   lsl r0, r0, #29
-  str r0, [r4]
+@  str r0, [r4]
+
+  mov r0, #1
+  str r0, [r5]
+
+  mov r0, #0
+  str r0, [r5]
+
   pop {r0, r1, r2, r4, r5, r6, lr} @ <<--- CORREÇÃO: Restaura todos os registradores
   bx lr
 
 
 function_sleeping:
-    ldr r2, =90500000
+    ldr r2, =5000000
 sleep_loop:
     sub r2, r2, #1
     cmp r2, #1
