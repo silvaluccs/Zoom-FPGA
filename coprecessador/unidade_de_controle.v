@@ -21,8 +21,19 @@ module unidade_de_controle(
 	wire [7:0] pixel_escrever;
 	wire [16:0] endereco_escrv;
 	
+	reg sync1 = 1'b0;
+	reg sync2 = 1'b0;
+
+always @(posedge clock) begin
+    sync1 <= enable_read;
+    sync2 <= sync1;
+end
+
+wire new_data_pulse_25 = sync1 & ~sync2;
+
+	
 decodificador  deco(
-		enable_read,
+		new_data_pulse_25,
 		instrucoes,
 		opcode_instrucao,
 		zoom_in_s,
@@ -107,6 +118,12 @@ decodificador  deco(
 				// No início do módulo, ajuste as declarações:
 				reg [8:0] linha_aux;
 				reg [8:0] coluna_aux;
+				
+				reg [8:0] linha_base;
+				reg [8:0] coluna_base;
+				
+				reg [8:0] linha_base_next;
+				reg [8:0] coluna_base_next;
 
 				// Dentro do always @(posedge clock), adicione reset das variáveis auxiliares:
 				always @(posedge clock) begin
@@ -119,6 +136,8 @@ decodificador  deco(
 						//  seletor_algoritmo_reg <= seletor_algoritmo;
 						  linha_aux <= 9'd60;  // Reset para início da região central
 						  coluna_aux <= 9'd80; // Reset para início da região central
+						  linha_base <= 9'd0;
+						  coluna_base <= 9'd0;
 					 end else begin
 						  botao_zoom_in_reg <= botao_zoom_in_reg;
 						  botao_zoom_out_reg <= botao_zoom_out_reg;
@@ -152,6 +171,8 @@ decodificador  deco(
 						 end
 					 
 					 // Restante do código...
+					 coluna_base <= coluna_base_next;
+					 linha_base <= linha_base_next;
 					 endereco_memoria <= endereco_memoria_next;
 					 endereco_escrita <= endereco_escrita_next;
 					 escrita_dados <= escrita_dados_next;
@@ -178,6 +199,8 @@ decodificador  deco(
            dados_prontos_next = dados_prontos;
            opcode_next = opcode;
            endereco_base_para_escrita_next = endereco_base_para_escrita;
+			  coluna_base_next = coluna_base;
+			  linha_base_next = linha_base;
            
            pixel_m_1_next = pixel_m_1;
            pixel_m_2_next = pixel_m_2;
@@ -199,7 +222,7 @@ decodificador  deco(
 				  */
 				  
 				  
-				  if (enable_read) begin
+				  if (new_data_pulse_25) begin
 						proximo_estado = LOAD_OP;
 				  end else begin
 						proximo_estado = IDLE;
@@ -213,9 +236,13 @@ LOAD_OP: begin
             if (opcode == VIZINHO_MAIS_PROXIMO_OUT || opcode == MEDIA_DE_BLOCOS) begin
                 opcode_next = RESET_IMAGEM;
                 endereco_memoria_next = 17'd0; // 
+					 linha_base_next = 9'd0;
+					 coluna_base_next = 9'd0;
             end else begin
                 opcode_next = (opcode_instrucao == 3'b011) ? VIZINHO_MAIS_PROXIMO : REPLICACAO_PIXEL;
                 endereco_memoria_next = ENDERECO_BASE; // 
+					 linha_base_next = ENDERECO_BASE / 9'd320;
+					 coluna_base_next = ENDERECO_BASE % 9'd320;
             end
             proximo_estado = READ_PIXEL;
         end
@@ -225,9 +252,13 @@ LOAD_OP: begin
             if (opcode == VIZINHO_MAIS_PROXIMO || opcode == REPLICACAO_PIXEL) begin
                 opcode_next = RESET_IMAGEM;
                 endereco_memoria_next = 17'd0; // 
+					 linha_base_next = 9'd0;
+					 coluna_base_next = 9'd0;
             end else begin
                 opcode_next = (opcode_instrucao == 3'b101) ? VIZINHO_MAIS_PROXIMO_OUT : MEDIA_DE_BLOCOS;
                 endereco_memoria_next = 17'd0; // 
+					 linha_base_next = 9'd0;
+					 coluna_base_next = 9'd0;
             end
             proximo_estado = READ_PIXEL;
         end
@@ -470,8 +501,8 @@ end
 										
 									 default: begin
 										 
-										 coluna = (endereco_memoria % 17'd320) - 17'd160;
-										 linha = (endereco_memoria / 17'd320) - 17'd120;					
+										 coluna = (endereco_memoria % 17'd320) - coluna_base;
+										 linha = (endereco_memoria / 17'd320) - linha_base;					
 										 
 										 
 										 case (salvar_pixels)
@@ -528,12 +559,19 @@ end
 							NEXT_PIXEL: begin
 								 escrita_dados_next = 1'b0;
 
-								 
-								 if (endereco_memoria_next >= 17'd76800) begin
-									  proximo_estado = END_INSTRUCTION;
-								 end else begin
-									  proximo_estado = READ_PIXEL;
-								 end
+								 if (opcode_next == MEDIA_DE_BLOCOS || opcode_next == VIZINHO_MAIS_PROXIMO_OUT) begin
+									 if (endereco_memoria_next >= 17'd76800) begin
+										  proximo_estado = END_INSTRUCTION;
+									 end else begin
+										  proximo_estado = READ_PIXEL;
+									 end
+								end else begin
+									 if ((endereco_memoria_next - ENDERECO_BASE) >= 17'd38240) begin
+										  proximo_estado = END_INSTRUCTION;
+									 end else begin
+										  proximo_estado = READ_PIXEL;
+									 end
+								end
 							end
 							
 							END_INSTRUCTION: begin

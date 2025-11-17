@@ -242,17 +242,19 @@ unidade_de_controle unidade_de_controle(
 					VGA_CLK,           
 					VGA_BLANK_N,
 					instrucoes,
-					enabl
+					enable_instrucoes
 );
 
 wire [31:0] instrucoes;
 wire enable_instrucoes;
 
+/*
 delayed_clock_generator gerador(
 	 CLOCK_50,
 	 enable_instrucoes,
 	 enable_ins
 );
+*/ 
 
 wire enable_ins;
 
@@ -260,7 +262,7 @@ wire enabl;
 
 visualizar_instrucoes k(
 	.inst(instrucoes),
-	.clock(enable_ins),
+	.clock(enable_instrucoes),
 	.clock_in(CLOCK_50),
 	.seletor(SW[9]),
 	.HEX0(HEX0),

@@ -505,8 +505,18 @@ module soc_system (
 		.out_port   (instrucoes_external_connection_export)       // external_connection.export
 	);
 	
-	assign sinal_escrita_instrucoes = mm_interconnect_0_instrucoes_s1_write;
+	//assign sinal_escrita_instrucoes = mm_interconnect_0_instrucoes_s1_write;
 
+gerador_de_sinal dados_novos(
+		.clk_50(clk_clk),
+		.reset_n(~rst_controller_reset_out_reset),
+		.chipselect(mm_interconnect_0_instrucoes_s1_chipselect),
+		.write_n(~mm_interconnect_0_instrucoes_s1_write),
+		.address(mm_interconnect_0_instrucoes_s1_address),
+		.new_data_50(sinal_escrita_instrucoes)
+	);
+
+	
 	intr_capturer #(
 		.NUM_INTR (32)
 	) intr_capturer_0 (
