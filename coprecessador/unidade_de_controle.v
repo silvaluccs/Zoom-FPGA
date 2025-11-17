@@ -21,8 +21,19 @@ module unidade_de_controle(
 	wire [7:0] pixel_escrever;
 	wire [16:0] endereco_escrv;
 	
+	reg sync1 = 1'b0;
+	reg sync2 = 1'b0;
+
+always @(posedge clock) begin
+    sync1 <= enable_read;
+    sync2 <= sync1;
+end
+
+wire new_data_pulse_25 = sync1 & ~sync2;
+
+	
 decodificador  deco(
-		enable_read,
+		new_data_pulse_25,
 		instrucoes,
 		opcode_instrucao,
 		zoom_in_s,
@@ -199,7 +210,7 @@ decodificador  deco(
 				  */
 				  
 				  
-				  if (enable_read) begin
+				  if (new_data_pulse_25) begin
 						proximo_estado = LOAD_OP;
 				  end else begin
 						proximo_estado = IDLE;
