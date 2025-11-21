@@ -5,8 +5,6 @@
 @            (zoom in/out) para um coprocessador de imagem em hardware.
 @
 @ Plataforma: ARM Linux (DE1-SoC / Cyclone V)
-@ Autor: [Seu nome]
-@ Data: [Data]
 @=============================================================================
 
 .section .text
