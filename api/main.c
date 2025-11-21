@@ -61,7 +61,7 @@ int main() {
       printf("Operacao 'Media de pixels' enviada.\n");
     } else if (comando == '5') {
       printf("Entrou no comando 5\n");
-      enviar_imagem_fpga();
+      enviar_imagem_fpga("imagem.pgm");
       printf("Imagem enviada para a FPGA.\n");
     } else if (comando == 'q') {
       printf("Saindo do programa...\n");

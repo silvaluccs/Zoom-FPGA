@@ -3,7 +3,7 @@
 
 // Alterando para aceitar ponteiros volatile
 void mapear_enderecos();
-void enviar_imagem_fpga();
+void enviar_imagem_fpga(char *imagem);
 
 void replicacao_pixel();
 void vizinho_mais_proximo();
