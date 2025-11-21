@@ -1011,5 +1011,6 @@ set_global_assignment -name VERILOG_FILE delayed_clock_generator.v
 set_global_assignment -name VERILOG_FILE decodificador.v
 set_global_assignment -name QIP_FILE ram_leitura_2.qip
 set_global_assignment -name VERILOG_FILE gerenciar_memoria_ram.v
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VERILOG_FILE gerador_de_sinal.v
+set_global_assignment -name VERILOG_FILE IR.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

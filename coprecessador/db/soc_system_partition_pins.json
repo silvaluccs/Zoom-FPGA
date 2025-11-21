@@ -234,6 +234,10 @@
 				{
 					"name" : "CLOCK_50",
 					"strict" : false
+				},
+				{
+					"name" : "IRDA_RXD",
+					"strict" : false
 				}
 			]
 		}

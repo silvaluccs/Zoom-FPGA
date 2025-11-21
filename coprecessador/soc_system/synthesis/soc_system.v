@@ -5,7 +5,6 @@
 `timescale 1 ps / 1 ps
 module soc_system (
 		input  wire        clk_clk,                               //                            clk.clk
-		output wire        enable_external_connection_export,     //     enable_external_connection.export
 		input  wire        hps_0_f2h_cold_reset_req_reset_n,      //       hps_0_f2h_cold_reset_req.reset_n
 		input  wire        hps_0_f2h_debug_reset_req_reset_n,     //      hps_0_f2h_debug_reset_req.reset_n
 		input  wire [27:0] hps_0_f2h_stm_hw_events_stm_hwevents,  //        hps_0_f2h_stm_hw_events.stm_hwevents
@@ -250,6 +249,7 @@ module soc_system (
 	wire         rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [onchip_memory2_0:reset_req, rst_translator:reset_req_in]
 	wire         rst_controller_001_reset_out_reset;                        // rst_controller_001:reset_out -> [mm_interconnect_0:hps_0_h2f_axi_master_agent_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_0_f2h_axi_slave_agent_reset_sink_reset_bridge_in_reset_reset]
 
+	wire enable_external_connection_export;
 	soc_system_enable enable (
 		.clk        (clk_clk),                                //                 clk.clk
 		.reset_n    (~rst_controller_reset_out_reset),        //               reset.reset_n

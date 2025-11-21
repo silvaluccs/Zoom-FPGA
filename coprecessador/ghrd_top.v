@@ -227,12 +227,10 @@ wire [27:0] stm_hw_events;
 // connection of internal logics
 assign stm_hw_events    = {{3{1'b0}},SW, fpga_led_internal, fpga_debounced_buttons};
 
+
+// instancia da unidade de controle
 unidade_de_controle unidade_de_controle(
 					CLOCK_50,
-					KEY[0],
-					KEY[1],
-					SW[9],
-					KEY[3],
 					VGA_HS,
 					VGA_VS,    
 					VGA_R,     
@@ -241,26 +239,31 @@ unidade_de_controle unidade_de_controle(
 					VGA_SYNC_N,          
 					VGA_CLK,           
 					VGA_BLANK_N,
-					instrucoes,
-					enable_instrucoes
+					inst,
+					enable_infravermelho_ou_hps
 );
+
+
+wire [31:0] inst = enable_instrucoes_infra ? instrucoes_infra :  instrucoes;
+wire enable_infravermelho_ou_hps = enable_instrucoes_infra || enable_instrucoes;
 
 wire [31:0] instrucoes;
 wire enable_instrucoes;
 
-/*
-delayed_clock_generator gerador(
-	 CLOCK_50,
-	 enable_instrucoes,
-	 enable_ins
-);
-*/ 
+wire [31:0] instrucoes_infra;
+wire enable_instrucoes_infra;
+
+
+// modulo do infravermelho
+IR ir_insta(CLOCK_50, 1'b1, IRDA_RXD, instrucoes_infra, enable_instrucoes_infra);
+
 
 wire enable_ins;
 
 wire enabl;
 
-visualizar_instrucoes k(
+// modulo de visualizar instrucoes para debug
+visualizar_instrucoes visualizar_instrucoes_inst(
 	.inst(instrucoes),
 	.clock(enable_instrucoes),
 	.clock_in(CLOCK_50),
@@ -272,7 +275,6 @@ visualizar_instrucoes k(
 );
 
 soc_system u0 (
-      .enable_external_connection_export     (enabl),      //     enable_external_connection.export
      .sinal_escrita_instrucoes(enable_instrucoes),
     .instrucoes_external_connection_export (instrucoes),  // instrucoes_external_connection.export
     .clk_clk                               ( CLOCK_50           ),      //                            clk.clk
