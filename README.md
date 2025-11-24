@@ -296,6 +296,6 @@ NIRILU. ARM32 Syscall Reference. Disponível em: https://nirilu.github.io/arm32-
 
 **Kevin Borges**
 📍 Universidade Estadual de Feira de Santana (UEFS)
-📧 contato: 
+📧 contato: kcordeiro539@gmail.com
 
 ---
