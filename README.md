@@ -138,16 +138,16 @@ api/biblioteca.s
 
 contém as seguintes funções globais:
 
-| Função                 | Descrição                                              |
-| ---------------------- | ------------------------------------------------------ |
-| `mapear_enderecos`     | Mapeia a FPGA usando `/dev/mem` + `mmap2`              |
-| `abrir_imagem`         | Lê arquivo `.pgm` e ignora cabeçalho                   |
-| `enviar_imagem_fpga`   | Copia 76800 bytes para o registrador de imagem da FPGA |
-| `replicacao_pixel`     | Escreve opcode 0x80000000                              |
-| `vizinho_mais_proximo` | Escreve opcode 0x60000000                              |
-| `decimacao`            | Escreve 0xA0000000                                     |
-| `media_de_blocos`      | Escreve 0xC0000000                                     |
-| `fechar_enderecos`     | Fecha arquivos e executa `munmap`                      |
+| Função               | Descrição                                                                                                                                                                                          | Parâmetros (Entrada)                                                                                                                        | Retorno (Saída)                                |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
+| mapear_enderecos     | Abre o dispositivo `/dev/mem` e mapeia a região 0xFF200000 da FPGA (lightweight HPS-to-FPGA bridge) usando `open` e `mmap2`. O ponteiro de instruções e o File Descriptor (FD) são armazenados em variáveis globais. | Nenhum                                                                                                                                       | Nenhum (As variáveis globais são atualizadas)  |
+| enviar_imagem_fpga   | Carrega uma imagem PGM do disco (via chamada interna a `abrir_imagem`) e transmite os 76800 bytes de pixel para o registrador da FPGA. Cada pixel é formatado como uma instrução de 32 bits (Opcode 0b111 nos bits [31:29]). | `r0 = Ponteiro para o input buffer` .                                        | Nenhum                                         |
+| replicacao_pixel     | Envia o comando de Zoom In utilizando o algoritmo de replicação de pixel. Escreve o opcode de comando (`0x80000000`) no registrador de instruções da FPGA.                                         | Nenhum                                                                                                                                       | Nenhum                                         |
+| vizinho_mais_proximo | Envia o comando de Zoom In utilizando o algoritmo de interpolação por vizinho mais próximo. Escreve o opcode de comando (`0x60000000`).                                                             | Nenhum                                                                                                                                       | Nenhum                                         |
+| decimacao            | Envia o comando de Zoom Out utilizando o algoritmo de decimação. Escreve o opcode de comando (`0xA0000000`).                                                                                       | Nenhum                                                                                                                                       | Nenhum                                         |
+| media_de_blocos      | Envia o comando de Zoom Out utilizando o algoritmo de média de blocos. Escreve o opcode de comando (`0xC0000000`).                                                                                 | Nenhum                                                                                                                                       | Nenhum                                         |
+| fechar_enderecos     | Libera os recursos do sistema: realiza `munmap` na região de memória mapeada e fecha todos os File Descriptors abertos (`/dev/mem` e o arquivo de imagem) usando `close`.                           | Nenhum                                                                                                                                       | Nenhum                                         |
+
 
 ### ❗ Importante: **a versão final NÃO usa mais registrador ENABLE**
 
