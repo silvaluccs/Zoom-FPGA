@@ -124,7 +124,7 @@ A solução final é composta por:
 ```
 
 # 6. Conexão entre os módulos do sistema
-![Conexão entre os módulos](Assets/Conexao_modulos.jpg)
+![Conexão entre os módulos](Assets/diagrama.jpg)
 
 ---
 
