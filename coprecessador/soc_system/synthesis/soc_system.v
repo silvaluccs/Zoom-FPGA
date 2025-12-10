@@ -5,6 +5,8 @@
 `timescale 1 ps / 1 ps
 module soc_system (
 		input  wire        clk_clk,                               //                            clk.clk
+		input  wire [7:0]  data_external_connection_export,       //       data_external_connection.export
+		input  wire        done_external_connection_export,       //       done_external_connection.export
 		output wire        enable_external_connection_export,     //     enable_external_connection.export
 		input  wire        hps_0_f2h_cold_reset_req_reset_n,      //       hps_0_f2h_cold_reset_req.reset_n
 		input  wire        hps_0_f2h_debug_reset_req_reset_n,     //      hps_0_f2h_debug_reset_req.reset_n
@@ -196,6 +198,10 @@ module soc_system (
 	wire   [1:0] mm_interconnect_0_enable_s1_address;                       // mm_interconnect_0:enable_s1_address -> enable:address
 	wire         mm_interconnect_0_enable_s1_write;                         // mm_interconnect_0:enable_s1_write -> enable:write_n
 	wire  [31:0] mm_interconnect_0_enable_s1_writedata;                     // mm_interconnect_0:enable_s1_writedata -> enable:writedata
+	wire  [31:0] mm_interconnect_0_done_s1_readdata;                        // done:readdata -> mm_interconnect_0:done_s1_readdata
+	wire   [1:0] mm_interconnect_0_done_s1_address;                         // mm_interconnect_0:done_s1_address -> done:address
+	wire  [31:0] mm_interconnect_0_data_s1_readdata;                        // data:readdata -> mm_interconnect_0:data_s1_readdata
+	wire   [1:0] mm_interconnect_0_data_s1_address;                         // mm_interconnect_0:data_s1_address -> data:address
 	wire  [31:0] hps_only_master_master_readdata;                           // mm_interconnect_1:hps_only_master_master_readdata -> hps_only_master:master_readdata
 	wire         hps_only_master_master_waitrequest;                        // mm_interconnect_1:hps_only_master_master_waitrequest -> hps_only_master:master_waitrequest
 	wire  [31:0] hps_only_master_master_address;                            // hps_only_master:master_address -> mm_interconnect_1:hps_only_master_master_address
@@ -246,9 +252,25 @@ module soc_system (
 	wire  [31:0] hps_0_f2h_irq1_irq;                                        // irq_mapper_001:sender_irq -> hps_0:f2h_irq_p1
 	wire  [31:0] intr_capturer_0_interrupt_receiver_irq;                    // irq_mapper_002:sender_irq -> intr_capturer_0:interrupt_in
 	wire         irq_mapper_receiver0_irq;                                  // jtag_uart:av_irq -> [irq_mapper:receiver0_irq, irq_mapper_002:receiver0_irq]
-	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [enable:reset_n, instrucoes:reset_n, intr_capturer_0:rst_n, irq_mapper_002:reset, jtag_uart:rst_n, mm_interconnect_0:fpga_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:onchip_memory2_0_reset1_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_master_translator_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_translator:in_reset, sysid_qsys:reset_n]
+	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [data:reset_n, done:reset_n, enable:reset_n, instrucoes:reset_n, intr_capturer_0:rst_n, irq_mapper_002:reset, jtag_uart:rst_n, mm_interconnect_0:fpga_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:onchip_memory2_0_reset1_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_master_translator_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_translator:in_reset, sysid_qsys:reset_n]
 	wire         rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [onchip_memory2_0:reset_req, rst_translator:reset_req_in]
 	wire         rst_controller_001_reset_out_reset;                        // rst_controller_001:reset_out -> [mm_interconnect_0:hps_0_h2f_axi_master_agent_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_0_f2h_axi_slave_agent_reset_sink_reset_bridge_in_reset_reset]
+
+	soc_system_data data (
+		.clk      (clk_clk),                            //                 clk.clk
+		.reset_n  (~rst_controller_reset_out_reset),    //               reset.reset_n
+		.address  (mm_interconnect_0_data_s1_address),  //                  s1.address
+		.readdata (mm_interconnect_0_data_s1_readdata), //                    .readdata
+		.in_port  (data_external_connection_export)     // external_connection.export
+	);
+
+	soc_system_done done (
+		.clk      (clk_clk),                            //                 clk.clk
+		.reset_n  (~rst_controller_reset_out_reset),    //               reset.reset_n
+		.address  (mm_interconnect_0_done_s1_address),  //                  s1.address
+		.readdata (mm_interconnect_0_done_s1_readdata), //                    .readdata
+		.in_port  (done_external_connection_export)     // external_connection.export
+	);
 
 	soc_system_enable enable (
 		.clk        (clk_clk),                                //                 clk.clk
@@ -504,19 +526,18 @@ module soc_system (
 		.readdata   (mm_interconnect_0_instrucoes_s1_readdata),   //                    .readdata
 		.out_port   (instrucoes_external_connection_export)       // external_connection.export
 	);
-	
-	//assign sinal_escrita_instrucoes = mm_interconnect_0_instrucoes_s1_write;
 
-gerador_de_sinal dados_novos(
-		.clk_50(clk_clk),
-		.reset_n(~rst_controller_reset_out_reset),
-		.chipselect(mm_interconnect_0_instrucoes_s1_chipselect),
-		.write_n(~mm_interconnect_0_instrucoes_s1_write),
-		.address(mm_interconnect_0_instrucoes_s1_address),
-		.new_data_50(sinal_escrita_instrucoes)
-	);
-
+gerador_de_sinal gerador_de_sinal_inst(
+	.clk_50(clk_clk),
+	.reset_n(~rst_controller_reset_out_reset),
+	.chipselect(mm_interconnect_0_instrucoes_s1_chipselect),
+	.write_n(~mm_interconnect_0_instrucoes_s1_write),
+	.address(mm_interconnect_0_instrucoes_s1_address),
+	.new_data_50(sinal_escrita_instrucoes)
+);
 	
+	
+
 	intr_capturer #(
 		.NUM_INTR (32)
 	) intr_capturer_0 (
@@ -647,6 +668,10 @@ gerador_de_sinal dados_novos(
 		.fpga_only_master_master_readdatavalid                            (fpga_only_master_master_readdatavalid),                     //                                                           .readdatavalid
 		.fpga_only_master_master_write                                    (fpga_only_master_master_write),                             //                                                           .write
 		.fpga_only_master_master_writedata                                (fpga_only_master_master_writedata),                         //                                                           .writedata
+		.data_s1_address                                                  (mm_interconnect_0_data_s1_address),                         //                                                    data_s1.address
+		.data_s1_readdata                                                 (mm_interconnect_0_data_s1_readdata),                        //                                                           .readdata
+		.done_s1_address                                                  (mm_interconnect_0_done_s1_address),                         //                                                    done_s1.address
+		.done_s1_readdata                                                 (mm_interconnect_0_done_s1_readdata),                        //                                                           .readdata
 		.enable_s1_address                                                (mm_interconnect_0_enable_s1_address),                       //                                                  enable_s1.address
 		.enable_s1_write                                                  (mm_interconnect_0_enable_s1_write),                         //                                                           .write
 		.enable_s1_readdata                                               (mm_interconnect_0_enable_s1_readdata),                      //                                                           .readdata
@@ -690,7 +715,7 @@ gerador_de_sinal dados_novos(
 		.hps_0_f2h_axi_slave_awuser                                          (mm_interconnect_1_hps_0_f2h_axi_slave_awuser),  //                                                              .awuser
 		.hps_0_f2h_axi_slave_awvalid                                         (mm_interconnect_1_hps_0_f2h_axi_slave_awvalid), //                                                              .awvalid
 		.hps_0_f2h_axi_slave_awready                                         (mm_interconnect_1_hps_0_f2h_axi_slave_awready), //                                                              .awready
-		.hps_0_f2h_axi_slave_wid                                             (mm_interconnect_1_hps_0_f2h_axi_slave_wid),     //                                                              .wid
+		.hps_0_f2h_axi_slave_wid                                             (mm_interconnect_sinal_escrita_instrucoes1_hps_0_f2h_axi_slave_wid),     //                                                              .wid
 		.hps_0_f2h_axi_slave_wdata                                           (mm_interconnect_1_hps_0_f2h_axi_slave_wdata),   //                                                              .wdata
 		.hps_0_f2h_axi_slave_wstrb                                           (mm_interconnect_1_hps_0_f2h_axi_slave_wstrb),   //                                                              .wstrb
 		.hps_0_f2h_axi_slave_wlast                                           (mm_interconnect_1_hps_0_f2h_axi_slave_wlast),   //                                                              .wlast

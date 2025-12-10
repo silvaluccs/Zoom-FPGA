@@ -1,5 +1,5 @@
 Flow report for soc_system
-Tue Nov 11 14:30:43 2025
+Fri Dec  5 16:19:12 2025
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Tue Nov 11 14:30:16 2025          ;
+; Flow Status                     ; Successful - Fri Dec  5 16:18:44 2025          ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                   ; soc_system                                     ;
 ; Top-level Entity Name           ; ghrd_top                                       ;
 ; Family                          ; Cyclone V                                      ;
 ; Device                          ; 5CSEMA5F31C6                                   ;
 ; Timing Models                   ; Final                                          ;
-; Logic utilization (in ALMs)     ; 3,015 / 32,070 ( 9 % )                         ;
-; Total registers                 ; 3970                                           ;
+; Logic utilization (in ALMs)     ; 3,467 / 32,070 ( 11 % )                        ;
+; Total registers                 ; 4229                                           ;
 ; Total pins                      ; 382 / 457 ( 84 % )                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 1,759,232 / 4,065,280 ( 43 % )                 ;
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/11/2025 14:25:17 ;
+; Start date & time ; 12/05/2025 16:13:44 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; soc_system          ;
 +-------------------+---------------------+
@@ -79,20 +79,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------+--------------------------------------------------------------------------+---------------+--------------------------------+------------+
 ; Assignment Name                       ; Value                                                                    ; Default Value ; Entity Name                    ; Section Id ;
 +---------------------------------------+--------------------------------------------------------------------------+---------------+--------------------------------+------------+
-; COMPILER_SIGNATURE_ID                 ; 206951256905701.176288191548702                                          ; --            ; --                             ; --         ;
+; COMPILER_SIGNATURE_ID                 ; 268809273967831.176496202226799                                          ; --            ; --                             ; --         ;
 ; ECO_REGENERATE_REPORT                 ; On                                                                       ; Off           ; --                             ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sdram_io.pre.h                 ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_auto.pre.h           ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_auto_ac_init.pre.c   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.c                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/system.pre.h                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.h                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer.pre.h                ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_auto_inst_init.pre.c ; --            ; soc_system_hps_0_hps_io_border ; --         ;
 ; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer.pre.c                ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/alt_types.pre.h                ; --            ; soc_system_hps_0_hps_io_border ; --         ;
-; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_defines.pre.h        ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer.pre.h                ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.h                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
 ; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/emif.pre.xml                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/alt_types.pre.h                ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/system.pre.h                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.c                   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_auto.pre.h           ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_auto_inst_init.pre.c ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sdram_io.pre.h                 ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_defines.pre.h        ; --            ; soc_system_hps_0_hps_io_border ; --         ;
+; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/sequencer/sequencer_auto_ac_init.pre.c   ; --            ; soc_system_hps_0_hps_io_border ; --         ;
 ; HPS_ISW_FILE                          ; soc_system/synthesis/submodules/hps.pre.xml                              ; --            ; soc_system_hps_0_hps_io_border ; --         ;
 ; HPS_PARTITION                         ; On                                                                       ; --            ; soc_system_hps_0_hps_io_border ; --         ;
 ; MAX_CORE_JUNCTION_TEMP                ; 85                                                                       ; --            ; --                             ; --         ;
@@ -101,18 +101,18 @@ https://fpgasoftware.intel.com/eula.
 ; MISC_FILE                             ; soc_system/synthesis/../soc_system.cmp                                   ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; soc_system/synthesis/soc_system_hps_0_hps.svd                            ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; soc_system/synthesis/../../soc_system.qsys                               ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sdram_io.pre.h                 ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_auto.pre.h           ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_auto_ac_init.pre.c   ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.c                   ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/system.pre.h                   ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.h                   ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer.pre.h                ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_auto_inst_init.pre.c ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer.pre.c                ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/alt_types.pre.h                ; --            ; --                             ; --         ;
-; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_defines.pre.h        ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer.pre.h                ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.h                   ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/emif.pre.xml                   ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/alt_types.pre.h                ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/system.pre.h                   ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/tclrpt.pre.c                   ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_auto.pre.h           ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_auto_inst_init.pre.c ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sdram_io.pre.h                 ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_defines.pre.h        ; --            ; --                             ; --         ;
+; MISC_FILE                             ; soc_system/synthesis/submodules/sequencer/sequencer_auto_ac_init.pre.c   ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; soc_system/synthesis/submodules/hps.pre.xml                              ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; clock_75mhz.cmp                                                          ; --            ; --                             ; --         ;
 ; MISC_FILE                             ; clock_75mhz_sim/clock_75mhz.vo                                           ; --            ; --                             ; --         ;
@@ -132,7 +132,7 @@ https://fpgasoftware.intel.com/eula.
 ; PROJECT_OUTPUT_DIRECTORY              ; output_files                                                             ; --            ; --                             ; --         ;
 ; SLD_FILE                              ; soc_system/synthesis/soc_system.regmap                                   ; --            ; --                             ; --         ;
 ; SLD_FILE                              ; soc_system/synthesis/soc_system.debuginfo                                ; --            ; --                             ; --         ;
-; SLD_INFO                              ; QSYS_NAME soc_system HAS_SOPCINFO 1 GENERATION_ID 1762539273             ; --            ; --                             ; --         ;
+; SLD_INFO                              ; QSYS_NAME soc_system HAS_SOPCINFO 1 GENERATION_ID 1764097411             ; --            ; --                             ; --         ;
 ; SOPCINFO_FILE                         ; soc_system/synthesis/../../soc_system.sopcinfo                           ; --            ; --                             ; --         ;
 ; SPD_FILE                              ; clock_75mhz.spd                                                          ; --            ; --                             ; --         ;
 ; SYNTHESIS_ONLY_QIP                    ; On                                                                       ; --            ; --                             ; --         ;
@@ -147,11 +147,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:30     ; 1.0                     ; 954 MB              ; 00:00:50                           ;
-; Fitter               ; 00:01:25     ; 1.6                     ; 3570 MB             ; 00:05:54                           ;
-; Assembler            ; 00:00:08     ; 1.0                     ; 613 MB              ; 00:00:08                           ;
-; Timing Analyzer      ; 00:00:26     ; 2.2                     ; 1521 MB             ; 00:00:50                           ;
-; Total                ; 00:02:29     ; --                      ; --                  ; 00:07:42                           ;
+; Analysis & Synthesis ; 00:00:30     ; 1.0                     ; 979 MB              ; 00:00:51                           ;
+; Fitter               ; 00:01:25     ; 1.6                     ; 3556 MB             ; 00:05:44                           ;
+; Assembler            ; 00:00:08     ; 1.0                     ; 623 MB              ; 00:00:08                           ;
+; Timing Analyzer      ; 00:00:27     ; 2.3                     ; 1544 MB             ; 00:00:52                           ;
+; Total                ; 00:02:30     ; --                      ; --                  ; 00:07:35                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -160,10 +160,10 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+----------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name        ; OS Version ; Processor type ;
 +----------------------+------------------+----------------+------------+----------------+
-; Analysis & Synthesis ; LEDS-54152       ; Ubuntu 24.04.2 ; 24         ; x86_64         ;
-; Fitter               ; LEDS-54152       ; Ubuntu 24.04.2 ; 24         ; x86_64         ;
-; Assembler            ; LEDS-54152       ; Ubuntu 24.04.2 ; 24         ; x86_64         ;
-; Timing Analyzer      ; LEDS-54152       ; Ubuntu 24.04.2 ; 24         ; x86_64         ;
+; Analysis & Synthesis ; LEDS-54165       ; Ubuntu 24.04.3 ; 24         ; x86_64         ;
+; Fitter               ; LEDS-54165       ; Ubuntu 24.04.3 ; 24         ; x86_64         ;
+; Assembler            ; LEDS-54165       ; Ubuntu 24.04.3 ; 24         ; x86_64         ;
+; Timing Analyzer      ; LEDS-54165       ; Ubuntu 24.04.3 ; 24         ; x86_64         ;
 +----------------------+------------------+----------------+------------+----------------+
 
 

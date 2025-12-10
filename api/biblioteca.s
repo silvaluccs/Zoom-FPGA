@@ -21,6 +21,185 @@
 .global fechar_enderecos
 .type fechar_enderecos, %function
 
+.global enviar_pixel
+.type enviar_pixel, %function 
+
+.global carregar_pixel
+.type carregar_pixel, %function 
+
+.global controle_imagem
+.type controle_imagem, %function
+
+
+
+carregar_pixel: 
+    sub     sp, sp, #32          @ Aumentei para 32 bytes
+    str     r2, [sp, #0]
+    str     r3, [sp, #4]
+    str     r4, [sp, #8]
+    str     r5, [sp, #12]
+    str     r6, [sp, #16]
+    str     r7, [sp, #20]
+    str     lr, [sp, #24]        @ Salvando lr
+    str     r0, [sp, #28]        @ Salvando r0 também
+    
+    mov r5, r0
+    mov r6, r1
+    
+    ldr r0, =ponteiro_instrucoes
+    ldr r0, [r0]
+    
+    ldr r1, =ponteiro_enable
+    ldr r1, [r1]
+    
+    ldr r2, =ponteiro_data
+    ldr r2, [r2]
+    
+    ldr r3, =ponteiro_done
+    ldr r3, [r3]
+    
+    mov     r4, #0b001
+    lsl     r4, r4, #29
+    
+    lsl  r5, r5, #12
+    
+    lsl  r6, r6, #11
+    
+    orr r4, r4, r5
+    orr r4, r4, r6
+    
+    str r4, [r0]
+    
+    mov r4, #0
+    str r4, [r1]
+    
+    mov r4, #1
+    str r4, [r1]
+
+esperando_pixel:
+    ldr     r4, [r3]
+    cmp     r4, #1
+ @   bne     esperando_pixel      @ DESCOMENTAR ESTA LINHA!
+    
+    ldr     r6, [r2]             @ r0 tem o pixel lido
+    
+    mov r5, #0
+
+    str r5, [r0]            @ envia o valor para o endereço de envio das instruções
+
+     mov r5, #1
+     str r5, [r1]            @ envia o valor 1 para o endereço
+
+     mov r5, #0
+     str r5, [r1]            @ envia o valor 0 para o endereço
+    
+    mov r0, r6
+    
+    ldr     r2, [sp, #0]        
+    ldr     r3, [sp, #4]        
+    ldr     r4, [sp, #8]        
+    ldr     r5, [sp, #12]       
+    ldr     r6, [sp, #16]       
+    ldr     r7, [sp, #20]       
+    ldr     lr, [sp, #24]       @ Restaurando lr
+    add     sp, sp, #32         @ Ajustado para 32 bytes
+    
+    bx      lr
+
+enviar_pixel:
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #40          @ Aumentei para incluir r8
+    str     r0, [sp, #0]
+    str     r1, [sp, #4]
+    str     r2, [sp, #8]
+    str     r3, [sp, #12]
+    str     r4, [sp, #16]
+    str     r5, [sp, #20]
+    str     r6, [sp, #24]
+    str     r7, [sp, #28]
+    str     r8, [sp, #32]        @ Adicionei r8
+    str     lr, [sp, #36]        @ lr no final
+
+    @r0 pixel
+    @r1 endereco
+    
+    mov r2, r0
+    mov r3, r1
+    
+    @ Carrega ponteiro de instruções da FPGA
+    ldr     r4, =ponteiro_instrucoes
+    ldr     r4, [r4]
+    
+    ldr r5, =ponteiro_enable
+    ldr r5, [r5]
+
+enviar:
+    @ Verifica se todos os pixels foram enviados
+    cmp     r3, #76800
+    beq     fim_envio_imagem
+
+    @ --- Monta instrução de 32 bits ---
+    @ Opcode: 0b111 nos bits [31:29]
+    mov     r0, #0b111
+    lsl     r0, r0, #29
+
+    @ Endereço do pixel nos bits [28:12]
+    mov     r1, r3
+    lsl     r1, r1, #12
+
+    @ Valor do pixel nos bits [11:4]
+    lsl     r2, r2, #4
+
+    @ Combina todos os campos
+    orr     r0, r0, r1
+    orr     r0, r0, r2
+
+    @ Envia instrução para a FPGA
+    str     r0, [r4]
+    
+     mov r0, #1
+     str r0, [r5]            @ envia o valor 1 para o endereço de recepção
+
+    mov r0, #0
+    str r0, [r5]            @ envia o valor 0 para o endereço de recepção
+
+    @ Envia instrução NOP (0x00000000) para finalizar
+    mov     r0, #0
+    str     r0, [r4]
+    
+    mov r0, #1
+    str r0, [r5]            @ envia o valor 1 para o endereço de recepção
+
+    mov r0, #0
+    str r0, [r5]            @ envia o valor 0 para o endereço de recepção
+    
+    
+    str r0, [r4]
+    
+    mov r0, #1
+    str r0, [r5]            @ envia o valor 1 para o endereço de recepção
+
+    mov r0, #0
+    str r0, [r5]            @ envia o valor 0 para o endereço de recepção
+    
+
+    @ --- Restaurar registradores da pilha ---
+        ldr     r0, [sp, #0]
+    ldr     r1, [sp, #4]
+    ldr     r2, [sp, #8]
+    ldr     r3, [sp, #12]
+    ldr     r4, [sp, #16]
+    ldr     r5, [sp, #20]
+    ldr     r6, [sp, #24]
+    ldr     r7, [sp, #28]
+    ldr     r8, [sp, #32]
+    ldr     lr, [sp, #36]
+    add     sp, sp, #40
+
+    bx      lr
+
+
+
 
 mapear_enderecos:
 
@@ -52,7 +231,7 @@ mapear_enderecos:
     mov r2, #3             @ carrega o valor 3 em r2
     mov r3, #1             @ carrega o valor 1 em r3
     mov r4, r4             @ (sem alteração, apenas para manter o valor de r4)
-    ldr r5, =0xff200       @ carrega o endereço 0xff200 em r5
+    ldr r5, =0xFF200        @ carrega o endereço 0xff200 em r5
     mov r7, #192           @ configura o código do serviço (svc)
     
     svc 0                  @ chamada de sistema (svc)
@@ -71,6 +250,19 @@ mapear_enderecos:
 
     ldr r0, =ponteiro_enable
     str r6, [r0]
+    
+    ldr r6, =0x00000020
+    add r6, r5, r6
+    
+    ldr r0, =ponteiro_done
+    str r6, [r0]
+    
+    ldr r6, =0x00000030
+    add r6, r5, r6
+    
+    ldr r0, =ponteiro_data
+    str r6, [r0]
+    
     
  
   ldr r0, [sp, #0]        @ restaura r0
@@ -100,7 +292,7 @@ abrir_imagem:
     str     r2, [sp, #16]
     str     r3, [sp, #20]
 
-    ldr     r0, =nome_arquivo   @ caminho do arquivo
+   @ ldr     r0, =nome_arquivo   @ caminho do arquivo
     mov     r1, #0              @ O_RDONLY
     mov     r2, #0
     mov     r7, #5              @ syscall open
@@ -225,13 +417,26 @@ fim_envio_imagem:
   bx lr                  @ retorna
 
 replicacao_pixel:
-    sub sp, sp, #12
-    str r0, [sp, #0]
-    str r1, [sp, #4]
-    str r2, [sp, #8]
+    sub sp, sp, #16              @ Aumentei para incluir lr
+    str r2, [sp, #0]
+    str r3, [sp, #4]
+    str r4, [sp, #8]
+    str lr, [sp, #12]            @ SALVAR LR!
+
+
+    @ r0 x r1 y
+
+    mov r3, r0
+    mov r4, r1
 
     ldr r0, =0x80000000    @ Carrega o comando
 
+    lsl r3, r3, #20
+    lsl r4, r4, #12
+
+    orr r0, r0, r3
+    orr r0, r0, r4
+
     ldr r1, =ponteiro_instrucoes
     ldr r1, [r1]
 
@@ -246,21 +451,36 @@ replicacao_pixel:
     mov r0, #0
     str r0, [r2]
 
-    ldr r0, [sp, #0]
-    ldr r1, [sp, #4]
-    ldr r2, [sp, #8]
-    add sp, sp, #12
+     ldr r2, [sp, #0]
+    ldr r3, [sp, #4]
+    ldr r4, [sp, #8]
+    ldr lr, [sp, #12]            @ RESTAURAR LR!
+    add sp, sp, #16              @ Ajustado
 
-    bx lr                  @ Retorna
+    bx lr
 
 
 vizinho_mais_proximo:
-    sub sp, sp, #12
-    str r0, [sp, #0]
-    str r1, [sp, #4]
-    str r2, [sp, #8]
+   sub sp, sp, #16              @ Aumentei para incluir lr
+    str r2, [sp, #0]
+    str r3, [sp, #4]
+    str r4, [sp, #8]
+    str lr, [sp, #12]            @ SALVAR LR!
+
+
+
+    @ r0 x r1 y
+
+    mov r3, r0
+    mov r4, r1
 
     ldr r0, =0x60000000    @ Carrega o comando
+
+    lsl r3, r3, #20
+    lsl r4, r4, #12
+
+    orr r0, r0, r3
+    orr r0, r0, r4
 
     ldr r1, =ponteiro_instrucoes
     ldr r1, [r1]
@@ -276,12 +496,13 @@ vizinho_mais_proximo:
     mov r0, #0
     str r0, [r2]
 
-    ldr r0, [sp, #0]
-    ldr r1, [sp, #4]
-    ldr r2, [sp, #8]
-    add sp, sp, #12
+     ldr r2, [sp, #0]
+    ldr r3, [sp, #4]
+    ldr r4, [sp, #8]
+    ldr lr, [sp, #12]            @ RESTAURAR LR!
+    add sp, sp, #16              @ Ajustado
 
-    bx lr                  @ Retorna
+    bx lr
 
 
 decimacao:
@@ -351,13 +572,18 @@ media_de_blocos:
     bx lr                  @ Retorna
 
 
-nop:
-  sub sp, sp, #12
-  str r0, [sp, #0]
-  str r1, [sp, #4]
-  str r2, [sp, #8]
 
-  ldr r0, =0x00000000    @ Carrega o comando
+controle_imagem:
+  sub sp, sp, #12
+  str r1, [sp, #0]
+  str r2, [sp, #4]
+  str r3, [sp, #8]
+
+
+  mov r3, r0
+
+  ldr r0, =0x40000000    @ Carrega o comando
+  orr r0, r0, r3
 
   ldr r1, =ponteiro_instrucoes
   ldr r1, [r1]
@@ -373,9 +599,9 @@ nop:
   mov r0, #0
   str r0, [r2]
 
-  ldr r0, [sp, #0]
-  ldr r1, [sp, #4]
-  ldr r2, [sp, #8]
+  ldr r1, [sp, #0]
+  ldr r2, [sp, #4]
+  ldr r3, [sp, #8]
   add sp, sp, #12
 
   bx lr                  @ Retorna
@@ -401,6 +627,23 @@ fechar_enderecos:
         mov r7, #91
 
         svc 0
+
+	 ldr r0, =ponteiro_data
+
+        ldr r0, [r0]
+        ldr r1, =0x00005000 
+        mov r7, #91
+
+        svc 0
+        
+        ldr r0, =ponteiro_done
+
+        ldr r0, [r0]
+        ldr r1, =0x00005000 
+        mov r7, #91
+
+        svc 0
+
 
 
         ldr r0, =ponteiro_fd
@@ -451,6 +694,8 @@ nome_arquivo: .asciz "imagem.pgm"  @ string com o nome do arquivo
 
     ponteiro_instrucoes: .space 4
     ponteiro_enable: .space 4
+    ponteiro_done: .space 4
+    ponteiro_data: .space 4
     ponteiro_imagem: .space 4
     ponteiro_fd:    .space 4
     ponteiro_fd_imagem: .space 4

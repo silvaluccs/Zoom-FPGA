@@ -17,6 +17,38 @@
          type = "int";
       }
    }
+   element data
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
+      }
+   }
+   element data.s1
+   {
+      datum baseAddress
+      {
+         value = "48";
+         type = "String";
+      }
+   }
+   element done
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
+   element done.s1
+   {
+      datum baseAddress
+      {
+         value = "32";
+         type = "String";
+      }
+   }
    element enable
    {
       datum _sortIndex
@@ -180,6 +212,16 @@
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface
+   name="data_external_connection"
+   internal="data.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="done_external_connection"
+   internal="done.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
    name="enable_external_connection"
    internal="enable.external_connection"
    type="conduit"
@@ -223,6 +265,34 @@
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
+ </module>
+ <module name="data" kind="altera_avalon_pio" version="23.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="8" />
+ </module>
+ <module name="done" kind="altera_avalon_pio" version="23.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="1" />
  </module>
  <module name="enable" kind="altera_avalon_pio" version="23.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -924,6 +994,24 @@
  <connection
    kind="avalon"
    version="23.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="done.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0020" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="23.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="data.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="23.1"
    start="fpga_only_master.master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
@@ -980,6 +1068,8 @@
  <connection kind="clock" version="23.1" start="clk_0.clk" end="jtag_uart.clk" />
  <connection kind="clock" version="23.1" start="clk_0.clk" end="instrucoes.clk" />
  <connection kind="clock" version="23.1" start="clk_0.clk" end="enable.clk" />
+ <connection kind="clock" version="23.1" start="clk_0.clk" end="done.clk" />
+ <connection kind="clock" version="23.1" start="clk_0.clk" end="data.clk" />
  <connection
    kind="clock"
    version="23.1"
@@ -1049,6 +1139,8 @@
    version="23.1"
    start="clk_0.clk_reset"
    end="enable.reset" />
+ <connection kind="reset" version="23.1" start="clk_0.clk_reset" end="done.reset" />
+ <connection kind="reset" version="23.1" start="clk_0.clk_reset" end="data.reset" />
  <connection
    kind="reset"
    version="23.1"

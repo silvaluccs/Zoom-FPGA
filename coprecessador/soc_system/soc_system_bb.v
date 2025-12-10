@@ -1,6 +1,7 @@
 
 module soc_system (
 	clk_clk,
+	enable_external_connection_export,
 	hps_0_f2h_cold_reset_req_reset_n,
 	hps_0_f2h_debug_reset_req_reset_n,
 	hps_0_f2h_stm_hw_events_stm_hwevents,
@@ -79,9 +80,11 @@ module soc_system (
 	memory_mem_dm,
 	memory_oct_rzqin,
 	reset_reset_n,
-	enable_external_connection_export);	
+	done_external_connection_export,
+	data_external_connection_export);	
 
 	input		clk_clk;
+	output		enable_external_connection_export;
 	input		hps_0_f2h_cold_reset_req_reset_n;
 	input		hps_0_f2h_debug_reset_req_reset_n;
 	input	[27:0]	hps_0_f2h_stm_hw_events_stm_hwevents;
@@ -160,5 +163,6 @@ module soc_system (
 	output	[3:0]	memory_mem_dm;
 	input		memory_oct_rzqin;
 	input		reset_reset_n;
-	output		enable_external_connection_export;
+	input		done_external_connection_export;
+	input	[7:0]	data_external_connection_export;
 endmodule

@@ -12,7 +12,8 @@ module controle_vga(
     output sync,          
     output clk,           
     output blank,
-	 output wire [7:0] dados_porta_b
+	 output wire [7:0] dados_porta_b,
+	 input wire desligar_imagem
 );
 
     // Contador de endereço da RAM
@@ -143,7 +144,7 @@ module controle_vga(
     vga_module vga(
         .clock(clock),
         .reset(1'b0),
-        .color_in(pixel_sincronizado),
+        .color_in(desligar_imagem ? 8'd0 : pixel_sincronizado),
         .next_x(pixel_x),
         .next_y(pixel_y),
         .hsync(hsync),

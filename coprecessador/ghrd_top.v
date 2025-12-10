@@ -242,12 +242,16 @@ unidade_de_controle unidade_de_controle(
 					VGA_CLK,           
 					VGA_BLANK_N,
 					instrucoes,
-					enable_instrucoes
+					enabl,
+          dados_saida,
+          done_r
 );
 
 wire [31:0] instrucoes;
 wire enable_instrucoes;
 
+wire [7:0] dados_saida;
+wire done_r;
 /*
 delayed_clock_generator gerador(
 	 CLOCK_50,
@@ -262,7 +266,7 @@ wire enabl;
 
 visualizar_instrucoes k(
 	.inst(instrucoes),
-	.clock(enable_instrucoes),
+	.clock(enabl),
 	.clock_in(CLOCK_50),
 	.seletor(SW[9]),
 	.HEX0(HEX0),
@@ -275,6 +279,9 @@ soc_system u0 (
       .enable_external_connection_export     (enabl),      //     enable_external_connection.export
      .sinal_escrita_instrucoes(enable_instrucoes),
     .instrucoes_external_connection_export (instrucoes),  // instrucoes_external_connection.export
+	 .done_external_connection_export       (done_r),       //       done_external_connection.export
+    .data_external_connection_export       (dados_saida),        //       data_external_connection.export
+
     .clk_clk                               ( CLOCK_50           ),      //                            clk.clk
     .reset_reset_n                         ( hps_fpga_reset_n   ),      //                          reset.reset_n
     .memory_mem_a                          ( HPS_DDR3_ADDR  ),          //                         memory.mem_a

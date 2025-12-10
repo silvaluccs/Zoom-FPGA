@@ -1,9 +1,11 @@
 Info: Starting: Create block symbol file (.bsf)
-Info: qsys-generate /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system.qsys --block-symbol-file --output-directory=/home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system --family="Cyclone V" --part=5CSEMA5F31C6
+Info: qsys-generate "/home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system.qsys" --block-symbol-file --output-directory="/home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system" --family="Cyclone V" --part=5CSEMA5F31C6
 Progress: Loading coprecessador/soc_system.qsys
 Progress: Reading input file
 Progress: Adding clk_0 [clock_source 23.1]
 Progress: Parameterizing module clk_0
+Progress: Adding enable [altera_avalon_pio 23.1]
+Progress: Parameterizing module enable
 Progress: Adding fpga_only_master [altera_jtag_avalon_master 23.1]
 Progress: Parameterizing module fpga_only_master
 Progress: Adding hps_0 [altera_hps 23.1]
@@ -36,11 +38,13 @@ Info: qsys-generate succeeded.
 Info: Finished: Create block symbol file (.bsf)
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system.qsys --synthesis=VERILOG --output-directory=/home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis --family="Cyclone V" --part=5CSEMA5F31C6
+Info: qsys-generate "/home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system.qsys" --synthesis=VERILOG --output-directory="/home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis" --family="Cyclone V" --part=5CSEMA5F31C6
 Progress: Loading coprecessador/soc_system.qsys
 Progress: Reading input file
 Progress: Adding clk_0 [clock_source 23.1]
 Progress: Parameterizing module clk_0
+Progress: Adding enable [altera_avalon_pio 23.1]
+Progress: Parameterizing module enable
 Progress: Adding fpga_only_master [altera_jtag_avalon_master 23.1]
 Progress: Parameterizing module fpga_only_master
 Progress: Adding hps_0 [altera_hps 23.1]
@@ -75,6 +79,18 @@ Warning: hps_0.f2h_irq0: Cannot connect clock for irq_mapper.sender
 Warning: hps_0.f2h_irq0: Cannot connect reset for irq_mapper.sender
 Warning: hps_0.f2h_irq1: Cannot connect clock for irq_mapper_001.sender
 Warning: hps_0.f2h_irq1: Cannot connect reset for irq_mapper_001.sender
+Info: enable: Starting RTL generation for module 'soc_system_enable'
+Info: enable:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_enable --dir=/tmp/alt0399_4105051415806676420.dir/0002_enable_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0399_4105051415806676420.dir/0002_enable_gen//soc_system_enable_component_configuration.pl  --do_build_sim=0  ]
+Info: enable: perl: warning: Setting locale failed.
+Info: enable: perl: warning: Please check that your locale settings:
+Info: enable: 	LANGUAGE = (unset),
+Info: enable: 	LC_ALL = (unset),
+Info: enable: 	LC_CTYPE = "en_US.UTF-8",
+Info: enable: 	LANG = "C"
+Info: enable:     are supported and installed on your system.
+Info: enable: perl: warning: Falling back to the standard locale ("C").
+Info: enable: Done RTL generation for module 'soc_system_enable'
+Info: enable: "soc_system" instantiated altera_avalon_pio "enable"
 Info: fpga_only_master: "soc_system" instantiated altera_jtag_avalon_master "fpga_only_master"
 Info: hps_0: "Running  for module: hps_0"
 Info: hps_0: HPS Main PLL counter settings: n = 0  m = 73
@@ -84,7 +100,7 @@ Warning: hps_0: "QSPI clock frequency" (desired_qspi_clk_mhz) requested 400.0 MH
 Warning: hps_0: 1 or more output clock frequencies cannot be achieved precisely, consider revising desired output clock frequencies.
 Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
 Info: instrucoes: Starting RTL generation for module 'soc_system_instrucoes'
-Info: instrucoes:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_instrucoes --dir=/tmp/alt0398_2147130547700857815.dir/0002_instrucoes_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0398_2147130547700857815.dir/0002_instrucoes_gen//soc_system_instrucoes_component_configuration.pl  --do_build_sim=0  ]
+Info: instrucoes:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_instrucoes --dir=/tmp/alt0399_4105051415806676420.dir/0003_instrucoes_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0399_4105051415806676420.dir/0003_instrucoes_gen//soc_system_instrucoes_component_configuration.pl  --do_build_sim=0  ]
 Info: instrucoes: perl: warning: Setting locale failed.
 Info: instrucoes: perl: warning: Please check that your locale settings:
 Info: instrucoes: 	LANGUAGE = (unset),
@@ -97,7 +113,7 @@ Info: instrucoes: Done RTL generation for module 'soc_system_instrucoes'
 Info: instrucoes: "soc_system" instantiated altera_avalon_pio "instrucoes"
 Info: intr_capturer_0: "soc_system" instantiated intr_capturer "intr_capturer_0"
 Info: jtag_uart: Starting RTL generation for module 'soc_system_jtag_uart'
-Info: jtag_uart:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=soc_system_jtag_uart --dir=/tmp/alt0398_2147130547700857815.dir/0004_jtag_uart_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0398_2147130547700857815.dir/0004_jtag_uart_gen//soc_system_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=soc_system_jtag_uart --dir=/tmp/alt0399_4105051415806676420.dir/0005_jtag_uart_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0399_4105051415806676420.dir/0005_jtag_uart_gen//soc_system_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart: perl: warning: Setting locale failed.
 Info: jtag_uart: perl: warning: Please check that your locale settings:
 Info: jtag_uart: 	LANGUAGE = (unset),
@@ -109,7 +125,7 @@ Info: jtag_uart: perl: warning: Falling back to the standard locale ("C").
 Info: jtag_uart: Done RTL generation for module 'soc_system_jtag_uart'
 Info: jtag_uart: "soc_system" instantiated altera_avalon_jtag_uart "jtag_uart"
 Info: onchip_memory2_0: Starting RTL generation for module 'soc_system_onchip_memory2_0'
-Info: onchip_memory2_0:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=soc_system_onchip_memory2_0 --dir=/tmp/alt0398_2147130547700857815.dir/0005_onchip_memory2_0_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0398_2147130547700857815.dir/0005_onchip_memory2_0_gen//soc_system_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_0:   Generation command is [exec /opt/intelFPGA_lite/23.1/quartus/linux64/perl/bin/perl -I /opt/intelFPGA_lite/23.1/quartus/linux64/perl/lib -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin/europa -I /opt/intelFPGA_lite/23.1/quartus/sopc_builder/bin -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /opt/intelFPGA_lite/23.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=soc_system_onchip_memory2_0 --dir=/tmp/alt0399_4105051415806676420.dir/0006_onchip_memory2_0_gen/ --quartus_dir=/opt/intelFPGA_lite/23.1/quartus --verilog --config=/tmp/alt0399_4105051415806676420.dir/0006_onchip_memory2_0_gen//soc_system_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
 Info: onchip_memory2_0: perl: warning: Setting locale failed.
 Info: onchip_memory2_0: perl: warning: Please check that your locale settings:
 Info: onchip_memory2_0: 	LANGUAGE = (unset),
@@ -126,6 +142,7 @@ Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
 Info: mm_interconnect_0: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_0"
 Info: mm_interconnect_1: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_1"
 Info: irq_mapper: "soc_system" instantiated altera_irq_mapper "irq_mapper"
@@ -154,52 +171,49 @@ Info: router_006: "mm_interconnect_0" instantiated altera_merlin_router "router_
 Info: router_007: "mm_interconnect_0" instantiated altera_merlin_router "router_007"
 Info: router_009: "mm_interconnect_0" instantiated altera_merlin_router "router_009"
 Info: fpga_only_master_master_limiter: "mm_interconnect_0" instantiated altera_merlin_traffic_limiter "fpga_only_master_master_limiter"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
 Info: onchip_memory2_0_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "onchip_memory2_0_s1_burst_adapter"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_st_pipeline_stage.sv
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_st_pipeline_stage.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
 Info: cmd_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_002"
-Info: cmd_demux_003: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_003"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
 Info: cmd_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_001"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: cmd_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_002"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: cmd_mux_004: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_004"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_001"
 Info: rsp_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_002"
 Info: rsp_demux_004: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_004"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_002"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
-Info: rsp_mux_003: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_003"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: fpga_only_master_master_to_onchip_memory2_0_s1_cmd_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "fpga_only_master_master_to_onchip_memory2_0_s1_cmd_width_adapter"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: avalon_st_adapter_001: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
 Info: hps_0_f2h_axi_slave_agent: "mm_interconnect_1" instantiated altera_merlin_axi_slave_ni "hps_0_f2h_axi_slave_agent"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
 Info: router: "mm_interconnect_1" instantiated altera_merlin_router "router"
 Info: router_001: "mm_interconnect_1" instantiated altera_merlin_router "router_001"
 Info: cmd_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "cmd_demux"
 Info: cmd_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "cmd_mux"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file /home/aluno/Downloads/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/aluno/Downloads/qa (2)/q/Zoom-FPGA-d6b4313a8d9282652024cae151e5579acae331aa/coprecessador/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: border: "hps_io" instantiated altera_interface_generator "border"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
 Info: error_adapter_0: "avalon_st_adapter_001" instantiated error_adapter "error_adapter_0"
-Info: soc_system: Done "soc_system" with 64 modules, 130 files
+Info: soc_system: Done "soc_system" with 63 modules, 129 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

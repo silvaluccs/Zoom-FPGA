@@ -1,6 +1,7 @@
 	component soc_system is
 		port (
 			clk_clk                               : in    std_logic                     := 'X';             -- clk
+			enable_external_connection_export     : out   std_logic;                                        -- export
 			hps_0_f2h_cold_reset_req_reset_n      : in    std_logic                     := 'X';             -- reset_n
 			hps_0_f2h_debug_reset_req_reset_n     : in    std_logic                     := 'X';             -- reset_n
 			hps_0_f2h_stm_hw_events_stm_hwevents  : in    std_logic_vector(27 downto 0) := (others => 'X'); -- stm_hwevents
@@ -79,13 +80,15 @@
 			memory_mem_dm                         : out   std_logic_vector(3 downto 0);                     -- mem_dm
 			memory_oct_rzqin                      : in    std_logic                     := 'X';             -- oct_rzqin
 			reset_reset_n                         : in    std_logic                     := 'X';             -- reset_n
-			enable_external_connection_export     : out   std_logic                                         -- export
+			done_external_connection_export       : in    std_logic                     := 'X';             -- export
+			data_external_connection_export       : in    std_logic_vector(7 downto 0)  := (others => 'X')  -- export
 		);
 	end component soc_system;
 
 	u0 : component soc_system
 		port map (
 			clk_clk                               => CONNECTED_TO_clk_clk,                               --                            clk.clk
+			enable_external_connection_export     => CONNECTED_TO_enable_external_connection_export,     --     enable_external_connection.export
 			hps_0_f2h_cold_reset_req_reset_n      => CONNECTED_TO_hps_0_f2h_cold_reset_req_reset_n,      --       hps_0_f2h_cold_reset_req.reset_n
 			hps_0_f2h_debug_reset_req_reset_n     => CONNECTED_TO_hps_0_f2h_debug_reset_req_reset_n,     --      hps_0_f2h_debug_reset_req.reset_n
 			hps_0_f2h_stm_hw_events_stm_hwevents  => CONNECTED_TO_hps_0_f2h_stm_hw_events_stm_hwevents,  --        hps_0_f2h_stm_hw_events.stm_hwevents
@@ -164,6 +167,7 @@
 			memory_mem_dm                         => CONNECTED_TO_memory_mem_dm,                         --                               .mem_dm
 			memory_oct_rzqin                      => CONNECTED_TO_memory_oct_rzqin,                      --                               .oct_rzqin
 			reset_reset_n                         => CONNECTED_TO_reset_reset_n,                         --                          reset.reset_n
-			enable_external_connection_export     => CONNECTED_TO_enable_external_connection_export      --     enable_external_connection.export
+			done_external_connection_export       => CONNECTED_TO_done_external_connection_export,       --       done_external_connection.export
+			data_external_connection_export       => CONNECTED_TO_data_external_connection_export        --       data_external_connection.export
 		);
 
