@@ -227,12 +227,8 @@ wire [27:0] stm_hw_events;
 // connection of internal logics
 assign stm_hw_events    = {{3{1'b0}},SW, fpga_led_internal, fpga_debounced_buttons};
 
-unidade_de_controle unidade_de_controle(
+unidade_de_controle unidade_de_controle_inst(
 					CLOCK_50,
-					KEY[0],
-					KEY[1],
-					SW[9],
-					KEY[3],
 					VGA_HS,
 					VGA_VS,    
 					VGA_R,     
@@ -242,31 +238,19 @@ unidade_de_controle unidade_de_controle(
 					VGA_CLK,           
 					VGA_BLANK_N,
 					instrucoes,
-					enabl,
-          dados_saida,
-          done_r
+					enable_instrucoes,
+          dados_saida
 );
 
 wire [31:0] instrucoes;
 wire enable_instrucoes;
 
 wire [7:0] dados_saida;
-wire done_r;
-/*
-delayed_clock_generator gerador(
-	 CLOCK_50,
-	 enable_instrucoes,
-	 enable_ins
-);
-*/ 
 
-wire enable_ins;
 
-wire enabl;
-
-visualizar_instrucoes k(
+visualizar_instrucoes visualizador_instrucoes_inst(
 	.inst(instrucoes),
-	.clock(enabl),
+	.clock(enable_instrucoes),
 	.clock_in(CLOCK_50),
 	.seletor(SW[9]),
 	.HEX0(HEX0),
@@ -276,12 +260,9 @@ visualizar_instrucoes k(
 );
 
 soc_system u0 (
-      .enable_external_connection_export     (enabl),      //     enable_external_connection.export
-     .sinal_escrita_instrucoes(enable_instrucoes),
-    .instrucoes_external_connection_export (instrucoes),  // instrucoes_external_connection.export
-	 .done_external_connection_export       (done_r),       //       done_external_connection.export
-    .data_external_connection_export       (dados_saida),        //       data_external_connection.export
-
+   .sinal_escrita_instrucoes(enable_instrucoes),
+   .instrucoes_external_connection_export (instrucoes),  // instrucoes_external_connection.export
+   .data_external_connection_export       (dados_saida),        //       data_external_connection.export
     .clk_clk                               ( CLOCK_50           ),      //                            clk.clk
     .reset_reset_n                         ( hps_fpga_reset_n   ),      //                          reset.reset_n
     .memory_mem_a                          ( HPS_DDR3_ADDR  ),          //                         memory.mem_a

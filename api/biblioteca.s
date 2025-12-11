@@ -1,5 +1,19 @@
+@=============================================================================
+@ Arquivo: fpga_control.s
+@ Descrição: Biblioteca em Assembly ARM para comunicação com FPGA via mapeamento
+@            de memória. Permite enviar imagens e comandos de processamento
+@            (zoom in/out, controle de exibição) para um coprocessador de
+@            imagem em hardware Verilog.
+@
+@ Plataforma: ARM Linux (DE1-SoC / Cyclone V)
+@ Resolução de Imagem: 320x240 pixels (76800 bytes)
+@=============================================================================
+
 .section .text
 
+@-----------------------------------------------------------------------------
+@ Declaração de Símbolos Globais (exportados para uso em C)
+@-----------------------------------------------------------------------------
 .global mapear_enderecos
 .type mapear_enderecos, %function
 
@@ -22,93 +36,121 @@
 .type fechar_enderecos, %function
 
 .global enviar_pixel
-.type enviar_pixel, %function 
+.type enviar_pixel, %function
 
 .global carregar_pixel
-.type carregar_pixel, %function 
+.type carregar_pixel, %function
 
 .global controle_imagem
 .type controle_imagem, %function
 
 
-
-carregar_pixel: 
-    sub     sp, sp, #32          @ Aumentei para 32 bytes
+@=============================================================================
+@ Função: carregar_pixel
+@ Descrição: Lê um pixel da memória do coprocessador FPGA.
+@            Envia comando de leitura e aguarda o valor retornado.
+@
+@ Parâmetros: 
+@   r0 = endereço do pixel (0 a 76799)
+@   r1 = memória de exibição (0 ou 1)
+@
+@ Retorno: 
+@   r0 = valor do pixel lido (0 a 255)
+@
+@ Formato da instrução de leitura:
+@   [31:29] = 001 (opcode leitura)
+@   [28:12] = endereço (17 bits)
+@   [11]    = memória de exibição (1 bit)
+@   [10:0]  = reservado
+@=============================================================================
+carregar_pixel:
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #32
     str     r2, [sp, #0]
     str     r3, [sp, #4]
     str     r4, [sp, #8]
     str     r5, [sp, #12]
     str     r6, [sp, #16]
     str     r7, [sp, #20]
-    str     lr, [sp, #24]        @ Salvando lr
-    str     r0, [sp, #28]        @ Salvando r0 também
-    
-    mov r5, r0
-    mov r6, r1
-    
-    ldr r0, =ponteiro_instrucoes
-    ldr r0, [r0]
-    
-    ldr r1, =ponteiro_enable
-    ldr r1, [r1]
-    
-    ldr r2, =ponteiro_data
-    ldr r2, [r2]
-    
-    ldr r3, =ponteiro_done
-    ldr r3, [r3]
-    
+    str     lr, [sp, #24]
+    str     r0, [sp, #28]              @ Backup de r0
+
+    @ Salva parâmetros em registradores de trabalho
+    mov     r5, r0                      @ r5 = endereço
+    mov     r6, r1                      @ r6 = memória de exibição
+
+    @ Carrega ponteiros dos registradores da FPGA
+    ldr     r0, =ponteiro_instrucoes
+    ldr     r0, [r0]                    @ r0 = endereço do registrador de instruções
+
+    ldr     r2, =ponteiro_data
+    ldr     r2, [r2]                    @ r2 = endereço do registrador de dados
+
+    @ --- Monta instrução de leitura ---
+    @ Opcode: 0b001 nos bits [31:29]
     mov     r4, #0b001
     lsl     r4, r4, #29
-    
-    lsl  r5, r5, #12
-    
-    lsl  r6, r6, #11
-    
-    orr r4, r4, r5
-    orr r4, r4, r6
-    
-    str r4, [r0]
-    
-    mov r4, #0
-    str r4, [r1]
-    
-    mov r4, #1
-    str r4, [r1]
+
+    @ Endereço nos bits [28:12]
+    lsl     r5, r5, #12
+
+    @ Memória de exibição no bit [11]
+    lsl     r6, r6, #11
+
+    @ Combina todos os campos
+    orr     r4, r4, r5
+    orr     r4, r4, r6
+
+    @ Envia instrução de leitura para a FPGA
+    str     r4, [r0]
 
 esperando_pixel:
-    ldr     r4, [r3]
-    cmp     r4, #1
- @   bne     esperando_pixel      @ DESCOMENTAR ESTA LINHA!
-    
-    ldr     r6, [r2]             @ r0 tem o pixel lido
-    
-    mov r5, #0
+    @ Aguarda e lê o pixel do registrador de dados
+    ldr     r4, [r3]                    @ Lê status (verificação futura)
+    cmp     r4, #1                      @ Verifica se dado está pronto
 
-    str r5, [r0]            @ envia o valor para o endereço de envio das instruções
+    ldr     r6, [r2]                    @ r6 = pixel lido do registrador de dados
 
-     mov r5, #1
-     str r5, [r1]            @ envia o valor 1 para o endereço
+    @ Envia NOP para finalizar operação
+    mov     r5, #0
+    str     r5, [r0]
 
-     mov r5, #0
-     str r5, [r1]            @ envia o valor 0 para o endereço
-    
-    mov r0, r6
-    
-    ldr     r2, [sp, #0]        
-    ldr     r3, [sp, #4]        
-    ldr     r4, [sp, #8]        
-    ldr     r5, [sp, #12]       
-    ldr     r6, [sp, #16]       
-    ldr     r7, [sp, #20]       
-    ldr     lr, [sp, #24]       @ Restaurando lr
-    add     sp, sp, #32         @ Ajustado para 32 bytes
-    
+    @ Prepara retorno
+    mov     r0, r6                      @ r0 = valor do pixel
+
+    @ --- Restaurar registradores da pilha ---
+    ldr     r2, [sp, #0]
+    ldr     r3, [sp, #4]
+    ldr     r4, [sp, #8]
+    ldr     r5, [sp, #12]
+    ldr     r6, [sp, #16]
+    ldr     r7, [sp, #20]
+    ldr     lr, [sp, #24]
+    add     sp, sp, #32
+
     bx      lr
 
+
+@=============================================================================
+@ Função: enviar_pixel
+@ Descrição: Escreve um pixel individual na memória da FPGA.
+@            Utilizado para atualização parcial da imagem.
+@
+@ Parâmetros: 
+@   r0 = valor do pixel (0 a 255)
+@   r1 = endereço do pixel (0 a 76799)
+@
+@ Retorno: Nenhum
+@
+@ Formato da instrução de escrita:
+@   [31:29] = 111 (opcode escrita)
+@   [28:12] = endereço (17 bits)
+@   [11:4]  = valor do pixel (8 bits)
+@   [3:0]   = reservado
+@=============================================================================
 enviar_pixel:
     @ --- Salvar registradores na pilha ---
-    sub     sp, sp, #40          @ Aumentei para incluir r8
+    sub     sp, sp, #40
     str     r0, [sp, #0]
     str     r1, [sp, #4]
     str     r2, [sp, #8]
@@ -117,26 +159,21 @@ enviar_pixel:
     str     r5, [sp, #20]
     str     r6, [sp, #24]
     str     r7, [sp, #28]
-    str     r8, [sp, #32]        @ Adicionei r8
-    str     lr, [sp, #36]        @ lr no final
+    str     r8, [sp, #32]
+    str     lr, [sp, #36]
 
-    @r0 pixel
-    @r1 endereco
-    
-    mov r2, r0
-    mov r3, r1
-    
+    @ Salva parâmetros
+    mov     r2, r0                      @ r2 = valor do pixel
+    mov     r3, r1                      @ r3 = endereço
+
     @ Carrega ponteiro de instruções da FPGA
     ldr     r4, =ponteiro_instrucoes
     ldr     r4, [r4]
-    
-    ldr r5, =ponteiro_enable
-    ldr r5, [r5]
 
 enviar:
-    @ Verifica se todos os pixels foram enviados
+    @ Verifica se todos os pixels foram enviados (limite de segurança)
     cmp     r3, #76800
-    beq     fim_envio_imagem
+    beq     fim_envio_pixel
 
     @ --- Monta instrução de 32 bits ---
     @ Opcode: 0b111 nos bits [31:29]
@@ -156,35 +193,14 @@ enviar:
 
     @ Envia instrução para a FPGA
     str     r0, [r4]
-    
-     mov r0, #1
-     str r0, [r5]            @ envia o valor 1 para o endereço de recepção
-
-    mov r0, #0
-    str r0, [r5]            @ envia o valor 0 para o endereço de recepção
 
     @ Envia instrução NOP (0x00000000) para finalizar
     mov     r0, #0
     str     r0, [r4]
-    
-    mov r0, #1
-    str r0, [r5]            @ envia o valor 1 para o endereço de recepção
 
-    mov r0, #0
-    str r0, [r5]            @ envia o valor 0 para o endereço de recepção
-    
-    
-    str r0, [r4]
-    
-    mov r0, #1
-    str r0, [r5]            @ envia o valor 1 para o endereço de recepção
-
-    mov r0, #0
-    str r0, [r5]            @ envia o valor 0 para o endereço de recepção
-    
-
+fim_envio_pixel:
     @ --- Restaurar registradores da pilha ---
-        ldr     r0, [sp, #0]
+    ldr     r0, [sp, #0]
     ldr     r1, [sp, #4]
     ldr     r2, [sp, #8]
     ldr     r3, [sp, #12]
@@ -199,91 +215,103 @@ enviar:
     bx      lr
 
 
-
-
+@=============================================================================
+@ Função: mapear_enderecos
+@ Descrição: Abre o dispositivo /dev/mem e mapeia a região de memória da FPGA
+@            para acesso direto aos registradores de hardware.
+@
+@ Parâmetros: Nenhum
+@ Retorno: Nenhum (ponteiros armazenados em variáveis globais)
+@
+@ Syscalls utilizadas:
+@   - open (5): Abre /dev/mem
+@   - mmap2 (192): Mapeia memória física para virtual
+@
+@ Endereços mapeados:
+@   - 0xFF200000: Base dos periféricos lightweight HPS-to-FPGA
+@   - ponteiro_instrucoes: Offset 0x00 (registrador de comandos)
+@   - ponteiro_data: Offset 0x30 (registrador de dados)
+@=============================================================================
 mapear_enderecos:
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #36
+    str     r0, [sp, #0]
+    str     r1, [sp, #4]
+    str     r2, [sp, #8]
+    str     r3, [sp, #12]
+    str     r4, [sp, #16]
+    str     r5, [sp, #20]
+    str     r6, [sp, #24]
+    str     r7, [sp, #28]
+    str     lr, [sp, #32]
 
-  sub sp, sp, #36         @ reserva 32 bytes na pilha (8 registradores * 4 bytes)
-  str r0, [sp, #0]       @ armazena r0 na pilha
-  str r1, [sp, #4]       @ armazena r1 na pilha
-  str r2, [sp, #8]       @ armazena r2 na pilha
-  str r3, [sp, #12]      @ armazena r3 na pilha
-  str r4, [sp, #16]      @ armazena r4 na pilha
-  str r5, [sp, #20]      @ armazena r5 na pilha
-  str r6, [sp, #24]      @ armazena r6 na pilha
-  str r7, [sp, #28]      @ armazena r7 na pilha
-  str lr, [sp, #32]
+    @ --- Syscall open("/dev/mem", O_RDWR) ---
+    ldr     r0, =dev_mem                @ r0 = caminho do dispositivo
+    mov     r1, #2                      @ r1 = O_RDWR (leitura e escrita)
+    mov     r2, #0                      @ r2 = modo (não usado)
+    mov     r7, #5                      @ r7 = syscall number (open)
+    svc     0                           @ executa syscall
 
-    ldr r0, =dev_mem       @ carrega o endereço de dev_mem em r0
-    mov r1, #2             @ carrega o valor 2 em r1
-    mov r2, #0             @ carrega o valor 0 em r2
-    mov r7, #5             @ configura o valor do código do sistema (svc)
-    
-    svc 0                  @ chamada de sistema (svc)
+    mov     r4, r0                      @ r4 = file descriptor retornado
 
-    mov r4, r0             @ armazena o valor retornado em r0 em r4
+    @ Armazena o file descriptor para uso posterior
+    ldr     r0, =ponteiro_fd
+    str     r4, [r0]
 
-    ldr r0, =ponteiro_fd
-    str r4, [r0]
+    @ --- Syscall mmap2(NULL, 0x5000, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0xFF200) ---
+    mov     r0, #0                      @ r0 = addr (NULL = kernel escolhe)
+    ldr     r1, =0x00005000             @ r1 = length (20KB)
+    mov     r2, #3                      @ r2 = prot (PROT_READ | PROT_WRITE)
+    mov     r3, #1                      @ r3 = flags (MAP_SHARED)
+    mov     r4, r4                      @ r4 = fd (file descriptor)
+    ldr     r5, =0xFF200                @ r5 = offset/4096 (0xFF200000 >> 12)
+    mov     r7, #192                    @ r7 = syscall number (mmap2)
+    svc     0                           @ executa syscall
 
-    mov r0, #0             @ limpa r0
-    ldr r1, =0x00005000    @ carrega o valor 0x00005000 em r1
-    mov r2, #3             @ carrega o valor 3 em r2
-    mov r3, #1             @ carrega o valor 1 em r3
-    mov r4, r4             @ (sem alteração, apenas para manter o valor de r4)
-    ldr r5, =0xFF200        @ carrega o endereço 0xff200 em r5
-    mov r7, #192           @ configura o código do serviço (svc)
-    
-    svc 0                  @ chamada de sistema (svc)
+    @ Calcula e armazena o ponteiro para registrador de instruções (offset 0x00)
+    mov     r5, r0                      @ r5 = endereço base mapeado
+    ldr     r6, =0x00000000             @ offset do registrador de instruções
+    add     r6, r5, r6                  @ r6 = endereço final
 
-    mov r5, r0             @ armazena o valor retornado em r0 em r5
-    ldr r6, =0x00000000    @ carrega o valor 0x00000000 em r6
-    add r6, r5, r6         @ realiza a soma de r5 e r6 (resultando em r5)
+    ldr     r0, =ponteiro_instrucoes
+    str     r6, [r0]
 
-    ldr r0, =ponteiro_instrucoes
-    str r6, [r0]
-    
-    mov r4, r6
-    
-    ldr r6, =0x00000010    @ carrega o valor 0x00000010 em r7
-    add r6, r5, r6         @ soma o valor de r5 e r7 (resulta em r7)
+    @ Calcula e armazena o ponteiro para registrador de dados (offset 0x30)
+    ldr     r6, =0x00000030
+    add     r6, r5, r6
 
-    ldr r0, =ponteiro_enable
-    str r6, [r0]
-    
-    ldr r6, =0x00000020
-    add r6, r5, r6
-    
-    ldr r0, =ponteiro_done
-    str r6, [r0]
-    
-    ldr r6, =0x00000030
-    add r6, r5, r6
-    
-    ldr r0, =ponteiro_data
-    str r6, [r0]
-    
-    
- 
-  ldr r0, [sp, #0]        @ restaura r0
-  ldr r1, [sp, #4]        @ restaura r1
-  ldr r2, [sp, #8]        @ restaura r2
-  ldr r3, [sp, #12]       @ restaura r3
-  ldr r4, [sp, #16]       @ restaura r4
-  ldr r5, [sp, #20]       @ restaura r5
-  ldr r6, [sp, #24]       @ restaura r6
-  ldr r7, [sp, #28]       @ restaura r7
-  ldr lr, [sp, #32]
+    ldr     r0, =ponteiro_data
+    str     r6, [r0]
 
-  add sp, sp, #36         @ restaura o ponteiro da pilha (libera os 32 bytes)
+    @ --- Restaurar registradores da pilha ---
+    ldr     r0, [sp, #0]
+    ldr     r1, [sp, #4]
+    ldr     r2, [sp, #8]
+    ldr     r3, [sp, #12]
+    ldr     r4, [sp, #16]
+    ldr     r5, [sp, #20]
+    ldr     r6, [sp, #24]
+    ldr     r7, [sp, #28]
+    ldr     lr, [sp, #32]
+    add     sp, sp, #36
 
-  bx lr
+    bx      lr
 
-@ a função abrir_imagem não precisa de argumentos (registrador r0 será o retorno)
-@ a função abrir_imagem não precisa de argumentos (registrador r0 será o retorno)
 
+@=============================================================================
+@ Função: abrir_imagem (interna/privada)
+@ Descrição: Abre o arquivo de imagem PGM e carrega os dados para o buffer.
+@            Ignora o cabeçalho PGM (15 bytes) e lê os pixels raw.
+@
+@ Parâmetros: 
+@   r0 = ponteiro para nome do arquivo (imagem.pgm)
+@ Retorno: r0 = ponteiro para o buffer de imagem (input_buffer)
+@
+@ Formato esperado: PGM binário (P5), 320x240 pixels, 8 bits por pixel
+@ Tamanho dos dados: 76800 bytes (320 * 240)
+@=============================================================================
 abrir_imagem:
-    @ --- salvar registradores usados ---
+    @ --- Salvar registradores na pilha ---
     sub     sp, sp, #24
     str     r4, [sp, #0]
     str     r7, [sp, #4]
@@ -292,30 +320,36 @@ abrir_imagem:
     str     r2, [sp, #16]
     str     r3, [sp, #20]
 
-   @ ldr     r0, =nome_arquivo   @ caminho do arquivo
-    mov     r1, #0              @ O_RDONLY
-    mov     r2, #0
-    mov     r7, #5              @ syscall open
-    svc     0
-    mov     r4, r0              @ r4 = descritor de arquivo
- 
-   ldr     r1, =ponteiro_fd_imagem
-   str     r0, [r1]
+    @ --- Syscall open("ponteiro_imagem", O_RDONLY) ---
+    mov     r1, #0                      @ r1 = O_RDONLY
+    mov     r2, #0                      @ r2 = modo (não usado)
+    mov     r7, #5                      @ r7 = syscall number (open)
+    svc     0                           @ executa syscall
 
-    mov     r0, r4
-    ldr     r1, =input_buffer
-    mov     r2, #15
-    mov     r7, #3              @ syscall read
-    svc     0
+    mov     r4, r0                      @ r4 = file descriptor
 
-    mov     r0, r4
-    ldr     r1, =input_buffer
-    mov     r2, #76800          @ tamanho da imagem
-    mov     r7, #3              @ syscall read
-    svc     0
+    @ Armazena o file descriptor da imagem
+    ldr     r1, =ponteiro_fd_imagem
+    str     r0, [r1]
 
+    @ --- Lê e descarta o cabeçalho PGM (15 bytes) ---
+    mov     r0, r4                      @ r0 = fd
+    ldr     r1, =input_buffer           @ r1 = buffer temporário
+    mov     r2, #15                     @ r2 = tamanho do cabeçalho
+    mov     r7, #3                      @ r7 = syscall number (read)
+    svc     0                           @ executa syscall
+
+    @ --- Lê os dados da imagem (76800 bytes) ---
+    mov     r0, r4                      @ r0 = fd
+    ldr     r1, =input_buffer           @ r1 = buffer de destino
+    mov     r2, #76800                  @ r2 = 320 * 240 pixels
+    mov     r7, #3                      @ r7 = syscall number (read)
+    svc     0                           @ executa syscall
+
+    @ Retorna ponteiro para o buffer
     ldr     r0, =input_buffer
 
+    @ --- Restaurar registradores da pilha ---
     ldr     r4, [sp, #0]
     ldr     r7, [sp, #4]
     ldr     lr, [sp, #8]
@@ -324,378 +358,457 @@ abrir_imagem:
     ldr     r3, [sp, #20]
     add     sp, sp, #24
 
-    bx      lr                  @ retorna r0 = &input_buffer
+    bx      lr
 
 
+@=============================================================================
+@ Função: enviar_imagem_fpga
+@ Descrição: Carrega uma imagem PGM do disco e envia pixel a pixel para a FPGA.
+@            Cada pixel é empacotado em uma instrução de 32 bits.
+@
+@ Parâmetros: 
+@ r0 = ponteiro para dados da imagem (input_buffer)
+@ Retorno: Nenhum
+@
+@ Formato da instrução de escrita:
+@   [31:29] = 111 (opcode escrita)
+@   [28:12] = endereço (17 bits, 0 a 76799)
+@   [11:4]  = valor do pixel (8 bits, 0 a 255)
+@   [3:0]   = reservado
+@=============================================================================
 enviar_imagem_fpga:
-  @ função para enviar a imagem processada para a fpga
-  @ argumentos:
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #36
+    str     r0, [sp, #0]
+    str     r1, [sp, #4]
+    str     r2, [sp, #8]
+    str     r3, [sp, #12]
+    str     r4, [sp, #16]
+    str     r5, [sp, #20]
+    str     r6, [sp, #24]
+    str     r7, [sp, #28]
+    str     lr, [sp, #32]
 
+    @ Abre e carrega a imagem para o buffer
+    bl      abrir_imagem
 
-  @ salva os registradores usados na pilha
-  sub sp, sp, #36         @ reserva 32 bytes na pilha (8 registradores * 4 bytes)
-  str r0, [sp, #0]       @ armazena r0 na pilha
-  str r1, [sp, #4]       @ armazena r1 na pilha
-  str r2, [sp, #8]       @ armazena r2 na pilha
-  str r3, [sp, #12]      @ armazena r3 na pilha
-  str r4, [sp, #16]      @ armazena r4 na pilha
-  str r5, [sp, #20]      @ armazena r5 na pilha
-  str r6, [sp, #24]      @ armazena r6 na pilha
-  str r7, [sp, #28]      @ armazena r7 na pilha
-  str lr, [sp, #32]
+    mov     r6, r0                      @ r6 = ponteiro para dados da imagem
 
-  bl abrir_imagem
+    @ Carrega ponteiro de instruções da FPGA
+    ldr     r4, =ponteiro_instrucoes
+    ldr     r4, [r4]
 
-  mov r6, r0
-  ldr r4, =ponteiro_instrucoes
-  ldr r4, [r4]
-
-  ldr r5, =ponteiro_enable
-  ldr r5, [r5]
-  
-  mov r3, #0  @ contador de enderecos enviados
+    mov     r3, #0                      @ r3 = contador de pixels (0 a 76799)
 
 enviar_proximo_pixel:
-  cmp r3, #76800          @ verificando se já enviou todos os pixels
-  beq fim_envio_imagem    @ se sim, fim do envio da imagem
+    @ Verifica se todos os pixels foram enviados
+    cmp     r3, #76800
+    beq     fim_envio_imagem
 
-  ldrb r2, [r6], #1       @ carrega o valor do pixel e incrementa o ponteiro de recepção
+    @ Carrega próximo pixel e incrementa ponteiro
+    ldrb    r2, [r6], #1                @ r2 = valor do pixel, r6++
 
-  mov r0, #0b111          @ opcode
-  lsl r0, r0, #29         @ deslocando para a posição correta
+    @ --- Monta instrução de 32 bits ---
+    @ Opcode: 0b111 nos bits [31:29]
+    mov     r0, #0b111
+    lsl     r0, r0, #29
 
-  mov r1, r3              @ r1 = contador de endereços enviados
-  lsl r1, r1, #12         @ deslocando para a posição correta
+    @ Endereço do pixel nos bits [28:12]
+    mov     r1, r3
+    lsl     r1, r1, #12
 
-  @ mov r2, #0           @ r2 = valor do pixel (inicialmente 0) todo: substituir pelo valor correto
-  lsl r2, r2, #4          @ deslocando para a posição correta
+    @ Valor do pixel nos bits [11:4]
+    lsl     r2, r2, #4
 
-  orr r0, r0, r1          @ combinando opcode e endereço
-  orr r0, r0, r2          @ combinando com o valor do pixel
+    @ Combina todos os campos
+    orr     r0, r0, r1
+    orr     r0, r0, r2
 
-  str r0, [r4]            @ envia o valor para o endereço de envio das instruções
+    @ Envia instrução para a FPGA
+    str     r0, [r4]
 
-  mov r0, #1
-  str r0, [r5]            @ envia o valor 1 para o endereço de recepção
+    @ Incrementa contador
+    add     r3, r3, #1
 
-  mov r0, #0
-  str r0, [r5]            @ envia o valor 0 para o endereço de recepção
-
-  add r3, r3, #1          @ incrementa o contador de endereços enviados
-
-  @ bl function_sleeping
-  b enviar_proximo_pixel   @ continua enviando o próximo pixel
+    b       enviar_proximo_pixel
 
 fim_envio_imagem:
-  @ caso tenha enviado todos os pixels
+    @ Envia instrução NOP (0x00000000) para finalizar
+    mov     r0, #0
+    str     r0, [r4]
 
-  mov r0, #0
+    @ --- Restaurar registradores da pilha ---
+    ldr     r0, [sp, #0]
+    ldr     r1, [sp, #4]
+    ldr     r2, [sp, #8]
+    ldr     r3, [sp, #12]
+    ldr     r4, [sp, #16]
+    ldr     r5, [sp, #20]
+    ldr     r6, [sp, #24]
+    ldr     r7, [sp, #28]
+    ldr     lr, [sp, #32]
+    add     sp, sp, #36
 
-  str r0, [r4]            @ envia o valor para o endereço de envio das instruções
-
-  mov r0, #1
-  str r0, [r5]            @ envia o valor 1 para o endereço
-
-  mov r0, #0
-  str r0, [r5]            @ envia o valor 0 para o endereço
-
-
-  @ restaura os registradores da pilha
-  ldr r0, [sp, #0]        @ restaura r0
-  ldr r1, [sp, #4]        @ restaura r1
-  ldr r2, [sp, #8]        @ restaura r2
-  ldr r3, [sp, #12]       @ restaura r3
-  ldr r4, [sp, #16]       @ restaura r4
-  ldr r5, [sp, #20]       @ restaura r5
-  ldr r6, [sp, #24]       @ restaura r6
-  ldr r7, [sp, #28]       @ restaura r7
-  ldr lr, [sp, #32]
-
-  add sp, sp, #36         @ restaura o ponteiro da pilha (libera os 32 bytes)
+    bx      lr
 
 
-  bx lr                  @ retorna
-
+@=============================================================================
+@ Função: replicacao_pixel
+@ Descrição: Envia comando de zoom in usando o algoritmo de replicação de pixel.
+@            Cada pixel é replicado em um bloco 2x2, ampliando a imagem.
+@
+@ Parâmetros: 
+@   r0 = coordenada X 
+@   r1 = coordenada Y 
+@
+@ Retorno: Nenhum
+@
+@ Formato do comando:
+@   [31:29] = 100 (opcode replicação)
+@   [28:20] = coordenada X (9 bits)
+@   [19:12] = coordenada Y (8 bits)
+@   [11:0]  = reservado
+@=============================================================================
 replicacao_pixel:
-    sub sp, sp, #16              @ Aumentei para incluir lr
-    str r2, [sp, #0]
-    str r3, [sp, #4]
-    str r4, [sp, #8]
-    str lr, [sp, #12]            @ SALVAR LR!
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #16
+    str     r2, [sp, #0]
+    str     r3, [sp, #4]
+    str     r4, [sp, #8]
+    str     lr, [sp, #12]
+
+    @ Salva parâmetros
+    mov     r3, r0                      @ r3 = coordenada X
+    mov     r4, r1                      @ r4 = coordenada Y
+
+    @ --- Monta comando de replicação ---
+    ldr     r0, =0x80000000             @ Opcode base (bit 31 = 1, bits 30-29 = 00)
+
+    @ Coordenada X nos bits [28:20]
+    lsl     r3, r3, #20
+    @ Coordenada Y nos bits [19:12]
+    lsl     r4, r4, #12
+
+    @ Combina campos
+    orr     r0, r0, r3
+    orr     r0, r0, r4
+
+    @ Obtém ponteiro de instruções
+    ldr     r1, =ponteiro_instrucoes
+    ldr     r1, [r1]
+
+    @ Envia comando para a FPGA
+    str     r0, [r1]
+
+    @ --- Restaurar registradores da pilha ---
+    ldr     r2, [sp, #0]
+    ldr     r3, [sp, #4]
+    ldr     r4, [sp, #8]
+    ldr     lr, [sp, #12]
+    add     sp, sp, #16
+
+    bx      lr
 
 
-    @ r0 x r1 y
-
-    mov r3, r0
-    mov r4, r1
-
-    ldr r0, =0x80000000    @ Carrega o comando
-
-    lsl r3, r3, #20
-    lsl r4, r4, #12
-
-    orr r0, r0, r3
-    orr r0, r0, r4
-
-    ldr r1, =ponteiro_instrucoes
-    ldr r1, [r1]
-
-    ldr r2, =ponteiro_enable
-    ldr r2, [r2]
-
-    str r0, [r1]
-
-    mov r0, #1
-    str r0, [r2]
-
-    mov r0, #0
-    str r0, [r2]
-
-     ldr r2, [sp, #0]
-    ldr r3, [sp, #4]
-    ldr r4, [sp, #8]
-    ldr lr, [sp, #12]            @ RESTAURAR LR!
-    add sp, sp, #16              @ Ajustado
-
-    bx lr
-
-
+@=============================================================================
+@ Função: vizinho_mais_proximo
+@ Descrição: Envia comando de zoom in usando interpolação por vizinho mais
+@            próximo. Método mais refinado que replicação simples.
+@
+@ Parâmetros: 
+@   r0 = coordenada X
+@   r1 = coordenada Y
+@
+@ Retorno: Nenhum
+@
+@ Formato do comando:
+@   [31:29] = 011 (opcode vizinho mais próximo)
+@   [28:20] = coordenada X (9 bits)
+@   [19:12] = coordenada Y (8 bits)
+@   [11:0]  = reservado
+@=============================================================================
 vizinho_mais_proximo:
-   sub sp, sp, #16              @ Aumentei para incluir lr
-    str r2, [sp, #0]
-    str r3, [sp, #4]
-    str r4, [sp, #8]
-    str lr, [sp, #12]            @ SALVAR LR!
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #16
+    str     r2, [sp, #0]
+    str     r3, [sp, #4]
+    str     r4, [sp, #8]
+    str     lr, [sp, #12]
+
+    @ Salva parâmetros
+    mov     r3, r0                      @ r3 = coordenada X
+    mov     r4, r1                      @ r4 = coordenada Y
+
+    @ --- Monta comando de vizinho mais próximo ---
+    ldr     r0, =0x60000000             @ Opcode (bits 31-29 = 011)
+
+    @ Coordenada X nos bits [28:20]
+    lsl     r3, r3, #20
+    @ Coordenada Y nos bits [19:12]
+    lsl     r4, r4, #12
+
+    @ Combina campos
+    orr     r0, r0, r3
+    orr     r0, r0, r4
+
+    @ Obtém ponteiro de instruções
+    ldr     r1, =ponteiro_instrucoes
+    ldr     r1, [r1]
+
+    @ Envia comando para a FPGA
+    str     r0, [r1]
+
+    @ --- Restaurar registradores da pilha ---
+    ldr     r2, [sp, #0]
+    ldr     r3, [sp, #4]
+    ldr     r4, [sp, #8]
+    ldr     lr, [sp, #12]
+    add     sp, sp, #16
+
+    bx      lr
 
 
-
-    @ r0 x r1 y
-
-    mov r3, r0
-    mov r4, r1
-
-    ldr r0, =0x60000000    @ Carrega o comando
-
-    lsl r3, r3, #20
-    lsl r4, r4, #12
-
-    orr r0, r0, r3
-    orr r0, r0, r4
-
-    ldr r1, =ponteiro_instrucoes
-    ldr r1, [r1]
-
-    ldr r2, =ponteiro_enable
-    ldr r2, [r2]
-
-    str r0, [r1]
-
-    mov r0, #1
-    str r0, [r2]
-
-    mov r0, #0
-    str r0, [r2]
-
-     ldr r2, [sp, #0]
-    ldr r3, [sp, #4]
-    ldr r4, [sp, #8]
-    ldr lr, [sp, #12]            @ RESTAURAR LR!
-    add sp, sp, #16              @ Ajustado
-
-    bx lr
-
-
+@=============================================================================
+@ Função: decimacao
+@ Descrição: Envia comando de zoom out usando decimação (amostragem).
+@
+@ Parâmetros: Nenhum
+@ Retorno: Nenhum
+@
+@ Formato do comando:
+@   [31:29] = 101 (opcode decimação)
+@   [28:0]  = reservado
+@=============================================================================
 decimacao:
-    sub sp, sp, #16
-    str r0, [sp, #0]
-    str r1, [sp, #4]
-    str r2, [sp, #8]
-    str lr, [sp, #12]
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #16
+    str     r0, [sp, #0]
+    str     r1, [sp, #4]
+    str     r2, [sp, #8]
+    str     lr, [sp, #12]
 
-    ldr r0, =0xA0000000    @ Carrega o comando
+    @ Carrega comando de decimação
+    ldr     r0, =0xA0000000             @ Opcode (bits 31-29 = 101)
 
-    ldr r1, =ponteiro_instrucoes
-    ldr r1, [r1]
+    @ Obtém ponteiro de instruções
+    ldr     r1, =ponteiro_instrucoes
+    ldr     r1, [r1]
 
-    ldr r2, =ponteiro_enable
-    ldr r2, [r2]
+    @ Envia comando para a FPGA
+    str     r0, [r1]
 
-    str r0, [r1]
+    @ --- Restaurar registradores da pilha ---
+    ldr     r0, [sp, #0]
+    ldr     r1, [sp, #4]
+    ldr     r2, [sp, #8]
+    ldr     lr, [sp, #12]
+    add     sp, sp, #16
 
-    mov r0, #1
-    str r0, [r2]
-
-  @  bl function_sleeping
-
-    mov r0, #0
-    str r0, [r2]
-
-
-    ldr r0, [sp, #0]
-    ldr r1, [sp, #4]
-    ldr r2, [sp, #8]
-    ldr lr, [sp, #12]
-    add sp, sp, #16
-
-    bx lr                  @ Retorna
+    bx      lr
 
 
+@=============================================================================
+@ Função: media_de_blocos
+@ Descrição: Envia comando de zoom out usando média de blocos.
+@
+@ Parâmetros: Nenhum
+@ Retorno: Nenhum
+@
+@ Formato do comando:
+@   [31:29] = 110 (opcode média de blocos)
+@   [28:0]  = reservado
+@=============================================================================
 media_de_blocos:
-    sub sp, sp, #16
-    str r0, [sp, #0]
-    str r1, [sp, #4]
-    str r2, [sp, #8]
-    str lr, [sp, #12]
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #16
+    str     r0, [sp, #0]
+    str     r1, [sp, #4]
+    str     r2, [sp, #8]
+    str     lr, [sp, #12]
 
-    ldr r0, =0xC0000000    @ Carrega o comando
+    @ Carrega comando de média de blocos
+    ldr     r0, =0xC0000000             @ Opcode (bits 31-29 = 110)
 
-    ldr r1, =ponteiro_instrucoes
-    ldr r1, [r1]
+    @ Obtém ponteiro de instruções
+    ldr     r1, =ponteiro_instrucoes
+    ldr     r1, [r1]
 
-    ldr r2, =ponteiro_enable
-    ldr r2, [r2]
+    @ Envia comando para a FPGA
+    str     r0, [r1]
 
-    str r0, [r1]
+    @ --- Restaurar registradores da pilha ---
+    ldr     r0, [sp, #0]
+    ldr     r1, [sp, #4]
+    ldr     r2, [sp, #8]
+    ldr     lr, [sp, #12]
+    add     sp, sp, #16
 
-    mov r0, #1
-    str r0, [r2]
-
-    mov r0, #0
-    str r0, [r2]
-
-    ldr r0, [sp, #0]
-    ldr r1, [sp, #4]
-    ldr r2, [sp, #8]
-    ldr lr, [sp, #12]
-    add sp, sp, #16
-
-    bx lr                  @ Retorna
+    bx      lr
 
 
-
+@=============================================================================
+@ Função: controle_imagem
+@ Descrição: Controla a exibição da imagem no monitor (liga/desliga).
+@
+@ Parâmetros: 
+@   r0 = desligar (0 = ligar, 1 = desligar)
+@
+@ Retorno: Nenhum
+@
+@ Formato do comando:
+@   [31:29] = 010 (opcode controle)
+@   [28:1]  = reservado
+@   [0]     = flag desligar (1 bit)
+@=============================================================================
 controle_imagem:
-  sub sp, sp, #12
-  str r1, [sp, #0]
-  str r2, [sp, #4]
-  str r3, [sp, #8]
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #12
+    str     r1, [sp, #0]
+    str     r2, [sp, #4]
+    str     r3, [sp, #8]
+
+    @ Salva parâmetro
+    mov     r3, r0                      @ r3 = flag desligar
+
+    @ --- Monta comando de controle ---
+    ldr     r0, =0x40000000             @ Opcode base (bits 31-29 = 010)
+    orr     r0, r0, r3                  @ Adiciona flag no bit [0]
+
+    @ Obtém ponteiro de instruções
+    ldr     r1, =ponteiro_instrucoes
+    ldr     r1, [r1]
+
+    @ Envia comando para a FPGA
+    str     r0, [r1]
+
+    @ --- Restaurar registradores da pilha ---
+    ldr     r1, [sp, #0]
+    ldr     r2, [sp, #4]
+    ldr     r3, [sp, #8]
+    add     sp, sp, #12
+
+    bx      lr
 
 
-  mov r3, r0
-
-  ldr r0, =0x40000000    @ Carrega o comando
-  orr r0, r0, r3
-
-  ldr r1, =ponteiro_instrucoes
-  ldr r1, [r1]
-
-  ldr r2, =ponteiro_enable
-  ldr r2, [r2]
-
-  str r0, [r1]
-
-  mov r0, #1
-  str r0, [r2]
-
-  mov r0, #0
-  str r0, [r2]
-
-  ldr r1, [sp, #0]
-  ldr r2, [sp, #4]
-  ldr r3, [sp, #8]
-  add sp, sp, #12
-
-  bx lr                  @ Retorna
-
+@=============================================================================
+@ Função: fechar_enderecos
+@ Descrição: Libera os recursos alocados: desmapeia a memória e fecha os
+@            file descriptors abertos (/dev/mem e arquivo de imagem).
+@
+@ Parâmetros: Nenhum
+@ Retorno: Nenhum
+@
+@ Syscalls utilizadas:
+@   - munmap (91): Desmapeia região de memória
+@   - close (6): Fecha file descriptors
+@=============================================================================
 fechar_enderecos:
-        sub sp, sp, #12
-        str r0, [sp, #0]
-        str r1, [sp, #4]
-        str r7, [sp, #8]
+    @ --- Salvar registradores na pilha ---
+    sub     sp, sp, #12
+    str     r0, [sp, #0]
+    str     r1, [sp, #4]
+    str     r7, [sp, #8]
 
-        ldr r0, =ponteiro_instrucoes
-        ldr r0, [r0]
-        ldr r1, =0x00005000 
-        mov r7, #91
+    @ --- Syscall munmap(ponteiro_instrucoes, 0x5000) ---
+    ldr     r0, =ponteiro_instrucoes
+    ldr     r0, [r0]                    @ r0 = endereço mapeado (instruções)
+    ldr     r1, =0x00005000             @ r1 = tamanho da região
+    mov     r7, #91                     @ r7 = syscall number (munmap)
+    svc     0                           @ executa syscall
 
-        svc 0
+    @ --- Syscall munmap(ponteiro_data, 0x5000) ---
+    ldr     r0, =ponteiro_data
+    ldr     r0, [r0]                    @ r0 = endereço mapeado (dados)
+    ldr     r1, =0x00005000             @ r1 = tamanho da região
+    mov     r7, #91                     @ r7 = syscall number (munmap)
+    svc     0                           @ executa syscall
 
+    @ --- Syscall close(fd_devmem) ---
+    ldr     r0, =ponteiro_fd
+    ldr     r0, [r0]                    @ r0 = file descriptor de /dev/mem
+    mov     r7, #6                      @ r7 = syscall number (close)
+    svc     0                           @ executa syscall
 
-        ldr r0, =ponteiro_enable
+    @ --- Syscall close(fd_imagem) ---
+    ldr     r0, =ponteiro_fd_imagem
+    ldr     r0, [r0]                    @ r0 = file descriptor da imagem
+    mov     r7, #6                      @ r7 = syscall number (close)
+    svc     0                           @ executa syscall
 
-        ldr r0, [r0]
-        ldr r1, =0x00005000 
-        mov r7, #91
+    @ --- Restaurar registradores da pilha ---
+    ldr     r0, [sp, #0]
+    ldr     r1, [sp, #4]
+    ldr     r7, [sp, #8]
+    add     sp, sp, #12
 
-        svc 0
-
-	 ldr r0, =ponteiro_data
-
-        ldr r0, [r0]
-        ldr r1, =0x00005000 
-        mov r7, #91
-
-        svc 0
-        
-        ldr r0, =ponteiro_done
-
-        ldr r0, [r0]
-        ldr r1, =0x00005000 
-        mov r7, #91
-
-        svc 0
-
-
-
-        ldr r0, =ponteiro_fd
-        ldr r0, [r0]
-        mov r7, #6
-
-        svc 0
-
-	ldr r0, =ponteiro_fd_imagem
-	ldr r0, [r0]
-	mov r7, #6
-	svc 0
-
-        ldr r0, [sp, #0]
-        ldr r1, [sp, #4]
-        ldr r7, [sp, #8]
-        add sp, sp, #12
+    bx      lr
 
 
-        bx lr
-
-function_sleeping:
-    sub sp, sp, #4
-    str r2, [sp, #0]   
-    ldr r2, =15000000
-sleep_loop:
-    sub r2, r2, #1
-    cmp r2, #1
-    bne sleep_loop    @ Corrigido de 'b.neq' para 'bne'
-
- 
-    ldr r2, [sp, #0]
-    add sp, sp, #4
- 
-
-    bx lr
-
-
-
+@=============================================================================
+@ SEÇÃO DE DADOS
+@=============================================================================
 .section .data
+
+@-----------------------------------------------------------------------------
+@ Strings de Caminhos de Arquivos
+@-----------------------------------------------------------------------------
 dev_mem:
-        .asciz "/dev/mem"
+    .asciz "/dev/mem"                   @ Dispositivo de acesso à memória física
 
-nome_arquivo: .asciz "imagem.pgm"  @ string com o nome do arquivo
+nome_arquivo:
+    .asciz "imagem.pgm"                 @ Nome do arquivo de imagem de entrada
 
-    .equ buffer_size, 81920         @ sintaxe correta para .equ
-    input_buffer: .space 76800
+@-----------------------------------------------------------------------------
+@ Buffers e Variáveis Globais
+@-----------------------------------------------------------------------------
+    .equ buffer_size, 81920             @ Tamanho máximo do buffer
 
-    ponteiro_instrucoes: .space 4
-    ponteiro_enable: .space 4
-    ponteiro_done: .space 4
-    ponteiro_data: .space 4
-    ponteiro_imagem: .space 4
-    ponteiro_fd:    .space 4
-    ponteiro_fd_imagem: .space 4
+input_buffer:
+    .space 76800                        @ Buffer para imagem 320x240 (76800 bytes)
+
+ponteiro_instrucoes:
+    .space 4                            @ Ponteiro mapeado para registrador de instruções
+
+ponteiro_data:
+    .space 4                            @ Ponteiro mapeado para registrador de dados
+
+ponteiro_imagem:
+    .space 4                            @ Ponteiro auxiliar para imagem (reservado)
+
+ponteiro_fd:
+    .space 4                            @ File descriptor de /dev/mem
+
+ponteiro_fd_imagem:
+    .space 4                            @ File descriptor do arquivo de imagem
+
+
+@=============================================================================
+@ NOTAS DE IMPLEMENTAÇÃO
+@=============================================================================
+@ 
+@ 1. PROTOCOLO DE COMUNICAÇÃO:
+@    - Todas as instruções são palavras de 32 bits
+@    - Opcode definido nos 3 bits mais significativos [31:29]
+@    - Finalização de comandos sempre com NOP (0x00000000)
+@
+@ 2. OPCODES DISPONÍVEIS:
+@    001 - Leitura de pixel
+@    010 - Controle de exibição
+@    011 - Zoom in (vizinho mais próximo)
+@    100 - Zoom in (replicação de pixel)
+@    101 - Zoom out (decimação)
+@    110 - Zoom out (média de blocos)
+@    111 - Escrita de pixel
+@
+@ 3. MAPEAMENTO DE MEMÓRIA:
+@    - Base: 0xFF200000 (lightweight HPS-to-FPGA bridge)
+@    - Registrador de instruções: Base + 0x00
+@    - Registrador de dados: Base + 0x30
+@
+@ 4. FORMATO DE IMAGEM:
+@    - Resolução fixa: 320x240 pixels
+@    - Formato: PGM binário (P5)
+@    - Profundidade: 8 bits por pixel (escala de cinza)
+@    - Total de pixels: 76800 bytes
+@
+@============================================================================

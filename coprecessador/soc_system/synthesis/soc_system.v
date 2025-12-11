@@ -6,8 +6,6 @@
 module soc_system (
 		input  wire        clk_clk,                               //                            clk.clk
 		input  wire [7:0]  data_external_connection_export,       //       data_external_connection.export
-		input  wire        done_external_connection_export,       //       done_external_connection.export
-		output wire        enable_external_connection_export,     //     enable_external_connection.export
 		input  wire        hps_0_f2h_cold_reset_req_reset_n,      //       hps_0_f2h_cold_reset_req.reset_n
 		input  wire        hps_0_f2h_debug_reset_req_reset_n,     //      hps_0_f2h_debug_reset_req.reset_n
 		input  wire [27:0] hps_0_f2h_stm_hw_events_stm_hwevents,  //        hps_0_f2h_stm_hw_events.stm_hwevents
@@ -264,6 +262,9 @@ module soc_system (
 		.in_port  (data_external_connection_export)     // external_connection.export
 	);
 
+
+  wire        done_external_connection_export;       //       done_external_connection.export
+
 	soc_system_done done (
 		.clk      (clk_clk),                            //                 clk.clk
 		.reset_n  (~rst_controller_reset_out_reset),    //               reset.reset_n
@@ -271,6 +272,9 @@ module soc_system (
 		.readdata (mm_interconnect_0_done_s1_readdata), //                    .readdata
 		.in_port  (done_external_connection_export)     // external_connection.export
 	);
+
+
+	wire        enable_external_connection_export;     //     enable_external_connection.export
 
 	soc_system_enable enable (
 		.clk        (clk_clk),                                //                 clk.clk
